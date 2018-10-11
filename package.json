@@ -11,13 +11,22 @@
     "start": "react-scripts-ts start",
     "build": "react-scripts-ts build",
     "test": "react-scripts-ts test --env=jsdom",
+    "cypress": "cypress open",
+    "cypress-test": "react-scripts-ts start & wait-on http://localhost:3000 && cypress run",
     "eject": "react-scripts-ts eject"
   },
   "devDependencies": {
-    "@types/jest": "^23.3.5",
+    "@cypress/webpack-preprocessor": "^3.0.0",
     "@types/node": "^10.11.7",
     "@types/react": "^16.4.16",
     "@types/react-dom": "^16.0.9",
-    "typescript": "^3.1.2"
-  }
+    "cypress": "^3.1.0",
+    "typescript": "^2.9.0",
+    "wait-on": "^3.1.0",
+    "ts-loader": "^5.2.1"
+  },
+  "comments": [
+    "todo: update typescript to 3.1.2 when this gets released",
+    "https://github.com/cypress-io/cypress/issues/2363"
+  ]
 }

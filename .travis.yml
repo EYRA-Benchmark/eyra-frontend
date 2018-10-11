@@ -6,12 +6,17 @@ cache:
     - node_modules
 install:
   - yarn
-before_script:
-  - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
-  - chmod +x ./cc-test-reporter
-  - ./cc-test-reporter before-build
-script:
-  - yarn test --coverage
-#  - yarn build
-after_script:
-  - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
+jobs:
+  include:
+    - stage: "Tests"
+      name: "Unit tests"
+      before_script:
+        - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+        - chmod +x ./cc-test-reporter
+        - ./cc-test-reporter before-build
+      script: yarn test --coverage
+      after_script:
+        - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
+    - script: yarn cypress-test
+      name: "Cypress tests"
+
