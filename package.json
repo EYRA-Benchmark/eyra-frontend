@@ -28,5 +28,14 @@
   "comments": [
     "todo: update typescript to 3.1.2 when this gets released",
     "https://github.com/cypress-io/cypress/issues/2363"
-  ]
+  ],
+  "jest": {
+    "collectCoverageFrom": [
+      "src/**/*.ts",
+      "src/**/*.tsx",
+      "src/**/*.js",
+      "src/**/*.jsx",
+      "!src/index.tsx"
+    ]
+  }
 }
