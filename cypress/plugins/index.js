@@ -16,6 +16,8 @@
 //   // `config` is the resolved Cypress config
 // }
 
+// The following is required to get Typescript working with Cypress tests
+// https://github.com/cypress-io/cypress-example-recipes/tree/master/examples/preprocessors__typescript-webpack
 const wp = require('@cypress/webpack-preprocessor')
 
 module.exports = (on) => {
