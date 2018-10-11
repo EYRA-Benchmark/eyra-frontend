@@ -4,6 +4,7 @@ node_js:
 cache:
   directories:
     - node_modules
+    - /home/travis/.cache/Cypress
 install:
   - yarn
 jobs:
