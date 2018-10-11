@@ -9,6 +9,8 @@ install:
   - yarn
 jobs:
   include:
+    - stage: "Warm up cache"
+      script: true
     - stage: "Tests"
       name: "Unit tests"
       before_script:
