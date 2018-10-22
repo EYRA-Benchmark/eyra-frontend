@@ -4,14 +4,15 @@ import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import * as React from "react";
 import { Link } from "react-router-dom";
+import { IMenuItem } from "../Menu_Data";
 export interface IProps {
-  menus: any;
+  menus: IMenuItem[];
 }
 function NavigationMenu({ menus }: IProps) {
   return (
     <React.Fragment>
       <List>
-        {menus.map((menu: any, index: any) => {
+        {menus.map((menu, index) => {
           return (
             <ListItem
               key={index}
