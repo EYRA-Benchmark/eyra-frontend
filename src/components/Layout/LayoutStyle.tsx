@@ -27,6 +27,16 @@ const styles = (theme: Theme) =>
         easing: theme.transitions.easing.sharp,
         duration: theme.transitions.duration.enteringScreen
       })
+    },
+    content: {
+      backgroundColor: theme.palette.background.default,
+      padding: theme.spacing.unit * 3,
+      margin: "70px 0 0 70px",
+      overflowY: "scroll"
+    },
+    contentShift: {
+      marginLeft: drawerWidth,
+      width: `calc(100% - ${drawerWidth}px)`
     }
   });
 export default styles;
