@@ -1,6 +1,11 @@
 import * as React from "react";
+import CardGrid from "../../components/common/CardGrid/CardGrid";
 function Home() {
-  return <div>Home</div>;
+  return (
+    <div>
+      <CardGrid />
+    </div>
+  );
 }
 
 export default Home;
