@@ -5,7 +5,7 @@ import MenuIcon from "@material-ui/icons/Menu";
 import * as React from "react";
 
 export interface IProps {
-  classes?: string;
+  classes: string;
   drawerToggle: () => void;
 }
 
