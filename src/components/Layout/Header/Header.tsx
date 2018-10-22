@@ -6,14 +6,14 @@ import * as React from "react";
 
 export interface IProps {
   classes?: string;
-  menuClicked: () => void;
+  drawerToggle: () => void;
 }
 
-function Header({ classes, menuClicked }: IProps) {
+function Header({ classes, drawerToggle }: IProps) {
   return (
-    <AppBar position="fixed">
+    <AppBar position="fixed" className={classes}>
       <Toolbar style={{ padding: "0 12px" }}>
-        <IconButton aria-label="Menu" onClick={menuClicked}>
+        <IconButton aria-label="Menu" onClick={drawerToggle}>
           <MenuIcon />
         </IconButton>
       </Toolbar>
