@@ -1,31 +1,28 @@
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
-import ListItemText from "@material-ui/core/ListItemText";
 import * as React from "react";
-import { Link } from "react-router-dom";
-import { IMenuItem } from "../Menu_Data";
-export interface IProps {
-  menus: IMenuItem[];
-}
-function NavigationMenu({ menus }: IProps) {
+
+import { NavLink } from "react-router-dom";
+import * as styles from "./NavigationMenu.css";
+
+function NavigationMenu() {
   return (
     <React.Fragment>
-      <List>
-        {menus.map((menu, index) => {
-          return (
-            <ListItem
-              key={index}
-              {...{ to: menu.link }}
-              component={Link}
-              button={true}
-            >
-              <ListItemIcon>{menu.icon}</ListItemIcon>
-              <ListItemText primary={menu.text} />
-            </ListItem>
-          );
-        })}
-      </List>
+      <ul className={styles.nav}>
+        <li>
+          <NavLink to="/home" activeClassName={styles.active}>
+            Home
+          </NavLink>
+        </li>
+        <li>
+          <NavLink to="/challenges" activeClassName={styles.active}>
+            Challenges
+          </NavLink>
+        </li>
+        <li>
+          <NavLink to="/login" activeClassName={styles.active}>
+            LogIn
+          </NavLink>
+        </li>
+      </ul>
     </React.Fragment>
   );
 }

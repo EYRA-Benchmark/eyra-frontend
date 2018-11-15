@@ -1,0 +1,22 @@
+.nav {
+  display: flex;
+  list-style-type: none;
+}
+.nav li {
+  margin: 10px;
+}
+.nav li a {
+  font-size: 18px;
+  padding: 10px;
+  text-decoration: none;
+  color: #000;
+  border-bottom: 3px solid transparent;
+  transition: border-bottom 0.5s ease-out;
+}
+.nav a:hover {
+  border-bottom: 3px solid #62dafb;
+}
+li a.active {
+  color: #62dafb;
+  font-weight: 700;
+}
