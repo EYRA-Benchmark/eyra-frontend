@@ -6,9 +6,9 @@
     "@material-ui/core": "^3.2.2",
     "@material-ui/icons": "^3.0.1",
     "@types/classnames": "^2.2.6",
-    "react-router-dom": "^4.3.1",
     "react": "^16.5.2",
     "react-dom": "^16.5.2",
+    "react-router-dom": "^4.3.1",
     "react-scripts-ts": "3.1.0"
   },
   "scripts": {
@@ -21,14 +21,21 @@
   },
   "devDependencies": {
     "@cypress/webpack-preprocessor": "^3.0.0",
+    "@types/enzyme": "^3.1.14",
+    "@types/enzyme-adapter-react-16": "^1.0.3",
+    "@types/jest": "^23.3.9",
     "@types/node": "^10.11.7",
     "@types/react": "^16.4.16",
     "@types/react-dom": "^16.0.9",
     "@types/react-router-dom": "^4.3.1",
     "cypress": "^3.1.0",
+    "enzyme": "^3.7.0",
+    "enzyme-adapter-react-16": "^1.6.0",
+    "jest": "^23.6.0",
+    "ts-jest": "^22.4.2",
+    "ts-loader": "^5.2.1",
     "typescript": "^2.9.0",
-    "wait-on": "^3.1.0",
-    "ts-loader": "^5.2.1"
+    "wait-on": "^3.1.0"
   },
   "comments": [
     "todo: update typescript to 3.1.2 when this gets released",
