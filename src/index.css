@@ -1,12 +1,13 @@
-html {
+html,
+body,
+#root {
   height: 100%;
 }
 body {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
-  height: 100%;
 }
-#root {
-  height: 100%;
+::-webkit-scrollbar {
+  display: none;
 }
