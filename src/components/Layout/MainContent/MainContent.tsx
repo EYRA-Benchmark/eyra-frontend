@@ -1,15 +1,13 @@
 import * as React from "react";
-import { Route, Switch } from "react-router-dom";
+import { Route } from "react-router-dom";
 import Home from "../../../pages/Home/Home";
 import ReactRouter from "../../../Routes";
 
 function MainContent() {
   return (
     <React.Fragment>
-      <Switch>
-        <Route exact={true} path="/" component={Home} />
-        <Route exact={true} path="/home" component={Home} />
-      </Switch>
+      <Route exact={true} path="/" component={Home} />
+      <Route path="/home" component={Home} />
       <main
         style={{
           margin: " 150px 100px 0",
