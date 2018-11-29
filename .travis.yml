@@ -30,4 +30,5 @@ jobs:
     - script: yarn cypress-test
       name: "Cypress tests"
     - stage: "Docker build & deploy"
-      script: docker build . -t eyra/frontend:latest -t eyra/frontend:$(TRAVIS_BUILD_NUMBER) && docker login -u eyra -p "$DOCKER_PASSWORD" && docker push eyra/frontend:$(TRAVIS_BUILD_NUMBER)
+      install: skip
+      script: docker build . -t eyra/frontend:latest -t eyra/frontend:$TRAVIS_BUILD_NUMBER && docker login -u eyra -p "$DOCKER_PASSWORD" && docker push eyra/frontend:$TRAVIS_BUILD_NUMBER
