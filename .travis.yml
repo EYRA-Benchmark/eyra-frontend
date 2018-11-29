@@ -7,6 +7,13 @@ cache:
     - /home/travis/.cache/Cypress
 install:
   - yarn
+
+stages:
+  - "Warm up cache"
+  - "Tests"
+  - name: "Docker build & deploy"
+    if: branch = master
+
 jobs:
   include:
     - stage: "Warm up cache"
@@ -22,5 +29,5 @@ jobs:
         - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
     - script: yarn cypress-test
       name: "Cypress tests"
-    - stage: deploy to Docker Hub
+    - stage: "Docker build & deploy"
       script: docker build . -t eyra/frontend:latest -t eyra/frontend:$(TRAVIS_BUILD_NUMBER) && docker login -u eyra -p "$DOCKER_PASSWORD" && docker push eyra/frontend:$(TRAVIS_BUILD_NUMBER)
