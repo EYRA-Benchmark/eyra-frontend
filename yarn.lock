@@ -596,9 +596,9 @@
     date-fns "^1.27.2"
     figures "^1.7.0"
 
-"@cypress/webpack-preprocessor@^3.0.0":
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/@cypress/webpack-preprocessor/-/webpack-preprocessor-3.0.0.tgz#81db0364eeb4b04707c54cdf7453f7f753a449c9"
+"@cypress/webpack-preprocessor@^3.0.1":
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/@cypress/webpack-preprocessor/-/webpack-preprocessor-3.0.1.tgz#f6569ccc2c8c42f62491bce0b859d57177617530"
   dependencies:
     "@babel/core" "7.0.1"
     "@babel/preset-env" "7.0.0"
