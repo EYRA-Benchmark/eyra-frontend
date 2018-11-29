@@ -7,5 +7,9 @@
       "cypress/**/*.js",
       "coverage/lcov-report/*.js"
     ]
+  },
+  "rules": {
+    "object-literal-sort-keys": false,
+    "member-access": [true, "no-public"]
   }
 }
