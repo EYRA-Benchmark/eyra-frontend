@@ -13,7 +13,7 @@
     "build": "react-scripts-ts build",
     "test": "react-scripts-ts test --env=jsdom",
     "cypress": "cypress open",
-    "cypress-test": "react-scripts-ts start & wait-on http://localhost:3000 && cypress run",
+    "cypress-test": "react-scripts-ts start & wait-on http://localhost:3000 && cypress run --record false",
     "eject": "react-scripts-ts eject"
   },
   "devDependencies": {

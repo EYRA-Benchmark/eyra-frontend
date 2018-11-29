@@ -22,4 +22,5 @@ jobs:
         - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
     - script: yarn cypress-test
       name: "Cypress tests"
-
+    - stage: deploy to Docker Hub
+      script: docker build . -t eyra/frontend:latest -t eyra/frontend:$(TRAVIS_BUILD_NUMBER) && docker login -u eyra -p "$DOCKER_PASSWORD" && docker push eyra/frontend:$(TRAVIS_BUILD_NUMBER)
