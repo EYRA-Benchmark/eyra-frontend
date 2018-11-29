@@ -42,5 +42,6 @@
       "src/**/*.jsx",
       "!src/index.tsx"
     ]
-  }
+  },
+  "homepage": "https://145.100.58.75.surf-hosted.nl/new"
 }
