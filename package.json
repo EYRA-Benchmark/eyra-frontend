@@ -35,10 +35,6 @@
     "typescript": "^3.2.2",
     "wait-on": "^3.1.0"
   },
-  "comments": [
-    "todo: update typescript to 3.1.2 when this gets released",
-    "https://github.com/cypress-io/cypress/issues/2363"
-  ],
   "jest": {
     "collectCoverageFrom": [
       "src/**/*.ts",
