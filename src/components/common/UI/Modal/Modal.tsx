@@ -11,7 +11,7 @@ class Modal extends React.Component<IProps, {}> {
   public render() {
     const { show, clicked } = this.props;
     const style: any = {
-      transform: show ? "translateY(0)" : "translateY(-10vh)",
+      transform: show ? "translateY(0)" : "translateY(-100vh)",
       opacity: show ? "1" : "0"
     };
     return (

@@ -18,10 +18,10 @@ class Layout extends React.Component<{}, IState> {
   };
 
   componentDidMount() {
-    window.addEventListener("scroll", this.handleScroll);
+    window.addEventListener("scroll", this.handleScroll.bind(this));
   }
   componentWillMount() {
-    window.removeEventListener("scroll", this.handleScroll);
+    window.removeEventListener("scroll", this.handleScroll.bind(this));
   }
   public handleScroll = () => {
     const el: HTMLElement | null = document.documentElement;
@@ -49,7 +49,6 @@ class Layout extends React.Component<{}, IState> {
   };
   public render() {
     const { isShrink, showModal } = this.state;
-    debugger;
     return (
       <React.Fragment>
         <Modal show={showModal} clicked={this.handleHideModal} />

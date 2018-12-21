@@ -1,0 +1,82 @@
+.search_form {
+  background-color: rgba(244, 244, 244, 0.47);
+  position: relative;
+  -moz-border-radius: 16px;
+  -webkit-border-radius: 16px;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  padding: 0 10px;
+}
+.search_text {
+  border: 1px transparent;
+  border-radius: 2px;
+  color: #000;
+  float: left;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 15px;
+  line-height: 36px;
+  margin-right: 12px;
+  outline: medium none;
+  background: transparent;
+}
+.icons {
+  list-style: none;
+  position: relative;
+}
+
+.icons li {
+  float: left;
+  height: 19px;
+  text-indent: -999px;
+  cursor: pointer;
+  margin-right: 5px;
+  border: 1px solid;
+}
+
+/* Styling each icon */
+
+li.web {
+  width: 15px;
+}
+li.web.active,
+li.web:hover {
+  background-position: left bottom;
+}
+
+li.images {
+  width: 22px;
+  background-position: -18px 0;
+}
+li.images.active,
+li.images:hover {
+  background-position: -18px bottom;
+}
+
+li.news {
+  width: 14px;
+  background-position: -44px 0;
+}
+li.news.active,
+li.news:hover {
+  background-position: -44px bottom;
+}
+
+li.videos {
+  width: 17px;
+  background-position: right 0;
+}
+li.videos.active,
+li.videos:hover {
+  background-position: right bottom;
+}
+
+span.arrow {
+  /* The little arrow that moves below the icons */
+
+  width: 11px;
+  height: 6px;
+  margin: 21px 0 0 5px;
+  position: absolute;
+  left: 0;
+}
