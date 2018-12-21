@@ -31,4 +31,11 @@ jobs:
       name: "Cypress tests"
     - stage: "Docker build & deploy"
       install: skip
-      script: docker build . -t eyra/frontend:latest -t eyra/frontend:$TRAVIS_BUILD_NUMBER && docker login -u eyra -p "$DOCKER_PASSWORD" && docker push eyra/frontend:$TRAVIS_BUILD_NUMBER && docker push eyra/frontend:latest
+      script:
+        - docker build . -t eyra/frontend:latest -t eyra/frontend:$TRAVIS_BUILD_NUMBER
+        - docker login -u eyra -p "$DOCKER_PASSWORD"
+        - docker push eyra/frontend:$TRAVIS_BUILD_NUMBER
+        - docker push eyra/frontend:latest
+        - openssl aes-256-cbc -K $encrypted_62a889a79f26_key -iv $encrypted_62a889a79f26_iv -in travis_kubeconfig.yaml.enc -out travis_kubeconfig.yaml -d
+        - curl -Lo kubectl https://storage.googleapis.com/kubernetes-release/release/v1.12.3/bin/linux/amd64/kubectl && chmod +x kubectl && sudo mv kubectl /usr/local/bin/
+        - KUBECONFIG=`pwd`/travis_kubeconfig.yaml kubectl set image deployments/eyra-frontend-deployment eyra-frontend=eyra/frontend:$TRAVIS_BUILD_NUMBER
