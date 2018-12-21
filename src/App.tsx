@@ -1,9 +1,9 @@
 import * as React from "react";
 import Theme from "../src/Theme/Theme";
-import LandingPage from "./components/Layout/LandingPage/LandingPage";
+import Layout from "./components/Layout/Layout/Layout";
 class App extends React.Component {
   public render() {
-    return <LandingPage />;
+    return <Layout />;
   }
 }
 

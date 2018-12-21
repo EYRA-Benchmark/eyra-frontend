@@ -6,7 +6,11 @@
 }
 .logo {
   height: 100%;
+  transition: height 1s;
 }
 .logoImage {
   height: 100%;
+}
+.shrink {
+  height: 64px;
 }

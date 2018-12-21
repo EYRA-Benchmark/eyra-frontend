@@ -1,0 +1,15 @@
+.appBar {
+  height: 100px;
+  transition: height 1s;
+  -webkit-transition: height 1s;
+  background: linear-gradient(
+    to right,
+    rgba(255, 255, 255, 0.9) 20%,
+    #1fb8ea 100%
+  ) !important;
+}
+
+/* // #204864d1  previous color for header*/
+.shrink {
+  height: 64px;
+}
