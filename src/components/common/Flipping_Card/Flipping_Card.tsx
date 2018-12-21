@@ -3,7 +3,7 @@ import Grid from "@material-ui/core/Grid";
 import * as React from "react";
 import CardBack from "./CardBack/CardBack";
 import CardFront from "./CardFront/CardFront";
-import * as styles from "./Flipping_Card.css";
+import styles from "./Flipping_Card.module.css";
 class FlippingCard extends React.Component {
   render() {
     return (

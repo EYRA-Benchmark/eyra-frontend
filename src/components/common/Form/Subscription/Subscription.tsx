@@ -1,7 +1,7 @@
 import classNames from "classnames";
 import * as React from "react";
 import MailImage from "../../../../assets/images/mail.png";
-import * as styles from "./Subscription.css";
+import styles from "./Subscription.module.css";
 
 interface IErrors {
   email: string[];

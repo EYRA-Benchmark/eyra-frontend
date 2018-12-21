@@ -4,7 +4,7 @@ import Modal from "../../common/UI/Modal/Modal";
 import Footer from "../Footer/Footer";
 import Header from "../Header/Header";
 import MainContent from "../MainContent/MainContent";
-import * as styles from "./Layout.css";
+import styles from "./Layout.module.css";
 
 interface IState {
   isShrink: boolean;
@@ -49,6 +49,7 @@ class Layout extends React.Component<{}, IState> {
   };
   public render() {
     const { isShrink, showModal } = this.state;
+    debugger;
     return (
       <React.Fragment>
         <Modal show={showModal} clicked={this.handleHideModal} />

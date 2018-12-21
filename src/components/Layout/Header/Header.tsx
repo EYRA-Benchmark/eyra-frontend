@@ -5,7 +5,7 @@ import * as React from "react";
 import logo from "../../../assets/images/logo.png";
 import SearchBar from "../../common/SearchBar/SearchBar";
 import Navbar from "../../Navigation/NavigationMenu/NavigationMenu";
-import * as styles from "./Header.css";
+import styles from "./Header.module.css";
 
 export interface IProps {
   classes: string;

@@ -1,6 +1,6 @@
 import classNames from "classnames";
 import * as React from "react";
-import * as styles from "./AnimateComponent.css";
+import styles from "./AnimateComponent.module.css";
 const animate = <P extends object>(WrappedComponent: React.ComponentType<P>) =>
   class WithAnimation extends React.Component<P> {
     state = { didMount: false };

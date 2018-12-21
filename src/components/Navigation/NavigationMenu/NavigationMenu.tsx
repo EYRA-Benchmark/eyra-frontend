@@ -1,7 +1,7 @@
 import * as React from "react";
 
 import { NavLink } from "react-router-dom";
-import * as styles from "./NavigationMenu.css";
+import styles from "./NavigationMenu.module.css";
 
 function NavigationMenu() {
   return (

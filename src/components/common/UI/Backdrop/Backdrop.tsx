@@ -1,5 +1,5 @@
 import * as React from "react";
-import * as styles from "./Backdrop.css";
+import styles from "./Backdrop.module.css";
 export interface IProps {
   show: boolean;
   clicked: React.MouseEventHandler<HTMLDivElement>;

@@ -26,7 +26,8 @@
     "strict": true,
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "noEmit": true
+    "noEmit": true,
+    "plugins": [{ "name": "typescript-plugin-css-modules" }]
   },
   "exclude": [
     "node_modules",

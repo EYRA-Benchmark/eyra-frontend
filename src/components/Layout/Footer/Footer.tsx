@@ -1,6 +1,6 @@
 import classNames from "classnames";
 import * as React from "react";
-import * as styles from "./Footer.css";
+import styles from "./Footer.module.css";
 export interface IProps {
   showModal: React.MouseEventHandler<HTMLButtonElement>;
 }

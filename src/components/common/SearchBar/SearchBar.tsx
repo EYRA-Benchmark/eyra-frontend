@@ -1,5 +1,5 @@
 import * as React from "react";
-import * as styles from "./SearchBar.css";
+import styles from "./SearchBar.module.css";
 function SearchBar() {
   return (
     <form className={styles.search_form}>

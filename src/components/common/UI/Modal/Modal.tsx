@@ -1,7 +1,7 @@
 import * as React from "react";
 import Subscription from "../../Form/Subscription/Subscription";
 import Backdrop from "../Backdrop/Backdrop";
-import * as styles from "./Modal.css";
+import styles from "./Modal.module.css";
 
 export interface IProps {
   show: boolean;

@@ -2,7 +2,7 @@ import classNames from "classnames";
 import * as React from "react";
 import Header from "../Header/Header";
 import MainContent from "../MainContent/MainContent";
-import * as styles from "./LandingPage.css";
+import styles from "./LandingPage.module.css";
 interface IState {
   isShrink: boolean;
 }
