@@ -11,6 +11,7 @@ const animate = <P extends object>(WrappedComponent: React.ComponentType<P>) =>
     }
     render() {
       const { didMount } = this.state;
+
       return (
         <div className={classNames(styles.fadein, didMount && styles.visible)}>
           <WrappedComponent {...this.props} />
