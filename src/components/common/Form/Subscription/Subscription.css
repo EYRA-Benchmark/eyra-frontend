@@ -69,7 +69,7 @@
   transform: translateY(-25%);
   right: 8px;
   pointer-events: none;
-  color: #1fb8ea;
+  color: #ff0000;
   font-size: 12px;
   text-align: left;
   visibility: hidden;
@@ -85,7 +85,7 @@
   font-family: FontAwesome;
   display: block;
   position: absolute;
-  color: #1fb8ea;
+  color: #ff0000;
   font-size: 15px;
   top: 40%;
   -webkit-transform: translateY(-25%);
