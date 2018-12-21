@@ -37,6 +37,7 @@ class LandingPage extends React.Component<{}, IState> {
     return (
       <React.Fragment>
         <Header
+          isShrink={isShrink}
           classes={classNames(styles.appBar, isShrink && styles.shrink)}
         />
         <MainContent />

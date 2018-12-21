@@ -29,6 +29,7 @@ export class Layout extends React.Component<IProps, IState> {
       <div className={classes.root}>
         <Header
           // drawerToggle={this.handleDrawerToggle}
+          isShrink={false}
           classes={classNames(
             classes.appBar,
             openSideDrawer && classes.appBarShift

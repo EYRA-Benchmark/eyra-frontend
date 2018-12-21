@@ -1,3 +1,6 @@
+.bgBlue {
+  background: #1fb8ea;
+}
 .container {
   position: relative;
   width: 100vw;
@@ -12,7 +15,7 @@
   background-size: cover;
 }
 .banner_image {
-  background-image: url("../../assets/images/Banner.jpeg");
+  background-image: url("../../assets/images/bg_image2.jpg");
   width: 100vw;
   height: 100vh;
 }
@@ -23,7 +26,7 @@
   text-align: center;
   color: #000;
 }
-
+/* linear-gradient(to bottom right, rgba(255, 255, 255, 0.8) 20%, rgba(0, 10, 28, 0.2) 65%, rgba(0,10,28,.6) 100%) !important */
 .caption span.article {
   background: linear-gradient(
     to bottom,
@@ -44,20 +47,32 @@
   min-height: 700px;
 }
 .content {
-  color: #777;
-  background-color: #fff;
+  color: #fff;
   text-align: center;
   padding: 50px;
 }
-h3 {
-  letter-spacing: 5px;
-  text-transform: uppercase;
-  font: 20px "Lato", sans-serif;
-  color: #111;
+.content h3 {
+  letter-spacing: 3px;
+  text-transform: capitalize;
+  font: 25px "Lato", sans-serif;
 }
-.section4 {
-  color: #ddd;
-  background-color: #282e34;
-  text-align: center;
-  padding: 50px 80px;
+.buttonContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 30px;
+}
+
+.sendButton {
+  min-width: 100px;
+  height: 30px;
+  border: none;
+  font-weight: 600;
+  font-size: 16px;
+  color: #1fb8ea;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.4s;
+  cursor: pointer;
 }

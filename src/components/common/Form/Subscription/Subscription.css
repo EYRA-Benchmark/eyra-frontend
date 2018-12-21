@@ -1,0 +1,125 @@
+:focus {
+  outline: none;
+}
+.container {
+  width: 100%;
+  background: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+.mail {
+  flex: 1;
+}
+.mail img {
+  max-width: 100%;
+}
+.mail img:hover {
+  transform: rotate(10deg) scale(1.1);
+  transition: all 0.3s;
+}
+.formContainer {
+  flex: 1;
+}
+.formContainer .title {
+  display: block;
+  padding: 20px;
+  text-align: center;
+  font-size: 30px;
+}
+.formContainer input {
+  border-radius: 5px;
+  padding: 0 10px;
+  margin-bottom: 10px;
+}
+.wrapInput {
+  position: relative;
+  width: 100%;
+  z-index: 1;
+  margin-bottom: 20px;
+}
+.validateInput {
+  position: relative;
+}
+.input1 {
+  display: block;
+  width: 100%;
+  height: 40px;
+  background: #f8f7f7;
+  line-height: 1.5;
+  border: none;
+  font-size: 15px;
+}
+.alertValidate::before {
+  content: attr(data-validate);
+  position: absolute;
+  max-width: 70%;
+  padding: 0px 20px 0px 10px;
+  top: 40%;
+  -webkit-transform: translateY(-25%);
+  -moz-transform: translateY(-25%);
+  -ms-transform: translateY(-25%);
+  -o-transform: translateY(-25%);
+  transform: translateY(-25%);
+  right: 8px;
+  pointer-events: none;
+  color: #1fb8ea;
+  font-size: 12px;
+  text-align: left;
+  visibility: hidden;
+  opacity: 0;
+  -webkit-transition: opacity 0.4s;
+  -o-transition: opacity 0.4s;
+  -moz-transition: opacity 0.4s;
+  transition: opacity 0.2s;
+}
+
+.alertValidate::after {
+  content: "\f06a";
+  font-family: FontAwesome;
+  display: block;
+  position: absolute;
+  color: #1fb8ea;
+  font-size: 15px;
+  top: 40%;
+  -webkit-transform: translateY(-25%);
+  -moz-transform: translateY(-25%);
+  -ms-transform: translateY(-25%);
+  -o-transform: translateY(-25%);
+  transform: translateY(-25%);
+  right: 13px;
+}
+
+.alertValidate:hover:before {
+  visibility: visible;
+  opacity: 1;
+}
+.buttonContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 30px;
+}
+
+.sendButton {
+  min-width: 100px;
+  height: 30px;
+  border-radius: 10px;
+  background: #1fb8ea;
+  font-weight: 600;
+  font-size: 15px;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 25px;
+  transition: all 0.4s;
+  cursor: pointer;
+  border: none;
+}

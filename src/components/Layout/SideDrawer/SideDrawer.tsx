@@ -6,7 +6,7 @@ import Typography from "@material-ui/core/Typography";
 import classNames from "classnames";
 import * as React from "react";
 // import menus from "../../Navigation/Menu_Data";
-// import NavigationMenu from "../../Navigation/NavigationMenu/NavigationMenu";
+import NavigationMenu from "../../Navigation/NavigationMenu/NavigationMenu";
 import styles from "./SideDrawerStyle";
 interface IProps extends WithStyles<typeof styles> {
   classes: any;
@@ -14,7 +14,7 @@ interface IProps extends WithStyles<typeof styles> {
 }
 
 export class SideDrawer extends React.Component<IProps, {}> {
-  render() {
+  public render() {
     const { classes, open } = this.props;
     return (
       <Drawer
@@ -33,7 +33,7 @@ export class SideDrawer extends React.Component<IProps, {}> {
           </Typography>
         </Toolbar>
         <Divider />
-        {/*<NavigationMenu menus={menus} />*/}
+        <NavigationMenu />
       </Drawer>
     );
   }

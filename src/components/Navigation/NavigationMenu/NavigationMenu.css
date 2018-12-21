@@ -7,16 +7,17 @@
 }
 .nav li a {
   font-size: 18px;
+  font-weight: bold;
   padding: 10px;
   text-decoration: none;
-  color: #000;
+  color: #fff;
   border-bottom: 3px solid transparent;
   transition: border-bottom 0.5s ease-out;
 }
 .nav a:hover {
-  border-bottom: 3px solid #62dafb;
+  border-bottom: 3px solid #000;
 }
 li a.active {
-  color: #62dafb;
+  color: #000;
   font-weight: 700;
 }

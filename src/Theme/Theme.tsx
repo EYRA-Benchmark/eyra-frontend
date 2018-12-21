@@ -14,6 +14,11 @@ const theme = createMuiTheme({
       root: {
         color: "#000"
       }
+    },
+    MuiButton: {
+      textPrimary: {
+        color: "#62dafb"
+      }
     }
   },
   palette: {

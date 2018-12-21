@@ -1,3 +1,4 @@
+export const bgBlue: string;
 export const container: string;
 export const image: string;
 export const banner_image: string;
@@ -6,4 +7,5 @@ export const article: string;
 export const bgimg_2: string;
 export const bgimg_3: string;
 export const content: string;
-export const section4: string;
+export const buttonContainer: string;
+export const sendButton: string;

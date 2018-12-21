@@ -1,5 +1,12 @@
 {
   "extends": ["tslint:recommended", "tslint-react", "tslint-config-prettier"],
+  "rules": {
+    "member-access": false,
+    "no-console": false,
+    "no-debugger": false,
+    "object-literal-sort-keys": false,
+    "jsx-no-lambda": false
+  },
   "linterOptions": {
     "exclude": [
       "config/**/*.js",
@@ -7,9 +14,5 @@
       "cypress/**/*.js",
       "coverage/lcov-report/*.js"
     ]
-  },
-  "rules": {
-    "object-literal-sort-keys": false,
-    "member-access": [true, "no-public"]
   }
 }
