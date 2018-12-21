@@ -15,7 +15,15 @@ function Footer({ showModal }: IProps) {
           </button>
         </div>
       </div>
-      <div className={styles.content} />
+      <div className={styles.content}>
+        <p>
+          By{" "}
+          <a href="https://www.esciencecenter.nl/" target="_blank">
+            Netherlands eScience Center
+          </a>{" "}
+          & <a href="https://www.surf.nl/">SURF</a>
+        </p>
+      </div>
     </div>
   );
 }
