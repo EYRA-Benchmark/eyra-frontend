@@ -2,13 +2,7 @@
   outline: none;
 }
 .container {
-  /*width: 70%;*/
-  /*background: #fff;*/
-  /*border-radius: 10px;*/
-  /*overflow: hidden;*/
   display: flex;
-  /*flex-wrap: wrap;*/
-  /*justify-content: space-evenly;*/
 }
 .mail {
   flex: 1;
@@ -22,12 +16,6 @@
 }
 .formContainer {
   flex: 2;
-}
-.formContainer .title {
-  display: block;
-  padding: 20px;
-  text-align: center;
-  font-size: 30px;
 }
 .formContainer input {
   border-radius: 5px;
@@ -84,10 +72,6 @@
   color: #1fb8ea;
   font-size: 15px;
   top: 40%;
-  -webkit-transform: translateY(-25%);
-  -moz-transform: translateY(-25%);
-  -ms-transform: translateY(-25%);
-  -o-transform: translateY(-25%);
   transform: translateY(-25%);
   right: 13px;
 }
