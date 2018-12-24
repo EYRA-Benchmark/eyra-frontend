@@ -983,7 +983,7 @@
 
 "@types/jest@^23.3.10":
   version "23.3.10"
-  resolved "https://registry.npmjs.org/@types/jest/-/jest-23.3.10.tgz#4897974cc317bf99d4fe6af1efa15957fa9c94de"
+  resolved "https://registry.yarnpkg.com/@types/jest/-/jest-23.3.10.tgz#4897974cc317bf99d4fe6af1efa15957fa9c94de"
 
 "@types/jquery@*":
   version "3.3.28"
