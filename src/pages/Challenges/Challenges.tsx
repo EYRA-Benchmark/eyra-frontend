@@ -1,9 +1,9 @@
 import { AxiosResponse } from "axios";
 import * as React from "react";
 import { RouteComponentProps } from "react-router-dom";
-import AnimateComponent from "../../components/common/Animation/AnimateComponent";
-import axios from "../../components/common/API/SetUpAxios";
-import ChallengesGrid from "../../components/common/CardGrid/CardGrid";
+import AnimateComponent from "../../components/Animation/AnimateComponent";
+import axios from "../../services/SetUpAxios";
+import ChallengesGrid from "../../components/CardGrid/CardGrid";
 // import ChallengeDetails from "./ChallengeDetails/ChallengeDetails";
 
 // function challenges() {

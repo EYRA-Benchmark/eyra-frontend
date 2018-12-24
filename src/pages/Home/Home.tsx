@@ -1,5 +1,5 @@
 import * as React from "react";
-import FlippingCard from "../../components/common/Flipping_Card/Flipping_Card";
+import FlippingCard from "../../components/FlippingCard/FlippingCard";
 import styles from "./Home.module.css";
 
 class Home extends React.Component<{}, {}> {

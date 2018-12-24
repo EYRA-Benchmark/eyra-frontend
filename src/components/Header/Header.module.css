@@ -1,0 +1,17 @@
+.toolbar {
+  display: flex;
+  justify-content: space-between;
+  height: 100%;
+  padding: 0 12px;
+}
+.logo {
+  height: 100%;
+}
+.logoImage {
+  display: block;
+  width: auto;
+  height: 100%;
+}
+.shrink {
+  height: 64px;
+}

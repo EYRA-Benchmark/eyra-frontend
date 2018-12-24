@@ -19,13 +19,18 @@ const theme = createMuiTheme({
       textPrimary: {
         color: "#62dafb"
       }
+    },
+    MuiModal: {
+      root: {
+      }
     }
   },
   palette: {
     primary: {
-      main: "#e9ecef"
+      main: "#77b7eb"
     }
-  }
+  },
+
 });
 
 function withRoot(Component: React.ComponentType) {
