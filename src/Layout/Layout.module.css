@@ -13,3 +13,8 @@
 .shrink {
   height: 64px;
 }
+@media (max-width: 600px) {
+  .appBar {
+    height: 64px;
+  }
+}

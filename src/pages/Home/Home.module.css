@@ -28,9 +28,9 @@ a {
   top: 50%;
   color: #000;
   background: linear-gradient(
-          to bottom,
-          rgba(255, 255, 255, 1) 0%,
-          rgba(255, 255, 255, 0.7) 100%
+    to bottom,
+    rgba(255, 255, 255, 1) 0%,
+    rgba(255, 255, 255, 0.7) 100%
   );
   width: 30%;
 }
@@ -50,26 +50,22 @@ a {
   line-height: 1.5;
   font-size: 20px;
 }
-.bgimg_2 {
-  background-image: url("../../assets/images/bg_image2.jpg");
-  min-height: 400px;
-}
-.bgimg_3 {
-  background-image: url("../../assets/images/bg_image3.jpg");
-  min-height: 700px;
+.innerContainer {
+  width: 80%;
+  margin: 0 auto;
 }
 .content {
+  display: flex;
+  flex-direction: column;
   color: #fff;
-  text-align: center;
-  padding: 0 200px;
 }
-.content h3 {
+.sectionHeader {
   letter-spacing: 3px;
-  text-transform: capitalize;
   font: 25px "Lato", sans-serif;
-  color: #000;
+  color: #00a3e3;
   float: left;
-  margin-bottom: 0;
+  padding: 10px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 .buttonContainer {
@@ -91,4 +87,19 @@ a {
   align-items: center;
   transition: all 0.4s;
   cursor: pointer;
+}
+@media (min-width: 768px) and (max-width: 1024px) {
+  .caption {
+    width: 70%;
+  }
+}
+@media (max-width: 600px) {
+  .caption {
+    top: 40%;
+    width: 100%;
+    right: 0;
+  }
+  .caption .article {
+    font-size: 25px;
+  }
 }

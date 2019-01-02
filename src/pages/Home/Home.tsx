@@ -1,8 +1,9 @@
 import * as React from "react";
 import FlippingCard from "../../components/FlippingCard/FlippingCard";
+import Gallary from "../../components/Gallary/Gallary";
 import styles from "./Home.module.css";
-
 class Home extends React.Component<{}, {}> {
+  data = [{ title: "News1" }, { title: "News2" }, { title: "News3" }];
   public render() {
     return (
       <React.Fragment>
@@ -23,17 +24,17 @@ class Home extends React.Component<{}, {}> {
             </div>
           </div>
         </div>
+        <div className={styles.innerContainer}>
+          <div className={styles.content}>
+            <h3 className={styles.sectionHeader}>About Us</h3>
+            <FlippingCard />
+          </div>
 
-        <div className={styles.content}>
-          <h3>About Us</h3>
-          <FlippingCard />
+          <div className={styles.content}>
+            <h3 className={styles.sectionHeader}>News</h3>
+            <Gallary data={this.data} />
+          </div>
         </div>
-
-        <div className={styles.content}>
-          <h3>News</h3>
-          <FlippingCard />
-        </div>
-
         <div style={{ position: "relative" }} />
       </React.Fragment>
     );
