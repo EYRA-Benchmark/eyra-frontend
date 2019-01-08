@@ -1,0 +1,32 @@
+.sideDrawer {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 64px;
+  z-index: 200;
+  background: linear-gradient(
+    to bottom,
+    #1fb8ea,
+    rgba(255, 255, 255, 0.9) 50%
+  ) !important;
+  padding: 32px 16px;
+  box-sizing: border-box;
+  transition: transform 0.5s ease-out;
+}
+
+@media (min-width: 500px) {
+  .sideDrawer {
+    display: none;
+  }
+}
+
+.open {
+  transform: translateY(
+    0
+  ); /*will move side drawer to original position set in .SideDrawer*/
+}
+
+.close {
+  transform: translateY(-100%);
+}

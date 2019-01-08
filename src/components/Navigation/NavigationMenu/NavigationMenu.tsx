@@ -1,5 +1,4 @@
 import * as React from "react";
-
 import { NavLink } from "react-router-dom";
 import styles from "./NavigationMenu.module.css";
 
@@ -8,7 +7,7 @@ function NavigationMenu() {
     <React.Fragment>
       <ul className={styles.nav}>
         <li>
-          <NavLink to="/home" activeClassName={styles.active}>
+          <NavLink to="/" activeClassName={styles.active}>
             Home
           </NavLink>
         </li>

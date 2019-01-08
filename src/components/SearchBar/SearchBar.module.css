@@ -80,3 +80,8 @@ span.arrow {
   position: absolute;
   left: 0;
 }
+@media (max-width: 500px) {
+  .desktopOnly {
+    display: none;
+  }
+}
