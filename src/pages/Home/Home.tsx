@@ -55,14 +55,13 @@ class Home extends React.Component<{}, {}> {
 
           <div className={styles.content}>
             <h3 className={styles.sectionHeader}>News</h3>
-            <div>
-              {this.state.news.map((n: any) => (console.log(n) as any) || (
-                <div>
-                  {RichText.asText(n.data.title)}
-                </div>
-              ))}
-            </div>
-            <Gallary data={this.state.news.map((n: any) => ({ title: n.data.title[0].text }))} />
+            <Gallary
+              data={this.state.news.map((n: any) =>
+                ({
+                  title: RichText.asText(n.data.title),
+                  contents: RichText.render(n.data.description),
+                }))
+              } />
           </div>
         </div>
         <div style={{ position: "relative" }} />

@@ -19,6 +19,7 @@ export class Gallary extends React.Component<IProps, {}> {
                 <Typography gutterBottom={true} variant="h5" component="h2">
                   {card.title}
                 </Typography>
+                {card.contents}
               </CardContent>
             </Card>
           </Grid>

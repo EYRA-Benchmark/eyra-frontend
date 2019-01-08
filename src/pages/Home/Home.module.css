@@ -57,7 +57,7 @@ a {
 .content {
   display: flex;
   flex-direction: column;
-  color: #fff;
+  color: #000;
 }
 .sectionHeader {
   letter-spacing: 3px;
