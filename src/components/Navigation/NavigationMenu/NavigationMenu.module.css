@@ -9,20 +9,20 @@
   margin: 10px;
 }
 .nav li a {
-  font-size: 18px;
-  font-weight: bold;
+  font-size: 16px;
+  letter-spacing: 1px;
+  font-weight: 600;
   padding: 10px;
   text-decoration: none;
-  color: #fff;
   border-bottom: 3px solid transparent;
   transition: border-bottom 0.5s ease-out;
+  color: var(--dark-color);
 }
 .nav a:hover {
-  border-bottom: 2px solid #000;
+  border-bottom: 2px solid var(--white-color);
 }
 li a.active {
-  color: #000;
-  font-weight: 700;
+  color: var(--white-color);
 }
 
 @media (max-width: 600px) {
@@ -30,15 +30,17 @@ li a.active {
     flex-flow: column;
   }
   .nav li {
-    box-shadow: 0px 1px 1px 0 rgba(0, 0, 0, 0.16),
-      0 0px 0px 0 rgba(0, 0, 0, 0.12);
     padding: 15px;
     margin-bottom: 10px;
+    border-bottom: 1px solid var(--light-gray);
   }
   .nav a {
     border: none;
   }
   .nav li a:hover {
     border: none;
+  }
+  li a.active {
+    color: var(--primary-color);
   }
 }

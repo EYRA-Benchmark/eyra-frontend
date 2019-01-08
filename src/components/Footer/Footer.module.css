@@ -2,19 +2,16 @@
   margin-top: 60px;
 }
 .content {
-  color: #ddd;
-  background-color: #204864d1;
+  color: var(--secondary-text-color);
   text-align: center;
   padding: 50px 80px;
 }
-.bgBlue {
-  background-color: #1fb8ea;
-}
+
 .content h3 {
+  color: var(--black-color);
   letter-spacing: 3px;
   text-transform: capitalize;
   font: 25px "Lato", sans-serif;
-  color: #000;
 }
 .buttonContainer {
   display: flex;
@@ -23,15 +20,21 @@
   margin-top: 30px;
 }
 .sendButton {
+  color: var(--primary-color);
   min-width: 100px;
   height: 30px;
   border: none;
   font-weight: 600;
   font-size: 16px;
-  color: #1fb8ea;
   display: flex;
   justify-content: center;
   align-items: center;
   transition: all 0.4s;
   cursor: pointer;
+}
+.bgBlue {
+  background: var(--primary-color);
+}
+.bgDark {
+  background-color: var(--dark-color);
 }

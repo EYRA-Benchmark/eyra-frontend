@@ -1,0 +1,25 @@
+:root {
+  --white-color: #fff;
+  --black-color: #000;
+  --primary-color: #1fb8ea;
+  --dark-color: #204864;
+  --secondary-text-color: #ddd;
+  --light-gray: rgba(0, 0, 0, 0.1);
+  --drawer-background: #fafafa;
+  --header-background: linear-gradient(
+    to right,
+    rgba(255, 255, 255, 0.9) 20%,
+    var(--primary-color) 100%
+  );
+  --caption-white-gradient: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 1) 0%,
+    rgba(255, 255, 255, 0.7) 100%
+  );
+}
+a {
+  color: var(--white-color);
+}
+.primary {
+  color: var(--primary-color);
+}

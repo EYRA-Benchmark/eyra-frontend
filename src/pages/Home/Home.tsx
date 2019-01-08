@@ -1,3 +1,4 @@
+import classNames from "classnames";
 import * as React from "react";
 import FlippingCard from "../../components/FlippingCard/FlippingCard";
 import Gallary from "../../components/Gallary/Gallary";
@@ -9,7 +10,7 @@ class Home extends React.Component<{}, {}> {
       <React.Fragment>
         <div className={styles.container}>
           <div className={`${styles.image} ${styles.banner_image}`}>
-            <div className={styles.caption}>
+            <div className={classNames(styles.caption)}>
               <div className={styles.article}>
                 <span>E</span>nlighten&nbsp;
                 <span>Y</span>our&nbsp;
@@ -26,16 +27,19 @@ class Home extends React.Component<{}, {}> {
         </div>
         <div className={styles.innerContainer}>
           <div className={styles.content}>
-            <h3 className={styles.sectionHeader}>About Us</h3>
+            <h3 className={classNames(styles.sectionHeader, styles.divider)}>
+              About Us
+            </h3>
             <FlippingCard />
           </div>
 
           <div className={styles.content}>
-            <h3 className={styles.sectionHeader}>News</h3>
+            <h3 className={classNames(styles.sectionHeader, styles.divider)}>
+              News
+            </h3>
             <Gallary data={this.data} />
           </div>
         </div>
-        <div style={{ position: "relative" }} />
       </React.Fragment>
     );
   }

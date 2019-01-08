@@ -17,20 +17,18 @@ const theme = createMuiTheme({
     },
     MuiButton: {
       textPrimary: {
-        color: "#62dafb"
+        color: "#1fb8ea"
       }
     },
     MuiModal: {
-      root: {
-      }
+      root: {}
     }
   },
   palette: {
     primary: {
-      main: "#77b7eb"
+      main: "#1fb8ea"
     }
-  },
-
+  }
 });
 
 function withRoot(Component: React.ComponentType) {

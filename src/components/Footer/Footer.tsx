@@ -1,11 +1,8 @@
-import React from "react";
-
-import classNames from "classnames";
-
 import { Dialog } from "@material-ui/core";
+import classNames from "classnames";
+import React from "react";
 import SubscriptionDialog from "../SubscriptionDialog/SubscriptionDialog";
 import styles from "./Footer.module.css";
-
 class Footer extends React.Component<{}, { subscriptionDialogOpen: boolean }> {
   state = {
     subscriptionDialogOpen: false
@@ -37,7 +34,7 @@ class Footer extends React.Component<{}, { subscriptionDialogOpen: boolean }> {
             </button>
           </div>
         </div>
-        <div className={styles.content}>
+        <div className={classNames(styles.content, styles.bgDark)}>
           <p>
             By{" "}
             <a href="https://www.esciencecenter.nl/" target="_blank">
