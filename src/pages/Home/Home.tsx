@@ -58,7 +58,7 @@ class Home extends React.Component<{}, {}> {
             <Gallary
               data={this.state.news.map((n: any) =>
                 ({
-                  title: RichText.asText(n.data.title),
+                  title: new Date(n.first_publication_date).toISOString().split('T')[0] + ': ' + RichText.asText(n.data.title),
                   contents: RichText.render(n.data.description),
                 }))
               } />
