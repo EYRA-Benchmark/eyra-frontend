@@ -1,12 +1,13 @@
 import * as React from "react";
 
 import Prismic from 'prismic-javascript';
-// import {Link, RichText, Date} from 'prismic-reactjs';
+
+const RichText = require("prismic-reactjs").RichText;
 
 import FlippingCard from "../../components/FlippingCard/FlippingCard";
 import Gallary from "../../components/Gallary/Gallary";
-import styles from "./Home.module.css";
 import settings from '../../settings';
+import styles from "./Home.module.css";
 
 class Home extends React.Component<{}, {}> {
   data = [{ title: "News1" }, { title: "News2" }, { title: "News3" }];
@@ -54,6 +55,13 @@ class Home extends React.Component<{}, {}> {
 
           <div className={styles.content}>
             <h3 className={styles.sectionHeader}>News</h3>
+            <div>
+              {this.state.news.map((n: any) => (console.log(n) as any) || (
+                <div>
+                  {RichText.asText(n.data.title)}
+                </div>
+              ))}
+            </div>
             <Gallary data={this.state.news.map((n: any) => ({ title: n.data.title[0].text }))} />
           </div>
         </div>

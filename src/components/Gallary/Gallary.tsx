@@ -15,7 +15,7 @@ export class Gallary extends React.Component<IProps, {}> {
         {data.map((card: any, index: number) => (
           <Grid item={true} key={index} xs={12} sm={6} md={4}>
             <Card className={styles.card}>
-              <CardContent className={styles.cardContent}>
+              <CardContent className={styles.card}>
                 <Typography gutterBottom={true} variant="h5" component="h2">
                   {card.title}
                 </Typography>
