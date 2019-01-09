@@ -3,3 +3,9 @@
   display: flex;
   flex-direction: column;
 }
+.card img {
+  max-width: 100%;
+}
+.media {
+  padding-top: 67.25%;
+}

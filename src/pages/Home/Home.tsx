@@ -1,29 +1,28 @@
 import * as React from "react";
 
-import Prismic from 'prismic-javascript';
+import Prismic from "prismic-javascript";
 
 const RichText = require("prismic-reactjs").RichText;
 
 import FlippingCard from "../../components/FlippingCard/FlippingCard";
 import Gallary from "../../components/Gallary/Gallary";
-import settings from '../../settings';
+import settings from "../../settings";
 import styles from "./Home.module.css";
 
 class Home extends React.Component<{}, {}> {
-  data = [{ title: "News1" }, { title: "News2" }, { title: "News3" }];
   state = {
     news: []
-  }
+  };
 
   componentWillMount() {
-
     Prismic.api(settings.prismicEndpoint).then(api => {
-      api.query(Prismic.Predicates.at('document.type', 'news'), {}).then((response: any) => {
-        if (response) {
-          console.log(response.results);
-          this.setState({ news: response.results });
-        }
-      });
+      api
+        .query(Prismic.Predicates.at("document.type", "news"), {})
+        .then((response: any) => {
+          if (response) {
+            this.setState({ news: response.results });
+          }
+        });
     });
   }
 
@@ -56,12 +55,17 @@ class Home extends React.Component<{}, {}> {
           <div className={styles.content}>
             <h3 className={styles.sectionHeader}>News</h3>
             <Gallary
-              data={this.state.news.map((n: any) =>
-                ({
-                  title: (new Date(n.first_publication_date)).toISOString().split('T')[0] + ': ' + RichText.asText(n.data.title),
-                  contents: RichText.render(n.data.description),
-                }))
-              } />
+              data={this.state.news.map((n: any) => ({
+                title:
+                  new Date(n.first_publication_date)
+                    .toISOString()
+                    .split("T")[0] +
+                  ": " +
+                  RichText.asText(n.data.title),
+                image: n.data.image.url,
+                contents: RichText.render(n.data.description)
+              }))}
+            />
           </div>
         </div>
         <div style={{ position: "relative" }} />

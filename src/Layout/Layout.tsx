@@ -2,8 +2,9 @@ import classNames from "classnames";
 import * as React from "react";
 import Footer from "../components/Footer/Footer";
 import Header from "../components/Header/Header";
+import Pages from "../components/PageContent/PageContent";
 import SideDrawer from "../components/SideDrawer/SideDrawer";
-import ReactRouter from "../Routes";
+import ScrollToTop from "../components/Utils/ScrollToTop";
 import styles from "./Layout.module.css";
 interface IState {
   isShrink: boolean;
@@ -49,7 +50,9 @@ class Layout extends React.Component<{}, IState> {
           drawerToggle={this.sideDrawerToggleHandler}
         />
         <SideDrawer open={this.state.showSideDrawer} />
-        <ReactRouter />
+        <ScrollToTop>
+          <Pages />
+        </ScrollToTop>
         <Footer />
       </React.Fragment>
     );
