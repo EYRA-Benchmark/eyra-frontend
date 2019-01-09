@@ -13,15 +13,16 @@ import styles from "./CardGridStyle";
 interface IProps extends WithStyles<typeof styles> {
   classes: any;
   data: any;
+  clicked: () => void;
 }
 export class CardGrid extends React.Component<IProps, {}> {
   render() {
-    const { classes, data } = this.props;
+    const { classes, data, clicked } = this.props;
     return (
       <Grid container={true} spacing={40}>
         {data.map((card: any, index: number) => (
           <Grid item={true} key={index} sm={4} md={6} lg={4}>
-            <Card className={classes.card}>
+            <Card className={classes.card} onClick={clicked}>
               <CardMedia
                 className={classes.media}
                 image={ChallengeImage}

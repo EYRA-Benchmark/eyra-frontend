@@ -2,17 +2,8 @@ import { AxiosResponse } from "axios";
 import * as React from "react";
 import { RouteComponentProps } from "react-router-dom";
 import AnimateComponent from "../../components/Animation/AnimateComponent";
-import axios from "../../services/SetUpAxios";
 import ChallengesGrid from "../../components/CardGrid/CardGrid";
-// import ChallengeDetails from "./ChallengeDetails/ChallengeDetails";
-
-// function challenges() {
-//   return (
-//     <div>
-//       <ChallengesGrid />
-//     </div>
-//   );
-// }
+import axios from "../../services/SetUpAxios";
 
 interface IState {
   challengesData: any;
@@ -36,22 +27,21 @@ class Challenges extends React.Component<RouteComponentProps<{}>, IState> {
     });
   }
   public handleSelection = (selectedItem: any) => {
-    this.showDetails(selectedItem);
+    // this.showDetails(selectedItem);
   };
-  public showDetails = (item: any) => {
-    this.setState({ selectedItem: item }, () => {
-      this.props.history.push({
-        pathname: "/challenge_details",
-        state: { selectedItem: this.state.selectedItem }
-      });
+  public showDetails = () => {
+    this.props.history.push({
+      pathname: "/challenge_details",
+      state: { selectedItem: this.state.selectedItem }
     });
   };
   public render() {
     if (this.state.challengesData) {
       return (
-        <React.Fragment>
-          <ChallengesGrid data={this.state.challengesData} />
-        </React.Fragment>
+        <ChallengesGrid
+          data={this.state.challengesData}
+          clicked={this.showDetails}
+        />
       );
     }
     return <div />;
