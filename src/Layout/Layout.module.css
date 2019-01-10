@@ -2,12 +2,13 @@
   height: 80px;
   transition: height 1s;
   -webkit-transition: height 1s;
-  background: var(--header-background);
+  background: var(--header-background) !important;
 }
 
 /* // #204864d1  previous color for header*/
 .shrink {
   height: 64px;
+  background: #fff !important;
 }
 @media (max-width: 600px) {
   .appBar {

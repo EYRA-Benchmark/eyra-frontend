@@ -12,17 +12,19 @@
   background-size: cover;
 }
 .banner_image {
-  background-image: url("../../assets/images/bg_image2.jpg");
+  background-image: url("../../assets/images/Banner11.jpg");
   width: 100%;
   height: 100%;
 }
+
 .divider {
   border-bottom: 1px solid var(--light-gray);
 }
+
 .caption {
   position: absolute;
-  right: 5%;
-  top: 50%;
+  left: 5%;
+  top: 40%;
   width: 30%;
   background: var(--caption-white-gradient);
 }

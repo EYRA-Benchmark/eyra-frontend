@@ -5,6 +5,7 @@ import Tabs from "@material-ui/core/Tabs";
 import Typography from "@material-ui/core/Typography";
 import PropTypes from "prop-types";
 import * as React from "react";
+import Leadeboard from "../../pages/Challenges/ChallengeDetails/Leaderboard/Leaderboard";
 import styles from "./DetailsLayout.module.css";
 interface IProps {
   children: React.ReactNode;
@@ -26,7 +27,7 @@ TabContainer.propTypes = {
 interface IState {
   value: number;
 }
-export class Details extends React.Component<{}, IState> {
+class Details extends React.Component<{}, IState> {
   state = {
     value: 0
   };
@@ -38,10 +39,10 @@ export class Details extends React.Component<{}, IState> {
     return (
       <Grid container={true} spacing={24}>
         <Grid container={true} item={true} xs={12} className={styles.banner}>
-          <Grid item={true} xs={3}>
+          <Grid item={true} xs={12} sm={4} md={3}>
             <Paper className={styles.paper}>Image</Paper>
           </Grid>
-          <Grid item={true} xs={9}>
+          <Grid item={true} xs={12} sm={8} md={9}>
             <Paper className={styles.paper}>Desc</Paper>
           </Grid>
         </Grid>
@@ -52,7 +53,11 @@ export class Details extends React.Component<{}, IState> {
             <Tab label="DataSets" />
           </Tabs>
           {value === 0 && <TabContainer>Overview</TabContainer>}
-          {value === 1 && <TabContainer>Leadeboard</TabContainer>}
+          {value === 1 && (
+            <TabContainer>
+              <Leadeboard />
+            </TabContainer>
+          )}
           {value === 2 && <TabContainer>Datasets</TabContainer>}
         </Grid>
       </Grid>

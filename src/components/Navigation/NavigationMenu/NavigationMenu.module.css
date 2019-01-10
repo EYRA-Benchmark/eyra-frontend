@@ -19,10 +19,10 @@
   color: var(--dark-color);
 }
 .nav a:hover {
-  border-bottom: 2px solid var(--white-color);
+  border-bottom: 2px solid var(--dark-color);
 }
 li a.active {
-  color: var(--white-color);
+  color: var(--primary-color);
 }
 
 @media (max-width: 600px) {
