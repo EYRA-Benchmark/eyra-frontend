@@ -6,19 +6,7 @@ import Details from "../../../Layout/DetailsLayout/DetailsLayout";
 class ChallengDetails extends React.Component<RouteComponentProps<{}>, {}> {
   render() {
     // const selctedItem = this.props.location.state.selectedItem;
-    return (
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          minHeight: "500px",
-          margin: "150px 100px 50px"
-        }}
-      >
-        <Details />
-      </div>
-    );
+    return <Details />;
   }
 }
 export default AnimateComponent(ChallengDetails);

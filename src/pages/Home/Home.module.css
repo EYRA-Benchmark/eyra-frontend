@@ -49,6 +49,7 @@ span {
 .content {
   display: flex;
   flex-direction: column;
+  color: #000;
 }
 .sectionHeader {
   color: var(--primary-color);
