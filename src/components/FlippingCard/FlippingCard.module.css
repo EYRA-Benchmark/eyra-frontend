@@ -1,9 +1,8 @@
 .cardContainer {
   position: relative;
   z-index: 1;
-  margin: 32px auto;
   max-width: 720px;
-  height: 420px;
+  height: 300px;
   perspective: 1000px;
 }
 .cardBody {

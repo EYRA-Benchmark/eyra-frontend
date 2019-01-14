@@ -2,25 +2,24 @@ import React from "react";
 
 import classNames from "classnames";
 
-import SubscriptionDialog from '../SubscriptionDialog/SubscriptionDialog';
+import { Dialog } from "@material-ui/core";
+import SubscriptionDialog from "../SubscriptionDialog/SubscriptionDialog";
 import styles from "./Footer.module.css";
-import { Dialog } from '@material-ui/core';
 
 class Footer extends React.Component<{}, { subscriptionDialogOpen: boolean }> {
   state = {
     subscriptionDialogOpen: false
   };
 
-  toggleSubscriptionModal = (enabled: boolean|undefined) => () => {
-    const newState = enabled === undefined ?
-      !this.state.subscriptionDialogOpen
-      : enabled;
+  toggleSubscriptionModal = (enabled: boolean | undefined) => () => {
+    const newState =
+      enabled === undefined ? !this.state.subscriptionDialogOpen : enabled;
     this.setState({ subscriptionDialogOpen: newState });
-  }
+  };
 
   render() {
     return (
-      <div style={{ position: "relative" }}>
+      <div className={styles.topMargin}>
         <div className={classNames(styles.content, styles.bgBlue)}>
           <h3>Stay up to date, sign up for our newsletter</h3>
           <div className={styles.buttonContainer}>
@@ -28,9 +27,12 @@ class Footer extends React.Component<{}, { subscriptionDialogOpen: boolean }> {
               open={this.state.subscriptionDialogOpen}
               onClose={this.toggleSubscriptionModal(false)}
             >
-              <SubscriptionDialog/>
+              <SubscriptionDialog />
             </Dialog>
-            <button className={styles.sendButton} onClick={this.toggleSubscriptionModal(true)}>
+            <button
+              className={styles.sendButton}
+              onClick={this.toggleSubscriptionModal(true)}
+            >
               Subscribe
             </button>
           </div>
