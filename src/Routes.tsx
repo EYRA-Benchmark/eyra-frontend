@@ -8,13 +8,18 @@ const ReactRouter = () => {
   return (
     <Switch>
       <Route exact={true} path="/" component={Home} />
-      <Route exact={true} path="/login" component={Login} />
-      <Route exact={true} path="/challenges" component={Challenges} />
-      <Route
-        exact={true}
-        path="/challenge_details"
-        component={ChallengeDetails}
-      />
+      <Route>
+        <div id="root_container">
+          <Route exact={true} path="/login" component={Login} />
+          <Route exact={true} path="/challenges" component={Challenges} />
+          <Route
+            exact={true}
+            path="/challenge_details"
+            component={ChallengeDetails}
+          />
+        </div>
+      </Route>
+
     </Switch>
   );
 };

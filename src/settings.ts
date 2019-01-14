@@ -1,6 +1,6 @@
 export const settings = {
   prismicEndpoint: 'https://eyra-test.prismic.io/api/v2',
-  backendURL: 'www.test.com'
+  backendURL: 'https://api.staging.eyrabenchmark.netUser.js'
 };
 
 export const getSettings = async () => {
