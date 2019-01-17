@@ -1,140 +1,98 @@
 import React from 'react';
+import { settings } from '../settings';
+
+import axios from "axios";
+
+enum Status {
+  LOGGING_IN,
+  LOGGED_OUT,
+  LOGGED_IN,
+}
 
 interface IUser {
   name: string;
 }
 
-interface IUserProp {
-  user: IUser | null | undefined;
+interface IState {
+  user: IUser | null;
+  status: Status;
 }
 
-/*
-  user:
-    undefined - not checked yet
-    null      - user not logged in
-    object    - the current logged in user object
-*/
+export type IProps = IState & {
+  signup: typeof UserProvider.prototype.signup;
+  login: typeof UserProvider.prototype.login;
+  logout: typeof UserProvider.prototype.logout;
+  refresh: typeof UserProvider.prototype.refresh;
+}
 
-export const UserContext = React.createContext({});
-//
-// export const userPropTypes = {
-//   user: propType(userDetailsFragment),
-//   firstRun: PropTypes.bool,
-//   signup: PropTypes.func,
-//   login: PropTypes.func,
-//   logout: PropTypes.func,
-//   refresh: PropTypes.func,
-// };
-
-const setToken = async (token) => {
-  // await AsyncStorage.setItem('TOKEN', token);
-  // SeedorfAPI.setToken(token);
-  // client.setToken(token);
-};
+// https://medium.com/@thehappybug/using-react-context-in-a-typescript-app-c4ef7504c858
+// Unfortunately, TypeScript’s compiler will complain here as providing a defaultValue is compulsory
+// export const UserContext = React.createContext<IProps>(defaultProps);
+export const UserContext = React.createContext<IProps | null>(null);
 
 export class UserProvider extends React.Component {
   state = {
-    user: undefined,
+    user: null,
+    status: Status.LOGGED_OUT,
   }
 
   async componentWillMount() {
+    // check if token is in storage
     const token = document.location.href.split("?token=")[1];
-
+    console.log('token', token);
     if (token) {
-      const verifyTokenResult = await SeedorfAPI.verifyToken(token);
-      if (verifyTokenResult.ok) {
-        await setToken(token);
-        this.refresh();
-        return;
-      }
+      const res = await axios.get(settings.backendURL+'/challenges/');
+      console.log('res', res);
+      // const verifyTokenResult = await SeedorfAPI.verifyToken(token);
+      // if (verifyTokenResult.ok) {
+      //   await setToken(token);
+      //   this.refresh();
+      //   return;
+      // }
     }
 
-    this.logout();
+    // this.logout();
   }
 
   queryUser = async () => {
-    const token = await AsyncStorage.getItem('TOKEN');
-    const claims = JSON.parse(Buffer.from(token.split('.')[1], 'base64').toString('ascii'));
-    const { uuid } = claims;
-    const queryResult = await client.query({
-      fetchPolicy: 'network-only',
-      query: GET_USER_DETAILS,
-      variables: { uuid },
-    });
-    return queryResult.data.user;
+    // const token = await AsyncStorage.getItem('TOKEN');
+    // const claims = JSON.parse(Buffer.from(token.split('.')[1], 'base64').toString('ascii'));
+    // const { uuid } = claims;
+    // const queryResult = await client.query({
+    //   fetchPolicy: 'network-only',
+    //   query: GET_USER_DETAILS,
+    //   variables: { uuid },
+    // });
+    // return queryResult.data.user;
   }
 
-  refresh = async () => {
-    const user = await this.queryUser();
-    this.setState({ user });
+  refresh () {
+    // const user = await this.queryUser();
+    // this.setState({ user });
   }
 
-  setUserLanguage = async () => {
-    const user = await this.queryUser();
-    // console.log('SET USER LANG!!!!');
-    // console.log('user.uuid', user.uuid);
-    // console.log('user.profile.uuid', user.profile.uuid);
-    // console.log('I18n.locale', I18n.locale);
-    try {
-      const res = await SeedorfAPI.updateUserLanguage({
-        userUUID: user.uuid,
-        userProfileUUID: user.profile.uuid,
-        language: I18n.locale.substr(0, 2),
-      });
-      console.log('RESPONSE SET LANG', res);
-    } catch (exc) {
-      console.log(exc);
-    }
+  signup() {
+    // test
   }
 
-  signup = async ({
-    firstName, lastName, email, password,
-  }) => {
-    const result = await SeedorfAPI.signup({
-      firstName,
-      lastName,
-      username: email,
-      email,
-      password,
-    });
-    if (result.ok) {
-      await setToken(result.data.token);
-      await this.refresh();
-      await this.setUserLanguage();
-    }
-    return result;
+  login () {
+    document.location.href = `${settings.backendURL}/social/login/google-oauth2/?next=${document.location.origin}`;
   }
 
-  login = async ({ email, password }) => {
-    const result = await SeedorfAPI.login({
-      username: email,
-      email,
-      password,
-    });
-
-    if (result.ok) {
-      const { token } = result.data;
-      await setToken(token);
-      await this.refresh();
-    }
-
-    return result;
-  }
-
-  logout = async () => {
-    this.setState({ user: null });
-    client.setToken(null);
-    SeedorfAPI.setToken(null);
-    client.resetStore();
-    await AsyncStorage.removeItem('TOKEN');
+  logout() {
+    // this.setState({ user: null });
+    // client.setToken(null);
+    // SeedorfAPI.setToken(null);
+    // client.resetStore();
+    // await AsyncStorage.removeItem('TOKEN');
   }
 
   render() {
-    const { firstRun, user } = this.state;
-
-    if (user === undefined || firstRun === undefined) {
-      return <CenteredActivityIndicator />;
-    }
+    const { user, status } = this.state;
+    console.log('render', status);
+    // if (status === Status.LOGGING_IN) {
+    //   return <CenteredActivityIndicator />;
+    // }
 
     const { children } = this.props;
 
@@ -142,168 +100,7 @@ export class UserProvider extends React.Component {
       <UserContext.Provider
         value={{
           user,
-          firstRun,
-          signup: this.signup,
-          login: this.login,
-          logout: this.logout,
-          refresh: this.refresh,
-        }}
-      >
-        {children}
-      </UserContext.Provider>
-    );
-  }
-}
-
-UserProvider.propTypes = {
-  children: PropTypes.node.isRequired,
-};
-
-export const UserConsumer = UserContext.Consumer;
-
-export const withUser = Component => props => (
-  <UserConsumer>
-    {userProps => <Component {...props} {...userProps} />}
-  </UserConsumer>
-);
-
-
-/*
-import React from 'react';
-import PropTypes from 'prop-types';
-import { propType } from 'graphql-anywhere';
-import { AsyncStorage } from 'react-native';
-import { Buffer } from 'buffer';
-import SeedorfAPI from '../Services/SeedorfApi';
-import { client } from '../GraphQL';
-import userDetailsFragment from '../GraphQL/Users/Fragments/userDetails';
-import GET_USER_DETAILS from '../GraphQL/Users/Queries/GET_USER_DETAILS';
-import CenteredActivityIndicator from '../Components/Common/CenteredActivityIndicator';
-/*
-  user:
-    undefined - not checked yet
-    null      - user not logged in
-    object    - the current logged in user object
-
-  firstRun:
-    undefined - not checked yet
-    true      - onboarding already done
-    false     - first time user opens the app
-//
-
-export const UserContext = React.createContext();
-
-export const userPropTypes = {
-  user: propType(userDetailsFragment),
-  firstRun: PropTypes.bool,
-  signup: PropTypes.func,
-  login: PropTypes.func,
-  logout: PropTypes.func,
-  refresh: PropTypes.func,
-};
-
-export class UserProvider extends React.Component {
-  state = {
-    user: undefined,
-    firstRun: undefined,
-  }
-
-  // eslint-disable-next-line class-methods-use-this
-  async setToken(token) {
-    await AsyncStorage.setItem('TOKEN', token);
-    SeedorfAPI.setToken(token);
-    client.setToken(token);
-  }
-
-  async componentWillMount() {
-    const { mockUser } = this.props;
-    if (!mockUser) {
-      const firstRun = !await AsyncStorage.getItem('firstRunDone');
-      await AsyncStorage.setItem('firstRunDone', 'true');
-      this.setState({ firstRun });
-
-      const token = await AsyncStorage.getItem('TOKEN');
-
-      if (token) {
-        const verifyTokenResult = await SeedorfAPI.verifyToken(token);
-        if (verifyTokenResult.ok) {
-          await this.setToken(token);
-          this.refresh();
-          return;
-        }
-      }
-
-      this.logout();
-    }
-  }
-
-  async refresh() {
-    const token = await AsyncStorage.getItem('TOKEN');
-    const claims = JSON.parse(Buffer.from(token.split('.')[1], 'base64').toString('ascii'));
-    const { uuid } = claims;
-    const queryResult = await client.query({
-      fetchPolicy: 'network-only',
-      query: GET_USER_DETAILS,
-      variables: { uuid },
-    });
-    this.setState({ user: queryResult.data.user });
-  }
-
-  async signup({
-    firstName, lastName, email, password,
-  }) {
-    const result = await SeedorfAPI.signup({
-      firstName,
-      lastName,
-      username: email,
-      email,
-      password,
-    });
-    if (result.ok) {
-      await this.setToken(result.data.token);
-      await this.refresh();
-    }
-    return result;
-  }
-
-  async login({ email, password }) {
-    const result = await SeedorfAPI.login({
-      username: email,
-      email,
-      password,
-    });
-
-    if (result.ok) {
-      const { token } = result.data;
-      await this.setToken(token);
-      await this.refresh();
-    }
-
-    return result;
-  }
-
-  async logout() {
-    this.setState({ user: null });
-    client.setToken(null);
-    SeedorfAPI.setToken(null);
-    client.resetStore();
-    await AsyncStorage.removeItem('TOKEN');
-  }
-
-  render() {
-    const { firstRun, user } = this.state;
-
-    if (user === undefined || firstRun === undefined) {
-      return <CenteredActivityIndicator />;
-    }
-
-    const { children } = this.props;
-
-    return (
-      <UserContext.Provider
-        value={{
-          user,
-          firstRun,
+          status,
           signup: this.signup.bind(this),
           login: this.login.bind(this),
           logout: this.logout.bind(this),
@@ -316,16 +113,11 @@ export class UserProvider extends React.Component {
   }
 }
 
-UserProvider.propTypes = {
-  children: PropTypes.node.isRequired,
-};
-
 export const UserConsumer = UserContext.Consumer;
 
-export const withUser = Component => props => (
+export const withUser = <T extends object>(Component: React.ComponentType<T>) => (props: T) => (
   <UserConsumer>
     {userProps => <Component {...props} {...userProps} />}
   </UserConsumer>
 );
 
-*/

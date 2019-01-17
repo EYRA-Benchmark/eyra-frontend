@@ -6,10 +6,14 @@ import App from "./App";
 import "./index.css";
 import { getSettings } from './settings';
 
+import { UserProvider } from './context/User';
+
 getSettings().then(() => {
   ReactDOM.render(
     <BrowserRouter>
-      <App />
+      <UserProvider>
+        <App />
+      </UserProvider>
     </BrowserRouter>,
     document.getElementById("root") as HTMLElement
   );
