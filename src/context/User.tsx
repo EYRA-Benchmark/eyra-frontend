@@ -30,14 +30,16 @@ export type IUserProps = IState & {
   refresh: typeof UserProvider.prototype.refresh;
 }
 
-// we don't want a default value, but createContext<T> needs a
-// default value of type T.
-export const UserContext = React.createContext<IUserProps>({} as any);
+const defaultState: IState = {
+  user: null,
+  status: Status.LOGGED_OUT,
+}
+
+export const UserContext = React.createContext<IUserProps>(defaultState as IUserProps);
 
 export class UserProvider extends React.Component<{}, IState> {
   state = {
-    user: null,
-    status: Status.LOGGED_OUT,
+    ...defaultState
   }
 
   componentWillMount() {
@@ -48,7 +50,7 @@ export class UserProvider extends React.Component<{}, IState> {
     this.setState({ status: Status.LOGGING_IN });
     try {
       this.setState({
-        user: await comicApi.me(),
+        user: await comicApi.me() || null,
         status: Status.LOGGED_IN
       });
     } catch(e) {
