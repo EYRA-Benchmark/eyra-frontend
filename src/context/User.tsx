@@ -1,7 +1,7 @@
 import React from 'react';
 import { settings } from '../settings';
 
-import axios from "axios";
+import { comicApi } from '../services/comicApi';
 
 enum Status {
   LOGGING_IN,
@@ -9,8 +9,13 @@ enum Status {
   LOGGED_IN,
 }
 
-interface IUser {
-  name: string;
+export interface IUser {
+  first_name: string;
+  last_name: string;
+}
+
+export function isLoggedIn(user: IUser | null): user is IUser {
+  return user !== null;
 }
 
 interface IState {
@@ -18,61 +23,45 @@ interface IState {
   status: Status;
 }
 
-export type IProps = IState & {
+export type IUserProps = IState & {
   signup: typeof UserProvider.prototype.signup;
   login: typeof UserProvider.prototype.login;
   logout: typeof UserProvider.prototype.logout;
   refresh: typeof UserProvider.prototype.refresh;
 }
 
-// https://medium.com/@thehappybug/using-react-context-in-a-typescript-app-c4ef7504c858
-// Unfortunately, TypeScript’s compiler will complain here as providing a defaultValue is compulsory
-// export const UserContext = React.createContext<IProps>(defaultProps);
-export const UserContext = React.createContext<IProps | null>(null);
+// we don't want a default value, but createContext<T> needs a
+// default value of type T.
+export const UserContext = React.createContext<IUserProps>({} as any);
 
-export class UserProvider extends React.Component {
+export class UserProvider extends React.Component<{}, IState> {
   state = {
     user: null,
     status: Status.LOGGED_OUT,
   }
 
-  async componentWillMount() {
-    // check if token is in storage
-    const token = document.location.href.split("?token=")[1];
-    console.log('token', token);
-    if (token) {
-      const res = await axios.get(settings.backendURL+'/challenges/');
-      console.log('res', res);
-      // const verifyTokenResult = await SeedorfAPI.verifyToken(token);
-      // if (verifyTokenResult.ok) {
-      //   await setToken(token);
-      //   this.refresh();
-      //   return;
-      // }
+  componentWillMount() {
+    this.refresh();
+  }
+
+  async refresh () {
+    this.setState({ status: Status.LOGGING_IN });
+    try {
+      this.setState({
+        user: await comicApi.me(),
+        status: Status.LOGGED_IN
+      });
+    } catch(e) {
+      this.setState({
+        user: null,
+        status: Status.LOGGED_OUT,
+      });
+      console.log('refresh error', e);
     }
-
-    // this.logout();
-  }
-
-  queryUser = async () => {
-    // const token = await AsyncStorage.getItem('TOKEN');
-    // const claims = JSON.parse(Buffer.from(token.split('.')[1], 'base64').toString('ascii'));
-    // const { uuid } = claims;
-    // const queryResult = await client.query({
-    //   fetchPolicy: 'network-only',
-    //   query: GET_USER_DETAILS,
-    //   variables: { uuid },
-    // });
-    // return queryResult.data.user;
-  }
-
-  refresh () {
-    // const user = await this.queryUser();
-    // this.setState({ user });
   }
 
   signup() {
-    // test
+    // todo
   }
 
   login () {
@@ -80,20 +69,12 @@ export class UserProvider extends React.Component {
   }
 
   logout() {
-    // this.setState({ user: null });
-    // client.setToken(null);
-    // SeedorfAPI.setToken(null);
-    // client.resetStore();
-    // await AsyncStorage.removeItem('TOKEN');
+    this.setState({ user: null, status: Status.LOGGED_OUT });
+    comicApi.setToken(null);
   }
 
   render() {
     const { user, status } = this.state;
-    console.log('render', status);
-    // if (status === Status.LOGGING_IN) {
-    //   return <CenteredActivityIndicator />;
-    // }
-
     const { children } = this.props;
 
     return (
@@ -115,9 +96,10 @@ export class UserProvider extends React.Component {
 
 export const UserConsumer = UserContext.Consumer;
 
-export const withUser = <T extends object>(Component: React.ComponentType<T>) => (props: T) => (
+// https://github.com/Microsoft/TypeScript/issues/15713
+export const withUser = <T extends object>(Component: React.ComponentType<T & IUserProps>) => (props: T) => (
   <UserConsumer>
-    {userProps => <Component {...props} {...userProps} />}
+    {(userProps: IUserProps) => <Component {...props} {...userProps} />}
   </UserConsumer>
 );
 

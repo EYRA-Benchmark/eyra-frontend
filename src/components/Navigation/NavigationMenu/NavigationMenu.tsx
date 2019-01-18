@@ -1,8 +1,9 @@
 import * as React from "react";
 import { NavLink } from "react-router-dom";
+import { isLoggedIn, IUserProps, withUser } from '../../../context/User';
 import styles from "./NavigationMenu.module.css";
 
-function NavigationMenu() {
+function NavigationMenu({ user, logout }: IUserProps) {
   return (
     <React.Fragment>
       <ul className={styles.nav}>
@@ -17,13 +18,19 @@ function NavigationMenu() {
           </NavLink>
         </li>
         <li>
-          <NavLink to="/login" activeClassName={styles.active}>
-            LogIn
-          </NavLink>
+          { isLoggedIn(user) ? (
+            <NavLink onClick={logout} to="/login" activeClassName={styles.active}>
+              Logout { user.first_name }
+            </NavLink>
+          ) : (
+              <NavLink to="/login" activeClassName={styles.active}>
+                LogIn
+              </NavLink>
+          ) }
         </li>
       </ul>
     </React.Fragment>
   );
 }
 
-export default NavigationMenu;
+export default withUser(NavigationMenu);

@@ -4,9 +4,9 @@ import AnimateComponent from '../../components/Animation/AnimateComponent';
 import GoogleSigninButton from '../../assets/images/btn_google_signin_dark_normal_web.png';
 // import { settings } from '../../settings';
 
-import { IProps, withUser, } from '../../context/User';
+import { IUserProps, withUser, } from '../../context/User';
 
-const Login = ({ login }: IProps) => {
+const Login = ({ login }: IUserProps) => {
   return <div>
     <a onClick={login}>
       <img src={GoogleSigninButton} alt="Sign in with google"/>

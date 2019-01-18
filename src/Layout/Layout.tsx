@@ -5,6 +5,7 @@ import Header from "../components/Header/Header";
 import SideDrawer from "../components/SideDrawer/SideDrawer";
 import ReactRouter from "../Routes";
 import styles from "./Layout.module.css";
+
 interface IState {
   isShrink: boolean;
   showSideDrawer: boolean;

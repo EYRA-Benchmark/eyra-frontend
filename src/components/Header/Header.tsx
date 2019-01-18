@@ -1,19 +1,19 @@
-import AppBar from "@material-ui/core/AppBar";
-import IconButton from "@material-ui/core/IconButton";
-import Toolbar from "@material-ui/core/Toolbar";
-import MenuIcon from "@material-ui/icons/Menu";
-import * as React from "react";
-import logo from "../../assets/images/logo.png";
-import Navbar from "../Navigation/NavigationMenu/NavigationMenu";
+import AppBar from '@material-ui/core/AppBar';
+import IconButton from '@material-ui/core/IconButton';
+import Toolbar from '@material-ui/core/Toolbar';
+import MenuIcon from '@material-ui/icons/Menu';
+import * as React from 'react';
+import logo from '../../assets/images/logo.png';
+import Navbar from '../Navigation/NavigationMenu/NavigationMenu';
 // import SearchBar from "../SearchBar/SearchBar";
-import styles from "./Header.module.css";
+import styles from './Header.module.css';
 
-export interface IProps {
+export interface IOwnProps {
   classes: string;
   drawerToggle: () => void;
 }
 
-function Header({ classes, drawerToggle }: IProps) {
+function Header({ classes, drawerToggle }: IOwnProps) {
   return (
     <AppBar position="fixed" className={classes}>
       <Toolbar className={styles.toolbar}>

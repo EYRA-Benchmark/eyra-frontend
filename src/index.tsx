@@ -4,11 +4,13 @@ import * as ReactDOM from "react-dom";
 import { BrowserRouter } from "react-router-dom";
 import App from "./App";
 import "./index.css";
-import { getSettings } from './settings';
+import { getSettings, settings } from './settings';
 
 import { UserProvider } from './context/User';
+import { comicApi } from './services/comicApi';
 
 getSettings().then(() => {
+  comicApi.setBaseURL(settings.backendURL);
   ReactDOM.render(
     <BrowserRouter>
       <UserProvider>
