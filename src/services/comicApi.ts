@@ -25,7 +25,7 @@ export class ComicApi extends HTTPApi {
     groups: any[]
   }> {
     try {
-      const result = await this.get('/me');
+      const result = await this.get('/me/');
       return result.data;
     } catch(e) {
       this.setToken(null);
