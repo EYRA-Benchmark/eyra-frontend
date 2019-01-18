@@ -13,8 +13,6 @@ stages:
   - "Tests"
   - name: "Docker build & push"
     if: branch = master
-  - name: "Deploy on staging"
-    if: branch = master
 
 jobs:
   include:
@@ -29,7 +27,7 @@ jobs:
       script: yarn test --coverage
       after_script:
         - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
-    - script: yarn cypress-test
+    - script: yarn cypress-install && yarn cypress-test
       name: "Cypress tests"
     - stage: "Docker build & push"
       install: skip
@@ -38,9 +36,3 @@ jobs:
         - docker login -u eyra -p "$DOCKER_PASSWORD"
         - docker push eyra/frontend:$TRAVIS_BUILD_NUMBER
         - docker push eyra/frontend:latest
-    - stage: "Deploy on staging"
-      install: skip
-      script:
-        - openssl aes-256-cbc -K $encrypted_62a889a79f26_key -iv $encrypted_62a889a79f26_iv -in travis_kubeconfig.yaml.enc -out travis_kubeconfig.yaml -d
-        - curl -Lo kubectl https://storage.googleapis.com/kubernetes-release/release/v1.12.3/bin/linux/amd64/kubectl && chmod +x kubectl && sudo mv kubectl /usr/local/bin/
-        - KUBECONFIG=`pwd`/travis_kubeconfig.yaml kubectl set image deployments/eyra-frontend-deployment eyra-frontend=eyra/frontend:$TRAVIS_BUILD_NUMBER
