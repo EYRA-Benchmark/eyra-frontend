@@ -27,7 +27,7 @@
     "@material-ui/core": "^3.2.2",
     "@material-ui/icons": "^3.0.1",
     "@types/classnames": "^2.2.7",
-    "@types/jest": "^23.3.12",
+    "@types/jest": "^23.3.13",
     "@types/node": "^10.11.7",
     "@types/react": "^16.7.18",
     "@types/react-dom": "^16.0.11",
