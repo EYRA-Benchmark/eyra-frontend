@@ -951,9 +951,9 @@
   version "1.0.2"
   resolved "https://registry.npmjs.org/@types/tapable/-/tapable-1.0.2.tgz#e13182e1b69871a422d7863e11a4a6f5b814a4bd"
 
-"@types/yup@^0.26.3":
-  version "0.26.4"
-  resolved "https://registry.npmjs.org/@types/yup/-/yup-0.26.4.tgz#b6527d1ea167ac8049b6d62b45cff8eadfe883c5"
+"@types/yup@^0.26.5":
+  version "0.26.5"
+  resolved "https://registry.yarnpkg.com/@types/yup/-/yup-0.26.5.tgz#ab47c03965d775cdc9228b699bf46331068db367"
 
 "@webassemblyjs/ast@1.7.6":
   version "1.7.6"
