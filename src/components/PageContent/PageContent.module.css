@@ -2,3 +2,14 @@
   margin: 150px 100px 50px;
   min-height: 700px;
 }
+.bg {
+  background: url(/static/media/homepage-body-background.37cd34d7.svg) right
+    bottom no-repeat;
+  background-size: cover;
+  height: 100%;
+}
+@media (max-width: 600px) {
+  .container {
+    margin: 150px 0px 50px;
+  }
+}

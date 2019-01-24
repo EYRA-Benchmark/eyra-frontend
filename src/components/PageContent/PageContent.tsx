@@ -17,9 +17,11 @@ class PageContent extends React.Component<RouteComponentProps<{}>, {}> {
     } else {
       return (
         <React.Fragment>
-          <main className={styles.container}>
-            <Pages />
-          </main>
+          <div className={styles.bg}>
+            <main className={styles.container}>
+              <Pages />
+            </main>
+          </div>
         </React.Fragment>
       );
     }

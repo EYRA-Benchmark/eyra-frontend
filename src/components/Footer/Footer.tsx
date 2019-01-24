@@ -16,7 +16,7 @@ class Footer extends React.Component<{}, { subscriptionDialogOpen: boolean }> {
 
   render() {
     return (
-      <div className={styles.topMargin}>
+      <div>
         <div className={classNames(styles.content, styles.bgBlue)}>
           <h3>Stay up to date, sign up for our newsletter</h3>
           <div className={styles.buttonContainer}>

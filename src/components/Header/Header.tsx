@@ -15,7 +15,7 @@ export interface IProps {
 
 function Header({ classes, drawerToggle }: IProps) {
   return (
-    <AppBar position="fixed" className={classes}>
+    <AppBar className={classes}>
       <Toolbar className={styles.toolbar}>
         <div className={styles.logo}>
           <a href="/" title="Home">

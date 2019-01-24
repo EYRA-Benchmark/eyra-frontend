@@ -11,7 +11,6 @@
 .nav li a {
   font-size: 16px;
   letter-spacing: 1px;
-  font-weight: 600;
   padding: 10px;
   text-decoration: none;
   border-bottom: 3px solid transparent;
@@ -28,6 +27,7 @@ li a.active {
 @media (max-width: 600px) {
   .nav {
     flex-flow: column;
+    margin-top: 64px;
   }
   .nav li {
     padding: 15px;

@@ -17,7 +17,9 @@ const theme = createMuiTheme({
     },
     MuiButton: {
       textPrimary: {
-        color: "#1fb8ea"
+        color: "#1fb8ea",
+        textTransform: "none",
+        float: "right"
       }
     },
     MuiModal: {
@@ -27,6 +29,9 @@ const theme = createMuiTheme({
   palette: {
     primary: {
       main: "#1fb8ea"
+    },
+    secondary: {
+      main: "#fff"
     }
   }
 });

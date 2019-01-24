@@ -10,6 +10,7 @@
   height: 100%;
   transform-style: preserve-3d;
   transition: all 0.7s linear;
+  background: #fff;
 }
 .cardContainer:hover .cardBody {
   transform: rotateY(180deg);

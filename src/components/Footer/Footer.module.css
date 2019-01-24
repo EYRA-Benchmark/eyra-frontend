@@ -32,9 +32,13 @@
   transition: all 0.4s;
   cursor: pointer;
 }
+
 .bgBlue {
   background: var(--primary-color);
 }
 .bgDark {
   background-color: var(--dark-color);
+}
+.bgDark a {
+  color: #fff;
 }

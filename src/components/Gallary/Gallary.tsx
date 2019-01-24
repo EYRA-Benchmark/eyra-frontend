@@ -32,8 +32,9 @@ export class Gallary extends React.Component<
     return (
       <Grid container={true} spacing={24}>
         {data.map((card: any, index: number) => (
-          <Grid item={true} key={index} xs={12} sm={6} md={4}>
+          <Grid item={true} key={index} xs={12} sm={4} md={3}>
             <Card
+              square={true}
               className={styles.card}
               onClick={() => this.handleSelection(card)}
             >
@@ -43,7 +44,7 @@ export class Gallary extends React.Component<
                 title="Image title"
               />
               <CardContent>
-                <Typography gutterBottom={true} variant="h5" component="h2">
+                <Typography gutterBottom={true} variant="h6" component="h6">
                   {card.title}
                 </Typography>
               </CardContent>
