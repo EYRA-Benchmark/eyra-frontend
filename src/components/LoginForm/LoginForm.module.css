@@ -1,0 +1,35 @@
+.main {
+  width: 30%;
+  display: block;
+  margin: 0 auto;
+}
+.paper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+.avatar {
+  background-color: var(--primary-color) !important;
+}
+.form {
+  width: 100%;
+}
+.submit {
+  margin-top: 24px !important;
+}
+.forgotPasswordLink {
+  text-align: center;
+  padding: 20px;
+  color: var(--primary-color);
+}
+@media (max-width: 600px) {
+  .main {
+    width: 100%;
+  }
+}
+@media (max-width: 768px) {
+  .main {
+    width: 100%;
+  }
+}

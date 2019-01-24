@@ -25,7 +25,8 @@ class Challenges extends React.Component<RouteComponentProps<{}>, IState> {
     return this.state.challengesData !== nextState.challengesData;
   }
   componentDidMount() {
-    axios.get("/posts").then((response: AxiosResponse) => {
+    axios.get("/challenges/").then((response: AxiosResponse) => {
+      debugger;
       this.setState({
         loading: false,
         challengesData: response.data
