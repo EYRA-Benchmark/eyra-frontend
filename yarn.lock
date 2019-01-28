@@ -9441,9 +9441,9 @@ yargs@^11.0.0:
     y18n "^3.2.1"
     yargs-parser "^9.0.2"
 
-yup@^0.26.7:
-  version "0.26.7"
-  resolved "https://registry.yarnpkg.com/yup/-/yup-0.26.7.tgz#7480312d1a3efd8a2f5c1f98b0f11fc21c80efc8"
+yup@^0.26.10:
+  version "0.26.10"
+  resolved "https://registry.yarnpkg.com/yup/-/yup-0.26.10.tgz#3545839663289038faf25facfc07e11fd67c0cb1"
   dependencies:
     "@babel/runtime" "7.0.0"
     fn-name "~2.0.1"
