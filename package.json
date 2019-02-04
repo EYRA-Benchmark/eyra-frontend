@@ -15,7 +15,7 @@
     "axios": "^0.18.0",
     "classnames": "^2.2.6",
     "font-awesome": "^4.7.0",
-    "formik": "^1.4.2",
+    "formik": "^1.4.3",
     "prismic-javascript": "^2.0.1",
     "prismic-reactjs": "^0.3.2",
     "react": "^16.7.0",
