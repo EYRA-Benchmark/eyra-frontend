@@ -5,7 +5,7 @@ import Prismic from "prismic-javascript";
 
 const RichText = require("prismic-reactjs").RichText;
 
-import bannerImage from "../../assets/images/PawLight.png";
+import bannerImage from "../../assets/images/new_banner1.png";
 import FlippingCard from "../../components/FlippingCard/FlippingCard";
 import Gallary from "../../components/Gallary/Gallary";
 import settings from "../../settings";
@@ -64,7 +64,7 @@ class Home extends React.Component<{}, {}> {
               equipped with ingenuity and innovation.
             </p>
           </div>
-          <div className={styles.image}>
+          <div className={styles.bannerImage}>
             <img src={bannerImage} alt="logo" />
           </div>
         </div>

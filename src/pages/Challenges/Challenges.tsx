@@ -20,12 +20,10 @@ class Challenges extends React.Component<RouteComponentProps<{}>, IState> {
   };
 
   shouldComponentUpdate(nextProps: any, nextState: any) {
-    console.log(this.state + "and\n" + nextState);
-    console.log(this.state.challengesData !== nextState.challengesData);
     return this.state.challengesData !== nextState.challengesData;
   }
   componentDidMount() {
-    axios.get("/challenges/").then((response: AxiosResponse) => {
+    axios.get("challenges/").then((response: AxiosResponse) => {
       debugger;
       this.setState({
         loading: false,
@@ -38,7 +36,7 @@ class Challenges extends React.Component<RouteComponentProps<{}>, IState> {
   };
   public showDetails = () => {
     this.props.history.push({
-      pathname: "/challenge_details",
+      pathname: "challenge_details",
       state: { selectedItem: this.state.selectedItem }
     });
   };

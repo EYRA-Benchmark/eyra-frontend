@@ -24,7 +24,7 @@ export class Gallary extends React.Component<
 
     localStorage.setItem("NewsData", item.title);
     this.props.history.push({
-      pathname: "/news_details"
+      pathname: "news_details"
     });
   };
   render() {

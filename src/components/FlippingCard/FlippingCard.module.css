@@ -4,6 +4,7 @@
   max-width: 720px;
   height: 300px;
   perspective: 1000px;
+  cursor: pointer;
 }
 .cardBody {
   width: 100%;

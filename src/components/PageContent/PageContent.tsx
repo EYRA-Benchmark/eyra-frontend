@@ -9,20 +9,14 @@ class PageContent extends React.Component<RouteComponentProps<{}>, {}> {
   render() {
     const currentPath = this.props.location.pathname;
     if (currentPath === "/") {
-      return (
-        <React.Fragment>
-          <Route path="/" component={Home} />
-        </React.Fragment>
-      );
+      return <Route path="/" component={Home} />;
     } else {
       return (
-        <React.Fragment>
-          <div className={styles.bg}>
-            <main className={styles.container}>
-              <Pages />
-            </main>
-          </div>
-        </React.Fragment>
+        <div className={styles.bg}>
+          <main className={styles.container}>
+            <Pages />
+          </main>
+        </div>
       );
     }
   }
