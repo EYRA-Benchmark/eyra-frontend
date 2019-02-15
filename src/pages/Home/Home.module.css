@@ -9,17 +9,18 @@
   align-items: center;
   justify-content: center;
   position: absolute;
-  right: 5%;
-  top: 35%;
-  width: 30%;
-  height: 500px;
-  -webkit-transform: rotate(-12deg);
-  transform: rotate(-12deg);
+  right: 0;
+  top: 30%;
+  width: 40%;
+  height: 600px;
+  -webkit-transform: rotate(-10deg);
+  transform: rotate(-10deg);
   z-index: 1;
 }
 
 .bannerImage img {
   height: 100%;
+  width: 100%;
 }
 .fade {
   opacity: 0;
@@ -67,7 +68,7 @@
   left: 10%;
   top: 30%;
   width: 40%;
-  background: var(--caption-white-gradient);
+  /* background: var(--caption-white-gradient); */
   z-index: 2;
 }
 .caption .article {
@@ -80,6 +81,7 @@
   padding: 0 20px;
   line-height: 1.5;
   font-size: 20px;
+  text-align: center;
 }
 .caption .article span {
   color: var(--primary-color);

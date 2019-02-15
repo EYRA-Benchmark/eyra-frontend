@@ -47,9 +47,13 @@ class Details extends React.Component<{}, IState> {
           </Grid>
         </Grid>
         <Grid item={true} xs={12}>
-          <Tabs value={value} onChange={this.handleChange}>
+          <Tabs
+            value={value}
+            onChange={this.handleChange}
+            indicatorColor="primary"
+          >
             <Tab label="Overview" />
-            <Tab label="Leadeboard" />
+            <Tab label="Leaderboard" />
             <Tab label="DataSets" />
           </Tabs>
           {value === 0 && <TabContainer>Overview</TabContainer>}

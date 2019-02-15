@@ -5,7 +5,7 @@ import Prismic from "prismic-javascript";
 
 const RichText = require("prismic-reactjs").RichText;
 
-import bannerImage from "../../assets/images/new_banner1.png";
+import bannerImage from "../../assets/images/black_paw.png";
 import FlippingCard from "../../components/FlippingCard/FlippingCard";
 import Gallary from "../../components/Gallary/Gallary";
 import settings from "../../settings";
@@ -31,21 +31,6 @@ class Home extends React.Component<{}, {}> {
     return (
       <React.Fragment>
         <div className={styles.container}>
-          {/* <div className={styles.banner_image}>
-            <div className={styles.caption}>
-              <div className={styles.article}>
-                <span>E</span>nlighten&nbsp;
-                <span>Y</span>our&nbsp;
-                <span>R</span>esearch
-              </div>
-              <p>
-                Eyra are persistent and possess leadership abilities. Eyra dream
-                big and so are their achievements in real world. Eyra can
-                transform any idea into reality which make them a master builder
-                equipped with ingenuity and innovation.
-              </p>
-            </div>
-          </div> */}
           <div className={styles.bannerBackground} id="demo">
             <span />
             <span />
@@ -53,16 +38,9 @@ class Home extends React.Component<{}, {}> {
           </div>
           <div className={styles.caption}>
             <div className={styles.article}>
-              <span>E</span>nlighten&nbsp;
-              <span>Y</span>our&nbsp;
-              <span>R</span>esearch
+              <h3>EYRA Benchmark Platform</h3>
             </div>
-            <p>
-              Eyra are persistent and possess leadership abilities. Eyra dream
-              big and so are their achievements in real world. Eyra can
-              transform any idea into reality which make them a master builder
-              equipped with ingenuity and innovation.
-            </p>
+            <p>A platform for benchmarking scientific algorithms</p>
           </div>
           <div className={styles.bannerImage}>
             <img src={bannerImage} alt="logo" />
@@ -72,7 +50,6 @@ class Home extends React.Component<{}, {}> {
           <div className={styles.content}>
             <div className={styles.section}>
               <h3 className={classNames(styles.sectionHeader)}>About Us</h3>
-
               <FlippingCard />
             </div>
             <div className={styles.section}>

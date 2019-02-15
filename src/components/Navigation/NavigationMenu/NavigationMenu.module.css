@@ -9,13 +9,13 @@
   margin: 10px;
 }
 .nav li a {
-  font-size: 16px;
+  font-size: 18px;
   letter-spacing: 1px;
   padding: 10px;
   text-decoration: none;
   border-bottom: 3px solid transparent;
   transition: border-bottom 0.5s ease-out;
-  color: var(--dark-color);
+  color: black;
 }
 .nav a:hover {
   border-bottom: 2px solid var(--dark-color);

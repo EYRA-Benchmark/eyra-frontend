@@ -8,7 +8,12 @@ function NavigationMenu() {
       <ul className={styles.nav}>
         <li>
           <NavLink to="/challenges" activeClassName={styles.active}>
-            Challenges
+            About Us
+          </NavLink>
+        </li>
+        <li>
+          <NavLink to="/challenges" activeClassName={styles.active}>
+            Benchmarks
           </NavLink>
         </li>
         <li>
