@@ -4,7 +4,8 @@ const styles = (theme: Theme) =>
     card: {
       height: "100%",
       display: "flex",
-      flexDirection: "column"
+      flexDirection: "column",
+      cursor: "pointer"
     },
     media: {
       height: 0,

@@ -1,0 +1,15 @@
+.banner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 300px;
+  border: 1px solid;
+}
+.detailsContainer {
+  min-height: 200px;
+}
+.paper {
+  height: 200px;
+  padding: 10px;
+  margin: 10px;
+}

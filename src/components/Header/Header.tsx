@@ -15,10 +15,12 @@ export interface IOwnProps {
 
 function Header({ classes, drawerToggle }: IOwnProps) {
   return (
-    <AppBar position="fixed" className={classes}>
+    <AppBar className={classes}>
       <Toolbar className={styles.toolbar}>
         <div className={styles.logo}>
-          <img src={logo} alt="logo" className={styles.logoImage} />
+          <a href="/" title="Home">
+            <img src={logo} alt="logo" className={styles.logoImage} />
+          </a>
         </div>
         <IconButton
           aria-label="Open drawer"

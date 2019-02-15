@@ -5,12 +5,7 @@
   left: 0;
   top: 64px;
   z-index: 200;
-  background: linear-gradient(
-    to bottom,
-    #1fb8ea,
-    rgba(255, 255, 255, 0.9) 50%
-  ) !important;
-  padding: 32px 16px;
+  background: #fafafa;
   box-sizing: border-box;
   transition: transform 0.5s ease-out;
 }

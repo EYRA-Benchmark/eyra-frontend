@@ -2,12 +2,11 @@ import * as React from "react";
 import { Route, Switch } from "react-router-dom";
 import ChallengeDetails from "./pages/Challenges/ChallengeDetails/ChallengeDetails";
 import Challenges from "./pages/Challenges/Challenges";
-import Home from "./pages/Home/Home";
 import Login from "./pages/Login/Login";
+import NewsDetails from "./pages/News/NewsDetails/NewsDetails";
 const ReactRouter = () => {
   return (
     <Switch>
-      <Route exact={true} path="/" component={Home} />
       <Route>
         <div id="root_container">
           <Route exact={true} path="/login" component={Login} />
@@ -19,7 +18,7 @@ const ReactRouter = () => {
           />
         </div>
       </Route>
-
+      <Route exact={true} path="/news_details" component={NewsDetails} />
     </Switch>
   );
 };

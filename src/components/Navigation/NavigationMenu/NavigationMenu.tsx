@@ -8,13 +8,13 @@ function NavigationMenu({ user, logout }: IUserProps) {
     <React.Fragment>
       <ul className={styles.nav}>
         <li>
-          <NavLink to="/" activeClassName={styles.active}>
-            Home
+          <NavLink to="/challenges" activeClassName={styles.active}>
+            About Us
           </NavLink>
         </li>
         <li>
           <NavLink to="/challenges" activeClassName={styles.active}>
-            Challenges
+            Benchmarks
           </NavLink>
         </li>
         <li>
