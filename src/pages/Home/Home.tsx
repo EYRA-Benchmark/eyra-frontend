@@ -49,7 +49,7 @@ class Home extends React.Component<{}, {}> {
         <div className={styles.bg}>
           <div className={styles.content}>
             <div className={styles.section}>
-              <h3 className={classNames(styles.sectionHeader)}>About Us</h3>
+              <h3 className={classNames(styles.sectionHeader)}>Benchmarks</h3>
               <FlippingCard />
             </div>
             <div className={styles.section}>

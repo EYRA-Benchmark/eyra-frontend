@@ -12,7 +12,7 @@ class FlippingCard extends React.Component {
           <div className={styles.cardContainer}>
             <div className={styles.cardBody}>
               <CardBack />
-              <CardFront />
+              <CardFront name="Benchmark 1" />
             </div>
           </div>
         </Grid>
@@ -20,7 +20,7 @@ class FlippingCard extends React.Component {
           <div className={styles.cardContainer}>
             <div className={styles.cardBody}>
               <CardBack />
-              <CardFront />
+              <CardFront name="Benchmark 2" />
             </div>
           </div>
         </Grid>
@@ -28,7 +28,7 @@ class FlippingCard extends React.Component {
           <div className={styles.cardContainer}>
             <div className={styles.cardBody}>
               <CardBack />
-              <CardFront />
+              <CardFront name="Benchmark 3" />
             </div>
           </div>
         </Grid>

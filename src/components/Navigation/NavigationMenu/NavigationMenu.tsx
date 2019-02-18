@@ -1,6 +1,6 @@
 import * as React from "react";
 import { NavLink } from "react-router-dom";
-import { isLoggedIn, IUserProps, withUser } from '../../../context/User';
+import { isLoggedIn, IUserProps, withUser } from "../../../context/User";
 import styles from "./NavigationMenu.module.css";
 
 function NavigationMenu({ user, logout }: IUserProps) {
@@ -18,15 +18,19 @@ function NavigationMenu({ user, logout }: IUserProps) {
           </NavLink>
         </li>
         <li>
-          { isLoggedIn(user) ? (
-            <NavLink onClick={logout} to="/login" activeClassName={styles.active}>
-              Logout { user.first_name }
+          {isLoggedIn(user) ? (
+            <NavLink
+              onClick={logout}
+              to="/login"
+              activeClassName={styles.active}
+            >
+              Logout {user.first_name}
             </NavLink>
           ) : (
-              <NavLink to="/login" activeClassName={styles.active}>
-                LogIn
-              </NavLink>
-          ) }
+            <NavLink to="/login" activeClassName={styles.active}>
+              LogIn
+            </NavLink>
+          )}
         </li>
       </ul>
     </React.Fragment>
