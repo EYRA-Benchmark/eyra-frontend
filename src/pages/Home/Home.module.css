@@ -11,7 +11,7 @@
   position: absolute;
   right: 0;
   top: 30%;
-  width: 40%;
+  width: 550px;
   height: 600px;
   -webkit-transform: rotate(-10deg);
   transform: rotate(-10deg);
@@ -68,7 +68,6 @@
   left: 10%;
   top: 30%;
   width: 40%;
-  /* background: var(--caption-white-gradient); */
   z-index: 2;
 }
 .caption .article {
@@ -91,8 +90,6 @@
   display: flex;
   flex-direction: column;
   color: #000;
-  /* background: url("../../assets/images/homepage-body-background.svg"); */
-  /* background: linear-gradient(20deg, #fff 10%, #f8f7f7 45%, #05d5ff 14%); */
 }
 
 .section {

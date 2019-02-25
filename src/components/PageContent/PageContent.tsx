@@ -12,11 +12,9 @@ class PageContent extends React.Component<RouteComponentProps<{}>, {}> {
       return <Route path="/" component={Home} />;
     } else {
       return (
-        <div className={styles.bg}>
-          <main className={styles.container}>
-            <Pages />
-          </main>
-        </div>
+        <main className={styles.container}>
+          <Pages />
+        </main>
       );
     }
   }
