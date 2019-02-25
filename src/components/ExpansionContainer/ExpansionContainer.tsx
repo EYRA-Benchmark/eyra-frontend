@@ -23,12 +23,8 @@ class ExpansionContainer extends React.Component {
           <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
             <Typography>Test Data Sets</Typography>
           </ExpansionPanelSummary>
-          <ExpansionPanelDetails>
-            <Typography>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-              Suspendisse malesuada lacus ex, sit amet blandit leo lobortis
-              eget.
-            </Typography>
+          <ExpansionPanelDetails className={styles.container}>
+            <VerticalTabs />
           </ExpansionPanelDetails>
         </ExpansionPanel>
       </React.Fragment>

@@ -5,6 +5,9 @@
   border-radius: 0px;
   cursor: pointer;
 }
+.tilte {
+  font-size: 8px;
+}
 .card img {
   max-width: 100%;
 }

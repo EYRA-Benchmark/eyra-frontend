@@ -2,12 +2,12 @@ import classNames from "classnames";
 import * as React from "react";
 
 import Prismic from "prismic-javascript";
-
 const RichText = require("prismic-reactjs").RichText;
 
 import bannerImage from "../../assets/images/black_paw.png";
 import FlippingCard from "../../components/FlippingCard/FlippingCard";
-import Gallary from "../../components/Gallary/Gallary";
+import NewsGallary from "../../components/NewsGallary/NewsGallary";
+import formatDate from "../../components/Utils/helper";
 import { settings } from "../../settings";
 import styles from "./Home.module.css";
 class Home extends React.Component<{}, {}> {
@@ -55,14 +55,11 @@ class Home extends React.Component<{}, {}> {
             <div className={styles.section}>
               <h3 className={classNames(styles.sectionHeader)}>News</h3>
 
-              <Gallary
+              <NewsGallary
                 data={this.state.news.map((n: any) => ({
-                  title:
-                    new Date(n.first_publication_date)
-                      .toISOString()
-                      .split("T")[0] +
-                    ": " +
-                    RichText.asText(n.data.title),
+                  uid: n.uid,
+                  title: RichText.asText(n.data.title),
+                  date: formatDate(new Date(n.first_publication_date)),
                   image: n.data.image.url,
                   contents: RichText.render(n.data.description)
                 }))}
