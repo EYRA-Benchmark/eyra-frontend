@@ -1,0 +1,23 @@
+.tabsContainer {
+  flex-direction: column;
+}
+.noMargin {
+  margin: 0px !important;
+}
+.hide {
+  height: 0px !important;
+  color: red;
+}
+.label {
+  text-align: left;
+  text-transform: none;
+}
+.divider {
+  border-right: 1px solid #ccc;
+  padding: 0px !important;
+  border-bottom: 1px solid #ccc;
+}
+.borderBottom {
+  border-bottom: 1px solid #ccc;
+  padding: 0 25px;
+}

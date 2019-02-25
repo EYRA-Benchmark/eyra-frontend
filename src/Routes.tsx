@@ -16,9 +16,9 @@ const ReactRouter = () => {
             path="/challenge_details"
             component={ChallengeDetails}
           />
+          <Route exact={true} path="/news_details" component={NewsDetails} />
         </div>
       </Route>
-      <Route exact={true} path="/news_details" component={NewsDetails} />
     </Switch>
   );
 };
