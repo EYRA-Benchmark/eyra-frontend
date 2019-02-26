@@ -6,9 +6,14 @@ import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import * as React from "react";
 import VerticalTabs from "../VerticalTabs/VerticalTabs";
 import styles from "./ExpansionContainer.module.css";
-
-class ExpansionContainer extends React.Component {
+interface IProps {
+  testDataSets: any[];
+  trainingDataSets: any[];
+}
+class ExpansionContainer extends React.Component<IProps, {}> {
   render() {
+    const { testDataSets } = this.props;
+
     return (
       <React.Fragment>
         <ExpansionPanel>
@@ -16,16 +21,13 @@ class ExpansionContainer extends React.Component {
             <Typography>Training Data Sets</Typography>
           </ExpansionPanelSummary>
           <ExpansionPanelDetails className={styles.container}>
-            <VerticalTabs />
+            <VerticalTabs dataSets={testDataSets} />
           </ExpansionPanelDetails>
         </ExpansionPanel>
         <ExpansionPanel>
           <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
             <Typography>Test Data Sets</Typography>
           </ExpansionPanelSummary>
-          <ExpansionPanelDetails className={styles.container}>
-            <VerticalTabs />
-          </ExpansionPanelDetails>
         </ExpansionPanel>
       </React.Fragment>
     );

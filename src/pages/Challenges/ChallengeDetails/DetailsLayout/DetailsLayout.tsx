@@ -10,10 +10,13 @@ import { description } from "../../../../data/description";
 import Datasets from "./DataSets/DataSets";
 import styles from "./DetailsLayout.module.css";
 import Leadeboard from "./Leaderboard/Leaderboard";
-interface IProps {
+interface IContainerProps {
   children: React.ReactNode;
 }
-function TabContainer(props: IProps) {
+interface IProps {
+  data: any;
+}
+function TabContainer(props: IContainerProps) {
   return (
     <Typography
       component="div"
@@ -30,7 +33,7 @@ TabContainer.propTypes = {
 interface IState {
   value: number;
 }
-class Details extends React.Component<{}, IState> {
+class Details extends React.Component<IProps, IState> {
   state = {
     value: 0
   };
@@ -40,54 +43,70 @@ class Details extends React.Component<{}, IState> {
 
   render() {
     const { value } = this.state;
-    return (
-      <Grid container={true} spacing={24}>
-        {/* <Grid container={true} item={true} xs={12} className={styles.banner}> */}
-        {/* <Grid item={true} xs={12} sm={4} md={3}>
-            <Paper className={styles.paper}>Image</Paper>
-          </Grid> */}
-        <Grid item={true} xs={12} sm={12} md={12}>
-          <Paper className={styles.paper}>
-            <h2>EYRA Benchmark Demo Tissue Segmentation 2019</h2>
-            <p>
-              This benchmark is set up for illustrative purposes, with the aim
-              to provide an example of an insight challenge and show that
-              additional analyses can be done beyond the leaderboard.
-            </p>
-          </Paper>
-          {/* </Grid> */}
+    const { data } = this.props;
+    if (data) {
+      /* Get the test and training data sets */
+      const testDataSets = [
+        {
+          data: data.test_data_file,
+          ground_truth: data.test_ground_truth_data_file
+        }
+      ];
+      const trainingDataSets = [
+        {
+          data: data.training_data_file,
+          ground_truth: data.training_ground_truth_data_file
+        }
+      ];
+      return (
+        <Grid container={true} spacing={24}>
+          <Grid item={true} xs={12} sm={12} md={12}>
+            <Paper className={styles.paper}>
+              <h2>{data.name}</h2>
+              <p>
+                This benchmark is set up for illustrative purposes, with the aim
+                to provide an example of an insight challenge and show that
+                additional analyses can be done beyond the leaderboard.
+              </p>
+            </Paper>
+          </Grid>
+          <Grid item={true} xs={12}>
+            <Paper>
+              <Tabs
+                value={value}
+                onChange={this.handleChange}
+                indicatorColor="primary"
+                className={styles.tabsContainer}
+              >
+                <Tab label="Overview" />
+                <Tab label="Leaderboard" />
+                <Tab label="DataSets" />
+              </Tabs>
+              {value === 0 && (
+                <TabContainer>
+                  <Markdown source={description} className={styles.container} />
+                </TabContainer>
+              )}
+              {value === 1 && (
+                <TabContainer>
+                  <Leadeboard />
+                </TabContainer>
+              )}
+              {value === 2 && (
+                <TabContainer>
+                  <Datasets
+                    testDataSets={testDataSets}
+                    trainingDataSets={trainingDataSets}
+                  />
+                </TabContainer>
+              )}
+            </Paper>
+          </Grid>
         </Grid>
-        <Grid item={true} xs={12}>
-          <Paper>
-            <Tabs
-              value={value}
-              onChange={this.handleChange}
-              indicatorColor="primary"
-              className={styles.tabsContainer}
-            >
-              <Tab label="Overview" />
-              <Tab label="Leaderboard" />
-              <Tab label="DataSets" />
-            </Tabs>
-            {value === 0 && (
-              <TabContainer>
-                <Markdown source={description} className={styles.container} />
-              </TabContainer>
-            )}
-            {value === 1 && (
-              <TabContainer>
-                <Leadeboard />
-              </TabContainer>
-            )}
-            {value === 2 && (
-              <TabContainer>
-                <Datasets />
-              </TabContainer>
-            )}
-          </Paper>
-        </Grid>
-      </Grid>
-    );
+      );
+    } else {
+      return null;
+    }
   }
 }
 export default Details;

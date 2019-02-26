@@ -15,7 +15,6 @@ export class Gallary extends React.Component<
   {}
 > {
   public handleSelection = (selectedItem: any) => {
-    console.log(selectedItem);
     this.showDetails(selectedItem);
   };
   public showDetails = (item: any) => {

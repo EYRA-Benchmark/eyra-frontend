@@ -1,11 +1,13 @@
-.desc {
-  font-size: 18px;
-}
 .coverImage {
   height: 100%;
   background-position: center;
   background-repeat: no-repeat;
   background-size: 100% 100%;
+}
+.headerContainer {
+  min-height: 200px;
+  padding: 10px;
+  box-sizing: content-box;
 }
 .title {
   color: #1fb8ea;

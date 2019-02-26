@@ -35,13 +35,21 @@ class NewsDetails extends React.Component<RouteComponentProps<{}>, {}> {
     const { title, image, desc, date } = this.state;
     return (
       <Grid container={true} spacing={24}>
+        <Grid container={true} item={true} xs={12}>
+          <Grid item={true} xs={3} sm={3} md={3}>
+            <div
+              className={styles.coverImage}
+              style={{ backgroundImage: `url(${image})` }}
+            />
+          </Grid>
+          <Grid item={true} xs={9} sm={9} md={9}>
+            <div className={styles.headerContainer}>
+              <div className={styles.title}>{title}</div>
+              <p>{date}</p>
+            </div>
+          </Grid>
+        </Grid>
         <Grid item={true} xs={12} sm={12} md={12}>
-          <div className={styles.title}>{title}</div>
-          <div
-            className={styles.coverImage}
-            style={{ backgroundImage: `url(${image})`, height: "300px" }}
-          />
-          <p>{date},</p>
           {desc}
         </Grid>
       </Grid>

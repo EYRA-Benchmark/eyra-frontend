@@ -4,16 +4,24 @@ import Tab from "@material-ui/core/Tab";
 import Tabs from "@material-ui/core/Tabs";
 import Typography from "@material-ui/core/Typography";
 import DownloadIcon from "@material-ui/icons/CloudDownload";
+import { AxiosResponse } from "axios";
 import PropTypes from "prop-types";
 import * as React from "react";
+import axios from "../../../../../../services/SetUpAxios";
 import styles from "./VerticalTabs.module.css";
+
 interface IState {
   value: number;
+  data: object;
+  groundTruth: object;
 }
 interface IProps {
+  dataSets: any[];
+}
+interface IContainerProps {
   children: React.ReactNode;
 }
-function TabContainer(props: IProps) {
+function TabContainer(props: IContainerProps) {
   return (
     <Typography
       component="div"
@@ -27,21 +35,49 @@ function TabContainer(props: IProps) {
 TabContainer.propTypes = {
   children: PropTypes.node.isRequired
 };
-class VerticalTabs extends React.Component<{}, IState> {
+class VerticalTabs extends React.Component<IProps, IState> {
   state = {
-    value: 0
+    value: 0,
+    data: {},
+    groundTruth: {}
   };
   handleChange = (event: any, value: number) => {
     this.setState({ value });
   };
+  componentDidMount() {
+    const { dataSets } = this.props;
+
+    axios
+      .get("data_files/" + dataSets[0].data)
+      .then((response: AxiosResponse) => {
+        this.setState({
+          data: response.data
+        });
+      });
+    axios
+      .get("data_files/" + dataSets[0].ground_truth)
+      .then((response: AxiosResponse) => {
+        this.setState({
+          data: response.data
+        });
+      });
+  }
   render() {
-    const { value } = this.state;
+    const { value, data, groundTruth } = this.state;
+    const desc: any[] = [];
+
+    if (Object.keys(data) && Object.keys(groundTruth)) {
+      desc.push(data);
+      desc.push(groundTruth);
+    }
+    console.log("tabs", desc);
     return (
       <Grid container={true} spacing={24} className={styles.noMargin}>
         <Grid item={true} xs={2} sm={2} md={2} className={styles.divider}>
           <div className={styles.borderBottom}>
             <h5>Data Sources</h5>
           </div>
+
           <Tabs
             value={value}
             onChange={this.handleChange}
@@ -51,19 +87,15 @@ class VerticalTabs extends React.Component<{}, IState> {
               flexContainer: styles.tabsContainer
             }}
           >
-            <Tab
-              label="x_train.npy"
-              classes={{
-                labelContainer: styles.label
-              }}
-            />
-
-            <Tab
-              label="gt_train.npy"
-              classes={{
-                labelContainer: styles.label
-              }}
-            />
+            {desc.map((d: any, id: number) => (
+              <Tab
+                label={d.name ? d.name : ""}
+                classes={{
+                  labelContainer: styles.label
+                }}
+                key={d.id}
+              />
+            ))}
           </Tabs>
         </Grid>
         <Grid item={true} xs={9} sm={9} md={9} className={styles.divider}>

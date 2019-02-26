@@ -2,9 +2,9 @@ import { AxiosResponse } from "axios";
 import * as React from "react";
 import { RouteComponentProps } from "react-router-dom";
 import AnimateComponent from "../../components/Animation/AnimateComponent";
-import ChallengesGrid from "../../components/CardGrid/CardGrid";
 import Spinner from "../../components/Utils/Spinner/Spinner";
 import axios from "../../services/SetUpAxios";
+import ChallengesGrid from "./CardGrid/CardGrid";
 
 interface IState {
   challengesData: any;
@@ -23,21 +23,17 @@ class Challenges extends React.Component<RouteComponentProps<{}>, IState> {
     return this.state.challengesData !== nextState.challengesData;
   }
   componentDidMount() {
-    axios.get("challenges/").then((response: AxiosResponse) => {
-      debugger;
+    axios.get("benchmarks/").then((response: AxiosResponse) => {
       this.setState({
         loading: false,
         challengesData: response.data
       });
     });
   }
-  public handleSelection = (selectedItem: any) => {
-    // this.showDetails(selectedItem);
-  };
-  public showDetails = () => {
+  public showDetails = (selectedItem: string) => {
     this.props.history.push({
-      pathname: "challenge_details",
-      state: { selectedItem: this.state.selectedItem }
+      pathname: "benchmark_details",
+      state: { selectedItem }
     });
   };
   public render() {

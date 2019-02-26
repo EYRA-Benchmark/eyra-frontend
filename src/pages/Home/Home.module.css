@@ -60,7 +60,7 @@
 }
 
 .divider {
-  border-bottom: 1px solid var(--light-gray);
+  border-bottom: 1px solid #ccc;
 }
 
 .caption {
@@ -83,7 +83,7 @@
   text-align: center;
 }
 .caption .article span {
-  color: var(--primary-color);
+  color: #1fb8ea;
 }
 
 .content {
@@ -99,7 +99,7 @@
 }
 
 .sectionHeader {
-  color: var(--primary-color);
+  color: #1fb8ea;
   letter-spacing: 3px;
   font-size: 2rem;
   font-weight: normal;

@@ -10,10 +10,10 @@ const ReactRouter = () => {
       <Route>
         <div id="root_container">
           <Route exact={true} path="/login" component={Login} />
-          <Route exact={true} path="/challenges" component={Challenges} />
+          <Route exact={true} path="/benchmarks" component={Challenges} />
           <Route
             exact={true}
-            path="/challenge_details"
+            path="/benchmark_details"
             component={ChallengeDetails}
           />
           <Route exact={true} path="/news_details" component={NewsDetails} />
