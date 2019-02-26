@@ -14,7 +14,7 @@ const formatDate = (date: Date) => {
     "December"
   ];
 
-  debugger;
+  // debugger;
   const day = date.getDay();
   const monthIndex = date.getMonth();
   const year = date.getFullYear();

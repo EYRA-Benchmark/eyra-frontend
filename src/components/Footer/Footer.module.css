@@ -19,19 +19,6 @@
   justify-content: center;
   margin-top: 30px;
 }
-.sendButton {
-  color: #1fb8ea;
-  min-width: 100px;
-  height: 30px;
-  border: none;
-  font-weight: 600;
-  font-size: 16px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  transition: all 0.4s;
-  cursor: pointer;
-}
 
 .bgBlue {
   background: #1fb8ea;

@@ -31,7 +31,7 @@ class NewsDetails extends React.Component<RouteComponentProps<{}>, {}> {
     }
   }
   render() {
-    debugger;
+    // debugger;
     const { title, image, desc, date } = this.state;
     return (
       <Grid container={true} spacing={24}>
