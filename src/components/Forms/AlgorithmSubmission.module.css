@@ -1,0 +1,26 @@
+.container {
+  display: flex;
+  flex-direction: column;
+
+  margin: 0 auto;
+}
+.inputContainer {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+.inputContainer label {
+  width: 100px;
+  text-align: right;
+}
+.inputContainer input {
+  margin-left: 10px;
+  height: 30px;
+  border-radius: 5px;
+  flex: 2;
+}
+.inputContainer select {
+  height: 30px;
+  margin: 10px 0;
+  flex: 2;
+}
