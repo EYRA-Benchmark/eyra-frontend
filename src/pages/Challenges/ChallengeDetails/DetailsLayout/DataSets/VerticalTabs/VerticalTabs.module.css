@@ -6,12 +6,15 @@
 }
 .hide {
   height: 0px !important;
-  color: red;
+}
+.tab {
+  flex-direction: row;
 }
 .label {
   text-align: left;
   text-transform: none;
 }
+
 .divider {
   border-right: 1px solid #ccc;
   padding: 0px !important;
@@ -19,5 +22,6 @@
 }
 .borderBottom {
   border-bottom: 1px solid #ccc;
-  padding: 0 25px;
+  padding: 15px 0px;
+  text-align: center;
 }

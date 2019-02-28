@@ -12,7 +12,7 @@ interface IProps {
 }
 class ExpansionContainer extends React.Component<IProps, {}> {
   render() {
-    const { testDataSets } = this.props;
+    const { testDataSets, trainingDataSets } = this.props;
 
     return (
       <React.Fragment>
@@ -28,6 +28,9 @@ class ExpansionContainer extends React.Component<IProps, {}> {
           <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
             <Typography>Test Data Sets</Typography>
           </ExpansionPanelSummary>
+          <ExpansionPanelDetails className={styles.container}>
+            <VerticalTabs dataSets={trainingDataSets} />
+          </ExpansionPanelDetails>
         </ExpansionPanel>
       </React.Fragment>
     );
