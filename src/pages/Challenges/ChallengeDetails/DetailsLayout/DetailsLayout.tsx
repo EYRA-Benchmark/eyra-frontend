@@ -6,7 +6,7 @@ import Typography from "@material-ui/core/Typography";
 import Markdown from "@nteract/markdown";
 import PropTypes from "prop-types";
 import * as React from "react";
-import { description } from "../../../../data/description";
+import AlgorithmSubmissionForm from "../../../../components/Forms/AlgorithmSubmission";
 import Datasets from "./DataSets/DataSets";
 import styles from "./DetailsLayout.module.css";
 import Leadeboard from "./Leaderboard/Leaderboard";
@@ -81,10 +81,14 @@ class Details extends React.Component<IProps, IState> {
                 <Tab label="Overview" />
                 <Tab label="Leaderboard" />
                 <Tab label="DataSets" />
+                <Tab label="Submit" />
               </Tabs>
               {value === 0 && (
                 <TabContainer>
-                  <Markdown source={description} className={styles.container} />
+                  <Markdown
+                    source={data.description}
+                    className={styles.container}
+                  />
                 </TabContainer>
               )}
               {value === 1 && (
@@ -98,6 +102,11 @@ class Details extends React.Component<IProps, IState> {
                     testDataSets={testDataSets}
                     trainingDataSets={trainingDataSets}
                   />
+                </TabContainer>
+              )}
+              {value === 3 && (
+                <TabContainer>
+                  <AlgorithmSubmissionForm />
                 </TabContainer>
               )}
             </Paper>

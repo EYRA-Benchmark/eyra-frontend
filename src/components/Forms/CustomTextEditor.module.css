@@ -1,0 +1,14 @@
+.descContainer {
+  flex: 3;
+  display: flex;
+  margin-left: 10px;
+  flex-direction: column;
+}
+.col1 {
+  flex: 1;
+}
+.sourceContainer {
+  width: 100%;
+  min-height: 400px;
+  resize: none;
+}
