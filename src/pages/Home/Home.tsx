@@ -1,18 +1,36 @@
 import classNames from "classnames";
 import * as React from "react";
+import { RouteComponentProps } from "react-router-dom";
 
 import Prismic from "prismic-javascript";
 const RichText = require("prismic-reactjs").RichText;
 
 import bannerImage from "../../assets/images/black_paw.png";
-import FlippingCard from "../../components/FlippingCard/FlippingCard";
+
+// import FlippingCard from "../../components/FlippingCard/FlippingCard";
+import { AxiosResponse } from "axios";
+import Spinner from "../../components/Utils/Spinner/Spinner";
+import ChallengesGrid from "../Challenges/CardGrid/CardGrid";
+
 import NewsGallary from "../../components/NewsGallary/NewsGallary";
 import formatDate from "../../components/Utils/helper";
+import axios from "../../services/SetUpAxios";
 import { settings } from "../../settings";
 import styles from "./Home.module.css";
-class Home extends React.Component<{}, {}> {
+
+interface IState {
+  news: any;
+  challengesData: any;
+  selectedItem: any;
+  loading: boolean;
+}
+
+class Home extends React.Component<RouteComponentProps<{}>, IState> {
   state = {
-    news: []
+    news: [],
+    challengesData: null,
+    selectedItem: null,
+    loading: true
   };
 
   componentWillMount() {
@@ -26,8 +44,39 @@ class Home extends React.Component<{}, {}> {
         });
     });
   }
+  shouldComponentUpdate(nextProps: any, nextState: any) {
+    return this.state.challengesData !== nextState.challengesData || this.state.news !== nextState.news;
+  }
+  componentDidMount() {
+    axios.get("benchmarks/").then((response: AxiosResponse) => {
+      this.setState({
+        loading: false,
+        challengesData: response.data
+      });
+    });
+  }
+  public showDetails = (selectedItem: string) => {
+    this.props.history.push({
+      pathname: "benchmark_details",
+      state: { selectedItem }
+    });
+  };
 
   public render() {
+    let challengeContent = null;
+    
+    if (this.state.loading) {
+      challengeContent = <Spinner />;
+    } else {
+      challengeContent = (
+        <ChallengesGrid
+          size={3}
+          data={this.state.challengesData}
+          clicked={this.showDetails}
+        />
+      );
+    }
+
     return (
       <React.Fragment>
         <div className={styles.container}>
@@ -50,7 +99,7 @@ class Home extends React.Component<{}, {}> {
           <div className={styles.content}>
             <div className={styles.section}>
               <h3 className={classNames(styles.sectionHeader)}>Benchmarks</h3>
-              <FlippingCard />
+              {challengeContent}
             </div>
             <div className={styles.section}>
               <h3 className={classNames(styles.sectionHeader)}>News</h3>

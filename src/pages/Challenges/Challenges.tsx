@@ -43,6 +43,7 @@ class Challenges extends React.Component<RouteComponentProps<{}>, IState> {
     } else {
       content = (
         <ChallengesGrid
+          size={0}
           data={this.state.challengesData}
           clicked={this.showDetails}
         />
