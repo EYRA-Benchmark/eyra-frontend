@@ -11,23 +11,27 @@ interface IProps {
   order: any;
   orderBy: string;
   rowCount: number;
+  metricFields: string[];
 }
 
-const rows = [
-  {
-    id: "name",
-    numeric: false,
-    disablePadding: false,
-    label: "Name"
-  },
-  { id: "score", numeric: true, disablePadding: false, label: "Score" },
-  { id: "date", numeric: true, disablePadding: false, label: "Date" }
-];
 class Leaderboard extends React.Component<IProps, {}> {
   createSortHandler = (property: any) => (event: any) => {
     this.props.onRequestSort(event, property);
   };
   render() {
+    const rows = [
+      {
+        id: "name",
+        numeric: false,
+        disablePadding: false,
+        label: "Name"
+      },
+      ...this.props.metricFields.map(fieldName => ({
+        id: fieldName, numeric: true, disablePadding: false, label: fieldName
+      })),
+      { id: "date", numeric: true, disablePadding: false, label: "Date" }
+    ];
+
     const { order, orderBy } = this.props;
 
     return (
