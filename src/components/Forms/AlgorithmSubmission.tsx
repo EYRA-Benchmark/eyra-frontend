@@ -1,31 +1,45 @@
 import Button from "@material-ui/core/Button";
-import Axios from "axios";
+
 import { Field, Form, Formik } from "formik";
 import { FormikActions } from "formik/dist/types";
 import React from "react";
+import axios from "../../services/SetUpAxios";
 import styles from "./AlgorithmSubmission.module.css";
-import CustomFileUpload from "./CustomFileUpload";
 import CustomTextEditor from "./CustomTextEditor";
 interface IValues {
   name: string;
   description: string;
-  file: File | null;
+  // file: File | null;
+  containerName: string;
 }
 
 const initialValues: IValues = {
   name: "",
   description: "",
-  file: null
+  containerName: ""
 };
 const onSubmit = async (
   values: IValues,
   { setSubmitting }: FormikActions<IValues>
 ) => {
-  const formData = new FormData();
-  Object.keys(values).forEach(valueKey => {
-    formData.append(valueKey, values[valueKey]);
-  });
-  Axios.post("/algorithmSubmission", formData);
+  // const formData = new FormData();
+  // Object.keys(values).forEach(valueKey => {
+  //   formData.append(valueKey, values[valueKey]);
+  // });
+  const postData = {
+    name: values.name,
+    description: values.description,
+    containerName: values.containerName
+  };
+
+  await axios
+    .post("/algorithmSubmission", postData)
+    .then(response => {
+      console.log(response);
+    })
+    .catch(error => {
+      console.log(error);
+    });
   setSubmitting(false);
 };
 class AlgorithmSubmission extends React.Component<{}, {}> {
@@ -52,10 +66,15 @@ class AlgorithmSubmission extends React.Component<{}, {}> {
               </div>
 
               <div className={styles.inputContainer}>
-                <label htmlFor="container">Container</label>
-                <CustomFileUpload
-                  onChange={value => setFieldValue("file", value)}
+                <label htmlFor="containerName">Container</label>
+                <Field
+                  name="containerName"
+                  type="text"
+                  placeholder="Container Name"
                 />
+                {/* <CustomFileUpload
+                  onChange={value => setFieldValue("file", value)}
+                /> */}
               </div>
               <div className={styles.inputContainer}>
                 <Button

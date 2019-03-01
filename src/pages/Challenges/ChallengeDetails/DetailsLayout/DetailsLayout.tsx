@@ -45,6 +45,7 @@ class Details extends React.Component<IProps, IState> {
     const { value } = this.state;
     const { data } = this.props;
     if (data) {
+      console.log(data);
       /* Get the test and training data sets */
       const testDataSets = [
         {

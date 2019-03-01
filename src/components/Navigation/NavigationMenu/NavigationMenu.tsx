@@ -7,7 +7,7 @@ function NavigationMenu({ user, logout }: IUserProps) {
   return (
     <React.Fragment>
       <ul className={styles.nav}>
-        <li>
+        {/* <li>
           <NavLink to="/benchmark_details" activeClassName={styles.active}>
             About Us
           </NavLink>
@@ -16,7 +16,7 @@ function NavigationMenu({ user, logout }: IUserProps) {
           <NavLink to="/benchmarks" activeClassName={styles.active}>
             Benchmarks
           </NavLink>
-        </li>
+        </li> */}
         <li>
           {isLoggedIn(user) ? (
             <NavLink
@@ -27,9 +27,7 @@ function NavigationMenu({ user, logout }: IUserProps) {
               Logout {user.first_name}
             </NavLink>
           ) : (
-            <NavLink to="/login" activeClassName={styles.active}>
-              LogIn
-            </NavLink>
+            <NavLink to="/login" activeClassName={styles.active} />
           )}
         </li>
       </ul>

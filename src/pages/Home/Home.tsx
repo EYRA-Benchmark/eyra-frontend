@@ -3,12 +3,12 @@ import * as React from "react";
 
 import Prismic from "prismic-javascript";
 const RichText = require("prismic-reactjs").RichText;
-
 import bannerImage from "../../assets/images/black_paw.png";
-import FlippingCard from "../../components/FlippingCard/FlippingCard";
+// import FlippingCard from "../../components/FlippingCard/FlippingCard";
 import NewsGallary from "../../components/NewsGallary/NewsGallary";
 import formatDate from "../../components/Utils/helper";
 import { settings } from "../../settings";
+import Benchmarks from "../Challenges/Challenges";
 import styles from "./Home.module.css";
 class Home extends React.Component<{}, {}> {
   state = {
@@ -50,7 +50,7 @@ class Home extends React.Component<{}, {}> {
           <div className={styles.content}>
             <div className={styles.section}>
               <h3 className={classNames(styles.sectionHeader)}>Benchmarks</h3>
-              <FlippingCard />
+              <Benchmarks />
             </div>
             <div className={styles.section}>
               <h3 className={classNames(styles.sectionHeader)}>News</h3>
