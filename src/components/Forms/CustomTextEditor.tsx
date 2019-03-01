@@ -13,9 +13,10 @@ class CustomTextEditor extends React.Component<IProps, {}> {
     format: "html"
   };
   setDesc = (value: any) => {
-    console.log(value.toString("html"));
     this.setState({ value });
-    this.props.onChange(value.toString(this.state.format));
+    this.props.onChange(
+      value.toString("markdown")
+    ); /** Description will be submitted as markdown only */
   };
   onChangeSource = (event: any) => {
     const source = event.target.value;

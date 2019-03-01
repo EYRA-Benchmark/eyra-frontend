@@ -65,9 +65,10 @@ class Details extends React.Component<IProps, IState> {
             <Paper className={styles.paper}>
               <h2>{data.name}</h2>
               <p>
-                This benchmark is set up for illustrative purposes, with the aim
-                to provide an example of an insight challenge and show that
-                additional analyses can be done beyond the leaderboard.
+                <Markdown
+                  source={data.short_description}
+                  className={styles.container}
+                />
               </p>
             </Paper>
           </Grid>

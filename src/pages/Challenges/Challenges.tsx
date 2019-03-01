@@ -1,7 +1,7 @@
 import { AxiosResponse } from "axios";
 import * as React from "react";
-import { RouteComponentProps, withRouter } from "react-router-dom";
-// import AnimateComponent from "../../components/Animation/AnimateComponent";
+import { RouteComponentProps } from "react-router-dom";
+import AnimateComponent from "../../components/Animation/AnimateComponent";
 import Spinner from "../../components/Utils/Spinner/Spinner";
 import axios from "../../services/SetUpAxios";
 import ChallengesGrid from "./CardGrid/CardGrid";
@@ -52,4 +52,4 @@ class Challenges extends React.Component<RouteComponentProps<{}>, IState> {
     return content;
   }
 }
-export default withRouter(Challenges);
+export default AnimateComponent(Challenges);

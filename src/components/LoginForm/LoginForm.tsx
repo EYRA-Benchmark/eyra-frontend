@@ -29,7 +29,7 @@ const Login = ({ login }: IUserProps) => {
         </Typography>
 
         <form className={styles.form}>
-          <div>
+          <div className={styles.googleLogin}>
             <a onClick={login}>
               <img src={GoogleSigninButton} alt="Sign in with google" />
             </a>

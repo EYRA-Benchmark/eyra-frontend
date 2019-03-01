@@ -18,6 +18,12 @@
 .submit {
   margin-top: 24px !important;
 }
+.googleLogin {
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  padding: 10px;
+}
 .forgotPasswordLink {
   text-align: center;
   padding: 20px;

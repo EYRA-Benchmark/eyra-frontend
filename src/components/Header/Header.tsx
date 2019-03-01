@@ -1,13 +1,13 @@
-import AppBar from '@material-ui/core/AppBar';
-import IconButton from '@material-ui/core/IconButton';
-import Toolbar from '@material-ui/core/Toolbar';
-import MenuIcon from '@material-ui/icons/Menu';
-import * as React from 'react';
-import logo from '../../assets/images/logo.png';
-import Navbar from '../Navigation/NavigationMenu/NavigationMenu';
+import AppBar from "@material-ui/core/AppBar";
+import IconButton from "@material-ui/core/IconButton";
+import Toolbar from "@material-ui/core/Toolbar";
+import MenuIcon from "@material-ui/icons/Menu";
+import * as React from "react";
+import { NavLink } from "react-router-dom";
+import logo from "../../assets/images/logo.png";
+import Navbar from "../Navigation/NavigationMenu/NavigationMenu";
 // import SearchBar from "../SearchBar/SearchBar";
-import styles from './Header.module.css';
-import { NavLink } from 'react-router-dom';
+import styles from "./Header.module.css";
 
 export interface IOwnProps {
   classes: string;
@@ -15,12 +15,11 @@ export interface IOwnProps {
 }
 
 function Header({ classes, drawerToggle }: IOwnProps) {
-  console.log('Header drawing');
   return (
     <AppBar className={classes}>
       <Toolbar className={styles.toolbar}>
         <div className={styles.logo}>
-          <NavLink to="/" title="Home" >
+          <NavLink to="/" title="Home">
             <img src={logo} alt="logo" className={styles.logoImage} />
           </NavLink>
         </div>
