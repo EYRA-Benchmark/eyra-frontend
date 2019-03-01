@@ -9,7 +9,7 @@ import * as React from "react";
 import AlgorithmSubmissionForm from "../../../../components/Forms/AlgorithmSubmission";
 import Datasets from "./DataSets/DataSets";
 import styles from "./DetailsLayout.module.css";
-import Leadeboard from "./Leaderboard/Leaderboard";
+import Leaderboard from "./Leaderboard/Leaderboard";
 interface IContainerProps {
   children: React.ReactNode;
 }
@@ -93,7 +93,7 @@ class Details extends React.Component<IProps, IState> {
               )}
               {value === 1 && (
                 <TabContainer>
-                  <Leadeboard />
+                  <Leaderboard benchmarkID={data.id} />
                 </TabContainer>
               )}
               {value === 2 && (

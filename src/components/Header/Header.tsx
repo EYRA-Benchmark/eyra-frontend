@@ -7,6 +7,7 @@ import logo from '../../assets/images/logo.png';
 import Navbar from '../Navigation/NavigationMenu/NavigationMenu';
 // import SearchBar from "../SearchBar/SearchBar";
 import styles from './Header.module.css';
+import { NavLink } from 'react-router-dom';
 
 export interface IOwnProps {
   classes: string;
@@ -14,13 +15,14 @@ export interface IOwnProps {
 }
 
 function Header({ classes, drawerToggle }: IOwnProps) {
+  console.log('Header drawing');
   return (
     <AppBar className={classes}>
       <Toolbar className={styles.toolbar}>
         <div className={styles.logo}>
-          <a href="/" title="Home">
+          <NavLink to="/" title="Home" >
             <img src={logo} alt="logo" className={styles.logoImage} />
-          </a>
+          </NavLink>
         </div>
         <IconButton
           aria-label="Open drawer"
