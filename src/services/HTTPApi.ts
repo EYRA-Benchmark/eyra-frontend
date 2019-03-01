@@ -10,6 +10,7 @@ interface IAPIConfig {
 export class HTTPApi {
   public get!: AxiosInstance['get']
   public post!: AxiosInstance['post']
+  public token: string|null = null;
 
   protected config: IAPIConfig;
   protected axios!: AxiosInstance;
@@ -26,8 +27,10 @@ export class HTTPApi {
 
   setToken(token: string|null) {
     if (token) {
+      this.token = token;
       this.config.headers.Authorization = `Token ${token}`;
     } else {
+      this.token = null;
       delete this.config.headers.Authorization;
     }
     this.createAxios();
