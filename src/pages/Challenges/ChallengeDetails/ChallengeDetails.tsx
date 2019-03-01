@@ -9,7 +9,7 @@ interface IState {
   loading: boolean;
   challengesData: any;
 }
-class ChallengDetails extends React.Component<RouteComponentProps<{}>, IState> {
+class ChallengeDetails extends React.Component<RouteComponentProps<{}>, IState> {
   componentWillMount() {
     this.setState({
       selectedItemId: this.props.location.state.selectedItem
@@ -31,4 +31,4 @@ class ChallengDetails extends React.Component<RouteComponentProps<{}>, IState> {
     return <Details data={this.state.challengesData} />;
   }
 }
-export default AnimateComponent(ChallengDetails);
+export default AnimateComponent(ChallengeDetails);

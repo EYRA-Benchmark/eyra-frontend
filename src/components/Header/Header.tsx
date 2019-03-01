@@ -7,6 +7,7 @@ import logo from '../../assets/images/logo.png';
 import Navbar from '../Navigation/NavigationMenu/NavigationMenu';
 // import SearchBar from "../SearchBar/SearchBar";
 import styles from './Header.module.css';
+
 import { NavLink } from 'react-router-dom';
 
 export interface IOwnProps {
