@@ -28,7 +28,7 @@ function NavigationMenu({ user, logout }: IUserProps) {
             </NavLink>
           ) : (
             <NavLink to="/login" activeClassName={styles.active}>
-              LogIn
+              Login
             </NavLink>
           )}
         </li>

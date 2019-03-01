@@ -1,9 +1,8 @@
 import classNames from "classnames";
+import Prismic from "prismic-javascript";
 import * as React from "react";
 import { RouteComponentProps } from "react-router-dom";
-
-import Prismic from "prismic-javascript";
-const RichText = require("prismic-reactjs").RichText;
+import { settings } from "../../settings";
 
 import bannerImage from "../../assets/images/black_paw.png";
 
@@ -15,9 +14,10 @@ import ChallengesGrid from "../Challenges/CardGrid/CardGrid";
 import NewsGallary from "../../components/NewsGallary/NewsGallary";
 import formatDate from "../../components/Utils/helper";
 import axios from "../../services/SetUpAxios";
-import { settings } from "../../settings";
-import styles from "./Home.module.css";
 
+// import Benchmarks from "../Challenges/Challenges";
+import styles from "./Home.module.css";
+const RichText = require("prismic-reactjs").RichText;
 interface IState {
   news: any;
   challengesData: any;
@@ -45,7 +45,10 @@ class Home extends React.Component<RouteComponentProps<{}>, IState> {
     });
   }
   shouldComponentUpdate(nextProps: any, nextState: any) {
-    return this.state.challengesData !== nextState.challengesData || this.state.news !== nextState.news;
+    return (
+      this.state.challengesData !== nextState.challengesData ||
+      this.state.news !== nextState.news
+    );
   }
   componentDidMount() {
     axios.get("benchmarks/").then((response: AxiosResponse) => {
@@ -64,7 +67,7 @@ class Home extends React.Component<RouteComponentProps<{}>, IState> {
 
   public render() {
     let challengeContent = null;
-    
+
     if (this.state.loading) {
       challengeContent = <Spinner />;
     } else {

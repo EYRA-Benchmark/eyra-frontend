@@ -6,7 +6,10 @@ interface IProps {
 }
 class CustomTextEditor extends React.Component<IProps, {}> {
   state = {
-    value: RichTextEditor.createEmptyValue(),
+    value: RichTextEditor.createValueFromString(
+      "<b>Add Description Here..</b><br/><p>Here You can add description or paste HTML/ Markdown code for description in left Container</p>",
+      "html"
+    ),
     format: "html"
   };
   setDesc = (value: any) => {
@@ -34,7 +37,7 @@ class CustomTextEditor extends React.Component<IProps, {}> {
           <div style={{ display: "flex" }}>
             <div className={styles.col1}>
               <textarea
-                placeholder="Editor Source"
+                placeholder="Here You can see HTML or Markdown code for Description."
                 value={value.toString(format)}
                 onChange={this.onChangeSource}
                 className={styles.sourceContainer}
@@ -43,6 +46,7 @@ class CustomTextEditor extends React.Component<IProps, {}> {
             <div className={styles.col1}>
               <RichTextEditor
                 value={value}
+                placeholder="Here You can add description or copy HTML/ Markdown code for description in left Container"
                 onChange={this.setDesc}
                 rootStyle={{
                   minHeight: 400,

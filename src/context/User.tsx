@@ -1,7 +1,8 @@
 import React from 'react';
-import { settings } from '../settings';
+import axios from '../services/SetUpAxios';
 
 import { comicApi } from '../services/comicApi';
+import { settings } from '../settings';
 
 enum Status {
   LOGGING_IN,
@@ -53,11 +54,13 @@ export class UserProvider extends React.Component<{}, IState> {
         user: await comicApi.me() || null,
         status: Status.LOGGED_IN
       });
+      axios.defaults.headers.common.Authorization = `Token ${comicApi.token}`;
     } catch(e) {
       this.setState({
         user: null,
         status: Status.LOGGED_OUT,
       });
+      axios.defaults.headers.common.Authorization = null;
       console.log('refresh error', e);
     }
   }
@@ -67,11 +70,12 @@ export class UserProvider extends React.Component<{}, IState> {
   }
 
   login () {
-    document.location.href = `${settings.backendURL}/social/login/google-oauth2/?next=${document.location.origin}`;
+    document.location.href = `${settings.backendURL}social/login/google-oauth2/?next=${document.location.origin}`;
   }
 
   logout() {
     this.setState({ user: null, status: Status.LOGGED_OUT });
+    axios.defaults.headers.common.Authorization = null;
     comicApi.setToken(null);
   }
 
