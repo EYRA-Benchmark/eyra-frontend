@@ -70,7 +70,7 @@ export class UserProvider extends React.Component<{}, IState> {
   }
 
   login () {
-    document.location.href = `${settings.backendURL}/social/login/google-oauth2/?next=${document.location.origin}`;
+    document.location.href = `${settings.backendURL}social/login/google-oauth2/?next=${document.location.origin}`;
   }
 
   logout() {
