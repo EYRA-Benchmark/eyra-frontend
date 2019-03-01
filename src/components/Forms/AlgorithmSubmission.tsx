@@ -6,14 +6,19 @@ import React from "react";
 import axios from "../../services/SetUpAxios";
 import styles from "./AlgorithmSubmission.module.css";
 import CustomTextEditor from "./CustomTextEditor";
+
+interface IProps {
+  benchmarkId: string;
+}
 interface IValues {
+  id: string;
   name: string;
   description: string;
-  // file: File | null;
   containerName: string;
 }
 
 const initialValues: IValues = {
+  id: "",
   name: "",
   description: "",
   containerName: ""
@@ -27,13 +32,14 @@ const onSubmit = async (
   //   formData.append(valueKey, values[valueKey]);
   // });
   const postData = {
+    benchmark: values.id,
     name: values.name,
     description: values.description,
-    containerName: values.containerName
+    container: values.containerName
   };
 
   await axios
-    .post("/algorithmSubmission", postData)
+    .post("algorithmSubmission/", postData)
     .then(response => {
       console.log(response);
     })
@@ -42,8 +48,10 @@ const onSubmit = async (
     });
   setSubmitting(false);
 };
-class AlgorithmSubmission extends React.Component<{}, {}> {
+class AlgorithmSubmission extends React.Component<IProps, {}> {
   render() {
+    const { benchmarkId } = this.props;
+    initialValues.id = benchmarkId;
     return (
       <Formik initialValues={initialValues} onSubmit={onSubmit}>
         {({ isSubmitting, setFieldValue }) => (
@@ -61,7 +69,9 @@ class AlgorithmSubmission extends React.Component<{}, {}> {
               <div className={styles.inputContainer}>
                 <label htmlFor="description">Description</label>
                 <CustomTextEditor
-                  onChange={value => setFieldValue("description", value)}
+                  onChange={value => {
+                    setFieldValue("description", value);
+                  }}
                 />
               </div>
 

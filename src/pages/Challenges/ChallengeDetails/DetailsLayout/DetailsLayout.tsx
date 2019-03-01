@@ -107,7 +107,7 @@ class Details extends React.Component<IProps, IState> {
               )}
               {value === 3 && (
                 <TabContainer>
-                  <AlgorithmSubmissionForm />
+                  <AlgorithmSubmissionForm benchmarkId={data.id} />
                 </TabContainer>
               )}
             </Paper>

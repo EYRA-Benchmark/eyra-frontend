@@ -1,9 +1,9 @@
 import classNames from "classnames";
+import Prismic from "prismic-javascript";
 import * as React from "react";
 import { RouteComponentProps } from "react-router-dom";
+import { settings } from "../../settings";
 
-import Prismic from "prismic-javascript";
-const RichText = require("prismic-reactjs").RichText;
 import bannerImage from "../../assets/images/black_paw.png";
 
 // import FlippingCard from "../../components/FlippingCard/FlippingCard";
@@ -14,10 +14,10 @@ import ChallengesGrid from "../Challenges/CardGrid/CardGrid";
 import NewsGallary from "../../components/NewsGallary/NewsGallary";
 import formatDate from "../../components/Utils/helper";
 import axios from "../../services/SetUpAxios";
-import { settings } from "../../settings";
-import Benchmarks from "../Challenges/Challenges";
-import styles from "./Home.module.css";
 
+// import Benchmarks from "../Challenges/Challenges";
+import styles from "./Home.module.css";
+const RichText = require("prismic-reactjs").RichText;
 interface IState {
   news: any;
   challengesData: any;
