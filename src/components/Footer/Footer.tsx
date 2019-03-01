@@ -1,8 +1,9 @@
-import { Dialog } from "@material-ui/core";
+import { Dialog, Button } from "@material-ui/core";
 import classNames from "classnames";
 import React from "react";
 import SubscriptionDialog from "../SubscriptionDialog/SubscriptionDialog";
 import styles from "./Footer.module.css";
+
 class Footer extends React.Component<{}, { subscriptionDialogOpen: boolean }> {
   state = {
     subscriptionDialogOpen: false
@@ -26,12 +27,12 @@ class Footer extends React.Component<{}, { subscriptionDialogOpen: boolean }> {
             >
               <SubscriptionDialog />
             </Dialog>
-            <button
-              className={styles.sendButton}
+            <Button
+              variant="contained"
               onClick={this.toggleSubscriptionModal(true)}
             >
               Subscribe
-            </button>
+            </Button>
           </div>
         </div>
         <div className={classNames(styles.content, styles.bgDark)}>

@@ -6,10 +6,11 @@ import {
   TableRow,
   withStyles,
   WithStyles
-} from "@material-ui/core";
-import * as React from "react";
-import LeaderboardHead from "../LeaderboardHead/LeaderboardHead";
-import styles from "./LeaderboardTableStyle";
+} from '@material-ui/core';
+import * as React from 'react';
+import LeaderboardHead from '../LeaderboardHead/LeaderboardHead';
+import styles from './LeaderboardTableStyle';
+import { ISubmission } from '../Leaderboard';
 
 function desc(a: any, b: any, orderBy: any) {
   if (b[orderBy] < a[orderBy]) {
@@ -33,7 +34,7 @@ function stableSort(array: any, cmp: any) {
 }
 
 function getSorting(order: any, orderBy: any) {
-  return order === "desc"
+  return order === 'desc'
     ? (a: any, b: any) => desc(a, b, orderBy)
     : (a: any, b: any) => -desc(a, b, orderBy);
 }
@@ -44,19 +45,20 @@ interface IState {
 }
 interface IProps extends WithStyles<typeof styles> {
   classes: any;
+  submissions: ISubmission[];
 }
 class LeaderboardTable extends React.Component<IProps, IState> {
   state = {
-    order: "asc",
-    orderBy: "score"
+    order: 'asc',
+    orderBy: 'score'
   };
 
   handleRequestSort = (event: any, property: any) => {
     const orderBy = property;
-    let order = "desc";
+    let order = 'desc';
 
-    if (this.state.orderBy === property && this.state.order === "desc") {
-      order = "asc";
+    if (this.state.orderBy === property && this.state.order === 'desc') {
+      order = 'asc';
     }
 
     this.setState({ order, orderBy });
@@ -65,11 +67,12 @@ class LeaderboardTable extends React.Component<IProps, IState> {
   render() {
     const { classes } = this.props;
     const { order, orderBy } = this.state;
-    const data = [
-      { id: 1, name: "ABC", score: 100, date: "2018-05-21" },
-      { id: 2, name: "XYZ", score: 200, date: "2019-06-05" },
-      { id: 3, name: "GHT", score: 50, date: "2018-05-05" }
-    ];
+    const metricFields = Object.keys(this.props.submissions[0].metrics_json);
+    const data = this.props.submissions.map(submission => ({
+      name: submission.algorithm.name,
+      date: submission.created,
+      ...submission.metrics_json,
+    }));
     return (
       <Paper className={classes.root}>
         <div className={classes.tableWrapper}>
@@ -79,15 +82,18 @@ class LeaderboardTable extends React.Component<IProps, IState> {
               orderBy={orderBy}
               onRequestSort={this.handleRequestSort}
               rowCount={data.length}
+              metricFields={metricFields}
             />
             <TableBody>
-              {stableSort(data, getSorting(order, orderBy)).map((n: any) => {
+              {stableSort(data, getSorting(order, orderBy)).map((n: any, i: number) => {
                 return (
-                  <TableRow hover={true} tabIndex={-1} key={n.id}>
+                  <TableRow hover={true} tabIndex={-1} key={i}>
                     <TableCell component="th" scope="row">
                       {n.name}
                     </TableCell>
-                    <TableCell align="right">{n.score}</TableCell>
+                    { metricFields.map((fieldName, j: number) =>
+                      <TableCell key={j} align="right">{n[fieldName]}</TableCell>
+                    )}
                     <TableCell align="right">{n.date}</TableCell>
                   </TableRow>
                 );

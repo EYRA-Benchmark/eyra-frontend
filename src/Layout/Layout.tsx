@@ -11,14 +11,12 @@ import styles from "./Layout.module.css";
 interface IState {
   isShrink: boolean;
   showSideDrawer: boolean;
-  isHomePage: boolean;
 }
 
 class Layout extends React.Component<RouteComponentProps<{}>, IState> {
   state = {
     isShrink: false,
     showSideDrawer: false,
-    isHomePage: true
   };
 
   sideDrawerToggleHandler = () => {
@@ -26,15 +24,7 @@ class Layout extends React.Component<RouteComponentProps<{}>, IState> {
       return { showSideDrawer: !prevState.showSideDrawer };
     });
   };
-  componentWillMount() {
-    this.props.history.listen((location, action) => {
-      if (!(location.pathname === "/")) {
-        this.setState({
-          isHomePage: false
-        });
-      }
-    });
-  }
+
   componentDidMount() {
     window.addEventListener("scroll", this.handleScroll.bind(this));
   }
@@ -58,8 +48,8 @@ class Layout extends React.Component<RouteComponentProps<{}>, IState> {
   };
 
   public render() {
-    console.log(this.state.isHomePage);
-    const { isShrink, isHomePage } = this.state;
+    const { isShrink } = this.state;
+    const isHomePage = this.props.location.pathname === '/';
     return (
       <React.Fragment>
         <Header
