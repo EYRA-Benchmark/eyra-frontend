@@ -1,8 +1,8 @@
-import { Card, CardHeader, CardMedia } from "@material-ui/core";
-import Grid from "@material-ui/core/Grid";
-import * as React from "react";
-import ChallengeImage from "../../../assets/images/challenge.png";
-import styles from "./CardGrid.module.css";
+import { Card, CardHeader, CardMedia } from '@material-ui/core';
+import Grid from '@material-ui/core/Grid';
+import * as React from 'react';
+import ChallengeImage from '../../../assets/images/tissue_segmentation.png';
+import styles from './CardGrid.module.css';
 interface IProps {
   size: any;
   data: any;
@@ -10,33 +10,32 @@ interface IProps {
 }
 
 interface IBenchmarkData {
-  id: string,
-  created: Date,
-  modified: Date,
-  description: string,
-  name: string,
-  creator: number,
-  evaluator: string,
-  training_datafile: any,
-  test_datafile: string,
-  ground_truth_datafile: string
+  id: string;
+  created: Date;
+  modified: Date;
+  description: string;
+  name: string;
+  creator: number;
+  evaluator: string;
+  training_datafile: any;
+  test_datafile: string;
+  ground_truth_datafile: string;
 }
 
 function sortByDate(array: IBenchmarkData[]): void {
   array.sort((a: IBenchmarkData, b: IBenchmarkData) => {
-      return a.modified.getTime() - b.modified.getTime();
+    return a.modified.getTime() - b.modified.getTime();
   });
-} 
+}
 
 export class CardGrid extends React.Component<IProps, {}> {
-  
   render() {
     const { size, data, clicked } = this.props;
 
     let filteredData = data;
     if (size !== 0) {
       sortByDate(data);
-      filteredData = data.slice(0,size);
+      filteredData = data.slice(0, size);
     }
 
     return (
@@ -56,7 +55,7 @@ export class CardGrid extends React.Component<IProps, {}> {
               <CardHeader
                 title={card.name}
                 titleTypographyProps={{
-                  variant: "title"
+                  variant: 'title'
                 }}
               />
             </Card>
