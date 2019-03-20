@@ -4,6 +4,9 @@
   height: 100%;
   overflow: hidden;
 }
+.article h3 {
+  color: #1fb8ea;
+}
 .bannerBackground {
   right: 0;
   display: flex;
@@ -31,7 +34,7 @@
   width: 80%;
   z-index: 2;
 }
-.caption .article {    
+.caption .article {
   padding: 0px 0 0;
   font-size: 30px;
   letter-spacing: 3px;
@@ -52,7 +55,7 @@
 
 .people {
   height: 150px;
-  box-align: left;
+  margin: 10px;
 }
 
 .people_banner {

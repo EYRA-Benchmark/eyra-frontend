@@ -1,23 +1,23 @@
-import classNames from "classnames";
-import Prismic from "prismic-javascript";
-import * as React from "react";
-import { RouteComponentProps } from "react-router-dom";
-import { settings } from "../../settings";
+import classNames from 'classnames';
+import Prismic from 'prismic-javascript';
+import * as React from 'react';
+import { RouteComponentProps } from 'react-router-dom';
+import { settings } from '../../settings';
 
-import bannerImage from "../../assets/images/black_paw.png";
+import bannerImage from '../../assets/images/black_paw.png';
 
 // import FlippingCard from "../../components/FlippingCard/FlippingCard";
-import { AxiosResponse } from "axios";
-import Spinner from "../../components/Utils/Spinner/Spinner";
-import ChallengesGrid from "../Challenges/CardGrid/CardGrid";
+import { AxiosResponse } from 'axios';
+import Spinner from '../../components/Utils/Spinner/Spinner';
+import ChallengesGrid from '../Challenges/CardGrid/CardGrid';
 
-import NewsGallary from "../../components/NewsGallary/NewsGallary";
-import formatDate from "../../components/Utils/helper";
-import axios from "../../services/SetUpAxios";
+import NewsGallary from '../../components/NewsGallary/NewsGallary';
+import formatDate from '../../components/Utils/helper';
+import axios from '../../services/SetUpAxios';
 
 // import Benchmarks from "../Challenges/Challenges";
-import styles from "./Home.module.css";
-const RichText = require("prismic-reactjs").RichText;
+import styles from './Home.module.css';
+const RichText = require('prismic-reactjs').RichText;
 interface IState {
   news: any;
   challengesData: any;
@@ -36,7 +36,7 @@ class Home extends React.Component<RouteComponentProps<{}>, IState> {
   componentWillMount() {
     Prismic.api(settings.prismicEndpoint).then(api => {
       api
-        .query(Prismic.Predicates.at("document.type", "news"), {})
+        .query(Prismic.Predicates.at('document.type', 'news'), {})
         .then((response: any) => {
           if (response) {
             this.setState({ news: response.results });
@@ -51,7 +51,7 @@ class Home extends React.Component<RouteComponentProps<{}>, IState> {
     );
   }
   componentDidMount() {
-    axios.get("benchmarks/").then((response: AxiosResponse) => {
+    axios.get('benchmarks/').then((response: AxiosResponse) => {
       this.setState({
         loading: false,
         challengesData: response.data
@@ -60,7 +60,7 @@ class Home extends React.Component<RouteComponentProps<{}>, IState> {
   }
   public showDetails = (selectedItem: string) => {
     this.props.history.push({
-      pathname: "benchmark_details",
+      pathname: 'benchmark_details',
       state: { selectedItem }
     });
   };
@@ -101,7 +101,10 @@ class Home extends React.Component<RouteComponentProps<{}>, IState> {
         <div className={styles.bg}>
           <div className={styles.content}>
             <div className={styles.section}>
-              <h3 className={classNames(styles.sectionHeader)}>Benchmarks</h3>
+              <div className={styles.titleContainer}>
+                <h3 className={classNames(styles.sectionHeader)}>Benchmarks</h3>
+                {/* <a href="/organize_benchmark">Organize Benchmark</a> */}
+              </div>
               {challengeContent}
             </div>
             <div className={styles.section}>

@@ -6,7 +6,7 @@ import Typography from "@material-ui/core/Typography";
 import Markdown from "@nteract/markdown";
 import PropTypes from "prop-types";
 import * as React from "react";
-import AlgorithmSubmissionForm from "../../../../components/Forms/AlgorithmSubmission";
+import AlgorithmSubmissionForm from "../../../../components/Forms/Algorithm/AlgorithmSubmission";
 import Datasets from "./DataSets/DataSets";
 import styles from "./DetailsLayout.module.css";
 import Leaderboard from "./Leaderboard/Leaderboard";

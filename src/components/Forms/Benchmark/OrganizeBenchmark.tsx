@@ -1,57 +1,36 @@
 import Button from "@material-ui/core/Button";
-
 import { Field, Form, Formik } from "formik";
 import { FormikActions } from "formik/dist/types";
 import React from "react";
-import axios from "../../services/SetUpAxios";
-import styles from "./AlgorithmSubmission.module.css";
-import CustomTextEditor from "./CustomTextEditor";
 
-interface IProps {
-  benchmarkId: string;
-}
+import styles from "../Algorithm/AlgorithmSubmission.module.css";
+import CustomTextEditor from "../CustomTextEditor";
+
 interface IValues {
-  id: string;
   name: string;
-  description: string;
-  containerName: string;
+  short_description: string;
+  overview: string;
 }
 
 const initialValues: IValues = {
-  id: "",
   name: "",
-  description: "",
-  containerName: ""
+  short_description: "",
+  overview: ""
 };
 const onSubmit = async (
   values: IValues,
   { setSubmitting }: FormikActions<IValues>
 ) => {
-  // const formData = new FormData();
-  // Object.keys(values).forEach(valueKey => {
-  //   formData.append(valueKey, values[valueKey]);
-  // });
   const postData = {
-    benchmark: values.id,
     name: values.name,
-    description: values.description,
-    container: values.containerName
+    short_description: values.short_description,
+    overview: values.overview
   };
-
-  await axios
-    .post("algorithmSubmission/", postData)
-    .then(response => {
-      console.log(response);
-    })
-    .catch(error => {
-      console.log(error);
-    });
+  console.log(postData);
   setSubmitting(false);
 };
-class AlgorithmSubmission extends React.Component<IProps, {}> {
+class OrganizeBenchmark extends React.Component<{}, {}> {
   render() {
-    const { benchmarkId } = this.props;
-    initialValues.id = benchmarkId;
     return (
       <Formik initialValues={initialValues} onSubmit={onSubmit}>
         {({ isSubmitting, setFieldValue }) => (
@@ -104,4 +83,4 @@ class AlgorithmSubmission extends React.Component<IProps, {}> {
   }
 }
 
-export default AlgorithmSubmission;
+export default OrganizeBenchmark;
