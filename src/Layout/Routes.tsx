@@ -28,7 +28,7 @@ class Routes extends React.Component<RouteComponentProps<{}>, {}> {
             <div className={styles.bannerBackground} id="about">
               <img src={paw} />
             </div>
-            <TransitionGroup>
+            <TransitionGroup style={{width: '100%', height: '100%'}}>
               <CSSTransition
                 key={location.pathname}
                 classNames="fade"
