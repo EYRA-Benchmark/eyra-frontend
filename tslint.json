@@ -6,7 +6,8 @@
     "no-debugger": false,
     "object-literal-sort-keys": false,
     "jsx-no-lambda": false,
-    "no-var-requires": false
+    "no-var-requires": false,
+    "ordered-imports": false
   },
   "linterOptions": {
     "exclude": [
