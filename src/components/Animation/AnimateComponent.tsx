@@ -1,6 +1,7 @@
 import classNames from "classnames";
-import * as React from "react";
+import React from "react";
 import styles from "./AnimateComponent.module.css";
+
 const animate = <P extends object>(WrappedComponent: React.ComponentType<P>) =>
   class WithAnimation extends React.Component<P> {
     state = { didMount: false };
@@ -13,7 +14,7 @@ const animate = <P extends object>(WrappedComponent: React.ComponentType<P>) =>
       const { didMount } = this.state;
 
       return (
-        <div className={classNames(styles.fadein, didMount && styles.visible)}>
+        <div className={classNames(styles.fader, styles.fadein, didMount && styles.visible)}>
           <WrappedComponent {...this.props} />
         </div>
       );

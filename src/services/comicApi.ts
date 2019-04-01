@@ -16,8 +16,9 @@ export class ComicApi {
     const token = document.location.href.split('?token=')[1] || localStorage.getItem('comicToken') || null;
     this.axios = Axios.create({
       baseURL,
-      headers: { Authorization: `Token ${token}`, ...headers}
+      headers,
     });
+    this.setToken(token);
   }
 
   public setToken(token: string | null): void {
@@ -26,7 +27,11 @@ export class ComicApi {
     } else {
       localStorage.removeItem('comicToken');
     }
-    this.axios.defaults.headers.Authorization = !token ? null : `Token ${token}`;
+    if (token) {
+      this.axios.defaults.headers.Authorization = `Token ${token}`;
+    } else {
+      delete this.axios.defaults.headers.Authorization;
+    }
   }
 
   public setBaseURL(baseURL: string) {

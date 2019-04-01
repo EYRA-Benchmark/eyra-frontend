@@ -16,30 +16,34 @@ import NewsDetails from '../pages/News/NewsDetails/NewsDetails';
 class Routes extends React.Component<RouteComponentProps<{}>, {}> {
   render() {
     return (
-      <Switch>
-        <Route path="/" exact={true} component={Home} />
+      <React.Fragment>
+        <Switch>
+          <Route path="/" exact={true} component={Home} />
+        </Switch>
         <div id="root_container">
           <main className={styles.container}>
             <div className={styles.bannerBackground} id="about">
               <img src={paw} />
             </div>
-            <Route exact={true} path="/about" component={About} />
-            <Route exact={true} path="/login" component={Login} />
-            <Route exact={true} path="/benchmarks" component={Challenges} />
-            <Route
-              exact={true}
-              path="/organize_benchmark"
-              component={Benchmark}
-            />
-            <Route
-              exact={true}
-              path="/benchmark_details"
-              component={ChallengeDetails}
-            />
-            <Route exact={true} path="/news_details" component={NewsDetails} />
+            <Switch>
+              <Route exact={true} path="/about" component={About} />
+              <Route exact={true} path="/login" component={Login} />
+              <Route exact={true} path="/benchmarks" component={Challenges} />
+              <Route
+                exact={true}
+                path="/organize_benchmark"
+                component={Benchmark}
+              />
+              <Route
+                exact={true}
+                path="/benchmark_details"
+                component={ChallengeDetails}
+              />
+              <Route exact={true} path="/news_details" component={NewsDetails} />
+            </Switch>
           </main>
         </div>
-      </Switch>
+      </React.Fragment>
     );
   }
 }

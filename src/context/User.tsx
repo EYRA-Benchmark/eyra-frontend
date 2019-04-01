@@ -54,7 +54,6 @@ export class UserProvider extends React.Component<{}, IState> {
         user: null,
         status: Status.LOGGED_OUT
       });
-      console.log('refresh error', e);
     }
   }
 
