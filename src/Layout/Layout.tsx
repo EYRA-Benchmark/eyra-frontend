@@ -6,7 +6,7 @@ import Header from "../components/Header/Header";
 import SideDrawer from "../components/SideDrawer/SideDrawer";
 import ScrollToTop from "../components/Utils/ScrollToTop";
 import styles from "./Layout.module.css";
-import Routes from './Routes';
+import Routes from "./Routes";
 
 interface IState {
   isShrink: boolean;
@@ -16,7 +16,7 @@ interface IState {
 class Layout extends React.Component<RouteComponentProps<{}>, IState> {
   state = {
     isShrink: false,
-    showSideDrawer: false,
+    showSideDrawer: false
   };
 
   sideDrawerToggleHandler = () => {
@@ -43,7 +43,7 @@ class Layout extends React.Component<RouteComponentProps<{}>, IState> {
 
   public render() {
     const { isShrink } = this.state;
-    const isHomePage = this.props.location.pathname === '/';
+    const isHomePage = this.props.location.pathname === "/";
     return (
       <React.Fragment>
         <Header

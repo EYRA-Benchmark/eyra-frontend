@@ -1,13 +1,13 @@
-import React from 'react';
+import React from "react";
 
-import { comicApi } from '../services/comicApi';
-import { settings } from '../settings';
-import { IUser } from '../types/user';
+import { comicApi } from "../services/comicApi";
+import { settings } from "../settings";
+import { IUser } from "../types";
 
 enum Status {
   LOGGING_IN,
   LOGGED_OUT,
-  LOGGED_IN,
+  LOGGED_IN
 }
 
 export function isLoggedIn(user: IUser | null): user is IUser {
@@ -24,32 +24,34 @@ export type IUserProps = IState & {
   login: typeof UserProvider.prototype.login;
   logout: typeof UserProvider.prototype.logout;
   refresh: typeof UserProvider.prototype.refresh;
-}
+};
 
 const defaultState: IState = {
   user: null,
   status: Status.LOGGED_OUT
-}
+};
 
-export const UserContext = React.createContext<IUserProps>(defaultState as IUserProps);
+export const UserContext = React.createContext<IUserProps>(
+  defaultState as IUserProps
+);
 
 export class UserProvider extends React.Component<{}, IState> {
   state = {
     ...defaultState
-  }
+  };
 
   componentWillMount() {
     this.refresh();
   }
 
-  async refresh () {
+  async refresh() {
     this.setState({ status: Status.LOGGING_IN });
     try {
       this.setState({
-        user: await comicApi.me() || null,
+        user: (await comicApi.me()) || null,
         status: Status.LOGGED_IN
       });
-    } catch(e) {
+    } catch (e) {
       this.setState({
         user: null,
         status: Status.LOGGED_OUT
@@ -61,8 +63,10 @@ export class UserProvider extends React.Component<{}, IState> {
     // todo
   }
 
-  login () {
-    document.location.href = `${settings.backendURL}social/login/google-oauth2/?next=${document.location.origin}`;
+  login() {
+    document.location.href = `${
+      settings.backendURL
+    }social/login/google-oauth2/?next=${document.location.origin}`;
   }
 
   logout() {
@@ -94,9 +98,10 @@ export class UserProvider extends React.Component<{}, IState> {
 export const UserConsumer = UserContext.Consumer;
 
 // https://github.com/Microsoft/TypeScript/issues/15713
-export const withUser = <T extends object>(Component: React.ComponentType<T & IUserProps>) => (props: T) => (
+export const withUser = <T extends object>(
+  Component: React.ComponentType<T & IUserProps>
+) => (props: T) => (
   <UserConsumer>
     {(userProps: IUserProps) => <Component {...props} {...userProps} />}
   </UserConsumer>
 );
-

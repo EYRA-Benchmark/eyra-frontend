@@ -1,10 +1,10 @@
-import * as React from 'react';
-import { RouteComponentProps } from 'react-router-dom';
-import Spinner from '../../components/Utils/Spinner/Spinner';
-import ChallengesGrid from './CardGrid/CardGrid';
-import { comicApi } from '../../services/comicApi';
-import { IBenchmark } from '../../types/benchmark';
-import { Typography } from '@material-ui/core';
+import * as React from "react";
+import { RouteComponentProps } from "react-router-dom";
+import Spinner from "../../components/Utils/Spinner/Spinner";
+import ChallengesGrid from "./CardGrid/CardGrid";
+import { comicApi } from "../../services/comicApi";
+import { IBenchmark } from "../../types/benchmark";
+import { Typography } from "@material-ui/core";
 
 interface IState {
   benchmarks: IBenchmark[] | null;
@@ -26,13 +26,13 @@ class Challenges extends React.Component<RouteComponentProps<{}>, IState> {
   async componentDidMount() {
     this.setState({
       loading: false,
-      benchmarks: await comicApi.benchmarks(),
+      benchmarks: await comicApi.benchmarks()
     });
   }
 
   public showDetails = (selectedItem: string) => {
     this.props.history.push({
-      pathname: `benchmark/${selectedItem}`,
+      pathname: `benchmark/${selectedItem}`
     });
   };
 
@@ -49,12 +49,14 @@ class Challenges extends React.Component<RouteComponentProps<{}>, IState> {
         />
       );
     }
-    return <div>
-      <Typography component="h1" variant="h5">
-        Benchmarks
-        {content}
-      </Typography>
-    </div>;
+    return (
+      <div>
+        <Typography component="h1" variant="h5">
+          Benchmarks
+          {content}
+        </Typography>
+      </div>
+    );
   }
 }
 export default Challenges;

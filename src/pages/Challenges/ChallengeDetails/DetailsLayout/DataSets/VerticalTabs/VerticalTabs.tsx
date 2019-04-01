@@ -6,8 +6,8 @@ import Typography from "@material-ui/core/Typography";
 import PropTypes from "prop-types";
 import * as React from "react";
 import styles from "./VerticalTabs.module.css";
-import { comicApi } from '../../../../../../services/comicApi';
-import { IDataFile } from '../../../../../../types/data_file';
+import { comicApi } from "../../../../../../services/comicApi";
+import { IDataFile } from "../../../../../../types/data_file";
 
 interface IState {
   value: number;
@@ -40,7 +40,7 @@ class VerticalTabs extends React.Component<IProps, IState> {
   state = {
     value: 0,
     data: null,
-    groundTruth: null,
+    groundTruth: null
   };
   handleChange = (event: any, value: number) => {
     this.setState({ value });
@@ -50,13 +50,15 @@ class VerticalTabs extends React.Component<IProps, IState> {
     const { dataSets } = this.props;
     this.setState({
       data: await comicApi.data_file(dataSets[0].data),
-      groundTruth: await comicApi.data_file(dataSets[0].ground_truth),
-    })
+      groundTruth: await comicApi.data_file(dataSets[0].ground_truth)
+    });
   }
 
   render() {
     const { value, data, groundTruth } = this.state;
-    if (!data || !groundTruth) { return null; }
+    if (!data || !groundTruth) {
+      return null;
+    }
 
     const desc: any[] = [];
     if (Object.keys(data) && Object.keys(groundTruth)) {

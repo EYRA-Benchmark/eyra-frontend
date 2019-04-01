@@ -1,23 +1,23 @@
-import classNames from 'classnames';
-import Prismic from 'prismic-javascript';
-import * as React from 'react';
-import { RouteComponentProps } from 'react-router-dom';
-import { settings } from '../../settings';
+import classNames from "classnames";
+import Prismic from "prismic-javascript";
+import * as React from "react";
+import { RouteComponentProps } from "react-router-dom";
+import { settings } from "../../settings";
 
-import bannerImage from '../../assets/images/black_paw.png';
+import bannerImage from "../../assets/images/black_paw.png";
 
 // import FlippingCard from "../../components/FlippingCard/FlippingCard";
-import Spinner from '../../components/Utils/Spinner/Spinner';
-import ChallengesGrid from '../Challenges/CardGrid/CardGrid';
+import Spinner from "../../components/Utils/Spinner/Spinner";
+import ChallengesGrid from "../Challenges/CardGrid/CardGrid";
 
-import NewsGallary from '../../components/NewsGallary/NewsGallary';
-import formatDate from '../../components/Utils/helper';
+import NewsGallary from "../../components/NewsGallary/NewsGallary";
+import formatDate from "../../components/Utils/helper";
 
 // import Benchmarks from "../Challenges/Challenges";
-import styles from './Home.module.css';
-import { comicApi } from '../../services/comicApi';
+import styles from "./Home.module.css";
+import { comicApi } from "../../services/comicApi";
 
-const RichText = require('prismic-reactjs').RichText;
+const RichText = require("prismic-reactjs").RichText;
 interface IState {
   news: any;
   challengesData: any;
@@ -36,7 +36,7 @@ class Home extends React.Component<RouteComponentProps<{}>, IState> {
   componentWillMount() {
     Prismic.api(settings.prismicEndpoint).then(api => {
       api
-        .query(Prismic.Predicates.at('document.type', 'news'), {})
+        .query(Prismic.Predicates.at("document.type", "news"), {})
         .then((response: any) => {
           if (response) {
             this.setState({ news: response.results });
@@ -53,13 +53,13 @@ class Home extends React.Component<RouteComponentProps<{}>, IState> {
   async componentDidMount() {
     this.setState({
       loading: false,
-      challengesData: await comicApi.benchmarks(),
+      challengesData: await comicApi.benchmarks()
     });
   }
 
   public showDetails = (selectedItem: string) => {
     this.props.history.push({
-      pathname: 'benchmark_details',
+      pathname: "benchmark_details",
       state: { selectedItem }
     });
   };

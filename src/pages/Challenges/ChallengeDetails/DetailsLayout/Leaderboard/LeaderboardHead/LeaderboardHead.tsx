@@ -27,7 +27,10 @@ class Leaderboard extends React.Component<IProps, {}> {
         label: "Name"
       },
       ...this.props.metricFields.map(fieldName => ({
-        id: fieldName, numeric: true, disablePadding: false, label: fieldName
+        id: fieldName,
+        numeric: true,
+        disablePadding: false,
+        label: fieldName
       })),
       { id: "date", numeric: true, disablePadding: false, label: "Date" }
     ];

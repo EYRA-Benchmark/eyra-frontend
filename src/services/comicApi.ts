@@ -1,31 +1,35 @@
-import { AxiosInstance } from 'axios';
-import Axios from 'axios';
+import Axios, { AxiosInstance } from "axios";
 
-import { IAlgorithm } from '../types/algorithm';
-import { IBenchmark } from '../types/benchmark';
-import { IDataFile } from '../types/data_file';
-import { ISubmission } from '../types/submission';
-import { IUser } from '../types/user';
-import { UUID4 } from '../types/utils';
+import {
+  IAlgorithm,
+  IBenchmark,
+  IDataFile,
+  ISubmission,
+  IUser,
+  UUID4
+} from "../types";
 
-import { objectToQueryParams } from '../utils';
+import { objectToQueryParams } from "../utils";
 
 export class ComicApi {
   protected axios!: AxiosInstance;
-  constructor(baseURL: string = '', headers = {}) {
-    const token = document.location.href.split('?token=')[1] || localStorage.getItem('comicToken') || null;
+  constructor(baseURL: string = "", headers = {}) {
+    const token =
+      document.location.href.split("?token=")[1] ||
+      localStorage.getItem("comicToken") ||
+      null;
     this.axios = Axios.create({
       baseURL,
-      headers,
+      headers
     });
     this.setToken(token);
   }
 
   public setToken(token: string | null): void {
     if (token) {
-      localStorage.setItem('comicToken', token);
+      localStorage.setItem("comicToken", token);
     } else {
-      localStorage.removeItem('comicToken');
+      localStorage.removeItem("comicToken");
     }
     if (token) {
       this.axios.defaults.headers.Authorization = `Token ${token}`;
@@ -43,16 +47,16 @@ export class ComicApi {
       throw Error("Trying to get /me/ user without token");
     }
     try {
-      const result = await this.axios.get('me/');
+      const result = await this.axios.get("me/");
       return result.data;
-    } catch(e) {
+    } catch (e) {
       this.setToken(null);
       throw e;
     }
   }
 
   async benchmarks(): Promise<IBenchmark[]> {
-    return (await this.axios.get<IBenchmark[]>('benchmarks/')).data;
+    return (await this.axios.get<IBenchmark[]>("benchmarks/")).data;
   }
 
   async benchmark(id: string): Promise<IBenchmark> {
@@ -64,20 +68,23 @@ export class ComicApi {
   }
 
   async submissions(filters: {}): Promise<ISubmission[]> {
-    return (await this.axios.get<ISubmission[]>(`submissions/?${objectToQueryParams(filters)}`)).data;
+    return (await this.axios.get<ISubmission[]>(
+      `submissions/?${objectToQueryParams(filters)}`
+    )).data;
   }
 
   async algorithm(id: string): Promise<IAlgorithm> {
     return (await this.axios.get<IAlgorithm>(`algorithms/${id}/`)).data;
   }
 
-  async algorithmSubmission(details : {
-    benchmark: UUID4,
-    name: string,
-    description: string,
-    container: UUID4
+  async algorithmSubmission(details: {
+    benchmark: UUID4;
+    name: string;
+    description: string;
+    container: UUID4;
   }): Promise<IAlgorithm> {
-    return (await this.axios.post<IAlgorithm>('algorithmSubmission/', details)).data;
+    return (await this.axios.post<IAlgorithm>("algorithmSubmission/", details))
+      .data;
   }
 }
 

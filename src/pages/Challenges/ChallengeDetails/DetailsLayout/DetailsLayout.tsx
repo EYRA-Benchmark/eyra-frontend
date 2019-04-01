@@ -11,7 +11,7 @@ import Datasets from "./DataSets/DataSets";
 import styles from "./DetailsLayout.module.css";
 import Leaderboard from "./Leaderboard/Leaderboard";
 
-import { IBenchmark } from '../../../../types/benchmark';
+import { IBenchmark } from "../../../../types/benchmark";
 
 interface IContainerProps {
   children: React.ReactNode;

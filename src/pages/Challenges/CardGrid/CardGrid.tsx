@@ -1,8 +1,8 @@
-import { Card, CardHeader, CardMedia } from '@material-ui/core';
-import Grid from '@material-ui/core/Grid';
-import * as React from 'react';
-import ChallengeImage from '../../../assets/images/tissue_segmentation.png';
-import styles from './CardGrid.module.css';
+import { Card, CardHeader, CardMedia } from "@material-ui/core";
+import Grid from "@material-ui/core/Grid";
+import * as React from "react";
+import ChallengeImage from "../../../assets/images/tissue_segmentation.png";
+import styles from "./CardGrid.module.css";
 interface IProps {
   size: any;
   data: any;
@@ -55,7 +55,7 @@ export class CardGrid extends React.Component<IProps, {}> {
               <CardHeader
                 title={card.name}
                 titleTypographyProps={{
-                  variant: 'title'
+                  variant: "title"
                 }}
               />
             </Card>
