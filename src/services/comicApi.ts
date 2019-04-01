@@ -1,11 +1,13 @@
 import { AxiosInstance } from 'axios';
 import Axios from 'axios';
-import { IUser } from '../types/user';
-import { IBenchmark } from '../types/benchmark';
-import { UUID4 } from '../types/utils';
+
 import { IAlgorithm } from '../types/algorithm';
+import { IBenchmark } from '../types/benchmark';
 import { IDataFile } from '../types/data_file';
 import { ISubmission } from '../types/submission';
+import { IUser } from '../types/user';
+import { UUID4 } from '../types/utils';
+
 import { objectToQueryParams } from '../utils';
 
 export class ComicApi {
