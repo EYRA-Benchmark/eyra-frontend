@@ -39,6 +39,9 @@ export class ComicApi {
   }
 
   async me(): Promise<IUser> {
+    if (!this.axios.defaults.headers.Authorization) {
+      throw Error("Trying to get /me/ user without token");
+    }
     try {
       const result = await this.axios.get('me/');
       return result.data;
