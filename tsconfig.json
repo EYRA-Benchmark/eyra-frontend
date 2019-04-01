@@ -23,6 +23,7 @@
     "skipLibCheck": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
+    "experimentalDecorators": true,
     "strict": true,
     "resolveJsonModule": true,
     "isolatedModules": true,

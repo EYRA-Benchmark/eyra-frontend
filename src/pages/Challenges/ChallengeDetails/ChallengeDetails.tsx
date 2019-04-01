@@ -1,31 +1,34 @@
 import * as React from "react";
+import { RouteComponentProps, withRouter } from 'react-router';
+
 import { comicApi } from '../../../services/comicApi';
 
-import { RouteComponentProps } from "react-router";
-import AnimateComponent from "../../../components/Animation/AnimateComponent";
+import { IBenchmark } from '../../../types/benchmark';
+
+import Spinner from '../../../components/Utils/Spinner/Spinner';
 import Details from "./DetailsLayout/DetailsLayout";
 
 interface IState {
-  selectedItemId: string;
-  loading: boolean;
-  challengesData: any;
+  benchmark: IBenchmark | null;
 }
 
-class ChallengeDetails extends React.Component<RouteComponentProps<{}>, IState> {
-  componentWillMount() {
-    this.setState({
-      selectedItemId: this.props.location.state.selectedItem
-    });
+class ChallengeDetails extends React.Component<RouteComponentProps<{id: string}>, IState> {
+  state = {
+    benchmark: null,
   }
   async componentDidMount() {
+    // await new Promise(resolve => setTimeout(resolve, 2000));
     this.setState({
-      loading: false,
-      challengesData: await comicApi.benchmark(this.state.selectedItemId),
+      benchmark: await comicApi.benchmark(this.props.match.params.id),
     });
   }
   render() {
-    console.log("data", this.state.challengesData);
-    return <Details data={this.state.challengesData} />;
+    const content = this.state.benchmark ? <Details data={this.state.benchmark!} /> : <Spinner />
+    return (
+      <div>
+        {content}
+      </div>
+    )
   }
 }
-export default AnimateComponent(ChallengeDetails);
+export default withRouter(ChallengeDetails);

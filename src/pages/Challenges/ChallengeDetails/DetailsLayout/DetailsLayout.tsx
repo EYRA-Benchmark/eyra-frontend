@@ -10,11 +10,14 @@ import AlgorithmSubmissionForm from "../../../../components/Forms/Algorithm/Algo
 import Datasets from "./DataSets/DataSets";
 import styles from "./DetailsLayout.module.css";
 import Leaderboard from "./Leaderboard/Leaderboard";
+
+import { IBenchmark } from '../../../../types/benchmark';
+
 interface IContainerProps {
   children: React.ReactNode;
 }
 interface IProps {
-  data: any;
+  data: IBenchmark;
 }
 function TabContainer(props: IContainerProps) {
   return (
@@ -45,7 +48,6 @@ class Details extends React.Component<IProps, IState> {
     const { value } = this.state;
     const { data } = this.props;
     if (data) {
-      console.log(data);
       /* Get the test and training data sets */
       const testDataSets = [
         {

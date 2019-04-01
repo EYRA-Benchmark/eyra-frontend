@@ -1,39 +1,38 @@
 import * as React from 'react';
 import { RouteComponentProps } from 'react-router-dom';
-import AnimateComponent from '../../components/Animation/AnimateComponent';
 import Spinner from '../../components/Utils/Spinner/Spinner';
 import ChallengesGrid from './CardGrid/CardGrid';
 import { comicApi } from '../../services/comicApi';
 import { IBenchmark } from '../../types/benchmark';
+import { Typography } from '@material-ui/core';
 
 interface IState {
-  challengesData: IBenchmark[] | null;
+  benchmarks: IBenchmark[] | null;
   selectedItem: any;
   loading: boolean;
 }
 
 class Challenges extends React.Component<RouteComponentProps<{}>, IState> {
   state = {
-    challengesData: null,
+    benchmarks: null,
     selectedItem: null,
     loading: true
   };
 
   shouldComponentUpdate(nextProps: any, nextState: any) {
-    return this.state.challengesData !== nextState.challengesData;
+    return this.state.benchmarks !== nextState.benchmarks;
   }
 
   async componentDidMount() {
     this.setState({
       loading: false,
-      challengesData: await comicApi.benchmarks(),
+      benchmarks: await comicApi.benchmarks(),
     });
   }
 
   public showDetails = (selectedItem: string) => {
     this.props.history.push({
-      pathname: 'benchmark_details',
-      state: { selectedItem }
+      pathname: `benchmark/${selectedItem}`,
     });
   };
 
@@ -45,12 +44,17 @@ class Challenges extends React.Component<RouteComponentProps<{}>, IState> {
       content = (
         <ChallengesGrid
           size={0}
-          data={this.state.challengesData}
+          data={this.state.benchmarks}
           clicked={this.showDetails}
         />
       );
     }
-    return content;
+    return <div>
+      <Typography component="h1" variant="h5">
+        Benchmarks
+        {content}
+      </Typography>
+    </div>;
   }
 }
-export default AnimateComponent(Challenges);
+export default Challenges;
