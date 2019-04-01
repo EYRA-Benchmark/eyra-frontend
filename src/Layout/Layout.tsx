@@ -35,15 +35,9 @@ class Layout extends React.Component<RouteComponentProps<{}>, IState> {
   public handleScroll = () => {
     const el: HTMLElement | null = document.documentElement;
     if (el != null && el.offsetWidth > 1024) {
-      if (document.body.scrollTop > 80 || el.scrollTop > 80) {
-        this.setState({
-          isShrink: true
-        });
-      } else {
-        this.setState({
-          isShrink: false
-        });
-      }
+      this.setState({
+        isShrink: document.body.scrollTop > 80 || el.scrollTop > 80
+      });
     }
   };
 
