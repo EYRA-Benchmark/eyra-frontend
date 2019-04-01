@@ -10,11 +10,8 @@ import { getSettings, settings } from "./settings";
 import { UserProvider } from "./context/User";
 import { comicApi } from "./services/comicApi";
 
-import axios from "./services/SetUpAxios";
-
 getSettings().then(() => {
   comicApi.setBaseURL(settings.backendURL);
-  axios.defaults.baseURL = settings.backendURL;
   ReactDOM.render(
     <BrowserRouter>
       <UserProvider>

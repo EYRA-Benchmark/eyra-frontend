@@ -3,17 +3,19 @@ import Grid from "@material-ui/core/Grid";
 import Tab from "@material-ui/core/Tab";
 import Tabs from "@material-ui/core/Tabs";
 import Typography from "@material-ui/core/Typography";
-import { AxiosResponse } from "axios";
 import PropTypes from "prop-types";
 import * as React from "react";
-import axios from "../../../../../../services/SetUpAxios";
 import styles from "./VerticalTabs.module.css";
+import { comicApi } from '../../../../../../services/comicApi';
+import { IDataFile } from '../../../../../../types/data_file';
+
 interface IState {
   value: number;
-  data: object;
-  groundTruth: object;
+  data: IDataFile | null;
+  groundTruth: IDataFile | null;
 }
 interface IProps {
+  // todo: add proper type
   dataSets: any[];
 }
 interface IContainerProps {
@@ -25,7 +27,7 @@ function TabContainer(props: IContainerProps) {
     <Typography
       component="div"
       style={{ padding: 8 * 3 }}
-      className={styles.detailsContainer}
+      className={styles.tabsContainer}
     >
       {props.children}
     </Typography>
@@ -37,40 +39,31 @@ TabContainer.propTypes = {
 class VerticalTabs extends React.Component<IProps, IState> {
   state = {
     value: 0,
-    data: {},
-    groundTruth: {}
+    data: null,
+    groundTruth: null,
   };
   handleChange = (event: any, value: number) => {
     this.setState({ value });
   };
 
-  componentDidMount() {
+  async componentDidMount() {
     const { dataSets } = this.props;
-
-    axios
-      .get("data_files/" + dataSets[0].data)
-      .then((response: AxiosResponse) => {
-        this.setState({
-          data: response.data
-        });
-      });
-    axios
-      .get("data_files/" + dataSets[0].ground_truth)
-      .then((response: AxiosResponse) => {
-        this.setState({
-          groundTruth: response.data
-        });
-      });
+    this.setState({
+      data: await comicApi.data_file(dataSets[0].data),
+      groundTruth: await comicApi.data_file(dataSets[0].ground_truth),
+    })
   }
 
   render() {
     const { value, data, groundTruth } = this.state;
-    const desc: any[] = [];
+    if (!data || !groundTruth) { return null; }
 
+    const desc: any[] = [];
     if (Object.keys(data) && Object.keys(groundTruth)) {
       desc.push(data);
       desc.push(groundTruth);
     }
+
     console.log("tabs", desc);
     return (
       <Grid container={true} spacing={24} className={styles.noMargin}>

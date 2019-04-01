@@ -1,13 +1,13 @@
-import { AxiosResponse } from "axios";
-import * as React from "react";
-import { RouteComponentProps } from "react-router-dom";
-import AnimateComponent from "../../components/Animation/AnimateComponent";
-import Spinner from "../../components/Utils/Spinner/Spinner";
-import axios from "../../services/SetUpAxios";
-import ChallengesGrid from "./CardGrid/CardGrid";
+import * as React from 'react';
+import { RouteComponentProps } from 'react-router-dom';
+import AnimateComponent from '../../components/Animation/AnimateComponent';
+import Spinner from '../../components/Utils/Spinner/Spinner';
+import ChallengesGrid from './CardGrid/CardGrid';
+import { comicApi } from '../../services/comicApi';
+import { IBenchmark } from '../../types/benchmark';
 
 interface IState {
-  challengesData: any;
+  challengesData: IBenchmark[] | null;
   selectedItem: any;
   loading: boolean;
 }
@@ -22,20 +22,21 @@ class Challenges extends React.Component<RouteComponentProps<{}>, IState> {
   shouldComponentUpdate(nextProps: any, nextState: any) {
     return this.state.challengesData !== nextState.challengesData;
   }
-  componentDidMount() {
-    axios.get("benchmarks/").then((response: AxiosResponse) => {
-      this.setState({
-        loading: false,
-        challengesData: response.data
-      });
+
+  async componentDidMount() {
+    this.setState({
+      loading: false,
+      challengesData: await comicApi.benchmarks(),
     });
   }
+
   public showDetails = (selectedItem: string) => {
     this.props.history.push({
-      pathname: "benchmark_details",
+      pathname: 'benchmark_details',
       state: { selectedItem }
     });
   };
+
   public render() {
     let content = null;
     if (this.state.loading) {

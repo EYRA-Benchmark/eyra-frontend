@@ -7,16 +7,16 @@ import { settings } from '../../settings';
 import bannerImage from '../../assets/images/black_paw.png';
 
 // import FlippingCard from "../../components/FlippingCard/FlippingCard";
-import { AxiosResponse } from 'axios';
 import Spinner from '../../components/Utils/Spinner/Spinner';
 import ChallengesGrid from '../Challenges/CardGrid/CardGrid';
 
 import NewsGallary from '../../components/NewsGallary/NewsGallary';
 import formatDate from '../../components/Utils/helper';
-import axios from '../../services/SetUpAxios';
 
 // import Benchmarks from "../Challenges/Challenges";
 import styles from './Home.module.css';
+import { comicApi } from '../../services/comicApi';
+
 const RichText = require('prismic-reactjs').RichText;
 interface IState {
   news: any;
@@ -50,14 +50,13 @@ class Home extends React.Component<RouteComponentProps<{}>, IState> {
       this.state.news !== nextState.news
     );
   }
-  componentDidMount() {
-    axios.get('benchmarks/').then((response: AxiosResponse) => {
-      this.setState({
-        loading: false,
-        challengesData: response.data
-      });
+  async componentDidMount() {
+    this.setState({
+      loading: false,
+      challengesData: await comicApi.benchmarks(),
     });
   }
+
   public showDetails = (selectedItem: string) => {
     this.props.history.push({
       pathname: 'benchmark_details',

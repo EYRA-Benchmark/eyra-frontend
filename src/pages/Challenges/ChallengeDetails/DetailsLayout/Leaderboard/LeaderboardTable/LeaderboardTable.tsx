@@ -10,7 +10,7 @@ import {
 import * as React from 'react';
 import LeaderboardHead from '../LeaderboardHead/LeaderboardHead';
 import styles from './LeaderboardTableStyle';
-import { ISubmission } from '../Leaderboard';
+import { INestedSubmission } from '../Leaderboard';
 
 function desc(a: any, b: any, orderBy: any) {
   if (b[orderBy] < a[orderBy]) {
@@ -45,7 +45,7 @@ interface IState {
 }
 interface IProps extends WithStyles<typeof styles> {
   classes: any;
-  submissions: ISubmission[];
+  submissions: INestedSubmission[];
 }
 class LeaderboardTable extends React.Component<IProps, IState> {
   state = {

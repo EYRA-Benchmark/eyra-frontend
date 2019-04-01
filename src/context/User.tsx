@@ -1,18 +1,13 @@
 import React from 'react';
-import axios from '../services/SetUpAxios';
 
 import { comicApi } from '../services/comicApi';
 import { settings } from '../settings';
+import { IUser } from '../types/user';
 
 enum Status {
   LOGGING_IN,
   LOGGED_OUT,
   LOGGED_IN,
-}
-
-export interface IUser {
-  first_name: string;
-  last_name: string;
 }
 
 export function isLoggedIn(user: IUser | null): user is IUser {
@@ -33,7 +28,7 @@ export type IUserProps = IState & {
 
 const defaultState: IState = {
   user: null,
-  status: Status.LOGGED_OUT,
+  status: Status.LOGGED_OUT
 }
 
 export const UserContext = React.createContext<IUserProps>(defaultState as IUserProps);
@@ -54,13 +49,11 @@ export class UserProvider extends React.Component<{}, IState> {
         user: await comicApi.me() || null,
         status: Status.LOGGED_IN
       });
-      axios.defaults.headers.common.Authorization = `Token ${comicApi.token}`;
     } catch(e) {
       this.setState({
         user: null,
-        status: Status.LOGGED_OUT,
+        status: Status.LOGGED_OUT
       });
-      axios.defaults.headers.common.Authorization = null;
       console.log('refresh error', e);
     }
   }
@@ -75,7 +68,6 @@ export class UserProvider extends React.Component<{}, IState> {
 
   logout() {
     this.setState({ user: null, status: Status.LOGGED_OUT });
-    axios.defaults.headers.common.Authorization = null;
     comicApi.setToken(null);
   }
 
@@ -91,7 +83,7 @@ export class UserProvider extends React.Component<{}, IState> {
           signup: this.signup.bind(this),
           login: this.login.bind(this),
           logout: this.logout.bind(this),
-          refresh: this.refresh.bind(this),
+          refresh: this.refresh.bind(this)
         }}
       >
         {children}

@@ -1,8 +1,9 @@
+import { comicApi } from '../../../services/comicApi';
+
 import Button from "@material-ui/core/Button";
 import { Field, Form, Formik } from "formik";
 import { FormikActions } from "formik/dist/types";
 import React from "react";
-import axios from "../../../services/SetUpAxios";
 import CustomTextEditor from "../CustomTextEditor";
 import styles from "./AlgorithmSubmission.module.css";
 
@@ -30,21 +31,17 @@ const onSubmit = async (
   // Object.keys(values).forEach(valueKey => {
   //   formData.append(valueKey, values[valueKey]);
   // });
-  const postData = {
-    benchmark: values.id,
-    name: values.name,
-    description: values.description,
-    container: values.containerName
-  };
-
-  await axios
-    .post("algorithmSubmission/", postData)
-    .then(response => {
-      console.log(response);
-    })
-    .catch(error => {
-      console.log(error);
+  try {
+    const algorithm = await comicApi.algorithmSubmission({
+      benchmark: values.id,
+      name: values.name,
+      description: values.description,
+      container: values.containerName
     });
+    console.log(algorithm);
+  } catch (e) {
+    console.log(e);
+  }
   setSubmitting(false);
 };
 class AlgorithmSubmission extends React.Component<IProps, {}> {

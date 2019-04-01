@@ -3,10 +3,10 @@ import * as React from "react";
 import { RouteComponentProps, withRouter } from "react-router-dom";
 import Footer from "../components/Footer/Footer";
 import Header from "../components/Header/Header";
-import Pages from "../components/PageContent/PageContent";
 import SideDrawer from "../components/SideDrawer/SideDrawer";
 import ScrollToTop from "../components/Utils/ScrollToTop";
 import styles from "./Layout.module.css";
+import Routes from './Routes';
 
 interface IState {
   isShrink: boolean;
@@ -62,7 +62,7 @@ class Layout extends React.Component<RouteComponentProps<{}>, IState> {
         />
         <SideDrawer open={this.state.showSideDrawer} />
         <ScrollToTop>
-          <Pages />
+          <Routes />
         </ScrollToTop>
         <Footer />
       </React.Fragment>
