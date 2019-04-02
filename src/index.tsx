@@ -1,3 +1,4 @@
+// tslint:disable-next-line
 import "font-awesome/css/font-awesome.min.css";
 import * as React from "react";
 import * as ReactDOM from "react-dom";
@@ -9,15 +10,18 @@ import { getSettings, settings } from "./settings";
 
 import { UserProvider } from "./context/User";
 import { comicApi } from "./services/comicApi";
+import { setupPrismic } from "src/services/prismicApi";
 
-getSettings().then(() => {
+(async () => {
+  await getSettings();
+  await setupPrismic();
   comicApi.setBaseURL(settings.backendURL);
   ReactDOM.render(
     <BrowserRouter>
       <UserProvider>
-        <App />
+        <App/>
       </UserProvider>
     </BrowserRouter>,
-    document.getElementById("root") as HTMLElement
+    document.getElementById("root") as HTMLElement,
   );
-});
+})();

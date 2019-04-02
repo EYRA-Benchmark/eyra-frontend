@@ -1,14 +1,12 @@
-import Button from '@material-ui/core/Button';
-import { Field, Form, Formik } from 'formik';
-import { FormikActions } from 'formik/dist/types';
-import React from 'react';
-import Markdown from '@nteract/markdown';
-import { Paper, TextField } from '@material-ui/core';
-import styles from './BenchmarkForm.module.css';
-import Fab from '@material-ui/core/Fab';
-import { comicApi } from '../../../services/comicApi';
-import EditIcon from '@material-ui/icons/Edit';
-import { IBenchmark } from '../../../types';
+import { Field, Form, Formik } from "formik";
+import { FormikActions } from "formik";
+import React from "react";
+import Markdown from "@nteract/markdown";
+import { Button, Fab, Paper, TextField } from "@material-ui/core";
+import styles from "./BenchmarkForm.module.css";
+import { comicApi } from "src/services/comicApi";
+import { Edit as EditIcon } from "@material-ui/icons";
+import { IBenchmark } from "src/types";
 
 interface IProps {
   benchmark: IBenchmark;
@@ -26,14 +24,14 @@ interface IValues {
 
 const onSubmit = async (
   values: IValues,
-  { setSubmitting }: FormikActions<IValues>
+  { setSubmitting }: FormikActions<IValues>,
 ) => {
   console.log(values.id);
   try {
     const benchmark = await comicApi.benchmarkSubmission(values.id, {
       name: values.name,
       description: values.description,
-      short_description: values.short_description
+      short_description: values.short_description,
     });
     console.log(benchmark);
   } catch (e) {
@@ -45,7 +43,7 @@ const onSubmit = async (
 class BenchmarkForm extends React.Component<IProps, IState> {
   state = {
     editDesc: false,
-    desc: this.props.benchmark.description
+    desc: this.props.benchmark.description,
   };
 
   render() {
@@ -55,7 +53,7 @@ class BenchmarkForm extends React.Component<IProps, IState> {
       id,
       name,
       short_description,
-      description: desc
+      description: desc,
     };
     return (
       <Formik initialValues={initialValues} onSubmit={onSubmit}>
@@ -85,19 +83,19 @@ class BenchmarkForm extends React.Component<IProps, IState> {
                   <Fab
                     size="small"
                     onClick={this.enableEdit}
-                    style={{ float: 'right' }}
+                    style={{ float: "right" }}
                   >
                     <EditIcon />
                   </Fab>
                   {this.state.editDesc ? (
                     <TextField
-                      style={{ width: '100%' }}
+                      style={{ width: "100%" }}
                       defaultValue={desc}
                       multiline={true}
                       onChange={(event: any) => {
-                        setFieldValue('description', event.target.value);
+                        setFieldValue("description", event.target.value);
                         this.setState({
-                          desc: event.target.value
+                          desc: event.target.value,
                         });
                       }}
                     />
@@ -125,9 +123,9 @@ class BenchmarkForm extends React.Component<IProps, IState> {
   }
   private enableEdit = () => {
     this.setState({
-      editDesc: !this.state.editDesc
+      editDesc: !this.state.editDesc,
     });
-  };
+  }
 }
 
 export default BenchmarkForm;

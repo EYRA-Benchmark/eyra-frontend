@@ -1,9 +1,9 @@
-import Grid from "@material-ui/core/Grid";
-
+import { Grid } from "@material-ui/core";
 import * as React from "react";
 import CardBack from "./CardBack/CardBack";
 import CardFront from "./CardFront/CardFront";
 import styles from "./FlippingCard.module.css";
+
 class FlippingCard extends React.Component {
   render() {
     return (

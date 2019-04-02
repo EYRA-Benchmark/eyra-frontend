@@ -1,11 +1,11 @@
-import * as React from 'react';
-import { RouteComponentProps, withRouter } from 'react-router';
-import { Typography } from '@material-ui/core';
-import { comicApi } from '../../../services/comicApi';
+import * as React from "react";
+import { RouteComponentProps, withRouter } from "react-router";
+import { Typography } from "@material-ui/core";
+import { comicApi } from "src/services/comicApi";
 
-import { IBenchmark } from '../../../types/benchmark';
-import BenchmarkForm from '../../../components/Forms/Benchmark/BenchmarkForm';
-import Spinner from '../../../components/Utils/Spinner/Spinner';
+import { IBenchmark } from "src/types/benchmark";
+import BenchmarkForm from "src/components/Forms/Benchmark/BenchmarkForm";
+import Spinner from "src/components/Spinner";
 
 interface IState {
   benchmark: IBenchmark | null;
@@ -16,11 +16,11 @@ class EditBenchmark extends React.Component<
   IState
 > {
   state = {
-    benchmark: null
+    benchmark: null,
   };
   async componentDidMount() {
     this.setState({
-      benchmark: await comicApi.benchmark(this.props.match.params.id)
+      benchmark: await comicApi.benchmark(this.props.match.params.id),
     });
   }
   render() {
@@ -32,7 +32,7 @@ class EditBenchmark extends React.Component<
     );
     return (
       <div>
-        <Typography component="h1" variant="h5" style={{ margin: '20px 10px' }}>
+        <Typography component="h1" variant="h5" style={{ margin: "20px 10px" }}>
           Edit Benchmark
         </Typography>
         {content}

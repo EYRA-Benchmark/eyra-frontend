@@ -7,7 +7,7 @@ import { IUser } from "../types";
 enum Status {
   LOGGING_IN,
   LOGGED_OUT,
-  LOGGED_IN
+  LOGGED_IN,
 }
 
 export function isLoggedIn(user: IUser | null): user is IUser {
@@ -28,16 +28,16 @@ export type IUserProps = IState & {
 
 const defaultState: IState = {
   user: null,
-  status: Status.LOGGED_OUT
+  status: Status.LOGGED_OUT,
 };
 
 export const UserContext = React.createContext<IUserProps>(
-  defaultState as IUserProps
+  defaultState as IUserProps,
 );
 
 export class UserProvider extends React.Component<{}, IState> {
   state = {
-    ...defaultState
+    ...defaultState,
   };
 
   componentWillMount() {
@@ -49,12 +49,12 @@ export class UserProvider extends React.Component<{}, IState> {
     try {
       this.setState({
         user: (await comicApi.me()) || null,
-        status: Status.LOGGED_IN
+        status: Status.LOGGED_IN,
       });
     } catch (e) {
       this.setState({
         user: null,
-        status: Status.LOGGED_OUT
+        status: Status.LOGGED_OUT,
       });
     }
   }
@@ -86,7 +86,7 @@ export class UserProvider extends React.Component<{}, IState> {
           signup: this.signup.bind(this),
           login: this.login.bind(this),
           logout: this.logout.bind(this),
-          refresh: this.refresh.bind(this)
+          refresh: this.refresh.bind(this),
         }}
       >
         {children}
@@ -99,7 +99,7 @@ export const UserConsumer = UserContext.Consumer;
 
 // https://github.com/Microsoft/TypeScript/issues/15713
 export const withUser = <T extends object>(
-  Component: React.ComponentType<T & IUserProps>
+  Component: React.ComponentType<T & IUserProps>,
 ) => (props: T) => (
   <UserConsumer>
     {(userProps: IUserProps) => <Component {...props} {...userProps} />}
