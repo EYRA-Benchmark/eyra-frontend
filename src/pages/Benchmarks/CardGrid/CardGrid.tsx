@@ -1,7 +1,6 @@
-import { Card, CardHeader, CardMedia } from "@material-ui/core";
-import Grid from "@material-ui/core/Grid";
+import { Card, CardHeader, CardMedia, Grid } from "@material-ui/core";
 import * as React from "react";
-import ChallengeImage from "../../../assets/images/tissue_segmentation.png";
+import ChallengeImage from "src/assets/images/tissue_segmentation.png";
 import styles from "./CardGrid.module.css";
 interface IProps {
   size: any;

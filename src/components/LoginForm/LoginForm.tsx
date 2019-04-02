@@ -1,19 +1,16 @@
-import Avatar from "@material-ui/core/Avatar";
+import { Avatar, CssBaseline, Paper, Typography } from "@material-ui/core";
 // import Button from "@material-ui/core/Button";
-import CssBaseline from "@material-ui/core/CssBaseline";
 // import FormControl from "@material-ui/core/FormControl";
 // import Input from "@material-ui/core/Input";
 // import InputLabel from "@material-ui/core/InputLabel";
-import Paper from "@material-ui/core/Paper";
-import Typography from "@material-ui/core/Typography";
-import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
+import { LockOutlined as LockOutlinedIcon } from "@material-ui/icons";
 import * as React from "react";
 import styles from "./LoginForm.module.css";
 
 import GoogleSigninButton from "../../assets/images/btn_google_signin_dark_normal_web.png";
 // import { settings } from '../../settings';
 
-import { IUserProps, withUser } from "../../context/User";
+import { IUserProps, withUser } from "src/context/User";
 const Login = ({ login }: IUserProps) => {
   return (
     <main className={styles.main}>

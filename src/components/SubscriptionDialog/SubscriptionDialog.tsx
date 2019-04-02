@@ -1,8 +1,7 @@
 import React from "react";
 
 import classNames from "classnames";
-import { Formik } from "formik";
-import { FormikActions } from "formik/dist/types";
+import { Formik, FormikActions } from "formik";
 import * as yup from "yup";
 
 import {
@@ -14,8 +13,8 @@ import {
 
 import styles from "./SubscriptionDialog.module.css";
 
-import MailImage from "../../assets/images/mail.png";
-import { submitContactForm } from "../../services/contactFormSubmission";
+import MailImage from "src/assets/images/mail.png";
+import { submitContactForm } from "src/services/contactFormSubmission";
 
 const formSchema = yup.object().shape({
   email: yup

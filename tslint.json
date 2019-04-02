@@ -10,7 +10,8 @@
     "ordered-imports": false,
     "no-implicit-dependencies": [true, "dev", ["src"]],
     "no-submodule-imports": [true, "src"],
-    "semicolon": [true, "always"]
+    "semicolon": [true, "always"],
+    "jsx-no-multiline-js": false
   },
   "linterOptions": {
     "exclude": [

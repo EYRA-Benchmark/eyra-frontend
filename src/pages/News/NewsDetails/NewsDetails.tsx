@@ -1,9 +1,9 @@
-import Grid from "@material-ui/core/Grid";
+import { Grid } from "@material-ui/core";
 import Prismic from "prismic-javascript";
 import * as React from "react";
 import { RouteComponentProps } from "react-router";
-import formatDate from "../../../components/Utils/helper";
-import { settings } from "../../../settings";
+import formatDate from "src/components/Utils/helper";
+import { settings } from "src/settings";
 import styles from "./NewsDetails.module.css";
 const RichText = require("prismic-reactjs").RichText;
 

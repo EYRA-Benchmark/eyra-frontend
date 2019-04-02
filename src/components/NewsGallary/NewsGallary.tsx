@@ -1,6 +1,4 @@
-import Card from "@material-ui/core/Card";
-import CardMedia from "@material-ui/core/CardMedia";
-import Grid from "@material-ui/core/Grid";
+import { Card, CardMedia, Grid } from "@material-ui/core";
 
 // import formatDate from "../../../components/Utils/helper";
 import { CardHeader } from "@material-ui/core";
