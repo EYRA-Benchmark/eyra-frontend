@@ -8,14 +8,12 @@ import { Typography } from "@material-ui/core";
 
 interface IState {
   benchmarks: IBenchmark[] | null;
-  selectedItem: any;
   loading: boolean;
 }
 
 class Benchmarks extends React.Component<RouteComponentProps<{}>, IState> {
   state = {
     benchmarks: null,
-    selectedItem: null,
     loading: true,
   };
 
@@ -30,24 +28,26 @@ class Benchmarks extends React.Component<RouteComponentProps<{}>, IState> {
     });
   }
 
-  public render() {
-    let content = null;
+  private getContent() {
     if (this.state.loading) {
-      content = <Spinner />;
+      return <Spinner />;
     } else {
-      content = (
+      return (
         <BenchmarksGrid
           size={0}
           data={this.state.benchmarks}
         />
       );
     }
+  }
+
+  public render() {
     return (
       <div>
         <Typography component="h1" variant="h5">
           Benchmarks
         </Typography>
-        {content}
+        {this.getContent()}
       </div>
     );
   }

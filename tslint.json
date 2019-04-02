@@ -11,7 +11,8 @@
     "no-implicit-dependencies": [true, "dev", ["src"]],
     "no-submodule-imports": [true, "src"],
     "semicolon": [true, "always"],
-    "jsx-no-multiline-js": false
+    "jsx-no-multiline-js": false,
+    "member-ordering": false
   },
   "linterOptions": {
     "exclude": [
