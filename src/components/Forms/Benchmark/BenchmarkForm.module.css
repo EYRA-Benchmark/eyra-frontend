@@ -13,12 +13,11 @@
 }
 
 .inputContainer input {
-  margin-left: 10px;
+  padding: 0 10px;
   height: 30px;
   border-radius: 5px;
   flex: 8;
   font-size: 15px;
-  padding: 0;
 }
 .desc {
   flex: 8;

@@ -5,14 +5,17 @@ import Markdown from "@nteract/markdown";
 import { Button, Fab, Paper, TextField } from "@material-ui/core";
 import styles from "./BenchmarkForm.module.css";
 import { comicApi } from "src/services/comicApi";
-import { Edit as EditIcon } from "@material-ui/icons";
+import {
+  Edit as EditIcon,
+  Description as DescriptionIcon,
+} from "@material-ui/icons";
 import { IBenchmark } from "src/types";
 
 interface IProps {
   benchmark: IBenchmark;
 }
 interface IState {
-  editDesc: boolean;
+  isEdit: boolean;
   desc: string;
 }
 interface IValues {
@@ -26,14 +29,12 @@ const onSubmit = async (
   values: IValues,
   { setSubmitting }: FormikActions<IValues>,
 ) => {
-  console.log(values.id);
   try {
-    const benchmark = await comicApi.benchmarkSubmission(values.id, {
+    await comicApi.benchmarkSubmission(values.id, {
       name: values.name,
       description: values.description,
       short_description: values.short_description,
     });
-    console.log(benchmark);
   } catch (e) {
     console.log(e);
   }
@@ -42,12 +43,12 @@ const onSubmit = async (
 
 class BenchmarkForm extends React.Component<IProps, IState> {
   state = {
-    editDesc: false,
+    isEdit: false,
     desc: this.props.benchmark.description,
   };
 
   render() {
-    const { desc } = this.state;
+    const { desc, isEdit } = this.state;
     const { id, name, short_description } = this.props.benchmark;
     const initialValues: IValues = {
       id,
@@ -85,9 +86,9 @@ class BenchmarkForm extends React.Component<IProps, IState> {
                     onClick={this.enableEdit}
                     style={{ float: "right" }}
                   >
-                    <EditIcon />
+                    {isEdit ? <DescriptionIcon /> : <EditIcon />}
                   </Fab>
-                  {this.state.editDesc ? (
+                  {this.state.isEdit ? (
                     <TextField
                       style={{ width: "100%" }}
                       defaultValue={desc}
@@ -123,7 +124,7 @@ class BenchmarkForm extends React.Component<IProps, IState> {
   }
   private enableEdit = () => {
     this.setState({
-      editDesc: !this.state.editDesc,
+      isEdit: !this.state.isEdit,
     });
   }
 }
