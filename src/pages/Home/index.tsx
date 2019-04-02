@@ -2,16 +2,17 @@ import classNames from "classnames";
 import Prismic from "prismic-javascript";
 import * as React from "react";
 import { RouteComponentProps } from "react-router-dom";
-import { settings } from "src/settings";
+
+import { prismicApi } from "src/services/prismicApi";
 import { comicApi } from "src/services/comicApi";
 
 import { IBenchmark } from "src/types";
 
 import bannerImage from "src/assets/images/black_paw.png";
-import Spinner from "src/components/Utils/Spinner/Spinner";
+import Spinner from "src/components/Spinner/Spinner";
 import ChallengesGrid from "src/components/BenchmarkCardGrid/index";
 import NewsGallary from "src/components/NewsGallary/NewsGallary";
-import formatDate from "src/components/Utils/helper";
+import { formatDate } from "src/utils";
 const RichText = require("prismic-reactjs").RichText;
 
 import styles from "./Home.module.css";
@@ -32,16 +33,15 @@ class Index extends React.Component<RouteComponentProps<{}>, IState> {
   };
 
   componentWillMount() {
-    Prismic.api(settings.prismicEndpoint).then((api) => {
-      api
-        .query(Prismic.Predicates.at("document.type", "news"), {})
-        .then((response: any) => {
-          if (response) {
-            this.setState({ news: response.results });
-          }
-        });
-    });
+    prismicApi
+      .query(Prismic.Predicates.at("document.type", "news"), {})
+      .then((response: any) => {
+        if (response) {
+          this.setState({ news: response.results });
+        }
+      });
   }
+
   shouldComponentUpdate(nextProps: any, nextState: any) {
     return (
       this.state.challengesData !== nextState.challengesData ||

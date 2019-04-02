@@ -1,4 +1,9 @@
-const formatDate = (date: Date) => {
+export const objectToQueryParams = (obj: object = {}) =>
+  Object.keys(obj)
+    .map((k) => `${encodeURIComponent(k)}=${encodeURIComponent(obj[k])}`)
+    .join("&");
+
+export const formatDate = (date: Date) => {
   const monthNames = [
     "January",
     "February",
@@ -20,4 +25,3 @@ const formatDate = (date: Date) => {
   const year = date.getFullYear();
   return day + " " + monthNames[monthIndex] + " " + year;
 };
-export default formatDate;

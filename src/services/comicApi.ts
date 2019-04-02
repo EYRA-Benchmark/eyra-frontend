@@ -9,7 +9,7 @@ import {
   UUID4,
 } from "../types";
 
-import { objectToQueryParams } from "../utils";
+import { objectToQueryParams } from "../utils/index";
 
 export class ComicApi {
   protected axios!: AxiosInstance;

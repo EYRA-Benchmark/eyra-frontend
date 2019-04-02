@@ -1,6 +1,6 @@
 import * as React from "react";
 import { RouteComponentProps } from "react-router-dom";
-import Spinner from "src/components/Utils/Spinner/Spinner";
+import Spinner from "src/components/Spinner/Spinner";
 import BenchmarkCardGrid from "src/components/BenchmarkCardGrid";
 import { comicApi } from "src/services/comicApi";
 import { IBenchmark } from "src/types";

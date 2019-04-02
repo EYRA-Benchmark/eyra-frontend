@@ -6,7 +6,7 @@ import { CSSTransition, TransitionGroup } from "react-transition-group";
 import Footer from "../Footer/Footer";
 import Header from "../Header/Header";
 import SideDrawer from "../SideDrawer/SideDrawer";
-import ScrollToTop from "../Utils/ScrollToTop";
+import ScrollToTop from "../ScrollToTop";
 import Routes from "../../Routes";
 import Home from "src/pages/Home";
 

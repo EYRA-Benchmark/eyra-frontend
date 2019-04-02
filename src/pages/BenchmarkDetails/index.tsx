@@ -5,7 +5,7 @@ import { comicApi } from "src/services/comicApi";
 
 import { IBenchmark } from "src/types/benchmark";
 
-import Spinner from "src/components/Utils/Spinner/Spinner";
+import Spinner from "src/components/Spinner/Spinner";
 import Details from "./DetailsLayout/DetailsLayout";
 
 interface IState {

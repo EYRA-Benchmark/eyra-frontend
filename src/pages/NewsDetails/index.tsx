@@ -1,11 +1,11 @@
-import { Grid } from "@material-ui/core";
-import Prismic from "prismic-javascript";
 import * as React from "react";
+import { prismicApi } from "src/services/prismicApi";
 import { RouteComponentProps } from "react-router";
-import formatDate from "src/components/Utils/helper";
-import { settings } from "src/settings";
-import styles from "./NewsDetails.module.css";
+import { Grid } from "@material-ui/core";
 const RichText = require("prismic-reactjs").RichText;
+
+import { formatDate } from "src/utils";
+import styles from "./NewsDetails.module.css";
 
 class NewsDetails extends React.Component<RouteComponentProps<{ id: string }>, {}> {
   state = {
@@ -17,16 +17,14 @@ class NewsDetails extends React.Component<RouteComponentProps<{ id: string }>, {
   componentWillMount() {
     const selectedItem = this.props.match.params.id;
     if (selectedItem) {
-      Prismic.api(settings.prismicEndpoint).then((api) => {
-        api.getByUID("news", selectedItem).then((response: any) => {
-          if (response) {
-            const title = RichText.render(response.data.title);
-            const desc = RichText.render(response.data.description);
-            const image = response.data.image.url;
-            const date = formatDate(new Date(response.first_publication_date));
-            this.setState({ title, desc, image, date });
-          }
-        });
+      prismicApi.getByUID("news", selectedItem).then((response: any) => {
+        if (response) {
+          const title = RichText.render(response.data.title);
+          const desc = RichText.render(response.data.description);
+          const image = response.data.image.url;
+          const date = formatDate(new Date(response.first_publication_date));
+          this.setState({ title, desc, image, date });
+        }
       });
     }
   }
