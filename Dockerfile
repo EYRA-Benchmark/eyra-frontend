@@ -12,6 +12,7 @@ COPY public/ ./public
 COPY tsconfig.json .
 COPY tsconfig.prod.json .
 COPY tsconfig.paths.json .
+COPY .env .
 COPY tslint.json .
 COPY images.d.ts .
 
