@@ -4,7 +4,7 @@ import * as React from "react";
 import AlgorithmSubmissionForm from "src/components/Forms/Algorithm/AlgorithmSubmission";
 import Datasets from "./DataSets/DataSets";
 import styles from "./DetailsLayout.module.css";
-import Leaderboard from "./Leaderboard/Leaderboard";
+import Leaderboard from "../../../components/Leaderboard/index";
 
 import { IBenchmark } from "src/types/benchmark";
 

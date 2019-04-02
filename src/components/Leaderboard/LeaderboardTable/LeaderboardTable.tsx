@@ -10,7 +10,7 @@ import {
 import * as React from "react";
 import LeaderboardHead from "../LeaderboardHead/LeaderboardHead";
 import styles from "./LeaderboardTableStyle";
-import { INestedSubmission } from "../Leaderboard";
+import { INestedSubmission } from "../index";
 
 function desc(a: any, b: any, orderBy: any) {
   if (b[orderBy] < a[orderBy]) {

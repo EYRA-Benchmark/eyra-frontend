@@ -2,23 +2,23 @@ import classNames from "classnames";
 import Prismic from "prismic-javascript";
 import * as React from "react";
 import { RouteComponentProps } from "react-router-dom";
-import { settings } from "../../settings";
+import { settings } from "src/settings";
+import { comicApi } from "src/services/comicApi";
 
-import bannerImage from "../../assets/images/black_paw.png";
+import { IBenchmark } from "src/types";
 
-import Spinner from "../../components/Utils/Spinner/Spinner";
-import ChallengesGrid from "../Benchmarks/CardGrid/CardGrid";
-
-import NewsGallary from "../../components/NewsGallary/NewsGallary";
-import formatDate from "../../components/Utils/helper";
+import bannerImage from "src/assets/images/black_paw.png";
+import Spinner from "src/components/Utils/Spinner/Spinner";
+import ChallengesGrid from "src/components/BenchmarkCardGrid/index";
+import NewsGallary from "src/components/NewsGallary/NewsGallary";
+import formatDate from "src/components/Utils/helper";
+const RichText = require("prismic-reactjs").RichText;
 
 import styles from "./Home.module.css";
-import { comicApi } from "../../services/comicApi";
 
-const RichText = require("prismic-reactjs").RichText;
 interface IState {
   news: any;
-  challengesData: any;
+  challengesData: IBenchmark[] | null;
   selectedItem: any;
   loading: boolean;
 }
@@ -64,7 +64,7 @@ class Home extends React.Component<RouteComponentProps<{}>, IState> {
       challengeContent = (
         <ChallengesGrid
           size={3}
-          data={this.state.challengesData}
+          benchmarks={this.state.challengesData!}
         />
       );
     }

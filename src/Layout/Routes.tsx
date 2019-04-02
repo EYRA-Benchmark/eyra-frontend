@@ -6,10 +6,10 @@ import Home from "../pages/Home/Home";
 import styles from "./Routes.module.css";
 
 import About from "../pages/About/About";
-import BenchmarkDetails from "../pages/Benchmarks/BenchmarkDetails/BenchmarkDetails";
-import Benchmarks from "../pages/Benchmarks/Benchmarks";
+import BenchmarkDetails from "src/pages/BenchmarkDetails";
+import Benchmarks from "../pages/Benchmarks/index";
 import Login from "../pages/Login/Login";
-import NewsDetails from "../pages/News/NewsDetails/NewsDetails";
+import NewsDetails from "../pages/NewsDetails/index";
 
 import { CSSTransition, TransitionGroup } from "react-transition-group";
 

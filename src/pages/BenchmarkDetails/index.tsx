@@ -1,11 +1,11 @@
 import * as React from "react";
 import { RouteComponentProps, withRouter } from "react-router";
 
-import { comicApi } from "../../../services/comicApi";
+import { comicApi } from "src/services/comicApi";
 
-import { IBenchmark } from "../../../types/benchmark";
+import { IBenchmark } from "src/types/benchmark";
 
-import Spinner from "../../../components/Utils/Spinner/Spinner";
+import Spinner from "src/components/Utils/Spinner/Spinner";
 import Details from "./DetailsLayout/DetailsLayout";
 
 interface IState {
