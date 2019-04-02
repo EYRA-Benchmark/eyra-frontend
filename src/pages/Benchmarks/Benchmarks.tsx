@@ -46,8 +46,8 @@ class Benchmarks extends React.Component<RouteComponentProps<{}>, IState> {
       <div>
         <Typography component="h1" variant="h5">
           Benchmarks
-          {content}
         </Typography>
+        {content}
       </div>
     );
   }
