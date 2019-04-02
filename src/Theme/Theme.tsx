@@ -1,39 +1,39 @@
 import {
   createMuiTheme,
   CssBaseline,
-  MuiThemeProvider
+  MuiThemeProvider,
 } from "@material-ui/core";
 import * as React from "react";
 
 const theme = createMuiTheme({
   typography: {
-    useNextVariants: true
+    useNextVariants: true,
   },
   overrides: {
     MuiSvgIcon: {
       root: {
-        color: "#000"
-      }
+        color: "#000",
+      },
     },
     MuiButton: {
       textPrimary: {
         color: "#1fb8ea",
         textTransform: "none",
-        float: "right"
-      }
+        float: "right",
+      },
     },
     MuiModal: {
-      root: {}
-    }
+      root: {},
+    },
   },
   palette: {
     primary: {
-      main: "#1fb8ea"
+      main: "#1fb8ea",
     },
     secondary: {
-      main: "#fff"
-    }
-  }
+      main: "#fff",
+    },
+  },
 });
 
 function withRoot(Component: React.ComponentType) {

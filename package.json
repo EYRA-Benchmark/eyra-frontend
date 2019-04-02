@@ -7,7 +7,6 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "lint": "tslint --project .",
-    "prettier": "prettier './src/**/*.{tsx,ts}' --write",
     "cypress-install": "yarn add --peer @cypress/webpack-preprocessor@3.0.1 cypress@3.1.4",
     "cypress": "cypress open",
     "cypress-test": "react-scripts start & wait-on http://localhost:3000 && cypress run",
@@ -20,12 +19,12 @@
     "axios": "^0.18.0",
     "classnames": "^2.2.6",
     "font-awesome": "^4.7.0",
-    "formik": "^1.4.2",
-    "prettier": "^1.16.4",
+    "formik": "^1.5.1",
     "prismic-javascript": "^2.0.1",
     "prismic-reactjs": "^0.3.2",
-    "react": "^16.7.0",
-    "react-dom": "^16.7.0",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "react-router": "^4.3.1",
     "react-router-dom": "^4.3.1",
     "react-rte": "^0.16.1",
     "react-transition-group": "^2.7.1",
@@ -33,20 +32,22 @@
   },
   "devDependencies": {
     "@types/classnames": "^2.2.7",
-    "@types/jest": "^23.3.13",
-    "@types/node": "^10.11.7",
-    "@types/react": "^16.7.21",
-    "@types/react-dom": "^16.0.11",
+    "@types/jest": "^24.0.11",
+    "@types/node": "^10.13.0",
+    "@types/react": "^16.8.10",
+    "@types/react-dom": "^16.8.3",
     "@types/react-router-dom": "^4.3.1",
     "@types/react-rte": "^0.16.0",
     "@types/react-transition-group": "^2.0.16",
-    "@types/yup": "^0.26.6",
-    "react-scripts": "2.1.3",
+    "@types/yup": "^0.26.12",
+    "husky": "^1.3.1",
+    "lint-staged": "^8.1.5",
+    "react-scripts": "2.1.8",
     "ts-loader": "^5.3.3",
     "tslint": "^5.12.1",
-    "tslint-config-prettier": "^1.17.0",
+    "tslint-config-prettier": "^1.18.0",
     "tslint-react": "^3.6.0",
-    "typescript": "^3.2.4",
+    "typescript": "^3.4.1",
     "typescript-plugin-css-modules": "^1.0.5",
     "wait-on": "^3.1.0"
   },
@@ -58,6 +59,16 @@
       "src/**/*.jsx",
       "!src/index.tsx"
     ]
+  },
+  "lint-staged": {
+    "linters": {
+      "*.{ts,tsx}": ["yarn lint", "git add"]
+    }
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "yarn lint-staged"
+    }
   },
   "browserslist": [
     ">0.2%",

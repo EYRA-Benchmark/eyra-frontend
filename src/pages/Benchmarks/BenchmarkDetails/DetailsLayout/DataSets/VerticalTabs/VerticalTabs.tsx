@@ -1,13 +1,10 @@
 // import { Icon } from "@material-ui/core";
-import Grid from "@material-ui/core/Grid";
-import Tab from "@material-ui/core/Tab";
-import Tabs from "@material-ui/core/Tabs";
-import Typography from "@material-ui/core/Typography";
-import PropTypes from "prop-types";
+import { Grid, Tab, Tabs, Typography } from "@material-ui/core";
+// import PropTypes from "prop-types";
 import * as React from "react";
 import styles from "./VerticalTabs.module.css";
-import { comicApi } from "../../../../../../services/comicApi";
-import { IDataFile } from "../../../../../../types/data_file";
+import { comicApi } from "src/services/comicApi";
+import { IDataFile } from "src/types/data_file";
 
 interface IState {
   value: number;
@@ -33,24 +30,24 @@ function TabContainer(props: IContainerProps) {
     </Typography>
   );
 }
-TabContainer.propTypes = {
-  children: PropTypes.node.isRequired
-};
+// TabContainer.propTypes = {
+//   children: PropTypes.node.isRequired
+// };
 class VerticalTabs extends React.Component<IProps, IState> {
   state = {
     value: 0,
     data: null,
-    groundTruth: null
+    groundTruth: null,
   };
   handleChange = (event: any, value: number) => {
     this.setState({ value });
-  };
+  }
 
   async componentDidMount() {
     const { dataSets } = this.props;
     this.setState({
       data: await comicApi.data_file(dataSets[0].data),
-      groundTruth: await comicApi.data_file(dataSets[0].ground_truth)
+      groundTruth: await comicApi.data_file(dataSets[0].ground_truth),
     });
   }
 
@@ -80,7 +77,7 @@ class VerticalTabs extends React.Component<IProps, IState> {
             textColor="primary"
             classes={{
               indicator: styles.hide,
-              flexContainer: styles.tabsContainer
+              flexContainer: styles.tabsContainer,
             }}
           >
             {desc.map((d: any, id: number) => (
@@ -88,7 +85,7 @@ class VerticalTabs extends React.Component<IProps, IState> {
                 label={d.name ? d.name : ""}
                 classes={{
                   labelContainer: styles.label,
-                  wrapper: styles.borderBottom
+                  wrapper: styles.borderBottom,
                 }}
                 key={d.id}
                 style={{ flexDirection: "row" }}
@@ -120,7 +117,7 @@ class VerticalTabs extends React.Component<IProps, IState> {
                     Download
                   </a>
                 </TabContainer>
-              )
+              ),
           )}
         </Grid>
       </Grid>

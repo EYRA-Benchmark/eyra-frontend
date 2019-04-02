@@ -15,16 +15,16 @@ interface IValues {
 const initialValues: IValues = {
   name: "",
   short_description: "",
-  overview: ""
+  overview: "",
 };
 const onSubmit = async (
   values: IValues,
-  { setSubmitting }: FormikActions<IValues>
+  { setSubmitting }: FormikActions<IValues>,
 ) => {
   const postData = {
     name: values.name,
     short_description: values.short_description,
-    overview: values.overview
+    overview: values.overview,
   };
   console.log(postData);
   setSubmitting(false);
@@ -48,7 +48,7 @@ class OrganizeBenchmark extends React.Component<{}, {}> {
               <div className={styles.inputContainer}>
                 <label htmlFor="description">Description</label>
                 <CustomTextEditor
-                  onChange={value => {
+                  onChange={(value) => {
                     setFieldValue("description", value);
                   }}
                 />

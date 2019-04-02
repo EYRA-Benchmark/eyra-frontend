@@ -8,27 +8,27 @@ class CustomTextEditor extends React.Component<IProps, {}> {
   state = {
     value: RichTextEditor.createValueFromString(
       "<b>Add Description Here..</b><br/><p>Here You can add description or paste HTML/ Markdown code for description in left Container</p>",
-      "html"
+      "html",
     ),
-    format: "html"
+    format: "html",
   };
   setDesc = (value: any) => {
     this.setState({ value });
     this.props.onChange(
-      value.toString("markdown")
+      value.toString("markdown"),
     ); /** Description will be submitted as markdown only */
-  };
+  }
   onChangeSource = (event: any) => {
     const source = event.target.value;
     const oldValue = this.state.value;
     this.setState({
-      value: oldValue.setContentFromString(source, this.state.format)
+      value: oldValue.setContentFromString(source, this.state.format),
     });
-  };
+  }
 
   onChangeFormat = (event: any) => {
     this.setState({ format: event.target.value });
-  };
+  }
 
   render() {
     const { value, format } = this.state;
@@ -52,7 +52,7 @@ class CustomTextEditor extends React.Component<IProps, {}> {
                 rootStyle={{
                   minHeight: 400,
                   maxHeight: 400,
-                  overflowY: "scroll"
+                  overflowY: "scroll",
                 }}
               />
             </div>

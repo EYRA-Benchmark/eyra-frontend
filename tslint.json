@@ -1,5 +1,5 @@
 {
-  "extends": ["tslint:latest", "tslint-react", "tslint-config-prettier"],
+  "extends": ["tslint:recommended", "tslint-react"],
   "rules": {
     "member-access": false,
     "no-console": false,
@@ -7,7 +7,11 @@
     "object-literal-sort-keys": false,
     "jsx-no-lambda": false,
     "no-var-requires": false,
-    "ordered-imports": false
+    "ordered-imports": false,
+    "no-implicit-dependencies": [true, "dev", ["src"]],
+    "no-submodule-imports": [true, "src"],
+    "semicolon": [true, "always"],
+    "jsx-no-multiline-js": false
   },
   "linterOptions": {
     "exclude": [

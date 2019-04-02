@@ -5,7 +5,7 @@ import {
   TableCell,
   TableRow,
   withStyles,
-  WithStyles
+  WithStyles,
 } from "@material-ui/core";
 import * as React from "react";
 import LeaderboardHead from "../LeaderboardHead/LeaderboardHead";
@@ -50,7 +50,7 @@ interface IProps extends WithStyles<typeof styles> {
 class LeaderboardTable extends React.Component<IProps, IState> {
   state = {
     order: "asc",
-    orderBy: "score"
+    orderBy: "score",
   };
 
   handleRequestSort = (event: any, property: any) => {
@@ -62,16 +62,16 @@ class LeaderboardTable extends React.Component<IProps, IState> {
     }
 
     this.setState({ order, orderBy });
-  };
+  }
 
   render() {
     const { classes } = this.props;
     const { order, orderBy } = this.state;
     const metricFields = Object.keys(this.props.submissions[0].metrics_json);
-    const data = this.props.submissions.map(submission => ({
+    const data = this.props.submissions.map((submission) => ({
       name: submission.algorithm.name,
       date: submission.created,
-      ...submission.metrics_json
+      ...submission.metrics_json,
     }));
     return (
       <Paper className={classes.root}>
@@ -100,7 +100,7 @@ class LeaderboardTable extends React.Component<IProps, IState> {
                       <TableCell align="right">{n.date}</TableCell>
                     </TableRow>
                   );
-                }
+                },
               )}
             </TableBody>
           </Table>

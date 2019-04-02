@@ -1,3 +1,4 @@
+// tslint:disable-next-line
 import "font-awesome/css/font-awesome.min.css";
 import * as React from "react";
 import * as ReactDOM from "react-dom";
@@ -18,6 +19,6 @@ getSettings().then(() => {
         <App />
       </UserProvider>
     </BrowserRouter>,
-    document.getElementById("root") as HTMLElement
+    document.getElementById("root") as HTMLElement,
   );
 });

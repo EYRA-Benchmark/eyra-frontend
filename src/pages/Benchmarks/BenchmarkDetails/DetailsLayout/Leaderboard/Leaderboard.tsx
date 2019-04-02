@@ -50,23 +50,23 @@ interface IState {
 class Leaderboard extends React.Component<IProps, IState> {
   state = {
     submissions: [],
-    isLoading: true
+    isLoading: true,
   };
   async componentWillMount() {
     const submissions = await comicApi.submissions({
-      benchmark: this.props.benchmarkID
+      benchmark: this.props.benchmarkID,
     });
     const evaluatedSubmissions = submissions.filter(
-      submission => submission.metrics_json !== null
+      (submission) => submission.metrics_json !== null,
     );
     const nestedSubmissions: INestedSubmission[] = [];
     await Promise.all(
-      evaluatedSubmissions.map(async submission => {
+      evaluatedSubmissions.map(async (submission) => {
         nestedSubmissions.push({
           ...submission,
-          algorithm: await comicApi.algorithm(submission.algorithm)
+          algorithm: await comicApi.algorithm(submission.algorithm),
         });
-      })
+      }),
     );
     this.setState({ submissions: nestedSubmissions, isLoading: false });
   }

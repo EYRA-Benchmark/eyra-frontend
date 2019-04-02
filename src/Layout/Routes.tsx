@@ -1,19 +1,17 @@
-import * as React from 'react';
-import { RouteComponentProps, Switch } from 'react-router';
-import { withRouter } from 'react-router';
-import { Route } from 'react-router-dom';
-import paw from '../assets/images/PawLight.png';
-import Home from '../pages/Home/Home';
-import styles from './Routes.module.css';
+import * as React from "react";
+import { RouteComponentProps, Switch, withRouter } from "react-router";
+import { Route } from "react-router-dom";
+import paw from "../assets/images/PawLight.png";
+import Home from "../pages/Home/Home";
+import styles from "./Routes.module.css";
 
-import About from '../pages/About/About';
-import BenchmarkDetails from '../pages/Benchmarks/BenchmarkDetails/BenchmarkDetails';
-import Benchmarks from '../pages/Benchmarks/Benchmarks';
-import Login from '../pages/Login/Login';
-import NewsDetails from '../pages/News/NewsDetails/NewsDetails';
+import About from "../pages/About/About";
+import BenchmarkDetails from "../pages/Benchmarks/BenchmarkDetails/BenchmarkDetails";
+import Benchmarks from "../pages/Benchmarks/Benchmarks";
+import Login from "../pages/Login/Login";
+import NewsDetails from "../pages/News/NewsDetails/NewsDetails";
 
-import { CSSTransition, TransitionGroup } from 'react-transition-group';
-import './Routes.css';
+import { CSSTransition, TransitionGroup } from "react-transition-group";
 
 class Routes extends React.Component<RouteComponentProps<{}>, {}> {
   render() {
@@ -27,7 +25,7 @@ class Routes extends React.Component<RouteComponentProps<{}>, {}> {
             <div className={styles.bannerBackground} id="about">
               <img src={paw} />
             </div>
-            <TransitionGroup style={{ width: '100%', height: '100%' }}>
+            <TransitionGroup style={{ width: "100%", height: "100%" }}>
               <CSSTransition
                 key={location.pathname}
                 classNames="fade"
@@ -44,11 +42,7 @@ class Routes extends React.Component<RouteComponentProps<{}>, {}> {
                   />
 
                   <Route path="/benchmark/:id" component={BenchmarkDetails} />
-                  <Route
-                    exact={true}
-                    path="/news_details"
-                    component={NewsDetails}
-                  />
+                  <Route path="/news/:id" component={NewsDetails} />
                 </Switch>
               </CSSTransition>
             </TransitionGroup>

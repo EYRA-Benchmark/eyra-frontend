@@ -16,14 +16,14 @@ interface IState {
 class Layout extends React.Component<RouteComponentProps<{}>, IState> {
   state = {
     isShrink: false,
-    showSideDrawer: false
+    showSideDrawer: false,
   };
 
   sideDrawerToggleHandler = () => {
-    this.setState(prevState => {
+    this.setState((prevState) => {
       return { showSideDrawer: !prevState.showSideDrawer };
     });
-  };
+  }
 
   componentDidMount() {
     window.addEventListener("scroll", this.handleScroll.bind(this));
@@ -36,10 +36,10 @@ class Layout extends React.Component<RouteComponentProps<{}>, IState> {
     const el: HTMLElement | null = document.documentElement;
     if (el != null && el.offsetWidth > 1024) {
       this.setState({
-        isShrink: document.body.scrollTop > 80 || el.scrollTop > 80
+        isShrink: document.body.scrollTop > 80 || el.scrollTop > 80,
       });
     }
-  };
+  }
 
   public render() {
     const { isShrink } = this.state;
@@ -50,7 +50,7 @@ class Layout extends React.Component<RouteComponentProps<{}>, IState> {
           classes={classNames(
             styles.appBar,
             isShrink && styles.shrink,
-            isHomePage && styles.homePage
+            isHomePage && styles.homePage,
           )}
           drawerToggle={this.sideDrawerToggleHandler}
         />

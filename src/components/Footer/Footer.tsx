@@ -6,14 +6,14 @@ import styles from "./Footer.module.css";
 
 class Footer extends React.Component<{}, { subscriptionDialogOpen: boolean }> {
   state = {
-    subscriptionDialogOpen: false
+    subscriptionDialogOpen: false,
   };
 
   toggleSubscriptionModal = (enabled: boolean | undefined) => () => {
     const newState =
       enabled === undefined ? !this.state.subscriptionDialogOpen : enabled;
     this.setState({ subscriptionDialogOpen: newState });
-  };
+  }
 
   render() {
     return (

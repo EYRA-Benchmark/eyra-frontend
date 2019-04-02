@@ -1,8 +1,8 @@
-import { comicApi } from "../../../services/comicApi";
+import { comicApi } from "src/services/comicApi";
 
-import Button from "@material-ui/core/Button";
+import { Button } from "@material-ui/core";
 import { Field, Form, Formik } from "formik";
-import { FormikActions } from "formik/dist/types";
+import { FormikActions } from "formik";
 import React from "react";
 import CustomTextEditor from "../CustomTextEditor";
 import styles from "./AlgorithmSubmission.module.css";
@@ -21,11 +21,11 @@ const initialValues: IValues = {
   id: "",
   name: "",
   description: "",
-  containerName: ""
+  containerName: "",
 };
 const onSubmit = async (
   values: IValues,
-  { setSubmitting }: FormikActions<IValues>
+  { setSubmitting }: FormikActions<IValues>,
 ) => {
   // const formData = new FormData();
   // Object.keys(values).forEach(valueKey => {
@@ -36,7 +36,7 @@ const onSubmit = async (
       benchmark: values.id,
       name: values.name,
       description: values.description,
-      container: values.containerName
+      container: values.containerName,
     });
     console.log(algorithm);
   } catch (e) {
@@ -65,7 +65,7 @@ class AlgorithmSubmission extends React.Component<IProps, {}> {
               <div className={styles.inputContainer}>
                 <label htmlFor="description">Description</label>
                 <CustomTextEditor
-                  onChange={value => {
+                  onChange={(value) => {
                     setFieldValue("description", value);
                   }}
                 />
