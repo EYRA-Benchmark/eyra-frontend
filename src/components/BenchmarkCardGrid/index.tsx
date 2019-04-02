@@ -1,6 +1,5 @@
 import * as React from "react";
 
-import { Link } from "react-router-dom";
 import { Grid } from "@material-ui/core";
 import { IBenchmark } from "src/types";
 
@@ -26,9 +25,7 @@ export class CardGrid extends React.Component<IProps, {}> {
       <Grid container={true} spacing={24}>
         {filteredBenchmarks.map((benchmark, index: number) => (
           <Grid item={true} key={index} xs={12} sm={4} md={4}>
-            <Link to={`benchmark/${benchmark.id}`}>
-              <BenchmarkCard benchmark={benchmark}/>
-            </Link>
+            <BenchmarkCard benchmark={benchmark}/>
           </Grid>
         ))}
       </Grid>
