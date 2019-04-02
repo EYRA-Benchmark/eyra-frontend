@@ -1,12 +1,16 @@
-import { Card, CardHeader, CardMedia } from "@material-ui/core";
-import Grid from "@material-ui/core/Grid";
-import * as React from "react";
-import ChallengeImage from "../../../assets/images/tissue_segmentation.png";
-import styles from "./CardGrid.module.css";
+import { Card, CardHeader, CardMedia } from '@material-ui/core';
+import Grid from '@material-ui/core/Grid';
+import IconButton from '@material-ui/core/IconButton';
+import DetailsIcon from '@material-ui/icons/Description';
+import EditIcon from '@material-ui/icons/Edit';
+import * as React from 'react';
+import ChallengeImage from '../../../assets/images/tissue_segmentation.png';
+import styles from './CardGrid.module.css';
 interface IProps {
   size: any;
   data: any;
-  clicked: (item: any) => void;
+  clicked: (itemId: string) => void;
+  edit: (itemId: string) => void;
 }
 
 interface IBenchmarkData {
@@ -30,7 +34,7 @@ function sortByDate(array: IBenchmarkData[]): void {
 
 export class CardGrid extends React.Component<IProps, {}> {
   render() {
-    const { size, data, clicked } = this.props;
+    const { size, data, clicked, edit } = this.props;
 
     let filteredData = data;
     if (size !== 0) {
@@ -42,11 +46,7 @@ export class CardGrid extends React.Component<IProps, {}> {
       <Grid container={true} spacing={24}>
         {filteredData.map((card: any, index: number) => (
           <Grid item={true} key={index} xs={12} sm={4} md={4}>
-            <Card
-              square={true}
-              className={styles.card}
-              onClick={() => clicked(card.id)}
-            >
+            <Card square={true} className={styles.card}>
               <CardMedia
                 className={styles.media}
                 image={ChallengeImage}
@@ -55,8 +55,21 @@ export class CardGrid extends React.Component<IProps, {}> {
               <CardHeader
                 title={card.name}
                 titleTypographyProps={{
-                  variant: "title"
+                  variant: 'title'
                 }}
+                action={
+                  <div>
+                    <IconButton
+                      onClick={() => clicked(card.id)}
+                      title="Details"
+                    >
+                      <DetailsIcon />
+                    </IconButton>
+                    <IconButton onClick={() => edit(card.id)} title="Edit">
+                      <EditIcon />
+                    </IconButton>
+                  </div>
+                }
               />
             </Card>
           </Grid>

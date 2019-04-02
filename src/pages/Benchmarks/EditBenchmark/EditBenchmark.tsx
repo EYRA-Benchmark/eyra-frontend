@@ -1,18 +1,17 @@
 import * as React from 'react';
 import { RouteComponentProps, withRouter } from 'react-router';
-
+import { Typography } from '@material-ui/core';
 import { comicApi } from '../../../services/comicApi';
 
 import { IBenchmark } from '../../../types/benchmark';
-
+import BenchmarkForm from '../../../components/Forms/Benchmark/BenchmarkForm';
 import Spinner from '../../../components/Utils/Spinner/Spinner';
-import Details from './DetailsLayout/DetailsLayout';
 
 interface IState {
   benchmark: IBenchmark | null;
 }
 
-class BenchmarkDetails extends React.Component<
+class EditBenchmark extends React.Component<
   RouteComponentProps<{ id: string }>,
   IState
 > {
@@ -20,19 +19,25 @@ class BenchmarkDetails extends React.Component<
     benchmark: null
   };
   async componentDidMount() {
-    // await new Promise(resolve => setTimeout(resolve, 2000));
-
     this.setState({
       benchmark: await comicApi.benchmark(this.props.match.params.id)
     });
   }
   render() {
-    const content = this.state.benchmark ? (
-      <Details data={this.state.benchmark!} />
+    const { benchmark } = this.state;
+    const content = benchmark ? (
+      <BenchmarkForm benchmark={benchmark} />
     ) : (
       <Spinner />
     );
-    return <div>{content}</div>;
+    return (
+      <div>
+        <Typography component="h1" variant="h5" style={{ margin: '20px 10px' }}>
+          Edit Benchmark
+        </Typography>
+        {content}
+      </div>
+    );
   }
 }
-export default withRouter(BenchmarkDetails);
+export default withRouter(EditBenchmark);

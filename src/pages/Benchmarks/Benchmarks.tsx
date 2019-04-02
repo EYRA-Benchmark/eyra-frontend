@@ -35,7 +35,12 @@ class Benchmarks extends React.Component<RouteComponentProps<{}>, IState> {
       pathname: `benchmark/${selectedItem}`
     });
   };
-
+  public edit = (selectedItemId: string) => {
+    this.props.history.push({
+      pathname: `edit_benchmark/${selectedItemId}`,
+      state: { selectedItemId }
+    });
+  };
   public render() {
     let content = null;
     if (this.state.loading) {
@@ -46,6 +51,7 @@ class Benchmarks extends React.Component<RouteComponentProps<{}>, IState> {
           size={0}
           data={this.state.benchmarks}
           clicked={this.showDetails}
+          edit={this.edit}
         />
       );
     }

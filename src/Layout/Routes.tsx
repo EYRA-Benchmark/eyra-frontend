@@ -9,6 +9,7 @@ import styles from './Routes.module.css';
 import About from '../pages/About/About';
 import BenchmarkDetails from '../pages/Benchmarks/BenchmarkDetails/BenchmarkDetails';
 import Benchmarks from '../pages/Benchmarks/Benchmarks';
+import EditBenchmark from '../pages/Benchmarks/EditBenchmark/EditBenchmark';
 import Login from '../pages/Login/Login';
 import NewsDetails from '../pages/News/NewsDetails/NewsDetails';
 
@@ -44,6 +45,7 @@ class Routes extends React.Component<RouteComponentProps<{}>, {}> {
                   />
 
                   <Route path="/benchmark/:id" component={BenchmarkDetails} />
+                  <Route path="/edit_benchmark/:id" component={EditBenchmark} />
                   <Route
                     exact={true}
                     path="/news_details"

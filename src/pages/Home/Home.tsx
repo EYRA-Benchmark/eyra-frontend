@@ -7,7 +7,7 @@ import { settings } from '../../settings';
 import bannerImage from '../../assets/images/black_paw.png';
 
 import Spinner from '../../components/Utils/Spinner/Spinner';
-import ChallengesGrid from '../Benchmarks/CardGrid/CardGrid';
+import BenchmarkGrid from '../Benchmarks/CardGrid/CardGrid';
 
 import NewsGallary from '../../components/NewsGallary/NewsGallary';
 import formatDate from '../../components/Utils/helper';
@@ -18,16 +18,16 @@ import { comicApi } from '../../services/comicApi';
 const RichText = require('prismic-reactjs').RichText;
 interface IState {
   news: any;
-  challengesData: any;
-  selectedItem: any;
+  benchmarkData: any;
+  selectedItemId: string;
   loading: boolean;
 }
 
 class Home extends React.Component<RouteComponentProps<{}>, IState> {
   state = {
     news: [],
-    challengesData: null,
-    selectedItem: null,
+    benchmarkData: null,
+    selectedItemId: '',
     loading: true
   };
 
@@ -44,36 +44,41 @@ class Home extends React.Component<RouteComponentProps<{}>, IState> {
   }
   shouldComponentUpdate(nextProps: any, nextState: any) {
     return (
-      this.state.challengesData !== nextState.challengesData ||
+      this.state.benchmarkData !== nextState.benchmarkData ||
       this.state.news !== nextState.news
     );
   }
   async componentDidMount() {
     this.setState({
       loading: false,
-      challengesData: await comicApi.benchmarks()
+      benchmarkData: await comicApi.benchmarks()
     });
   }
 
-  public showDetails = (selectedItem: string) => {
-    debugger;
+  public showDetails = (selectedItemId: string) => {
     this.props.history.push({
-      pathname: `benchmark/${selectedItem}`,
-      state: { selectedItem }
+      pathname: `benchmark/${selectedItemId}`,
+      state: { selectedItemId }
     });
   };
-
+  public edit = (selectedItemId: string) => {
+    this.props.history.push({
+      pathname: `edit_benchmark/${selectedItemId}`,
+      state: { selectedItemId }
+    });
+  };
   public render() {
-    let challengeContent = null;
+    let benchmarkContent = null;
 
     if (this.state.loading) {
-      challengeContent = <Spinner />;
+      benchmarkContent = <Spinner />;
     } else {
-      challengeContent = (
-        <ChallengesGrid
+      benchmarkContent = (
+        <BenchmarkGrid
           size={3}
-          data={this.state.challengesData}
+          data={this.state.benchmarkData}
           clicked={this.showDetails}
+          edit={this.edit}
         />
       );
     }
@@ -103,7 +108,7 @@ class Home extends React.Component<RouteComponentProps<{}>, IState> {
                 <h3 className={classNames(styles.sectionHeader)}>Benchmarks</h3>
                 {/* <a href="/organize_benchmark">Organize Benchmark</a> */}
               </div>
-              {challengeContent}
+              {benchmarkContent}
             </div>
             <div className={styles.section}>
               <h3 className={classNames(styles.sectionHeader)}>News</h3>
