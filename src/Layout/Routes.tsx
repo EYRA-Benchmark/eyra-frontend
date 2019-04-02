@@ -1,6 +1,5 @@
 import * as React from 'react';
-import { RouteComponentProps, Switch } from 'react-router';
-import { withRouter } from 'react-router';
+import { RouteComponentProps, Switch, withRouter } from 'react-router';
 import { Route } from 'react-router-dom';
 import paw from '../assets/images/PawLight.png';
 import Home from '../pages/Home/Home';
@@ -13,7 +12,6 @@ import Login from '../pages/Login/Login';
 import NewsDetails from '../pages/News/NewsDetails/NewsDetails';
 
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
-import './Routes.css';
 
 class Routes extends React.Component<RouteComponentProps<{}>, {}> {
   render() {
