@@ -1,13 +1,10 @@
 // import { Icon } from "@material-ui/core";
-import Grid from "@material-ui/core/Grid";
-import Tab from "@material-ui/core/Tab";
-import Tabs from "@material-ui/core/Tabs";
-import Typography from "@material-ui/core/Typography";
-import PropTypes from "prop-types";
+import { Grid, Tab, Tabs, Typography } from "@material-ui/core";
+// import PropTypes from "prop-types";
 import * as React from "react";
 import styles from "./VerticalTabs.module.css";
-import { comicApi } from "../../../../../../services/comicApi";
-import { IDataFile } from "../../../../../../types/data_file";
+import { comicApi } from "src/services/comicApi";
+import { IDataFile } from "src/types/data_file";
 
 interface IState {
   value: number;
@@ -33,9 +30,9 @@ function TabContainer(props: IContainerProps) {
     </Typography>
   );
 }
-TabContainer.propTypes = {
-  children: PropTypes.node.isRequired
-};
+// TabContainer.propTypes = {
+//   children: PropTypes.node.isRequired
+// };
 class VerticalTabs extends React.Component<IProps, IState> {
   state = {
     value: 0,

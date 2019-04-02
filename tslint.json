@@ -7,7 +7,10 @@
     "object-literal-sort-keys": false,
     "jsx-no-lambda": false,
     "no-var-requires": false,
-    "ordered-imports": false
+    "ordered-imports": false,
+    "no-implicit-dependencies": [true, "dev", ["src"]],
+    "no-submodule-imports": [true, "src"],
+    "no-relative-imports": [true, "allow-siblings"]
   },
   "linterOptions": {
     "exclude": [
