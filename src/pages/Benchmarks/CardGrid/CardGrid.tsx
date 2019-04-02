@@ -55,7 +55,7 @@ export class CardGrid extends React.Component<IProps, {}> {
               <CardHeader
                 title={card.name}
                 titleTypographyProps={{
-                  variant: "title"
+                  variant: "title",
                 }}
               />
             </Card>

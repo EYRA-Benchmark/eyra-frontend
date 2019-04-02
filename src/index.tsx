@@ -18,6 +18,6 @@ getSettings().then(() => {
         <App />
       </UserProvider>
     </BrowserRouter>,
-    document.getElementById("root") as HTMLElement
+    document.getElementById("root") as HTMLElement,
   );
 });

@@ -11,7 +11,7 @@ function SideDrawer({ open }: IProps) {
     <div
       className={classNames(
         styles.sideDrawer,
-        open ? styles.open : styles.close
+        open ? styles.open : styles.close,
       )}
     >
       <nav>

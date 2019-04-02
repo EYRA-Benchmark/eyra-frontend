@@ -16,13 +16,13 @@ export class Gallary extends React.Component<
 > {
   public handleSelection = (selectedItem: any) => {
     this.showDetails(selectedItem);
-  };
+  }
   public showDetails = (item: any) => {
     this.props.history.push({
       pathname: "news_details",
-      state: { selectedItem: item.uid }
+      state: { selectedItem: item.uid },
     });
-  };
+  }
   render() {
     const { data } = this.props;
     return (
@@ -43,7 +43,7 @@ export class Gallary extends React.Component<
                 title={card.title}
                 subheader={card.date}
                 titleTypographyProps={{
-                  variant: "title"
+                  variant: "title",
                 }}
                 subheaderTypographyProps={{ align: "right" }}
               />

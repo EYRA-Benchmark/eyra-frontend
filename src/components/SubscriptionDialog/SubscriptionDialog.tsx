@@ -9,7 +9,7 @@ import {
   Button,
   DialogActions,
   DialogContent,
-  DialogTitle
+  DialogTitle,
 } from "@material-ui/core";
 
 import styles from "./SubscriptionDialog.module.css";
@@ -23,7 +23,7 @@ const formSchema = yup.object().shape({
     .email()
     .required(),
   name: yup.string(),
-  organization: yup.string()
+  organization: yup.string(),
 });
 
 interface IValues {
@@ -35,12 +35,12 @@ interface IValues {
 const initialValues: IValues = {
   email: "",
   name: "",
-  organization: ""
+  organization: "",
 };
 
 const onSubmit = async (
   values: IValues,
-  { setSubmitting }: FormikActions<IValues>
+  { setSubmitting }: FormikActions<IValues>,
 ) => {
   await submitContactForm(values.name, values.organization, values.email);
   setSubmitting(false);
@@ -61,7 +61,7 @@ const SubscriptionDialog: React.FunctionComponent = () => (
       errors,
       touched,
       submitCount,
-      isSubmitting
+      isSubmitting,
     }) => (
       <React.Fragment>
         <DialogTitle>Stay in touch</DialogTitle>
@@ -75,7 +75,7 @@ const SubscriptionDialog: React.FunctionComponent = () => (
                 className={classNames(
                   styles.wrapInput,
                   styles.validateInput,
-                  errors.email && styles.alertValidate
+                  errors.email && styles.alertValidate,
                 )}
               >
                 <input

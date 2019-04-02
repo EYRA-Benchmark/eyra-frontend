@@ -3,7 +3,7 @@ import {
   TableHead,
   TableRow,
   TableSortLabel,
-  Tooltip
+  Tooltip,
 } from "@material-ui/core";
 import * as React from "react";
 interface IProps {
@@ -17,22 +17,22 @@ interface IProps {
 class Leaderboard extends React.Component<IProps, {}> {
   createSortHandler = (property: any) => (event: any) => {
     this.props.onRequestSort(event, property);
-  };
+  }
   render() {
     const rows = [
       {
         id: "name",
         numeric: false,
         disablePadding: false,
-        label: "Name"
+        label: "Name",
       },
-      ...this.props.metricFields.map(fieldName => ({
+      ...this.props.metricFields.map((fieldName) => ({
         id: fieldName,
         numeric: true,
         disablePadding: false,
-        label: fieldName
+        label: fieldName,
       })),
-      { id: "date", numeric: true, disablePadding: false, label: "Date" }
+      { id: "date", numeric: true, disablePadding: false, label: "Date" },
     ];
 
     const { order, orderBy } = this.props;
@@ -40,7 +40,7 @@ class Leaderboard extends React.Component<IProps, {}> {
     return (
       <TableHead>
         <TableRow>
-          {rows.map(row => {
+          {rows.map((row) => {
             return (
               <TableCell
                 key={row.id}

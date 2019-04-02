@@ -12,12 +12,12 @@ class NewsDetails extends React.Component<RouteComponentProps<{}>, {}> {
     title: "",
     desc: "",
     image: "",
-    date: ""
+    date: "",
   };
   componentWillMount() {
     const selectedItem = this.props.location.state.selectedItem;
     if (selectedItem) {
-      Prismic.api(settings.prismicEndpoint).then(api => {
+      Prismic.api(settings.prismicEndpoint).then((api) => {
         api.getByUID("news", selectedItem).then((response: any) => {
           if (response) {
             const title = RichText.render(response.data.title);

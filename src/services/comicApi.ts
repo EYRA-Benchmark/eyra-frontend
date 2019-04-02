@@ -6,7 +6,7 @@ import {
   IDataFile,
   ISubmission,
   IUser,
-  UUID4
+  UUID4,
 } from "../types";
 
 import { objectToQueryParams } from "../utils";
@@ -20,7 +20,7 @@ export class ComicApi {
       null;
     this.axios = Axios.create({
       baseURL,
-      headers
+      headers,
     });
     this.setToken(token);
   }
@@ -69,7 +69,7 @@ export class ComicApi {
 
   async submissions(filters: {}): Promise<ISubmission[]> {
     return (await this.axios.get<ISubmission[]>(
-      `submissions/?${objectToQueryParams(filters)}`
+      `submissions/?${objectToQueryParams(filters)}`,
     )).data;
   }
 
