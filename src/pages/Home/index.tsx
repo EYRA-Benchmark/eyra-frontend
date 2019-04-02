@@ -8,13 +8,14 @@ import { comicApi } from "src/services/comicApi";
 
 import { IBenchmark } from "src/types";
 
-import bannerImage from "src/assets/images/black_paw.png";
 import Spinner from "src/components/Spinner/Spinner";
 import ChallengesGrid from "src/components/BenchmarkCardGrid/index";
-import NewsGallary from "src/components/NewsGallary/NewsGallary";
-import { formatDate } from "src/utils";
+import NewsGallery from "src/components/NewsGallery";
 const RichText = require("prismic-reactjs").RichText;
 
+import { formatDate } from "src/utils";
+
+import bannerImage from "src/assets/images/black_paw.png";
 import styles from "./Home.module.css";
 
 interface IState {
@@ -99,7 +100,7 @@ class Index extends React.Component<RouteComponentProps<{}>, IState> {
             <div className={styles.section}>
               <h3 className={classNames(styles.sectionHeader)}>News</h3>
 
-              <NewsGallary
+              <NewsGallery
                 data={this.state.news.map((n: any) => ({
                   uid: n.uid,
                   title: RichText.asText(n.data.title),

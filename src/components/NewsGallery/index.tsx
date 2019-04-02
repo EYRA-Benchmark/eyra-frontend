@@ -1,14 +1,13 @@
 import { Card, CardMedia, Grid } from "@material-ui/core";
 
-// import formatDate from "../../../components/Utils/helper";
 import { CardHeader } from "@material-ui/core";
 import * as React from "react";
 import { RouteComponentProps, withRouter, Link } from "react-router-dom";
-import styles from "./NewsGallary.module.css";
+import styles from "./NewsGallery.module.css";
 interface IProps {
   data: any;
 }
-export class Gallary extends React.Component<
+export class Gallery extends React.Component<
   RouteComponentProps<{}> & IProps,
   {}
 > {
@@ -44,4 +43,4 @@ export class Gallary extends React.Component<
     );
   }
 }
-export default withRouter(Gallary);
+export default withRouter(Gallery);
