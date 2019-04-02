@@ -17,6 +17,28 @@ interface IState {
   showSideDrawer: boolean;
 }
 
+const defaultPage = () => (
+  <div id="root_container">
+    <main className={styles.container}>
+      <div className={styles.bannerBackground} id="about">
+        <img src={paw} />
+      </div>
+      <TransitionGroup style={{ width: "100%", height: "100%" }}>
+        <CSSTransition
+          key={location.pathname}
+          classNames="fade"
+          timeout={2000}
+          exit={false}
+        >
+          <Switch>
+            <Routes />
+          </Switch>
+        </CSSTransition>
+      </TransitionGroup>
+    </main>
+  </div>
+);
+
 class Layout extends React.Component<RouteComponentProps<{}>, IState> {
   state = {
     isShrink: false,
@@ -63,26 +85,8 @@ class Layout extends React.Component<RouteComponentProps<{}>, IState> {
         <ScrollToTop>
           <Switch>
             <Route path="/" exact={true} component={Home} />
+            <Route component={defaultPage} />
           </Switch>
-          <div id="root_container">
-            <main className={styles.container}>
-              <div className={styles.bannerBackground} id="about">
-                <img src={paw} />
-              </div>
-              <TransitionGroup style={{ width: "100%", height: "100%" }}>
-                <CSSTransition
-                  key={location.pathname}
-                  classNames="fade"
-                  timeout={2000}
-                  exit={false}
-                >
-                  <Switch>
-                    <Routes />
-                  </Switch>
-                </CSSTransition>
-              </TransitionGroup>
-            </main>
-          </div>
         </ScrollToTop>
         <Footer />
       </React.Fragment>
