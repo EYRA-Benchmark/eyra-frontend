@@ -1,11 +1,17 @@
 import * as React from "react";
-import Theme from "../src/Theme/Theme";
-import Layout from "./Layout/Layout";
+import RootLayout from "./components/RootLayout";
+import { CssBaseline, MuiThemeProvider } from "@material-ui/core";
+import theme from "./theme";
 
 class App extends React.Component {
   public render() {
-    return <Layout />;
+    return (
+      <MuiThemeProvider theme={theme}>
+        <CssBaseline />
+        <RootLayout />
+      </MuiThemeProvider>
+    );
   }
 }
 
-export default Theme(App);
+export default App;

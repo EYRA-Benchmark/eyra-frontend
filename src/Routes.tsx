@@ -1,11 +1,11 @@
 import * as React from "react";
 import { Route } from "react-router-dom";
 
-import About from "./pages/About/About";
-import BenchmarkDetails from "src/pages/BenchmarkDetails/index";
-import Benchmarks from "./pages/Benchmarks/index";
-import Login from "./pages/Login/Login";
-import NewsDetails from "./pages/NewsDetails/index";
+import About from "./pages/About";
+import BenchmarkDetails from "src/pages/BenchmarkDetails";
+import Benchmarks from "./pages/Benchmarks";
+import Login from "./pages/Login";
+import NewsDetails from "./pages/NewsDetails";
 
 export default () => (
   <React.Fragment>

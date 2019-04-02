@@ -23,7 +23,7 @@ interface IState {
   loading: boolean;
 }
 
-class Home extends React.Component<RouteComponentProps<{}>, IState> {
+class Index extends React.Component<RouteComponentProps<{}>, IState> {
   state = {
     news: [],
     challengesData: null,
@@ -116,4 +116,4 @@ class Home extends React.Component<RouteComponentProps<{}>, IState> {
   }
 }
 
-export default Home;
+export default Index;

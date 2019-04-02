@@ -3,14 +3,15 @@ import * as React from "react";
 import { Route, RouteComponentProps, Switch, withRouter } from "react-router-dom";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
 
-import Footer from "../components/Footer/Footer";
-import Header from "../components/Header/Header";
-import SideDrawer from "../components/SideDrawer/SideDrawer";
-import ScrollToTop from "../components/Utils/ScrollToTop";
+import Footer from "../Footer/Footer";
+import Header from "../Header/Header";
+import SideDrawer from "../SideDrawer/SideDrawer";
+import ScrollToTop from "../Utils/ScrollToTop";
+import Routes from "../../Routes";
+import Home from "src/pages/Home";
+
 import styles from "./Layout.module.css";
-import Routes from "../Routes";
-import Home from "src/pages/Home/Home";
-import paw from "../assets/images/PawLight.png";
+import paw from "../../assets/images/PawLight.png";
 
 interface IState {
   isShrink: boolean;
