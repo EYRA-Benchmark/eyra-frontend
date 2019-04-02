@@ -1,9 +1,9 @@
 import * as React from "react";
 import { RouteComponentProps } from "react-router-dom";
-import Spinner from "../../components/Utils/Spinner/Spinner";
+import Spinner from "src/components/Utils/Spinner/Spinner";
 import BenchmarksGrid from "./CardGrid/CardGrid";
-import { comicApi } from "../../services/comicApi";
-import { IBenchmark } from "../../types/benchmark";
+import { comicApi } from "src/services/comicApi";
+import { IBenchmark } from "src/types";
 import { Typography } from "@material-ui/core";
 
 interface IState {
@@ -30,12 +30,6 @@ class Benchmarks extends React.Component<RouteComponentProps<{}>, IState> {
     });
   }
 
-  public showDetails = (selectedItem: string) => {
-    this.props.history.push({
-      pathname: `benchmark/${selectedItem}`,
-    });
-  }
-
   public render() {
     let content = null;
     if (this.state.loading) {
@@ -45,7 +39,6 @@ class Benchmarks extends React.Component<RouteComponentProps<{}>, IState> {
         <BenchmarksGrid
           size={0}
           data={this.state.benchmarks}
-          clicked={this.showDetails}
         />
       );
     }

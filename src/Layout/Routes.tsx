@@ -42,11 +42,7 @@ class Routes extends React.Component<RouteComponentProps<{}>, {}> {
                   />
 
                   <Route path="/benchmark/:id" component={BenchmarkDetails} />
-                  <Route
-                    exact={true}
-                    path="/news_details"
-                    component={NewsDetails}
-                  />
+                  <Route path="/news/:id" component={NewsDetails} />
                 </Switch>
               </CSSTransition>
             </TransitionGroup>

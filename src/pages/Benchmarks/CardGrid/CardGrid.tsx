@@ -1,35 +1,26 @@
-import { Card, CardHeader, CardMedia, Grid } from "@material-ui/core";
 import * as React from "react";
+
+import { Link } from "react-router-dom";
+import { Card, CardHeader, CardMedia, Grid } from "@material-ui/core";
+import { IBenchmark } from "src/types";
+
 import ChallengeImage from "src/assets/images/tissue_segmentation.png";
 import styles from "./CardGrid.module.css";
+
 interface IProps {
   size: any;
   data: any;
-  clicked: (item: any) => void;
 }
 
-interface IBenchmarkData {
-  id: string;
-  created: Date;
-  modified: Date;
-  description: string;
-  name: string;
-  creator: number;
-  evaluator: string;
-  training_datafile: any;
-  test_datafile: string;
-  ground_truth_datafile: string;
-}
-
-function sortByDate(array: IBenchmarkData[]): void {
-  array.sort((a: IBenchmarkData, b: IBenchmarkData) => {
-    return a.modified.getTime() - b.modified.getTime();
+function sortByDate(array: IBenchmark[]): void {
+  array.sort((a: IBenchmark, b: IBenchmark) => {
+    return new Date(a.modified).getTime() - new Date(b.modified).getTime();
   });
 }
 
 export class CardGrid extends React.Component<IProps, {}> {
   render() {
-    const { size, data, clicked } = this.props;
+    const { size, data } = this.props;
 
     let filteredData = data;
     if (size !== 0) {
@@ -41,23 +32,24 @@ export class CardGrid extends React.Component<IProps, {}> {
       <Grid container={true} spacing={24}>
         {filteredData.map((card: any, index: number) => (
           <Grid item={true} key={index} xs={12} sm={4} md={4}>
-            <Card
-              square={true}
-              className={styles.card}
-              onClick={() => clicked(card.id)}
-            >
-              <CardMedia
-                className={styles.media}
-                image={ChallengeImage}
-                title="Image title"
-              />
-              <CardHeader
-                title={card.name}
-                titleTypographyProps={{
-                  variant: "title",
-                }}
-              />
-            </Card>
+            <Link to={`benchmark/${card.id}`}>
+              <Card
+                square={true}
+                className={styles.card}
+              >
+                <CardMedia
+                  className={styles.media}
+                  image={ChallengeImage}
+                  title="Image title"
+                />
+                <CardHeader
+                  title={card.name}
+                  titleTypographyProps={{
+                    variant: "title",
+                  }}
+                />
+              </Card>
+            </Link>
           </Grid>
         ))}
       </Grid>

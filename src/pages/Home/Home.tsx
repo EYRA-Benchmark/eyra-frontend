@@ -55,14 +55,6 @@ class Home extends React.Component<RouteComponentProps<{}>, IState> {
     });
   }
 
-  public showDetails = (selectedItem: string) => {
-    debugger;
-    this.props.history.push({
-      pathname: `benchmark/${selectedItem}`,
-      state: { selectedItem },
-    });
-  }
-
   public render() {
     let challengeContent = null;
 
@@ -73,7 +65,6 @@ class Home extends React.Component<RouteComponentProps<{}>, IState> {
         <ChallengesGrid
           size={3}
           data={this.state.challengesData}
-          clicked={this.showDetails}
         />
       );
     }

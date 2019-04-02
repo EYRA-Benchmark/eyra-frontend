@@ -7,7 +7,7 @@ import { settings } from "src/settings";
 import styles from "./NewsDetails.module.css";
 const RichText = require("prismic-reactjs").RichText;
 
-class NewsDetails extends React.Component<RouteComponentProps<{}>, {}> {
+class NewsDetails extends React.Component<RouteComponentProps<{ id: string }>, {}> {
   state = {
     title: "",
     desc: "",
@@ -15,7 +15,7 @@ class NewsDetails extends React.Component<RouteComponentProps<{}>, {}> {
     date: "",
   };
   componentWillMount() {
-    const selectedItem = this.props.location.state.selectedItem;
+    const selectedItem = this.props.match.params.id;
     if (selectedItem) {
       Prismic.api(settings.prismicEndpoint).then((api) => {
         api.getByUID("news", selectedItem).then((response: any) => {
