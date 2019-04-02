@@ -6,14 +6,12 @@ import { settings } from '../../settings';
 
 import bannerImage from '../../assets/images/black_paw.png';
 
-// import FlippingCard from "../../components/FlippingCard/FlippingCard";
 import Spinner from '../../components/Utils/Spinner/Spinner';
-import ChallengesGrid from '../Challenges/CardGrid/CardGrid';
+import ChallengesGrid from '../Benchmarks/CardGrid/CardGrid';
 
 import NewsGallary from '../../components/NewsGallary/NewsGallary';
 import formatDate from '../../components/Utils/helper';
 
-// import Benchmarks from "../Challenges/Challenges";
 import styles from './Home.module.css';
 import { comicApi } from '../../services/comicApi';
 

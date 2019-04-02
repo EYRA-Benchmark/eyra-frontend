@@ -1,17 +1,17 @@
-import Grid from "@material-ui/core/Grid";
-import Paper from "@material-ui/core/Paper";
-import Tab from "@material-ui/core/Tab";
-import Tabs from "@material-ui/core/Tabs";
-import Typography from "@material-ui/core/Typography";
-import Markdown from "@nteract/markdown";
-import PropTypes from "prop-types";
-import * as React from "react";
-import AlgorithmSubmissionForm from "../../../../components/Forms/Algorithm/AlgorithmSubmission";
-import Datasets from "./DataSets/DataSets";
-import styles from "./DetailsLayout.module.css";
-import Leaderboard from "./Leaderboard/Leaderboard";
+import Grid from '@material-ui/core/Grid';
+import Paper from '@material-ui/core/Paper';
+import Tab from '@material-ui/core/Tab';
+import Tabs from '@material-ui/core/Tabs';
+import Typography from '@material-ui/core/Typography';
+import Markdown from '@nteract/markdown';
+import PropTypes from 'prop-types';
+import * as React from 'react';
+import AlgorithmSubmissionForm from '../../../../components/Forms/Algorithm/AlgorithmSubmission';
+import Datasets from './DataSets/DataSets';
+import styles from './DetailsLayout.module.css';
+import Leaderboard from './Leaderboard/Leaderboard';
 
-import { IBenchmark } from "../../../../types/benchmark";
+import { IBenchmark } from '../../../../types/benchmark';
 
 interface IContainerProps {
   children: React.ReactNode;

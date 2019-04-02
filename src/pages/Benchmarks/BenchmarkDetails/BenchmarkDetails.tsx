@@ -12,7 +12,7 @@ interface IState {
   benchmark: IBenchmark | null;
 }
 
-class ChallengeDetails extends React.Component<
+class BenchmarkDetails extends React.Component<
   RouteComponentProps<{ id: string }>,
   IState
 > {
@@ -36,4 +36,4 @@ class ChallengeDetails extends React.Component<
     return <div>{content}</div>;
   }
 }
-export default withRouter(ChallengeDetails);
+export default withRouter(BenchmarkDetails);
