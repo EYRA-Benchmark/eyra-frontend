@@ -1,5 +1,5 @@
 {
-  "extends": ["tslint:latest", "tslint-react", "tslint-config-prettier"],
+  "extends": ["tslint:recommended", "tslint-react"],
   "rules": {
     "member-access": false,
     "no-console": false,
@@ -9,7 +9,8 @@
     "no-var-requires": false,
     "ordered-imports": false,
     "no-implicit-dependencies": [true, "dev", ["src"]],
-    "no-submodule-imports": [true, "src"]
+    "no-submodule-imports": [true, "src"],
+    "semicolon": [true, "always"]
   },
   "linterOptions": {
     "exclude": [
