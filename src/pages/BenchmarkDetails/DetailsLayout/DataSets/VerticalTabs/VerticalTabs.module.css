@@ -1,6 +1,9 @@
 .tabsContainer {
   flex-direction: column;
 }
+.labelContainer {
+  padding: 0;
+}
 .noMargin {
   margin: 0px !important;
 }

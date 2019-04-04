@@ -14,6 +14,7 @@ interface IState {
 interface IProps {
   // todo: add proper type
   dataSets: any[];
+  isTestData: boolean;
 }
 interface IContainerProps {
   children: React.ReactNode;
@@ -63,14 +64,12 @@ class VerticalTabs extends React.Component<IProps, IState> {
       desc.push(groundTruth);
     }
 
-    console.log("tabs", desc);
     return (
       <Grid container={true} spacing={24} className={styles.noMargin}>
         <Grid item={true} xs={2} sm={2} md={2} className={styles.divider}>
           <div className={styles.borderBottom}>
             <h5>Data Sources</h5>
           </div>
-
           <Tabs
             value={value}
             onChange={this.handleChange}
@@ -80,18 +79,33 @@ class VerticalTabs extends React.Component<IProps, IState> {
               flexContainer: styles.tabsContainer,
             }}
           >
+            <Tab
+              label="Data"
+              classes={{ labelContainer: styles.labelContainer }}
+            />
+            <Tab label="Ground Truth(Gold Standard)" />
+          </Tabs>
+          {/* <Tabs
+            value={value}
+            onChange={this.handleChange}
+            textColor="primary"
+            classes={{
+              indicator: styles.hide,
+              flexContainer: styles.tabsContainer
+            }}
+          >
             {desc.map((d: any, id: number) => (
               <Tab
-                label={d.name ? d.name : ""}
+                label={d.name ? d.name : ''}
                 classes={{
                   labelContainer: styles.label,
-                  wrapper: styles.borderBottom,
+                  wrapper: styles.borderBottom
                 }}
                 key={d.id}
-                style={{ flexDirection: "row" }}
+                style={{ flexDirection: 'row' }}
               />
             ))}
-          </Tabs>
+          </Tabs> */}
         </Grid>
         <Grid item={true} xs={10} sm={10} md={10} className={styles.divider}>
           <div className={styles.borderBottom}>
@@ -113,9 +127,11 @@ class VerticalTabs extends React.Component<IProps, IState> {
                     <span>Created: </span>
                     <span> {d.created}</span>
                   </p>
-                  <a href={d.file} download={true}>
-                    Download
-                  </a>
+                  {this.props.isTestData ? null : (
+                    <a href={d.file} download={true}>
+                      Download
+                    </a>
+                  )}
                 </TabContainer>
               ),
           )}
