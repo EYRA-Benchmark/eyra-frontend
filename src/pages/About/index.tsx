@@ -1,40 +1,33 @@
 import * as React from "react";
+// import Prismic from "prismic-javascript";
 import { RouteComponentProps } from "react-router-dom";
 
-// import bannerImage from "../../assets/images/black_paw.png";
-
+import { prismicApi } from "src/services/prismicApi";
 import styles from "./About.module.css";
-
-// import paw from "../../assets/images/PawLight.png";
-
+const RichText = require("prismic-reactjs").RichText;
 class About extends React.Component<RouteComponentProps<{}>, {}> {
+  state = {
+    title: "",
+    desc: "",
+  };
+  componentWillMount() {
+    prismicApi.getSingle("aboutus").then((response: any) => {
+      const title = RichText.render(response.data.title);
+      const desc = RichText.render(response.data.description);
+      this.setState({ title, desc });
+    });
+  }
   public render() {
+    const { title, desc } = this.state;
     return (
       <React.Fragment>
         <div className={styles.container}>
-          {/* <div className={styles.bannerBackground} id="about">
-            <img src={paw} />
-          </div> */}
           <div className={styles.caption}>
             <div className={styles.article}>
-              <h3>About the EYRA Benchmark Platform</h3>
+              <h3>{title}</h3>
             </div>
-            <p>
-              The Enlighten Your Research Alliance (EYRA) benchmark platform is
-              a tool for the evaluation of scientific algorithms. It is
-              developed by the{" "}
-              <a href="https://esciencecenter.nl">
-                Netherlands eScience Center
-              </a>
-              , in conjunction with <a href="https://surfsara.nl">SURFsara</a>.
-            </p>
-            <p>
-              The goal of this platform is to provide a place to test the
-              performance of algorithms on various challenges, to enable easy
-              re-use of data and ground truth for new challenges to answer new
-              research questions, and to provide more sustainability for
-              challenges.
-            </p>
+
+            {desc}
           </div>
           <div className={styles.people_banner}>
             <img
