@@ -7,7 +7,7 @@ import styles from "./BenchmarkForm.module.css";
 import { comicApi } from "src/services/comicApi";
 import {
   Edit as EditIcon,
-  Description as DescriptionIcon,
+  Visibility as VisibilityIcon,
 } from "@material-ui/icons";
 import { IBenchmark } from "src/types";
 
@@ -80,17 +80,23 @@ class BenchmarkForm extends React.Component<IProps, IState> {
               </div>
               <div className={styles.inputContainer}>
                 <label htmlFor="description">Description</label>
-                <Paper className={styles.desc}>
+                <Paper className={styles.descContainer}>
                   <Fab
                     size="small"
+                    className={styles.fabRoot}
                     onClick={this.enableEdit}
-                    style={{ float: "right" }}
+                    classes={{ label: styles.label, root: styles.fabRoot }}
+                    variant="extended"
+                    color="primary"
                   >
-                    {isEdit ? <DescriptionIcon /> : <EditIcon />}
+                    {isEdit ? <EditIcon /> : <VisibilityIcon />}
+                    {isEdit ? "Edit" : " Preview"}
                   </Fab>
                   {this.state.isEdit ? (
+                    <Markdown source={desc} className={styles.desc} />
+                  ) : (
                     <TextField
-                      style={{ width: "100%" }}
+                      className={styles.desc}
                       defaultValue={desc}
                       multiline={true}
                       onChange={(event: any) => {
@@ -100,8 +106,6 @@ class BenchmarkForm extends React.Component<IProps, IState> {
                         });
                       }}
                     />
-                  ) : (
-                    <Markdown source={desc} />
                   )}
                 </Paper>
               </div>

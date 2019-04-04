@@ -1,26 +1,30 @@
-import {
-  createMuiTheme,
-} from "@material-ui/core";
+import { createMuiTheme } from "@material-ui/core";
 
 export default createMuiTheme({
   typography: {
     useNextVariants: true,
   },
   overrides: {
-    MuiSvgIcon: {
-      root: {
-        color: "#000",
-      },
-    },
+    // MuiSvgIcon: {
+    //   root: {
+    //     color: "#000",
+    //   },
+    // },
     MuiButton: {
       textPrimary: {
-        color: "#1fb8ea",
         textTransform: "none",
         float: "right",
       },
     },
-    MuiModal: {
-      root: {},
+    MuiFab: {
+      label: {
+        textTransform: "none",
+      },
+    },
+    MuiTab: {
+      label: {
+        textTransform: "none",
+      },
     },
   },
   palette: {

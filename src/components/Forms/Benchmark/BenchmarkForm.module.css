@@ -19,9 +19,23 @@
   flex: 8;
   font-size: 15px;
 }
-.desc {
+.descContainer {
   flex: 8;
   padding: 10px;
+  position: relative;
   max-height: 500px;
+}
+.desc {
   overflow-y: scroll;
+  height: 490px;
+  width: 100%;
+}
+.fabRoot {
+  position: absolute !important;
+  width: 100px !important;
+  z-index: 1;
+  right: 0;
+}
+.label {
+  color: #fff;
 }
