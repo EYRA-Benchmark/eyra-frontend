@@ -1,5 +1,5 @@
 import * as React from "react";
-// import Prismic from "prismic-javascript";
+
 import { RouteComponentProps } from "react-router-dom";
 
 import { prismicApi } from "src/services/prismicApi";

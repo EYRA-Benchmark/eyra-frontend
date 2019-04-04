@@ -29,20 +29,32 @@ interface IValues {
   email: string;
   name: string;
   organization: string;
+  isSuccess: boolean;
+  isError: boolean;
 }
 
 const initialValues: IValues = {
   email: "",
   name: "",
   organization: "",
+  isSuccess: false,
+  isError: false,
 };
 
 const onSubmit = async (
   values: IValues,
   { setSubmitting }: FormikActions<IValues>,
 ) => {
-  await submitContactForm(values.name, values.organization, values.email);
-  setSubmitting(false);
+  const isSuccess = await submitContactForm(
+    values.name,
+    values.organization,
+    values.email,
+  );
+  values.isSuccess = isSuccess;
+  if (!isSuccess) {
+    values.isError = true;
+  }
+  setSubmitting(isSuccess);
 };
 
 const SubscriptionDialog: React.FunctionComponent = () => (
@@ -69,58 +81,69 @@ const SubscriptionDialog: React.FunctionComponent = () => (
             <div className={styles.mail}>
               <img src={MailImage} alt="Mail" />
             </div>
-            <form onSubmit={handleSubmit} className={styles.formContainer}>
-              <div
-                className={classNames(
-                  styles.wrapInput,
-                  styles.validateInput,
-                  errors.email && styles.alertValidate,
-                )}
-              >
+            {values.isSuccess ? (
+              <div className={styles.formContainer}>
+                <h3>Thank You!</h3>
+                <p>
+                  Your subscription has been confirmed. You've been added to our
+                  list and will hear from us soon.
+                </p>
+              </div>
+            ) : (
+              <form onSubmit={handleSubmit} className={styles.formContainer}>
+                <div
+                  className={classNames(
+                    styles.wrapInput,
+                    styles.validateInput,
+                    errors.email && styles.alertValidate,
+                  )}
+                >
+                  <input
+                    type="email"
+                    name="email"
+                    value={values.email}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    className={styles.input1}
+                    placeholder="Email"
+                  />
+                  {errors.email && touched.email && (
+                    <div style={{ color: "red", marginTop: ".5rem" }}>
+                      {errors.email}
+                    </div>
+                  )}
+                </div>
                 <input
-                  type="email"
-                  name="email"
-                  value={values.email}
+                  type="text"
+                  name="name"
+                  value={values.name}
                   onChange={handleChange}
                   onBlur={handleBlur}
                   className={styles.input1}
-                  placeholder="Email"
+                  placeholder="Name"
                 />
-                {errors.email && touched.email && (
-                  <div style={{ color: "red", marginTop: ".5rem" }}>
-                    {errors.email}
-                  </div>
-                )}
-              </div>
-              <input
-                type="text"
-                name="name"
-                value={values.name}
-                onChange={handleChange}
-                onBlur={handleBlur}
-                className={styles.input1}
-                placeholder="Name"
-              />
-              <input
-                type="text"
-                name="organization"
-                value={values.organization}
-                onChange={handleChange}
-                onBlur={handleBlur}
-                className={styles.input1}
-                placeholder="Organization"
-              />
-              <DialogActions>
-                <Button
-                  variant="outlined"
-                  color="primary"
-                  disabled={!isValid || isSubmitting}
-                  type="submit"
-                >
-                  Subscibe
-                </Button>
-              </DialogActions>
-            </form>
+                <input
+                  type="text"
+                  name="organization"
+                  value={values.organization}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  className={styles.input1}
+                  placeholder="Organization"
+                />
+                {values.isError ? <p>Please try again later!</p> : null}
+                <DialogActions>
+                  <Button
+                    variant="outlined"
+                    color="primary"
+                    disabled={!isValid || isSubmitting}
+                    type="submit"
+                  >
+                    Subscibe
+                  </Button>
+                </DialogActions>
+              </form>
+            )}
           </div>
         </DialogContent>
       </React.Fragment>
