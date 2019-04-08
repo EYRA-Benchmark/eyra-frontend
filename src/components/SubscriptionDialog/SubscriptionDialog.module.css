@@ -5,6 +5,8 @@
   display: flex;
 }
 .mail {
+  display: flex;
+  align-items: center;
   flex: 1;
 }
 .mail img {
@@ -65,7 +67,7 @@
 }
 
 .alertValidate::after {
-  content: "\f06a";
+  content: '\f06a';
   font-family: FontAwesome;
   display: block;
   position: absolute;
@@ -85,4 +87,17 @@
   flex-wrap: wrap;
   justify-content: center;
   margin-top: 30px;
+}
+.permission {
+  display: flex;
+}
+.permission p {
+  font-size: 12px;
+  margin-top: 0;
+}
+.intersts {
+  display: flex;
+  flex-direction: column;
+  font-size: 14px;
+  margin-bottom: 10px;
 }

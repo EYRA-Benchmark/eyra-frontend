@@ -1,7 +1,7 @@
 import React from "react";
 
 import classNames from "classnames";
-import { Formik, FormikActions } from "formik";
+import { Formik, FormikActions, FieldArray } from "formik";
 import * as yup from "yup";
 
 import {
@@ -23,12 +23,26 @@ const formSchema = yup.object().shape({
     .required(),
   name: yup.string(),
   organization: yup.string(),
+  permission: yup
+    .bool()
+    .test(
+      "permission",
+      "You have to agree with our Terms and Conditions!",
+      (value) => value === true,
+    )
+    .required("You have to agree with our Terms and Conditions!"),
 });
-
+const interests = [
+  "Setting up a benchmark",
+  "Submitting an algorithm",
+  "Stay up-to-date about EYRA platform",
+];
 interface IValues {
   email: string;
   name: string;
   organization: string;
+  intrests: string[];
+  permission: boolean;
   isSuccess: boolean;
   isError: boolean;
 }
@@ -37,6 +51,8 @@ const initialValues: IValues = {
   email: "",
   name: "",
   organization: "",
+  intrests: interests,
+  permission: false,
   isSuccess: false,
   isError: false,
 };
@@ -45,10 +61,12 @@ const onSubmit = async (
   values: IValues,
   { setSubmitting }: FormikActions<IValues>,
 ) => {
+  console.log(values);
   const isSuccess = await submitContactForm(
     values.name,
     values.organization,
     values.email,
+    values.intrests,
   );
   values.isSuccess = isSuccess;
   if (!isSuccess) {
@@ -71,11 +89,11 @@ const SubscriptionDialog: React.FunctionComponent = () => (
       isValid,
       errors,
       touched,
-      submitCount,
+      setFieldValue,
       isSubmitting,
     }) => (
       <React.Fragment>
-        <DialogTitle>Stay in touch</DialogTitle>
+        <DialogTitle>Sign up to stay up to date</DialogTitle>
         <DialogContent>
           <div className={styles.container}>
             <div className={styles.mail}>
@@ -131,6 +149,63 @@ const SubscriptionDialog: React.FunctionComponent = () => (
                   className={styles.input1}
                   placeholder="Organization"
                 />
+                <div className={styles.intersts}>
+                  <p>What is your main interest?</p>
+
+                  <FieldArray
+                    name="interests"
+                    render={(arrayHelpers) => (
+                      <div>
+                        {values.intrests.map((interest, index) => (
+                          <div key={index}>
+                            <label key={index}>
+                              <input
+                                name="interests"
+                                type="checkbox"
+                                value={interest}
+                                key={index}
+                                onChange={(e) => {
+                                  if (e.target.checked) {
+                                    arrayHelpers.push(interest);
+                                  } else {
+                                    const idx = values.intrests.indexOf(
+                                      interest,
+                                    );
+                                    arrayHelpers.remove(idx);
+                                  }
+                                }}
+                              />{" "}
+                              {interest}
+                            </label>
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                  />
+                </div>
+
+                <div className={styles.permission}>
+                  <input
+                    type="checkbox"
+                    name="permission"
+                    onChange={(event) => {
+                      const value = event.target.checked;
+                      setFieldValue("permission", value);
+                    }}
+                    checked={values.permission}
+                  />
+                  <p>
+                    The information you provide on this form will only be used
+                    to get in touch with you and to provide updates about the
+                    EYRA platform every once in a while.
+                  </p>
+                  {/* {errors.permission && (
+                    <div style={{ color: "red", marginTop: ".5rem" }}>
+                      {errors.permission}
+                    </div>
+                  )}*/}
+                </div>
+
                 {values.isError ? <p>Please try again later!</p> : null}
                 <DialogActions>
                   <Button
@@ -139,7 +214,7 @@ const SubscriptionDialog: React.FunctionComponent = () => (
                     disabled={!isValid || isSubmitting}
                     type="submit"
                   >
-                    Subscibe
+                    Subscribe
                   </Button>
                 </DialogActions>
               </form>

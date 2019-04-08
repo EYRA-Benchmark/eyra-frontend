@@ -1,14 +1,14 @@
-import React from 'react';
-import { Card, CardHeader, CardMedia, IconButton } from '@material-ui/core';
-import { IBenchmark } from 'src/types';
+import React from "react";
+import { Card, CardHeader, CardMedia, IconButton } from "@material-ui/core";
+import { IBenchmark } from "src/types";
 import {
   Description as DetailsIcon,
-  Edit as EditIcon
-} from '@material-ui/icons';
+  Edit as EditIcon,
+} from "@material-ui/icons";
 
-import FRBImage from 'src/assets/images/FRB.jpg';
-import styles from './BenchmarkCard.module.css';
-import { Link } from 'react-router-dom';
+import FRBImage from "src/assets/images/FRB.jpg";
+import styles from "./BenchmarkCard.module.css";
+import { Link } from "react-router-dom";
 
 interface IProps {
   benchmark: IBenchmark;
@@ -16,7 +16,8 @@ interface IProps {
 
 export const BenchmarkCard = (props: IProps) => {
   const benchmark = props.benchmark;
-  const canEdit = benchmark.permissions.indexOf('change_benchmark') > -1;
+  const canEdit = false;
+  // const canEdit = benchmark.permissions.indexOf("change_benchmark") > -1;
 
   return (
     <Card square={true} className={styles.card}>
@@ -33,7 +34,7 @@ export const BenchmarkCard = (props: IProps) => {
         <CardHeader
           title={benchmark.name}
           titleTypographyProps={{
-            variant: 'title'
+            variant: "title",
           }}
         />
       )}
@@ -44,7 +45,7 @@ export const getHeader = (benchmark: IBenchmark) => (
   <CardHeader
     title={benchmark.name}
     titleTypographyProps={{
-      variant: 'title'
+      variant: "title",
     }}
     action={
       <div>
