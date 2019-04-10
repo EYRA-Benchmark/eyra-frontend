@@ -1,0 +1,43 @@
+.main {
+  display: block;
+  margin: 0 auto;
+  max-width: 50%;
+}
+.paper {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+}
+.avatar {
+  background-color: var(--primary-color) !important;
+}
+.form {
+  width: 100%;
+}
+.submit {
+  margin-top: 24px !important;
+}
+.googleLogin {
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  padding: 10px;
+}
+.forgotPasswordLink {
+  text-align: center;
+  padding: 20px;
+  color: var(--primary-color);
+}
+.tabsContainer {
+  background-color: aliceblue;
+}
+@media (max-width: 600px) {
+  .main {
+    width: 100%;
+  }
+}
+@media (max-width: 768px) {
+  .main {
+    width: 100%;
+  }
+}
