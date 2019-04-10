@@ -18,10 +18,10 @@
   color: black;
 }
 .nav a:hover {
-  border-bottom: 2px solid var(--dark-color);
+  border-bottom: 2px solid #1fb8ea;
 }
 li a.active {
-  color: var(--primary-color);
+  color: #1fb8ea;
 }
 
 @media (max-width: 600px) {

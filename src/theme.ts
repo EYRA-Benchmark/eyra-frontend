@@ -26,6 +26,15 @@ export default createMuiTheme({
         textTransform: "none",
       },
     },
+    MuiTypography: {
+      h5: {
+        color: "#1fb8ea",
+        margin: "20px 0",
+      },
+      subtitle1: {
+        color: "#1fb8ea",
+      },
+    },
   },
   palette: {
     primary: {
