@@ -2,12 +2,12 @@ import {
   ExpansionPanel,
   ExpansionPanelDetails,
   ExpansionPanelSummary,
-  Typography
-} from '@material-ui/core';
-import { ExpandMore as ExpandMoreIcon } from '@material-ui/icons';
-import * as React from 'react';
-import VerticalTabs from '../VerticalTabs/VerticalTabs';
-import styles from './ExpansionContainer.module.css';
+  Typography,
+} from "@material-ui/core";
+import { ExpandMore as ExpandMoreIcon } from "@material-ui/icons";
+import * as React from "react";
+import VerticalTabs from "../VerticalTabs";
+import styles from "./ExpansionContainer.module.css";
 interface IProps {
   testDataSets: any[];
   trainingDataSets: any[];
@@ -23,7 +23,11 @@ class ExpansionContainer extends React.Component<IProps, {}> {
             <Typography>Training Data Sets</Typography>
           </ExpansionPanelSummary>
           <ExpansionPanelDetails className={styles.container}>
-            <VerticalTabs dataSets={trainingDataSets} isTestData={false} />
+            {trainingDataSets.length > 0 ? (
+              <VerticalTabs dataSets={trainingDataSets} isTestData={false} />
+            ) : (
+              <p>Training data is not available</p>
+            )}
           </ExpansionPanelDetails>
         </ExpansionPanel>
         <ExpansionPanel>
@@ -31,7 +35,11 @@ class ExpansionContainer extends React.Component<IProps, {}> {
             <Typography>Test Data Sets</Typography>
           </ExpansionPanelSummary>
           <ExpansionPanelDetails className={styles.container}>
-            <VerticalTabs dataSets={testDataSets} isTestData={true} />
+            {testDataSets.length > 0 ? (
+              <VerticalTabs dataSets={testDataSets} isTestData={true} />
+            ) : (
+              <p>Test data is not available</p>
+            )}
           </ExpansionPanelDetails>
         </ExpansionPanel>
       </React.Fragment>

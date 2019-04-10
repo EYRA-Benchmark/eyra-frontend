@@ -7,6 +7,9 @@
 .detailsContainer {
   min-height: 200px;
 }
+.detailsContainer a {
+  color: #1fb8ea;
+}
 .paper {
   height: 200px;
   padding: 10px;
