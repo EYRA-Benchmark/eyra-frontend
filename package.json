@@ -47,7 +47,7 @@
     "tslint": "^5.12.1",
     "tslint-config-prettier": "^1.18.0",
     "tslint-react": "3.6.0",
-    "typescript": "3.4.1",
+    "typescript": "3.4.3",
     "typescript-plugin-css-modules": "^1.0.5",
     "wait-on": "^3.1.0"
   },
