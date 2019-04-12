@@ -7,6 +7,7 @@ import {
   ISubmission,
   IUser,
   UUID4,
+  IJob,
 } from "../types";
 
 import { objectToQueryParams } from "../utils";
@@ -54,7 +55,9 @@ export class ComicApi {
       throw e;
     }
   }
-
+  async jobs(): Promise<IJob[]> {
+    return (await this.axios.get<IJob[]>("jobs/")).data;
+  }
   async benchmarks(): Promise<IBenchmark[]> {
     return (await this.axios.get<IBenchmark[]>("benchmarks/")).data;
   }

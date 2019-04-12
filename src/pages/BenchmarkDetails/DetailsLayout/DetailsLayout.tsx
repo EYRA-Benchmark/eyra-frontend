@@ -1,12 +1,13 @@
-import { Grid, Paper, Tab, Tabs, Typography } from '@material-ui/core';
-import Markdown from '@nteract/markdown';
-import * as React from 'react';
-import AlgorithmSubmissionForm from 'src/components/Forms/Algorithm/AlgorithmSubmission';
-import Datasets from './DataSets/DataSets';
-import styles from './DetailsLayout.module.css';
-import Leaderboard from '../../../components/Leaderboard/index';
+import { Grid, Paper, Tab, Tabs, Typography } from "@material-ui/core";
+import Markdown from "@nteract/markdown";
+import * as React from "react";
+import AlgorithmSubmissionForm from "src/components/Forms/Algorithm/AlgorithmSubmission";
+import Datasets from "./DataSets/DataSets";
+import styles from "./DetailsLayout.module.css";
+import Leaderboard from "../../../components/Leaderboard/index";
 
-import { IBenchmark } from 'src/types/benchmark';
+import { IBenchmark } from "src/types/benchmark";
+import Logs from "src/components/Logs";
 
 interface IContainerProps {
   children: React.ReactNode;
@@ -31,11 +32,11 @@ interface IState {
 }
 class Details extends React.Component<IProps, IState> {
   state = {
-    value: 0
+    value: 0,
   };
   handleChange = (event: any, value: number) => {
     this.setState({ value });
-  };
+  }
 
   render() {
     const { value } = this.state;
@@ -48,8 +49,8 @@ class Details extends React.Component<IProps, IState> {
           ? [
               {
                 data: data.test_data_file,
-                ground_truth: data.test_ground_truth_data_file
-              }
+                ground_truth: data.test_ground_truth_data_file,
+              },
             ]
           : [];
 
@@ -59,8 +60,8 @@ class Details extends React.Component<IProps, IState> {
           ? [
               {
                 data: data.training_data_file,
-                ground_truth: data.training_ground_truth_data_file
-              }
+                ground_truth: data.training_ground_truth_data_file,
+              },
             ]
           : [];
       return (
@@ -87,6 +88,7 @@ class Details extends React.Component<IProps, IState> {
                 <Tab label="Overview" />
                 <Tab label="Leaderboard" />
                 <Tab label="DataSets" />
+                <Tab label="Logs" />
                 <Tab label="Submit" />
               </Tabs>
               {value === 0 && (
@@ -111,6 +113,11 @@ class Details extends React.Component<IProps, IState> {
                 </TabContainer>
               )}
               {value === 3 && (
+                <TabContainer>
+                  <Logs />
+                </TabContainer>
+              )}
+              {value === 4 && (
                 <TabContainer>
                   <AlgorithmSubmissionForm benchmarkId={data.id} />
                 </TabContainer>
