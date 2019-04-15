@@ -1,6 +1,11 @@
 import classNames from "classnames";
 import * as React from "react";
-import { Route, RouteComponentProps, Switch, withRouter } from "react-router-dom";
+import {
+  Route,
+  RouteComponentProps,
+  Switch,
+  withRouter,
+} from "react-router-dom";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
 
 import Footer from "../Footer/Footer";
@@ -24,6 +29,7 @@ const defaultPage = () => (
       <div className={styles.bannerBackground} id="about">
         <img src={paw} />
       </div>
+
       <TransitionGroup style={{ width: "100%", height: "100%" }}>
         <CSSTransition
           key={location.pathname}

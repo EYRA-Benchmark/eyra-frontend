@@ -2,10 +2,10 @@ import classNames from "classnames";
 import Prismic from "prismic-javascript";
 import * as React from "react";
 import { RouteComponentProps } from "react-router-dom";
-
+import { KeyboardArrowDown as DownIcon } from "@material-ui/icons/";
 import { prismicApi } from "src/services/prismicApi";
 import { comicApi } from "src/services/comicApi";
-
+import { Fab } from "@material-ui/core";
 import { IBenchmark } from "src/types";
 
 import Spinner from "src/components/Spinner/index";
@@ -63,6 +63,12 @@ class Index extends React.Component<RouteComponentProps<{}>, IState> {
     });
   }
 
+  scrollToNext() {
+    const benchmarkSection = document.getElementById("benchmarks");
+    if (benchmarkSection) {
+      benchmarkSection.scrollIntoView({ behavior: "smooth", block: "center" });
+    }
+  }
   public render() {
     let challengeContent = null;
 
@@ -96,9 +102,16 @@ class Index extends React.Component<RouteComponentProps<{}>, IState> {
             <img src={bannerImage} alt="logo" />
           </div>
         </div>
+
+        <div className={styles.downBtn}>
+          <Fab color="primary" aria-label="Down" onClick={this.scrollToNext}>
+            <DownIcon />
+          </Fab>
+        </div>
+
         <div className={styles.bg}>
           <div className={styles.content}>
-            <div className={styles.section}>
+            <div className={styles.section} id="benchmarks">
               <div className={styles.titleContainer}>
                 <h3 className={classNames(styles.sectionHeader)}>Benchmarks</h3>
                 {/* <a href="/organize_benchmark">Organize Benchmark</a> */}

@@ -1,7 +1,7 @@
-import * as React from 'react';
-import { NavLink } from 'react-router-dom';
-import { isLoggedIn, IUserProps, withUser } from '../../../context/User';
-import styles from './NavigationMenu.module.css';
+import * as React from "react";
+import { NavLink } from "react-router-dom";
+import { isLoggedIn, IUserProps, withUser } from "../../../context/User";
+import styles from "./NavigationMenu.module.css";
 
 function NavigationMenu({ user, logout }: IUserProps) {
   return (
@@ -17,11 +17,11 @@ function NavigationMenu({ user, logout }: IUserProps) {
             Benchmarks
           </NavLink>
         </li>
-        <li>
+        {/* <li>
           <NavLink to="/datasets" activeClassName={styles.active}>
             Datasets
           </NavLink>
-        </li>
+        </li> */}
         <li>
           {isLoggedIn(user) ? (
             <NavLink

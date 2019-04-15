@@ -17,12 +17,6 @@ export const ItemsList = () => {
         </ListItemAvatar>
         <ListItemText primary="FRB Benchmark" />
       </ListItem>
-      <ListItem alignItems="center">
-        <ListItemAvatar>
-          <Avatar alt="FRB" src={FRBImage} />
-        </ListItemAvatar>
-        <ListItemText primary="Demo Challenge" />
-      </ListItem>
     </List>
   );
 };

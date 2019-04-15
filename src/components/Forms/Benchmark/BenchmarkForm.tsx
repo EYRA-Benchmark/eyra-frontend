@@ -1,23 +1,23 @@
-import { Field, Form, Formik } from "formik";
-import { FormikActions } from "formik";
-import React from "react";
+import { Field, Form, Formik } from 'formik';
+import { FormikActions } from 'formik';
+import React from 'react';
 // import CustomTextEditor from "../CustomTextEditor";
-import Markdown from "@nteract/markdown";
+import Markdown from '@nteract/markdown';
 import {
   Button,
   Fab,
   Paper,
   TextField,
-  // DialogContent,
-  // DialogTitle,
-} from "@material-ui/core";
-import styles from "./BenchmarkForm.module.css";
-import { comicApi } from "src/services/comicApi";
+  Dialog,
+  DialogContent
+} from '@material-ui/core';
+import styles from './BenchmarkForm.module.css';
+import { comicApi } from 'src/services/comicApi';
 import {
   Edit as EditIcon,
-  Visibility as VisibilityIcon,
-} from "@material-ui/icons";
-import { IBenchmark } from "src/types";
+  Visibility as VisibilityIcon
+} from '@material-ui/icons';
+import { IBenchmark } from 'src/types';
 interface IProps {
   benchmark: IBenchmark;
 }
@@ -27,29 +27,23 @@ interface IValues {
   name: string;
   short_description: string;
   description: string;
+  isSaved: boolean;
 }
 
 const onSubmit = async (
   values: IValues,
-  { setSubmitting }: FormikActions<IValues>,
+  { setSubmitting }: FormikActions<IValues>
 ) => {
   try {
     await comicApi
       .benchmarkSubmission(values.id, {
         name: values.name,
         description: values.description,
-        short_description: values.short_description,
+        short_description: values.short_description
       })
-      .then((response) => {
+      .then(response => {
         if (response) {
-          alert("Thank You!");
-          // <DialogTitle id="alert-dialog-title">{"Use Google's location service?"}</DialogTitle>
-          // <DialogContent>
-          //   <DialogContentText id="alert-dialog-description">
-          //     Let Google help apps determine location. This means sending anonymous location data to
-          //     Google, even when no apps are running.
-          //   </DialogContentText>
-          // </DialogContent>;
+          values.isSaved = true;
         }
       });
   } catch (e) {
@@ -61,7 +55,7 @@ const onSubmit = async (
 class BenchmarkForm extends React.Component<IProps> {
   state = {
     isEdit: false,
-    desc: this.props.benchmark.description,
+    desc: this.props.benchmark.description
   };
 
   render() {
@@ -72,11 +66,12 @@ class BenchmarkForm extends React.Component<IProps> {
       name,
       short_description,
       description: desc,
+      isSaved: false
     };
 
     return (
       <Formik initialValues={initialValues} onSubmit={onSubmit}>
-        {({ isSubmitting, setFieldValue }) => (
+        {({ isSubmitting, setFieldValue, values }) => (
           <Form>
             <div className={styles.container}>
               <div className={styles.inputContainer}>
@@ -108,7 +103,7 @@ class BenchmarkForm extends React.Component<IProps> {
                     color="primary"
                   >
                     {isEdit ? <EditIcon /> : <VisibilityIcon />}
-                    {isEdit ? "Edit" : " Preview"}
+                    {isEdit ? 'Edit' : ' Preview'}
                   </Fab>
                   {this.state.isEdit ? (
                     <Markdown source={desc} className={styles.desc} />
@@ -118,9 +113,9 @@ class BenchmarkForm extends React.Component<IProps> {
                       defaultValue={desc}
                       multiline={true}
                       onChange={(event: any) => {
-                        setFieldValue("description", event.target.value);
+                        setFieldValue('description', event.target.value);
                         this.setState({
-                          desc: event.target.value,
+                          desc: event.target.value
                         });
                       }}
                     />
@@ -143,6 +138,16 @@ class BenchmarkForm extends React.Component<IProps> {
               </div>
 
               <div className={styles.inputContainer}>
+                <Dialog
+                  open={values.isSaved}
+                  onClose={() => {
+                    setFieldValue('isSaved', false);
+                  }}
+                >
+                  <DialogContent>
+                    Benchmarks data saved successfully
+                  </DialogContent>
+                </Dialog>
                 <Button
                   variant="outlined"
                   color="primary"
@@ -160,9 +165,9 @@ class BenchmarkForm extends React.Component<IProps> {
   }
   private enableEdit = () => {
     this.setState({
-      isEdit: !this.state.isEdit,
+      isEdit: !this.state.isEdit
     });
-  }
+  };
 }
 
 export default BenchmarkForm;

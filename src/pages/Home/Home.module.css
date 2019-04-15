@@ -66,7 +66,11 @@
 .divider {
   border-bottom: 1px solid #ccc;
 }
-
+.downBtn {
+  position: absolute;
+  right: 50%;
+  bottom: 10%;
+}
 .caption {
   position: absolute;
   left: 10%;
@@ -110,7 +114,7 @@
 }
 
 .bg:before {
-  content: "";
+  content: '';
   position: absolute;
   z-index: -1;
   width: 100%;
