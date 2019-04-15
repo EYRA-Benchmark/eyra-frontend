@@ -29,7 +29,7 @@ class About extends React.Component<RouteComponentProps<{}>, {}> {
 
             {desc}
           </div>
-          <div className={styles.people_banner}>
+          {/* <div className={styles.people_banner}>
             <img
               className={styles.people}
               src={
@@ -72,7 +72,7 @@ class About extends React.Component<RouteComponentProps<{}>, {}> {
               alt={"foto Maarten van Meersbergen"}
               title={"Maarten van Meersbergen"}
             />
-          </div>
+          </div> */}
         </div>
       </React.Fragment>
     );

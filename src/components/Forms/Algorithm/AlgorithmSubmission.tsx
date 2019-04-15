@@ -47,6 +47,9 @@ const onSubmit = async (
 class AlgorithmSubmission extends React.Component<IProps, {}> {
   render() {
     const { benchmarkId } = this.props;
+    const defaultValue =
+      "<b>Add Description Here..</b><br/>" +
+      "<p>Here You can add description or paste HTML/ Markdown code for description in left Container</p>";
     initialValues.id = benchmarkId;
     return (
       <Formik initialValues={initialValues} onSubmit={onSubmit}>
@@ -65,6 +68,9 @@ class AlgorithmSubmission extends React.Component<IProps, {}> {
               <div className={styles.inputContainer}>
                 <label htmlFor="description">Description</label>
                 <CustomTextEditor
+                  defaultValue={defaultValue}
+                  defaultFormat="html"
+                  showEditor={true}
                   onChange={(value) => {
                     setFieldValue("description", value);
                   }}

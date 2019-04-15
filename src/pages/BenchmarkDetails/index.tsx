@@ -1,12 +1,12 @@
-import * as React from 'react';
-import { RouteComponentProps, withRouter } from 'react-router';
+import * as React from "react";
+import { RouteComponentProps, withRouter } from "react-router";
 
-import { comicApi } from 'src/services/comicApi';
+import { comicApi } from "src/services/comicApi";
 
-import { IBenchmark } from 'src/types/benchmark';
+import { IBenchmark } from "src/types/benchmark";
 
-import Spinner from 'src/components/Spinner/index';
-import Details from './DetailsLayout/DetailsLayout';
+import Spinner from "src/components/Spinner/index";
+import Details from "./DetailsLayout/";
 
 interface IState {
   benchmark: IBenchmark | null;
@@ -17,12 +17,12 @@ class BenchmarkDetails extends React.Component<
   IState
 > {
   state = {
-    benchmark: null
+    benchmark: null,
   };
   async componentDidMount() {
     // await new Promise(resolve => setTimeout(resolve, 2000));
     this.setState({
-      benchmark: await comicApi.benchmark(this.props.match.params.id)
+      benchmark: await comicApi.benchmark(this.props.match.params.id),
     });
   }
   render() {

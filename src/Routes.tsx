@@ -6,7 +6,7 @@ import BenchmarkDetails from "src/pages/BenchmarkDetails";
 import Benchmarks from "./pages/Benchmarks";
 import Login from "./pages/Login";
 import NewsDetails from "./pages/NewsDetails";
-import EditBenchmark from "src/pages/Benchmarks/EditBenchmark/EditBenchmark";
+import EditBenchmark from "src/pages/Benchmarks/EditBenchmark/";
 import Datasets from "src/pages/DatasetDetails/";
 export default () => (
   <React.Fragment>

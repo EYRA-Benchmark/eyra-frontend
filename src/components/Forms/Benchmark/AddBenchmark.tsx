@@ -31,6 +31,9 @@ const onSubmit = async (
 };
 class OrganizeBenchmark extends React.Component<{}, {}> {
   render() {
+    const defaultValue =
+      "<b>Add Description Here..</b><br/>" +
+      "<p>Here You can add description or paste HTML/ Markdown code for description in left Container</p>";
     return (
       <Formik initialValues={initialValues} onSubmit={onSubmit}>
         {({ isSubmitting, setFieldValue }) => (
@@ -48,6 +51,9 @@ class OrganizeBenchmark extends React.Component<{}, {}> {
               <div className={styles.inputContainer}>
                 <label htmlFor="description">Description</label>
                 <CustomTextEditor
+                  defaultValue={defaultValue}
+                  defaultFormat="html"
+                  showEditor={true}
                   onChange={(value) => {
                     setFieldValue("description", value);
                   }}

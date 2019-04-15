@@ -1,8 +1,16 @@
 import { Field, Form, Formik } from "formik";
 import { FormikActions } from "formik";
 import React from "react";
+// import CustomTextEditor from "../CustomTextEditor";
 import Markdown from "@nteract/markdown";
-import { Button, Fab, Paper, TextField } from "@material-ui/core";
+import {
+  Button,
+  Fab,
+  Paper,
+  TextField,
+  // DialogContent,
+  // DialogTitle,
+} from "@material-ui/core";
 import styles from "./BenchmarkForm.module.css";
 import { comicApi } from "src/services/comicApi";
 import {
@@ -10,14 +18,10 @@ import {
   Visibility as VisibilityIcon,
 } from "@material-ui/icons";
 import { IBenchmark } from "src/types";
-
 interface IProps {
   benchmark: IBenchmark;
 }
-interface IState {
-  isEdit: boolean;
-  desc: string;
-}
+
 interface IValues {
   id: string;
   name: string;
@@ -30,18 +34,31 @@ const onSubmit = async (
   { setSubmitting }: FormikActions<IValues>,
 ) => {
   try {
-    await comicApi.benchmarkSubmission(values.id, {
-      name: values.name,
-      description: values.description,
-      short_description: values.short_description,
-    });
+    await comicApi
+      .benchmarkSubmission(values.id, {
+        name: values.name,
+        description: values.description,
+        short_description: values.short_description,
+      })
+      .then((response) => {
+        if (response) {
+          alert("Thank You!");
+          // <DialogTitle id="alert-dialog-title">{"Use Google's location service?"}</DialogTitle>
+          // <DialogContent>
+          //   <DialogContentText id="alert-dialog-description">
+          //     Let Google help apps determine location. This means sending anonymous location data to
+          //     Google, even when no apps are running.
+          //   </DialogContentText>
+          // </DialogContent>;
+        }
+      });
   } catch (e) {
     console.log(e);
   }
   setSubmitting(false);
 };
 
-class BenchmarkForm extends React.Component<IProps, IState> {
+class BenchmarkForm extends React.Component<IProps> {
   state = {
     isEdit: false,
     desc: this.props.benchmark.description,
@@ -56,6 +73,7 @@ class BenchmarkForm extends React.Component<IProps, IState> {
       short_description,
       description: desc,
     };
+
     return (
       <Formik initialValues={initialValues} onSubmit={onSubmit}>
         {({ isSubmitting, setFieldValue }) => (
@@ -106,6 +124,20 @@ class BenchmarkForm extends React.Component<IProps, IState> {
                         });
                       }}
                     />
+                    // <CustomTextEditor
+                    //   defaultValue={desc}
+                    //   defaultFormat="markdown"
+                    //   showEditor={false}
+                    //   onChange={(value) => {
+                    //     setFieldValue("description", value);
+                    //     this.setState({
+                    //       desc: RichTextEditor.createValueFromString(
+                    //         value,
+                    //         "markdown",
+                    //       ),
+                    //     });
+                    //   }}
+                    // />
                   )}
                 </Paper>
               </div>
@@ -117,7 +149,7 @@ class BenchmarkForm extends React.Component<IProps, IState> {
                   disabled={isSubmitting}
                   type="submit"
                 >
-                  Submit
+                  Save
                 </Button>
               </div>
             </div>

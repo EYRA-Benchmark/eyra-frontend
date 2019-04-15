@@ -1,56 +1,63 @@
-import React from "react";
-import RichTextEditor from "react-rte";
-import styles from "./CustomTextEditor.module.css";
+import React from 'react';
+import RichTextEditor from 'react-rte';
+import styles from './CustomTextEditor.module.css';
 
 interface IProps {
   onChange: (value: string) => void;
+  showEditor: boolean;
+  defaultValue: string;
+  defaultFormat: string;
 }
 class CustomTextEditor extends React.Component<IProps, {}> {
   state = {
-    value: RichTextEditor.createValueFromString(
-      "<b>Add Description Here..</b><br/>" +
-      "<p>Here You can add description or paste HTML/ Markdown code for description in left Container</p>",
-      "html",
-    ),
     // value: RichTextEditor.createValueFromString(
-    //   this.props.benchmarkDesc,
-    //   'markdown'
+    //   "<b>Add Description Here..</b><br/>" +
+    //     "<p>Here You can add description or paste HTML/ Markdown code for description in left Container</p>",
+    //   "html",
     // ),
-    format: "html",
+    value: RichTextEditor.createValueFromString(
+      this.props.defaultValue,
+      this.props.defaultFormat
+    ),
+    format: this.props.defaultFormat
   };
   setDesc = (value: any) => {
     this.setState({ value });
     this.props.onChange(
-      value.toString("markdown"),
+      value.toString('markdown')
     ); /** Description will be submitted as markdown only */
-  }
+  };
   onChangeSource = (event: any) => {
     const source = event.target.value;
     const oldValue = this.state.value;
     this.setState({
-      value: oldValue.setContentFromString(source, this.state.format),
+      value: oldValue.setContentFromString(source, this.state.format)
     });
-  }
+  };
 
   onChangeFormat = (event: any) => {
     this.setState({ format: event.target.value });
-  }
+  };
 
   render() {
     const { value, format } = this.state;
-    console.log(value);
+    const { showEditor } = this.props;
+    const textArea = (
+      <div className={styles.col1}>
+        <textarea
+          placeholder="Here You can see HTML or Markdown code for Description."
+          value={value.toString(format)}
+          onChange={this.onChangeSource}
+          className={styles.sourceContainer}
+        />
+      </div>
+    );
     return (
       <React.Fragment>
         <div className={styles.descContainer}>
-          <div style={{ display: "flex" }}>
-            <div className={styles.col1}>
-              <textarea
-                placeholder="Here You can see HTML or Markdown code for Description."
-                value={value.toString(format)}
-                onChange={this.onChangeSource}
-                className={styles.sourceContainer}
-              />
-            </div>
+          <div style={{ display: 'flex' }}>
+            {showEditor ? textArea : null}
+
             <div className={styles.col1}>
               <RichTextEditor
                 value={value}
@@ -58,7 +65,7 @@ class CustomTextEditor extends React.Component<IProps, {}> {
                 rootStyle={{
                   minHeight: 400,
                   maxHeight: 400,
-                  overflowY: "scroll",
+                  overflowY: 'scroll'
                 }}
               />
             </div>
@@ -69,7 +76,7 @@ class CustomTextEditor extends React.Component<IProps, {}> {
                 type="radio"
                 name="format"
                 value="html"
-                checked={format === "html"}
+                checked={format === 'html'}
                 onChange={this.onChangeFormat}
               />
               <span>HTML</span>
@@ -79,7 +86,7 @@ class CustomTextEditor extends React.Component<IProps, {}> {
                 type="radio"
                 name="format"
                 value="markdown"
-                checked={format === "markdown"}
+                checked={format === 'markdown'}
                 onChange={this.onChangeFormat}
               />
               <span>Markdown</span>

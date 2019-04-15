@@ -1,20 +1,20 @@
-import React from "react";
+import React from 'react';
 
-import classNames from "classnames";
-import { Formik, FormikActions, FieldArray } from "formik";
-import * as yup from "yup";
+import classNames from 'classnames';
+import { Formik, FormikActions, FieldArray } from 'formik';
+import * as yup from 'yup';
 
 import {
   Button,
   DialogActions,
   DialogContent,
-  DialogTitle,
-} from "@material-ui/core";
+  DialogTitle
+} from '@material-ui/core';
 
-import styles from "./SubscriptionDialog.module.css";
+import styles from './SubscriptionDialog.module.css';
 
-import MailImage from "src/assets/images/mail.png";
-import { submitContactForm } from "src/services/contactFormSubmission";
+import MailImage from 'src/assets/images/mail.png';
+import { submitContactForm } from 'src/services/contactFormSubmission';
 
 const formSchema = yup.object().shape({
   email: yup
@@ -26,16 +26,16 @@ const formSchema = yup.object().shape({
   permission: yup
     .bool()
     .test(
-      "permission",
-      "You have to agree with our Terms and Conditions!",
-      (value) => value === true,
+      'permission',
+      'You have to agree with our Terms and Conditions!',
+      value => value === true
     )
-    .required("You have to agree with our Terms and Conditions!"),
+    .required('You have to agree with our Terms and Conditions!')
 });
 const interests = [
-  "Setting up a benchmark",
-  "Submitting an algorithm",
-  "Stay up-to-date about EYRA platform",
+  'Setting up a benchmark',
+  'Submitting an algorithm',
+  'Stay up-to-date about EYRA platform'
 ];
 interface IValues {
   email: string;
@@ -48,25 +48,24 @@ interface IValues {
 }
 
 const initialValues: IValues = {
-  email: "",
-  name: "",
-  organization: "",
+  email: '',
+  name: '',
+  organization: '',
   intrests: interests,
   permission: false,
   isSuccess: false,
-  isError: false,
+  isError: false
 };
 
 const onSubmit = async (
   values: IValues,
-  { setSubmitting }: FormikActions<IValues>,
+  { setSubmitting }: FormikActions<IValues>
 ) => {
-  console.log(values);
   const isSuccess = await submitContactForm(
     values.name,
     values.organization,
     values.email,
-    values.intrests,
+    values.intrests
   );
   values.isSuccess = isSuccess;
   if (!isSuccess) {
@@ -90,10 +89,10 @@ const SubscriptionDialog: React.FunctionComponent = () => (
       errors,
       touched,
       setFieldValue,
-      isSubmitting,
+      isSubmitting
     }) => (
       <React.Fragment>
-        <DialogTitle>Sign up to stay up to date</DialogTitle>
+        <DialogTitle>Subscribe to stay up to date</DialogTitle>
         <DialogContent>
           <div className={styles.container}>
             <div className={styles.mail}>
@@ -113,7 +112,7 @@ const SubscriptionDialog: React.FunctionComponent = () => (
                   className={classNames(
                     styles.wrapInput,
                     styles.validateInput,
-                    errors.email && styles.alertValidate,
+                    errors.email && styles.alertValidate
                   )}
                 >
                   <input
@@ -126,7 +125,7 @@ const SubscriptionDialog: React.FunctionComponent = () => (
                     placeholder="Email"
                   />
                   {errors.email && touched.email && (
-                    <div style={{ color: "red", marginTop: ".5rem" }}>
+                    <div style={{ color: 'red', marginTop: '.5rem' }}>
                       {errors.email}
                     </div>
                   )}
@@ -154,7 +153,7 @@ const SubscriptionDialog: React.FunctionComponent = () => (
 
                   <FieldArray
                     name="interests"
-                    render={(arrayHelpers) => (
+                    render={arrayHelpers => (
                       <div>
                         {values.intrests.map((interest, index) => (
                           <div key={index}>
@@ -164,17 +163,17 @@ const SubscriptionDialog: React.FunctionComponent = () => (
                                 type="checkbox"
                                 value={interest}
                                 key={index}
-                                onChange={(e) => {
+                                onChange={e => {
                                   if (e.target.checked) {
                                     arrayHelpers.push(interest);
                                   } else {
                                     const idx = values.intrests.indexOf(
-                                      interest,
+                                      interest
                                     );
                                     arrayHelpers.remove(idx);
                                   }
                                 }}
-                              />{" "}
+                              />{' '}
                               {interest}
                             </label>
                           </div>
@@ -188,9 +187,9 @@ const SubscriptionDialog: React.FunctionComponent = () => (
                   <input
                     type="checkbox"
                     name="permission"
-                    onChange={(event) => {
+                    onChange={event => {
                       const value = event.target.checked;
-                      setFieldValue("permission", value);
+                      setFieldValue('permission', value);
                     }}
                     checked={values.permission}
                   />
