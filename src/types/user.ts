@@ -1,3 +1,5 @@
+import { UUID4 } from './utils';
+
 export interface IUser {
   email: string;
   first_name: string;
@@ -5,4 +7,7 @@ export interface IUser {
   username: string;
   groups: any[];
   id?: number;
+}
+export interface IResponse {
+  token: UUID4;
 }

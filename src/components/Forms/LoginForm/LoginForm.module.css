@@ -3,6 +3,32 @@
   margin: 0 auto;
   max-width: 50%;
 }
+.container {
+  display: flex;
+  flex: 1;
+  min-height: 200px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.input {
+  display: block;
+  width: 100%;
+  height: 40px;
+  background: #f8f7f7;
+  line-height: 1.5;
+  border: none;
+  border-radius: 5px;
+  padding: 0 10px;
+  font-size: 15px;
+  margin-top: 10px;
+}
+.error {
+  color: #ff0000;
+  width: 100%;
+}
+
 .paper {
   display: flex;
   flex-direction: column;

@@ -104,7 +104,7 @@ class Index extends React.Component<RouteComponentProps<{}>, IState> {
         </div>
 
         <div className={styles.downBtn}>
-          <Fab color="primary" aria-label="Down" onClick={this.scrollToNext}>
+          <Fab color="primary" aria-label="Down" onClick={this.scrollToNext} title="Scroll Down">
             <DownIcon />
           </Fab>
         </div>

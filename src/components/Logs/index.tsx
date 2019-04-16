@@ -44,7 +44,7 @@ class Logs extends React.Component {
     });
   }
   private getContent() {
-    if (this.state.logs === null) {
+    if (this.state.jobs === null) {
       return <Spinner />;
     } else {
       const job = this.state.jobs[0];
