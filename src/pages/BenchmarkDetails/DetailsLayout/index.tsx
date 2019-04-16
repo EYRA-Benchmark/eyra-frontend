@@ -69,12 +69,11 @@ class Details extends React.Component<IProps, IState> {
           <Grid item={true} xs={12} sm={12} md={12}>
             <Paper className={styles.paper}>
               <h2>{data.name}</h2>
-              <p>
-                <Markdown
-                  source={data.short_description}
-                  className={styles.container}
-                />
-              </p>
+              {/* <Markdown
+                source={data.short_description}
+                className={styles.container}
+              /> */}
+              <p>{data.short_description}</p>
             </Paper>
           </Grid>
           <Grid item={true} xs={12}>
