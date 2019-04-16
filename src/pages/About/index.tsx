@@ -29,50 +29,6 @@ class About extends React.Component<RouteComponentProps<{}>, {}> {
 
             {desc}
           </div>
-          {/* <div className={styles.people_banner}>
-            <img
-              className={styles.people}
-              src={
-                "https://www.esciencecenter.nl/img/team/Adrienne_Mendrik-eScience-web.jpg"
-              }
-              alt={"foto Adriënne Mendrik"}
-              title={"Adriënne Mendrik"}
-            />
-            <img
-              className={styles.people}
-              src={"https://www.esciencecenter.nl/img/team/roel.jpg"}
-              alt={"foto Roel Zinkstok"}
-              title={"Roel Zinkstok"}
-            />
-            <img
-              className={styles.people}
-              src={"https://www.esciencecenter.nl/img/team/Tom_%28002%29.jpg"}
-              alt={"foto Tom Klaver"}
-              title={"Tom Klaver"}
-            />
-            <img
-              className={styles.people}
-              src={"https://www.esciencecenter.nl/img/team/pawar_%281%29.jpg"}
-              alt={"foto Pushpanjali Pawar"}
-              title={"Pushpanjali Pawar"}
-            />
-            <img
-              className={styles.people}
-              src={
-                "https://www.esciencecenter.nl/img/team/carlos-martinez-ortiz.jpg"
-              }
-              alt={"foto Carlos Martinez-Ortiz"}
-              title={"Carlos Martinez-Ortiz"}
-            />
-            <img
-              className={styles.people}
-              src={
-                "https://www.esciencecenter.nl/img/team/maarten-van-meersbergen-new.jpg"
-              }
-              alt={"foto Maarten van Meersbergen"}
-              title={"Maarten van Meersbergen"}
-            />
-          </div> */}
         </div>
       </React.Fragment>
     );
