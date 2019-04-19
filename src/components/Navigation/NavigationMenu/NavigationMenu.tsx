@@ -17,11 +17,11 @@ function NavigationMenu({ user, logout }: IUserProps) {
             Benchmarks
           </NavLink>
         </li>
-        <li>
-          <NavLink to="/datasets" activeClassName={styles.active}>
-            Datasets
-          </NavLink>
-        </li>
+        {/*<li>*/}
+          {/*<NavLink to="/datasets" activeClassName={styles.active}>*/}
+            {/*Datasets*/}
+          {/*</NavLink>*/}
+        {/*</li>*/}
         <li>
           {isLoggedIn(user) ? (
             <NavLink
