@@ -1,19 +1,19 @@
-import { Dialog, Button } from '@material-ui/core';
-import classNames from 'classnames';
-import React from 'react';
-import SubscriptionDialog from '../SubscriptionDialog/SubscriptionDialog';
-import styles from './Footer.module.css';
+import { Dialog, Button } from "@material-ui/core";
+import classNames from "classnames";
+import React from "react";
+import SubscriptionDialog from "../SubscriptionDialog/SubscriptionDialog";
+import styles from "./Footer.module.css";
 
 class Footer extends React.Component<{}, { subscriptionDialogOpen: boolean }> {
   state = {
-    subscriptionDialogOpen: false
+    subscriptionDialogOpen: false,
   };
 
   toggleSubscriptionModal = (enabled: boolean | undefined) => () => {
     const newState =
       enabled === undefined ? !this.state.subscriptionDialogOpen : enabled;
     this.setState({ subscriptionDialogOpen: newState });
-  };
+  }
 
   render() {
     return (
@@ -37,10 +37,10 @@ class Footer extends React.Component<{}, { subscriptionDialogOpen: boolean }> {
         </div>
         <div className={classNames(styles.content, styles.bgDark)}>
           <p>
-            By{' '}
+            By{" "}
             <a href="https://www.esciencecenter.nl/" target="_blank">
               Netherlands eScience Center
-            </a>{' '}
+            </a>{" "}
             & <a href="https://www.surf.nl/">SURF</a>
           </p>
         </div>

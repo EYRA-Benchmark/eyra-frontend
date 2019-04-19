@@ -4,7 +4,7 @@ import { SerializedDate, UUID4 } from "./utils";
 export interface IDataFile {
   // System requirements
   id: UUID4;
-  creator: IUser['id'];
+  creator: IUser["id"];
   permissions: string[];
   version: string;
   created: SerializedDate;

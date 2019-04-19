@@ -1,13 +1,13 @@
-import React from 'react';
-import { Card, CardHeader, CardMedia, IconButton } from '@material-ui/core';
-import { IDataset } from 'src/types';
+import React from "react";
+import { Card, CardHeader, CardMedia, IconButton } from "@material-ui/core";
+import { IDataset } from "src/types";
 import {
   Description as DetailsIcon,
-  Edit as EditIcon
-} from '@material-ui/icons';
+  Edit as EditIcon,
+} from "@material-ui/icons";
 
-import styles from './DatasetCard.module.css';
-import { Link } from 'react-router-dom';
+import styles from "./DatasetCard.module.css";
+import { Link } from "react-router-dom";
 
 interface IProps {
   dataset: IDataset;
@@ -16,7 +16,7 @@ interface IProps {
 export const DatasetCard = (props: IProps) => {
   const dataset = props.dataset;
   let canEdit = false;
-  canEdit = dataset.permissions.indexOf('change_dataset') > -1;
+  canEdit = dataset.permissions.indexOf("change_dataset") > -1;
 
   return (
     <Card square={true} className={styles.card}>
@@ -32,7 +32,7 @@ export const DatasetCard = (props: IProps) => {
           <CardHeader
             title={dataset.name}
             titleTypographyProps={{
-              variant: 'title'
+              variant: "title",
             }}
           />
         )}
@@ -44,7 +44,7 @@ export const getHeader = (dataset: IDataset) => (
   <CardHeader
     title={dataset.name}
     titleTypographyProps={{
-      variant: 'title'
+      variant: "title",
     }}
     action={
       <div>
