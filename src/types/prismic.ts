@@ -1,5 +1,4 @@
 
-
 export interface IPrismicResult<T> {
   data: T;
   alternate_languages: string[];

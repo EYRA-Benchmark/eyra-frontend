@@ -1,10 +1,10 @@
-import { SerializedDate, UUID4 } from './utils';
-import { IUser } from './user';
+import { SerializedDate, UUID4 } from "./utils";
+import { IUser } from "./user";
 
 export interface IDataset {
   // System requirements
   id: UUID4;
-  creator: IUser['id'];
+  creator: IUser["id"];
   permissions: string[];
   version: string;
   created: SerializedDate;

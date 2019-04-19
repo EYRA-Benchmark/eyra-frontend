@@ -1,27 +1,27 @@
-import * as React from 'react';
-import { prismicApi } from 'src/services/prismicApi';
-import { RouteComponentProps } from 'react-router';
-import { Grid } from '@material-ui/core';
-const RichText = require('prismic-reactjs').RichText;
+import * as React from "react";
+import { prismicApi } from "src/services/prismicApi";
+import { RouteComponentProps } from "react-router";
+import { Grid } from "@material-ui/core";
+const RichText = require("prismic-reactjs").RichText;
 
-import { formatDate } from 'src/utils';
-import styles from './NewsDetails.module.css';
-import { IPrismicResult, INews } from 'src/types/prismic';
+import { formatDate } from "src/utils";
+import styles from "./NewsDetails.module.css";
+import { IPrismicResult, INews } from "src/types/prismic";
 
 class NewsDetails extends React.Component<
   RouteComponentProps<{ id: string }>,
   {}
 > {
   state = {
-    title: '',
-    desc: '',
-    image: '',
-    date: ''
+    title: "",
+    desc: "",
+    image: "",
+    date: "",
   };
   componentWillMount() {
     const selectedItem = this.props.match.params.id;
     if (selectedItem) {
-      prismicApi.getByUID('news', selectedItem).then((response: IPrismicResult<INews>) => {
+      prismicApi.getByUID("news", selectedItem).then((response: IPrismicResult<INews>) => {
         if (response) {
           const title = RichText.render(response.data.title);
           const desc = RichText.render(response.data.description);

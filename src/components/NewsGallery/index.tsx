@@ -1,11 +1,11 @@
-import { Card, CardMedia, Grid } from '@material-ui/core';
+import { Card, CardMedia, Grid } from "@material-ui/core";
 
-import { CardHeader } from '@material-ui/core';
-import * as React from 'react';
-import { RouteComponentProps, withRouter, Link } from 'react-router-dom';
-import styles from './NewsGallery.module.css';
-import { INews, IPrismicResult } from 'src/types/prismic';
-import { formatDate } from 'src/utils';
+import { CardHeader } from "@material-ui/core";
+import * as React from "react";
+import { RouteComponentProps, withRouter, Link } from "react-router-dom";
+import styles from "./NewsGallery.module.css";
+import { INews, IPrismicResult } from "src/types/prismic";
+import { formatDate } from "src/utils";
 const RichText = require("prismic-reactjs").RichText;
 
 interface IProps {
@@ -34,9 +34,9 @@ export class Gallery extends React.Component<
                   title={RichText.asText(card.data.title)}
                   subheader={formatDate(new Date(card.data.date))}
                   titleTypographyProps={{
-                    variant: 'title'
+                    variant: "title",
                   }}
-                  subheaderTypographyProps={{ align: 'right' }}
+                  subheaderTypographyProps={{ align: "right" }}
                 />
               </Card>
             </Link>

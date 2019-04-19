@@ -2,7 +2,7 @@ import classNames from "classnames";
 import Prismic from "prismic-javascript";
 import * as React from "react";
 import { RouteComponentProps } from "react-router-dom";
-import { KeyboardArrowDown as DownIcon } from "@material-ui/icons/";
+import { KeyboardArrowDown as DownIcon } from "@material-ui/icons";
 import { prismicApi } from "src/services/prismicApi";
 import { comicApi } from "src/services/comicApi";
 import { Fab } from "@material-ui/core";
@@ -12,10 +12,9 @@ import Spinner from "src/components/Spinner/index";
 import ChallengesGrid from "src/components/BenchmarkCardGrid/index";
 import NewsGallery from "src/components/NewsGallery";
 
-
 import bannerImage from "src/assets/images/black_paw.png";
 import styles from "./Home.module.css";
-import { INews, IPrismicResult, IPrismicSearchResponse } from 'src/types/prismic';
+import { INews, IPrismicResult, IPrismicSearchResponse } from "src/types/prismic";
 
 interface IState {
   news: Array<IPrismicResult<INews>>;
