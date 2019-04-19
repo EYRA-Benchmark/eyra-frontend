@@ -24,3 +24,10 @@ export const formatDate = (date: Date) => {
   const year = date.getFullYear();
   return day + ' ' + monthNames[monthIndex] + ' ' + year;
 };
+
+// maps the values of an object to something else
+export const mapValues = (obj: any, f: (val: any) => any) => Object.assign({},
+  ...Object.entries(obj).map(
+    ([k, v]) => ({[k]: f(v)}),
+  ),
+);
