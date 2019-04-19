@@ -11,15 +11,14 @@ import { IBenchmark } from "src/types";
 import Spinner from "src/components/Spinner/index";
 import ChallengesGrid from "src/components/BenchmarkCardGrid/index";
 import NewsGallery from "src/components/NewsGallery";
-const RichText = require("prismic-reactjs").RichText;
 
-import { formatDate } from "src/utils";
 
 import bannerImage from "src/assets/images/black_paw.png";
 import styles from "./Home.module.css";
+import { INews, IPrismicResult, IPrismicSearchResponse } from 'src/types/prismic';
 
 interface IState {
-  news: any;
+  news: Array<IPrismicResult<INews>>;
   challengesData: IBenchmark[] | null;
   selectedItem: any;
   loading: boolean;
@@ -43,7 +42,7 @@ class Index extends React.Component<RouteComponentProps<{}>, IState> {
   componentWillMount() {
     prismicApi
       .query(Prismic.Predicates.at("document.type", "news"), {})
-      .then((response: any) => {
+      .then((response: IPrismicSearchResponse<INews>) => {
         if (response) {
           this.setState({ news: response.results });
         }
@@ -121,15 +120,7 @@ class Index extends React.Component<RouteComponentProps<{}>, IState> {
             <div className={styles.section}>
               <h3 className={classNames(styles.sectionHeader)}>News</h3>
 
-              <NewsGallery
-                data={this.state.news.map((n: any) => ({
-                  uid: n.uid,
-                  title: RichText.asText(n.data.title),
-                  date: formatDate(new Date(n.first_publication_date)),
-                  image: n.data.image.url,
-                  contents: RichText.render(n.data.description),
-                }))}
-              />
+              <NewsGallery data={this.state.news} />
             </div>
           </div>
         </div>

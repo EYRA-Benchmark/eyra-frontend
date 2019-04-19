@@ -19,7 +19,7 @@ export const formatDate = (date: Date) => {
     'December'
   ];
 
-  const day = date.getDay();
+  const day = date.getDate();
   const monthIndex = date.getMonth();
   const year = date.getFullYear();
   return day + ' ' + monthNames[monthIndex] + ' ' + year;

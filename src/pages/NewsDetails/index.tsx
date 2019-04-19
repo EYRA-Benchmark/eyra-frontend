@@ -6,6 +6,7 @@ const RichText = require('prismic-reactjs').RichText;
 
 import { formatDate } from 'src/utils';
 import styles from './NewsDetails.module.css';
+import { IPrismicResult, INews } from 'src/types/prismic';
 
 class NewsDetails extends React.Component<
   RouteComponentProps<{ id: string }>,
@@ -20,12 +21,12 @@ class NewsDetails extends React.Component<
   componentWillMount() {
     const selectedItem = this.props.match.params.id;
     if (selectedItem) {
-      prismicApi.getByUID('news', selectedItem).then((response: any) => {
+      prismicApi.getByUID('news', selectedItem).then((response: IPrismicResult<INews>) => {
         if (response) {
           const title = RichText.render(response.data.title);
           const desc = RichText.render(response.data.description);
           const image = response.data.image.url;
-          const date = formatDate(new Date(response.first_publication_date));
+          const date = formatDate(new Date(response.data.date));
           this.setState({ title, desc, image, date });
         }
       });
