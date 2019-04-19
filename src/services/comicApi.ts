@@ -17,10 +17,13 @@ import { objectToQueryParams } from '../utils';
 export class ComicApi {
   protected axios!: AxiosInstance;
   constructor(baseURL: string = '', headers = {}) {
-    const token =
+    let token =
       document.location.href.split('?token=')[1] ||
       localStorage.getItem('comicToken') ||
       null;
+    if (token && token.slice(-1) === '#') {
+      token = token.slice(0, -1);
+    }
     this.axios = Axios.create({
       baseURL,
       headers
