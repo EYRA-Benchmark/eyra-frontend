@@ -8,7 +8,8 @@ import {
   IUser,
   IResponse,
   UUID4,
-  IJob
+  IJob,
+  IDataset
 } from '../types';
 
 import { objectToQueryParams } from '../utils';
@@ -83,6 +84,13 @@ export class ComicApi {
   async benchmark(id: string): Promise<IBenchmark> {
     return (await this.axios.get<IBenchmark>(`benchmarks/${id}/`)).data;
   }
+  async datasets(): Promise<IDataset[]> {
+    return (await this.axios.get<IDataset[]>('datasets/')).data;
+  }
+
+  async dataset(id: string): Promise<IDataset> {
+    return (await this.axios.get<IDataset>(`dataset/${id}/`)).data;
+  }
 
   async data_file(id: string): Promise<IDataFile> {
     return (await this.axios.get<IDataFile>(`data_files/${id}/`)).data;
@@ -106,6 +114,17 @@ export class ComicApi {
     }
   ): Promise<IBenchmark> {
     return (await this.axios.patch<IBenchmark>(`benchmarks/${id}/`, details))
+      .data;
+  }
+  async datasetSubmission(
+    id: UUID4,
+    details: {
+      name: string;
+      short_description: string;
+      long_description: string;
+    }
+  ): Promise<IDataset> {
+    return (await this.axios.patch<IDataset>(`dataset/${id}/`, details))
       .data;
   }
 

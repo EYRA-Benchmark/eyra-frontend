@@ -1,0 +1,17 @@
+.card {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  border-radius: 0px;
+  cursor: pointer;
+}
+.card a {
+  text-decoration: none;
+}
+.card img {
+  max-width: 100%;
+}
+.media {
+  height: 0;
+  padding-top: 56.25%;
+}
