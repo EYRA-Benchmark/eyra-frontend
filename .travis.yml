@@ -33,6 +33,6 @@ jobs:
       install: skip
       script:
         - docker build . -t eyra/frontend:latest -t eyra/frontend:$TRAVIS_BUILD_NUMBER
-        - docker login -u eyra -p "$DOCKER_PASSWORD"
+        - docker login -u eyrabenchmark -p "$DOCKER_PASSWORD"
         - docker push eyra/frontend:$TRAVIS_BUILD_NUMBER
         - docker push eyra/frontend:latest

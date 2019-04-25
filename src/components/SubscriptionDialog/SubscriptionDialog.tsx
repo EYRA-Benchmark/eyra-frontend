@@ -1,20 +1,21 @@
-import React from 'react';
+import React from "react";
 
-import classNames from 'classnames';
-import { Formik, FormikActions, FieldArray } from 'formik';
-import * as yup from 'yup';
+import classNames from "classnames";
+import { Formik, FormikActions, Field } from "formik";
+import * as yup from "yup";
 
 import {
   Button,
   DialogActions,
   DialogContent,
-  DialogTitle
-} from '@material-ui/core';
+  DialogTitle,
+} from "@material-ui/core";
 
-import styles from './SubscriptionDialog.module.css';
+import styles from "./SubscriptionDialog.module.css";
 
-import MailImage from 'src/assets/images/mail.png';
-import { submitContactForm } from 'src/services/contactFormSubmission';
+import MailImage from "src/assets/images/mail.png";
+import { submitContactForm } from "src/services/contactFormSubmission";
+import { mapValues } from "src/utils";
 
 const formSchema = yup.object().shape({
   email: yup
@@ -26,46 +27,50 @@ const formSchema = yup.object().shape({
   permission: yup
     .bool()
     .test(
-      'permission',
-      'You have to agree with our Terms and Conditions!',
-      value => value === true
+      "permission",
+      "You have to agree with our Terms and Conditions!",
+      (value) => value === true,
     )
-    .required('You have to agree with our Terms and Conditions!')
+    .required("You have to agree with our Terms and Conditions!"),
 });
-const interests = [
-  'Setting up a benchmark',
-  'Submitting an algorithm',
-  'Stay up-to-date about EYRA platform'
-];
+
+const interests = {
+  setup: "Setting up a benchmark",
+  submit: "Submitting an algorithm",
+  update: "Stay up-to-date about EYRA platform",
+};
+
 interface IValues {
   email: string;
   name: string;
   organization: string;
-  intrests: string[];
+  interests: {
+    [key: string]: boolean;
+  };
   permission: boolean;
   isSuccess: boolean;
   isError: boolean;
 }
 
 const initialValues: IValues = {
-  email: '',
-  name: '',
-  organization: '',
-  intrests: interests,
+  email: "",
+  name: "",
+  organization: "",
+  interests: mapValues(interests, (_) => false),
   permission: false,
   isSuccess: false,
-  isError: false
+  isError: false,
 };
 
 const onSubmit = async (
   values: IValues,
-  { setSubmitting }: FormikActions<IValues>
+  { setSubmitting }: FormikActions<IValues>,
 ) => {
   const isSuccess = await submitContactForm(
     values.name,
     values.organization,
     values.email,
-    values.intrests
+    Object.entries(values.interests).filter(([k, v]) => v).map(([k, v]) => k).join(","),
   );
   values.isSuccess = isSuccess;
   if (!isSuccess) {
@@ -89,7 +94,7 @@ const SubscriptionDialog: React.FunctionComponent = () => (
       errors,
       touched,
       setFieldValue,
-      isSubmitting
+      isSubmitting,
     }) => (
       <React.Fragment>
         <DialogTitle>Subscribe to stay up to date</DialogTitle>
@@ -112,7 +117,7 @@ const SubscriptionDialog: React.FunctionComponent = () => (
                   className={classNames(
                     styles.wrapInput,
                     styles.validateInput,
-                    errors.email && styles.alertValidate
+                    errors.email && styles.alertValidate,
                   )}
                 >
                   <input
@@ -125,7 +130,7 @@ const SubscriptionDialog: React.FunctionComponent = () => (
                     placeholder="Email"
                   />
                   {errors.email && touched.email && (
-                    <div style={{ color: 'red', marginTop: '.5rem' }}>
+                    <div style={{ color: "red", marginTop: ".5rem" }}>
                       {errors.email}
                     </div>
                   )}
@@ -151,48 +156,18 @@ const SubscriptionDialog: React.FunctionComponent = () => (
                 <div className={styles.intersts}>
                   <p>What is your main interest?</p>
 
-                  <FieldArray
-                    name="interests"
-                    render={arrayHelpers => (
-                      <div>
-                        {values.intrests.map((interest, index) => (
-                          <div key={index}>
-                            <label key={index}>
-                              <input
-                                name="interests"
-                                type="checkbox"
-                                value={interest}
-                                key={index}
-                                onChange={e => {
-                                  if (e.target.checked) {
-                                    arrayHelpers.push(interest);
-                                  } else {
-                                    const idx = values.intrests.indexOf(
-                                      interest
-                                    );
-                                    arrayHelpers.remove(idx);
-                                  }
-                                }}
-                              />{' '}
-                              {interest}
-                            </label>
-                          </div>
-                        ))}
+                  { Object.keys(interests).map((interest, index) => (
+                      <div key={index}>
+                        <label>
+                          <Field type="checkbox" name={`interests.${interest}`} />
+                          {interests[interest]}
+                        </label>
                       </div>
-                    )}
-                  />
+                    ) )}
                 </div>
 
                 <div className={styles.permission}>
-                  <input
-                    type="checkbox"
-                    name="permission"
-                    onChange={event => {
-                      const value = event.target.checked;
-                      setFieldValue('permission', value);
-                    }}
-                    checked={values.permission}
-                  />
+                  <Field name="permission" type="checkbox" />
                   <p>
                     The information you provide on this form will only be used
                     to get in touch with you and to provide updates about the

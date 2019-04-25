@@ -6,7 +6,7 @@ export const settings = {
 
 export const getSettings = async () => {
   try {
-    const result = await fetch("env.json");
+    const result = await fetch("/env.json");
     const env = await result.json();
     Object.assign(settings, env);
     return settings;

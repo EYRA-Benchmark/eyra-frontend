@@ -85,10 +85,10 @@ class Details extends React.Component<IProps, IState> {
                 className={styles.tabsContainer}
               >
                 <Tab label="Overview" />
-                <Tab label="Leaderboard" />
-                <Tab label="DataSets" />
-                <Tab label="Logs" />
-                <Tab label="Submit" />
+                {/*<Tab label="Leaderboard" />*/}
+                {/*<Tab label="DataSets" />*/}
+                {/*<Tab label="Logs" />*/}
+                {/*<Tab label="Submit" />*/}
               </Tabs>
               {value === 0 && (
                 <TabContainer>
