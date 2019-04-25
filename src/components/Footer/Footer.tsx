@@ -30,6 +30,7 @@ class Footer extends React.Component<{}, { subscriptionDialogOpen: boolean }> {
             <Button
               variant="contained"
               onClick={this.toggleSubscriptionModal(true)}
+              id="subscribe"
             >
               Subscribe
             </Button>

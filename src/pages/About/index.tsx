@@ -17,6 +17,18 @@ class About extends React.Component<RouteComponentProps<{}>, {}> {
       this.setState({ title, desc });
     });
   }
+  componentDidUpdate(prevProps: any) {
+    if (this.props.location !== prevProps.location) {
+      if (this.props.location.hash !== "") {
+        const id = this.props.location.hash.substring(1);
+        const element: HTMLElement | null = document.getElementById(id);
+        if (element) {
+          element.scrollIntoView({ behavior: "smooth" });
+        }
+      }
+    }
+  }
+
   public render() {
     const { title, desc } = this.state;
     return (
