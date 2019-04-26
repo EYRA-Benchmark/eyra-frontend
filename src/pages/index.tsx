@@ -29,8 +29,8 @@ class Home extends React.Component<RouteComponentProps<{}>, IState> {
     });
   }
 
-  componentWillMount() {
-   console.log(styles);
+  async componentWillMount() {
+   // console.log(await comicApi.benchmarks());
   }
 
   shouldComponentUpdate(nextProps: any, nextState: any) {

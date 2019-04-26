@@ -5,6 +5,6 @@ import ResolvedApi from "prismic-javascript/d.ts/ResolvedApi";
 
 export let prismicApi: ResolvedApi;
 
-export async function setupPrismic() {
-  prismicApi = await Prismic.api(settings.prismicEndpoint);
+export async function setupPrismic(endpoint: string) {
+  prismicApi = await Prismic.api(endpoint);
 }

@@ -1,7 +1,6 @@
-const withTypescript = require('@zeit/next-typescript')
-const withCSS = require('@zeit/next-css')
-
-
+// @ts-ignore
+const withTypescript = require('@zeit/next-typescript');
+const withCSS = require('@zeit/next-css');
 
 // const infiProxy = () => new Proxy({}, {
 //   get: infiProxy
@@ -19,9 +18,8 @@ module.exports = withTypescript(withCSS({
     secondSecret: process.env.SECOND_SECRET, // Pass through env variables
   },
   publicRuntimeConfig: {
-    // Will be available on both server and client
-    // seedorfGraphQLUrl: 'https://api.sportyspots.com/graphql',
-    seedorfGraphQLUrl: 'http://localhost:8080/https://api.sportyspots.com/graphql',
+    prismicEndpoint: process.env.PRISMIC_URL || "https://eyra-test.prismic.io/api/v2",
+    backendURL: process.env.EYRA_BACKEND_URL ||  "https://api.staging.eyrabenchmark.net/api/v1/",
   },
   webpack: (config, options) => {
     config.module.rules.push({
