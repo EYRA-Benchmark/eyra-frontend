@@ -1,12 +1,12 @@
 import * as React from "react";
-import { prismicApi } from "src/services/prismicApi";
+import { prismicApi } from "../../services/prismicApi";
 import { RouteComponentProps } from "react-router";
 import { Grid } from "@material-ui/core";
 const RichText = require("prismic-reactjs").RichText;
 
-import { formatDate } from "src/utils";
+import { formatDate } from "../../utils";
 import styles from "./NewsDetails.module.css";
-import { IPrismicResult, INews } from "src/types/prismic";
+import { IPrismicResult, INews } from "../../types/prismic";
 
 class NewsDetails extends React.Component<
   RouteComponentProps<{ id: string }>,

@@ -12,7 +12,8 @@
     "no-submodule-imports": [true, "src"],
     "semicolon": [true, "always"],
     "jsx-no-multiline-js": false,
-    "member-ordering": false
+    "member-ordering": false,
+    "quotemark": [true, "single", "jsx-double"]
   },
   "linterOptions": {
     "exclude": [

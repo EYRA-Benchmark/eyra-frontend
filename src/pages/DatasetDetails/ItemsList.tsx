@@ -6,7 +6,7 @@ import {
   Avatar,
   ListItemText,
 } from "@material-ui/core";
-import FRBImage from "src/assets/images/FRB.jpg";
+import FRBImage from "../../assets/images/FRB.jpg";
 
 export const ItemsList = () => {
   return (

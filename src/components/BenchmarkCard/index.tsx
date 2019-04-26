@@ -6,7 +6,7 @@ import {
   Edit as EditIcon,
 } from "@material-ui/icons";
 
-import FRBImage from "src/assets/images/FRB.jpg";
+import FRBImage from "../../assets/images/FRB.jpg";
 import styles from "./BenchmarkCard.module.css";
 import { Link } from "react-router-dom";
 

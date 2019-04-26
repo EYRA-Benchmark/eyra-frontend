@@ -1,9 +1,9 @@
 import * as React from "react";
 import { RouteComponentProps } from "react-router-dom";
-import Spinner from "src/components/Spinner/index";
-import BenchmarkCardGrid from "src/components/BenchmarkCardGrid";
-import { comicApi } from "src/services/comicApi";
-import { IBenchmark } from "src/types";
+import Spinner from "../../components/Spinner";
+import BenchmarkCardGrid from "../../components/BenchmarkCardGrid";
+import { comicApi } from "../../services/comicApi";
+import { IBenchmark } from "../../types";
 import { Typography } from "@material-ui/core";
 
 interface IState {

@@ -3,18 +3,18 @@ import Prismic from "prismic-javascript";
 import * as React from "react";
 import { RouteComponentProps } from "react-router-dom";
 import { KeyboardArrowDown as DownIcon } from "@material-ui/icons";
-import { prismicApi } from "src/services/prismicApi";
-import { comicApi } from "src/services/comicApi";
+import { prismicApi } from "../../services/prismicApi";
+import { comicApi } from "../../services/comicApi";
 import { Fab } from "@material-ui/core";
-import { IBenchmark } from "src/types";
+import { IBenchmark } from "../../types";
 
-import Spinner from "src/components/Spinner/index";
-import ChallengesGrid from "src/components/BenchmarkCardGrid/index";
-import NewsGallery from "src/components/NewsGallery";
+import Spinner from "../../components/Spinner";
+import ChallengesGrid from "../../components/BenchmarkCardGrid";
+import NewsGallery from "../../components/NewsGallery";
 
-import bannerImage from "src/assets/images/black_paw.png";
+import bannerImage from "../../assets/images/black_paw.png";
 import styles from "./Home.module.css";
-import { INews, IPrismicResult, IPrismicSearchResponse } from "src/types/prismic";
+import { INews, IPrismicResult, IPrismicSearchResponse } from "../../types/prismic";
 
 interface IState {
   news: Array<IPrismicResult<INews>>;

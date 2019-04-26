@@ -17,10 +17,13 @@ import { objectToQueryParams } from "../utils";
 export class ComicApi {
   protected axios!: AxiosInstance;
   constructor(baseURL: string = "", headers = {}) {
-    let token =
-      document.location.href.split("?token=")[1] ||
-      localStorage.getItem("comicToken") ||
-      null;
+    let token = null;
+    if (typeof document !== 'undefined') {
+      token =
+        document && document.location.href.split("?token=")[1] ||
+        localStorage.getItem("comicToken") ||
+        null;
+    }
     if (token && token.slice(-1) === "#") {
       token = token.slice(0, -1);
     }
@@ -32,10 +35,12 @@ export class ComicApi {
   }
 
   public setToken(token: string | null): void {
-    if (token) {
-      localStorage.setItem("comicToken", token);
-    } else {
-      localStorage.removeItem("comicToken");
+    if (typeof localStorage !== 'undefined') {
+      if (token) {
+        localStorage.setItem("comicToken", token);
+      } else {
+        localStorage.removeItem("comicToken");
+      }
     }
     if (token) {
       this.axios.defaults.headers.Authorization = `Token ${token}`;

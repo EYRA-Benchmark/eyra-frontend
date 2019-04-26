@@ -3,8 +3,8 @@ import { Grid, Tab, Tabs, Typography } from "@material-ui/core";
 // import PropTypes from "prop-types";
 import * as React from "react";
 import styles from "./VerticalTabs.module.css";
-import { comicApi } from "src/services/comicApi";
-import { IDataFile } from "src/types/data_file";
+import { comicApi } from "../../../../../services/comicApi";
+import { IDataFile } from "../../../../../types/data_file";
 
 interface IState {
   value: number;

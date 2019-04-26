@@ -2,7 +2,7 @@ import * as React from "react";
 
 import { RouteComponentProps } from "react-router-dom";
 
-import { prismicApi } from "src/services/prismicApi";
+import { prismicApi } from "../../services/prismicApi";
 import styles from "./About.module.css";
 const RichText = require("prismic-reactjs").RichText;
 class About extends React.Component<RouteComponentProps<{}>, {}> {

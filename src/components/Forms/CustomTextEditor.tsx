@@ -1,6 +1,6 @@
 import React from "react";
-import RichTextEditor from "react-rte";
 import styles from "./CustomTextEditor.module.css";
+const RichTextEditor = (typeof window !== 'undefined') ? require('react-rte') : null;
 
 interface IProps {
   onChange: (value: string) => void;

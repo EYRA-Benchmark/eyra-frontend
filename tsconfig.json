@@ -1,5 +1,4 @@
 {
-  "extends": "./tsconfig.paths.json",
   "compilerOptions": {
     "outDir": "build/dist",
     "module": "esnext",
@@ -8,6 +7,10 @@
       "es6",
       "dom"
     ],
+    "baseUrl": ".",
+    "paths": {
+      "src/*": ["src/*"]
+    },
     "sourceMap": true,
     "allowJs": true,
     "jsx": "preserve",
@@ -28,12 +31,7 @@
     "strict": true,
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "noEmit": true,
-    "plugins": [
-      {
-        "name": "typescript-plugin-css-modules"
-      }
-    ]
+    "noEmit": true
   },
   "exclude": [
     "node_modules",
