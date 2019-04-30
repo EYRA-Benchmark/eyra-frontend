@@ -3,10 +3,10 @@ import { Route } from "react-router-dom";
 
 import About from "./pages/About";
 import BenchmarkDetails from "src/./pages/BenchmarkDetails";
-import Benchmarks from "./pages/Benchmarks";
+import Benchmarks from "./pages/benchmarks";
 import Login from "./pages/Login";
 import NewsDetails from "./pages/NewsDetails";
-import EditBenchmark from "src/./pages/Benchmarks/EditBenchmark/";
+import EditBenchmark from "src/./pages/benchmarks/EditBenchmark/";
 import Datasets from "src/./pages/Datasets/";
 import DatasetDetails from "src/./pages/DatasetDetails/";
 import EditDataset from "./pages/Datasets/EditDataset/EditDataset";

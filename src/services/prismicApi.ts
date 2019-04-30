@@ -1,10 +1,6 @@
-import Prismic from "prismic-javascript";
-import { settings } from "src/settings";
-// tslint:disable-next-line
-import ResolvedApi from "prismic-javascript/d.ts/ResolvedApi";
+import Prismic from 'prismic-javascript';
 
-export let prismicApi: ResolvedApi;
+import getConfig from 'next/config';
+const { publicRuntimeConfig } = getConfig();
 
-export async function setupPrismic(endpoint: string) {
-  prismicApi = await Prismic.api(endpoint);
-}
+export const getPrismicClient = () => Prismic.api(publicRuntimeConfig.prismicEndpoint);

@@ -13,6 +13,15 @@ app.prepare()
       return app.render(req, res, '/');
     });
 
+    server.get('/benchmarks', (req, res) => {
+      console.log('benchmarks');
+      return app.render(req, res, '/benchmarks');
+    });
+
+    server.get('/benchmark/:uuid', (req, res) => {
+      return app.render(req, res, '/benchmark', { uuid: req.params.uuid });
+    });
+
     server.get('*', (req, res) => {
       return handle(req, res)
     });

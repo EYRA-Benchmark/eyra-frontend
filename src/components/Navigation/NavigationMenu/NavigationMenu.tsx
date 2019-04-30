@@ -1,21 +1,22 @@
-import * as React from "react";
-import { NavLink } from "react-router-dom";
-import { isLoggedIn, IUserProps, withUser } from "../../../context/User";
-import styles from "./NavigationMenu.module.css";
+import * as React from 'react';
+import { isLoggedIn, IUserProps, withUser } from 'src/context/User';
+import styles from './NavigationMenu.module.css';
+
+import Link from 'next/link';
 
 function NavigationMenu({ user, logout }: IUserProps) {
   return (
     <React.Fragment>
       <ul className={styles.nav}>
         <li>
-          <NavLink to="/about" activeClassName={styles.active}>
-            About Us
-          </NavLink>
+          <Link href="/about">
+            <a>About Us</a>
+          </Link>
         </li>
         <li>
-          <NavLink to="/benchmarks" activeClassName={styles.active}>
-            Benchmarks
-          </NavLink>
+          <Link href="/benchmarks">
+            <a>Benchmarks</a>
+          </Link>
         </li>
         {/*<li>*/}
           {/*<NavLink to="/datasets" activeClassName={styles.active}>*/}
@@ -24,17 +25,11 @@ function NavigationMenu({ user, logout }: IUserProps) {
         {/*</li>*/}
         <li>
           {isLoggedIn(user) ? (
-            <NavLink
-              onClick={logout}
-              to="/login"
-              activeClassName={styles.active}
-            >
-              Logout {user.first_name}
-            </NavLink>
+              <a onClick={logout}>Logout {user.first_name}</a>
           ) : (
-            <NavLink to="/login" activeClassName={styles.active}>
-              Login
-            </NavLink>
+            <Link href="/login">
+              <a>Login</a>
+            </Link>
           )}
         </li>
       </ul>

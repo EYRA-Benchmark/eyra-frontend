@@ -1,5 +1,9 @@
 declare module '*.module.css' {
-  export default any;
+  interface IClassNames {
+    [className: string]: string;
+  }
+  const classNames: IClassNames;
+  export = classNames;
 }
 // declare module '*.module.css' {
 //   interface IClassNames {

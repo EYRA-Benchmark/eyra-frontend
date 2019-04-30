@@ -1,41 +1,34 @@
-import * as React from 'react'
-import Document, {Head, Main, NextScript} from 'next/document'
+import React from 'react';
+import Document, { Head, Main, NextScript } from 'next/document';
+import { ServerStyleSheets } from '@material-ui/styles';
+import flush from 'styled-jsx/server';
+import theme from 'src/theme';
 
-const SITE_NAME = "EYRA";
-const SITE_TITLE = "EYRA";
-const SITE_DESCRIPTION = "EYRA";
-const SITE_IMAGE = 'asd';
-
-
-export default class extends Document {
-  static async getInitialProps(...args) {
-    const documentProps = await Document.getInitialProps(...args)
-    const {req, renderPage} = args[0]
-    const page = renderPage()
-
-    return {...documentProps, ...page}
-  }
-
+class MyDocument extends Document {
   render() {
     return (
-      <html lang="ko">
+      <html lang="en" dir="ltr">
       <Head>
+        <meta charSet="utf-8" />
+        {/* Use minimum-scale=1 to enable GPU rasterization */}
         <meta
           name="viewport"
-          content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"
+          content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no"
         />
-        <meta property="og:type" content="website"/>
-        <meta property="og:site_name" content={SITE_NAME}/>
-        <meta property="og:title" content={SITE_TITLE}/>
-        <meta property="og:description" content={SITE_DESCRIPTION}/>
-        <meta property="og:image" content={SITE_IMAGE}/>
-        <meta name="twitter:card" content="summary_large_image"/>
-        <meta name="twitter:site" content={SITE_NAME}/>
-        <meta name="twitter:title" content={SITE_TITLE}/>
-        <meta name="twitter:description" content={SITE_DESCRIPTION}/>
-        <meta property="twitter:image" content={SITE_IMAGE}/>
-        <meta name="format-detection" content="telephone=no, address=no, email=no"/>
-
+        {/* PWA primary color */}
+        <meta name="theme-color" content={theme.palette.primary.main} />
+        <link
+          rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Roboto:300,400,500"
+        />
+        <link
+          rel="stylesheet"
+          href="/static/style/index.css"
+        />
+        <link
+          rel="stylesheet"
+          href="/static/style/nprogress.css"
+        />
         <link
           rel="stylesheet"
           href="https://use.fontawesome.com/releases/v5.1.0/css/all.css"
@@ -43,13 +36,65 @@ export default class extends Document {
           crossOrigin="anonymous"
         />
         <link rel="shortcut icon" href="/static/favicon.ico"/>
-        <script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=default,Array.prototype.find,Array.prototype.includes,String.prototype.includes,Array.prototype.findIndex,Object.entries"></script>
+
       </Head>
       <body>
-      <Main/>
-      <NextScript/>
+      <Main />
+      <NextScript />
       </body>
       </html>
-    )
+    );
   }
 }
+
+// There is some magic involved getting Material UI style right client+server side, see the ref:
+// tslint:disable-next-line:max-line-length
+// https://github.com/mui-org/material-ui/blob/4723c57a9f9a8a5008da08602428c190a46ef494/examples/nextjs-next/pages/_document.js
+
+MyDocument.getInitialProps = async (ctx) => {
+  // Resolution order
+  //
+  // On the server:
+  // 1. app.getInitialProps
+  // 2. page.getInitialProps
+  // 3. document.getInitialProps
+  // 4. app.render
+  // 5. page.render
+  // 6. document.render
+  //
+  // On the server with error:
+  // 1. document.getInitialProps
+  // 2. app.render
+  // 3. page.render
+  // 4. document.render
+  //
+  // On the client
+  // 1. app.getInitialProps
+  // 2. page.getInitialProps
+  // 3. app.render
+  // 4. page.render
+
+  // Render app and page and get the context of the page with collected side effects.
+  const sheets = new ServerStyleSheets();
+  const originalRenderPage = ctx.renderPage;
+
+  ctx.renderPage = () =>
+    originalRenderPage({
+      enhanceApp: (App) => (props) => sheets.collect(<App {...props} />),
+    });
+
+  const initialProps = await Document.getInitialProps(ctx);
+
+  return {
+    ...initialProps,
+    // Styles fragment is rendered after the app and page rendering finish.
+    styles: (
+      <React.Fragment>
+        {sheets.getStyleElement()}
+        {flush() || null}
+      </React.Fragment>
+    ),
+  };
+};
+
+export default MyDocument;

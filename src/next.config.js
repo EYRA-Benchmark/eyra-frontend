@@ -11,6 +11,9 @@ const withCSS = require('@zeit/next-css');
 
 module.exports = withTypescript(withCSS({
   cssModules: true,
+  cssLoaderOptions: {
+    localIdentName: '[name]__[local]--[hash:base64:5]'
+  },
   useFileSystemPublicRoutes: false,
   serverRuntimeConfig: {
     // Will only be available on the server side

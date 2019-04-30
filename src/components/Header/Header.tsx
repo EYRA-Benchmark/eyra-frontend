@@ -1,11 +1,9 @@
-import { AppBar, IconButton, Toolbar } from "@material-ui/core";
-import { Menu as MenuIcon } from "@material-ui/icons";
-import * as React from "react";
-import { NavLink } from "react-router-dom";
-import logo from "../../assets/images/logo.png";
-import Navbar from "../Navigation/NavigationMenu/NavigationMenu";
-// import SearchBar from "../SearchBar/SearchBar";
-import styles from "./Header.module.css";
+import { AppBar, IconButton, Toolbar } from '@material-ui/core';
+import { Menu as MenuIcon } from '@material-ui/icons';
+import * as React from 'react';
+import Navbar from '../Navigation/NavigationMenu/NavigationMenu';
+import styles from './Header.module.css';
+import Link from 'next/link';
 
 export interface IOwnProps {
   classes: string;
@@ -17,16 +15,16 @@ function Header({ classes, drawerToggle }: IOwnProps) {
     <AppBar className={classes}>
       <Toolbar className={styles.toolbar}>
         <div className={styles.logo}>
-          <NavLink to="/" title="Home">
-            <img src={logo} alt="logo" className={styles.logoImage} />
-          </NavLink>
+          <Link href="/">
+            <a title="Home"><img src="/static/images/logo.png" alt="logo" className={styles.logoImage} /></a>
+          </Link>
         </div>
         <IconButton
           aria-label="Open drawer"
           onClick={drawerToggle}
           className={styles.drawerToggle}
         >
-          <MenuIcon />
+          {/*<MenuIcon />*/}
         </IconButton>
         {/* <SearchBar /> */}
         <nav className={styles.desktopOnly}>

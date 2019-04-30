@@ -8,6 +8,7 @@ export interface IBenchmark {
   short_description: string;
   description: string;
   name: string;
+  image: string;
   creator: IUser["id"];
   evaluator: UUID4;
   training_data_file: UUID4;

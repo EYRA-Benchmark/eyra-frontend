@@ -14,6 +14,8 @@ import {
 
 import { objectToQueryParams } from "../utils";
 
+import getConfig from 'next/config';
+
 export class ComicApi {
   protected axios!: AxiosInstance;
   constructor(baseURL: string = "", headers = {}) {
@@ -147,4 +149,5 @@ export class ComicApi {
   }
 }
 
-export const comicApi = new ComicApi();
+const { publicRuntimeConfig } = getConfig();
+export const comicApi = new ComicApi(publicRuntimeConfig.backendURL);

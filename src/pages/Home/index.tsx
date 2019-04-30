@@ -1,24 +1,21 @@
-import classNames from "classnames";
-import Prismic from "prismic-javascript";
-import * as React from "react";
-import { RouteComponentProps } from "react-router-dom";
-import { KeyboardArrowDown as DownIcon } from "@material-ui/icons";
-import { prismicApi } from "../../services/prismicApi";
-import { comicApi } from "../../services/comicApi";
-import { Fab } from "@material-ui/core";
-import { IBenchmark } from "../../types";
-
-import Spinner from "../../components/Spinner";
-import ChallengesGrid from "../../components/BenchmarkCardGrid";
-import NewsGallery from "../../components/NewsGallery";
-
-import bannerImage from "../../assets/images/black_paw.png";
-import styles from "./Home.module.css";
-import { INews, IPrismicResult, IPrismicSearchResponse } from "../../types/prismic";
+import classNames from 'classnames';
+import Prismic from 'prismic-javascript';
+import * as React from 'react';
+import { RouteComponentProps } from 'react-router-dom';
+import { KeyboardArrowDown as DownIcon } from '@material-ui/icons';
+import { prismicApi } from 'src/services/prismicApi';
+import { comicApi } from 'src/services/comicApi';
+import { Fab } from '@material-ui/core';
+import { IBenchmark } from 'src/types';
+import Spinner from '../../components/Spinner';
+import ChallengesGrid from '../../components/BenchmarkCardGrid';
+import NewsGallery from '../../components/NewsGallery';
+import styles from './Home.module.css';
+import { INews, IPrismicResult, IPrismicSearchResponse } from 'src/types/prismic';
 
 interface IState {
   news: Array<IPrismicResult<INews>>;
-  challengesData: IBenchmark[] | null;
+  benchmarks: IBenchmark[] | null;
   selectedItem: any;
   loading: boolean;
 }
@@ -26,7 +23,7 @@ interface IState {
 class Index extends React.Component<RouteComponentProps<{}>, IState> {
   state = {
     news: [],
-    challengesData: null,
+    benchmarks: null,
     selectedItem: null,
     loading: true,
   };
@@ -40,7 +37,7 @@ class Index extends React.Component<RouteComponentProps<{}>, IState> {
 
   componentWillMount() {
     prismicApi
-      .query(Prismic.Predicates.at("document.type", "news"), {})
+      .query(Prismic.Predicates.at('document.type', 'news'), {})
       .then((response: IPrismicSearchResponse<INews>) => {
         if (response) {
           this.setState({ news: response.results });
@@ -50,21 +47,21 @@ class Index extends React.Component<RouteComponentProps<{}>, IState> {
 
   shouldComponentUpdate(nextProps: any, nextState: any) {
     return (
-      this.state.challengesData !== nextState.challengesData ||
+      this.state.challengesData !== nextState.benchmarks ||
       this.state.news !== nextState.news
     );
   }
   async componentDidMount() {
     this.setState({
       loading: false,
-      challengesData: await comicApi.benchmarks(),
+      benchmarks: await comicApi.benchmarks(),
     });
   }
 
   scrollToNext() {
-    const benchmarkSection = document.getElementById("benchmarks");
+    const benchmarkSection = document.getElementById('benchmarks');
     if (benchmarkSection) {
-      benchmarkSection.scrollIntoView({ behavior: "smooth", block: "center" });
+      benchmarkSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
   }
   public render() {
@@ -97,7 +94,7 @@ class Index extends React.Component<RouteComponentProps<{}>, IState> {
             <p>A platform for benchmarking scientific algorithms</p>
           </div>
           <div className={styles.bannerImage}>
-            <img src={bannerImage} alt="logo" />
+            <img src="/static/images/black_paw.png" alt="logo" />
           </div>
         </div>
 
@@ -118,7 +115,6 @@ class Index extends React.Component<RouteComponentProps<{}>, IState> {
             </div>
             <div className={styles.section}>
               <h3 className={classNames(styles.sectionHeader)}>News</h3>
-
               <NewsGallery data={this.state.news} />
             </div>
           </div>

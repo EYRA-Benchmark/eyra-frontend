@@ -27,7 +27,7 @@ const defaultPage = () => (
   <div id="root_container">
     <main className={styles.container}>
       <div className={styles.bannerBackground} id="about">
-        <img src={paw} />
+        <img src="/static/images/PawLight.png" />
       </div>
 
       <TransitionGroup style={{ width: "100%", height: "100%" }}>
