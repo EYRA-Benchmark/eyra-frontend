@@ -17,7 +17,7 @@ class Benchmarks extends React.Component<IProps> {
 
   public render() {
     return (
-      <div>
+      <div style={{width: '100%'}}>
         <Typography component="h1" variant="h5">
           Benchmarks
         </Typography>

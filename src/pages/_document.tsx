@@ -3,6 +3,7 @@ import Document, { Head, Main, NextScript } from 'next/document';
 import { ServerStyleSheets } from '@material-ui/styles';
 import flush from 'styled-jsx/server';
 import theme from 'src/theme';
+import NextHead from 'next/head';
 
 class MyDocument extends Document {
   render() {
@@ -84,6 +85,8 @@ MyDocument.getInitialProps = async (ctx) => {
     });
 
   const initialProps = await Document.getInitialProps(ctx);
+
+  NextHead.rewind();
 
   return {
     ...initialProps,

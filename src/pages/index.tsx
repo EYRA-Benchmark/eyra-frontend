@@ -13,20 +13,12 @@ import NewsGallery from 'src/components/NewsGallery';
 import styles from './Home.module.css';
 import { INews, IPrismicResult } from 'src/types/prismic';
 
-interface IState {
-  selectedItem: any;
-}
-
 interface IProps {
   news: Array<IPrismicResult<INews>>;
   benchmarks: IBenchmark[];
 }
 
-class Index extends React.Component<IProps, IState> {
-  state = {
-    selectedItem: null,
-  };
-
+class Index extends React.Component<IProps> {
   static async getInitialProps(...args: any[]): Promise<IProps> {
     const prismicApi = await getPrismicClient();
     const prismicResponse = await prismicApi.query(Prismic.Predicates.at('document.type', 'news'), {});

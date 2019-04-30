@@ -2,11 +2,9 @@ import App, {Container, NextAppContext} from 'next/app';
 import React from 'react';
 import { ThemeProvider } from '@material-ui/styles';
 import { CssBaseline } from '@material-ui/core';
-import classNames from 'classnames';
 
 import { UserProvider } from 'src/context/User';
 import Header from 'src/components/Header/Header';
-import styles from 'src/components/RootLayout/Layout.module.css';
 import SideDrawer from 'src/components/SideDrawer/SideDrawer';
 import Footer from 'src/components/Footer/Footer';
 
@@ -15,13 +13,14 @@ import Router from 'next/router';
 
 import NProgress from 'nprogress';
 
+import styles from './root.module.css';
+
 NProgress.configure({ easing: 'ease', speed: 500 });
 Router.onRouteChangeStart = () => NProgress.start();
 Router.onRouteChangeComplete = () => NProgress.done();
 Router.onRouteChangeError = () => NProgress.done();
 
 export default class MyApp extends App {
-  pageContext: any;
   componentDidMount() {
     // Remove the server-side injected CSS.
     const jssStyles = document.querySelector('#jss-server-side');
@@ -41,20 +40,31 @@ export default class MyApp extends App {
   }
 
   render() {
-    const {Component, pageProps} = this.props;
+    const {Component, pageProps, router} = this.props;
+
+    const Wrapper = (props: any) => router.route === '/'
+      ? <React.Fragment>{props.children}</React.Fragment>
+      : (
+        <div id="root_container">
+          <main className={styles.container}>
+            <div className={styles.bannerBackground} id="about">
+              <img src="/static/images/PawLight.png" />
+            </div>
+            {props.children}
+          </main>
+        </div>
+      );
+
     return (
         <Container>
           <UserProvider>
             <ThemeProvider theme={theme}>
               <CssBaseline />
-              <Header
-                classes={classNames(
-                  styles.appBar,
-                )}
-                drawerToggle={() => console.log('drawer toggle')}
-              />
+              <Header />
               <SideDrawer open={true} />
-              <Component {...pageProps} />
+              <Wrapper>
+                  <Component {...pageProps} />
+              </Wrapper>
               <Footer />
             </ThemeProvider>
           </UserProvider>

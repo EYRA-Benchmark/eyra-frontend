@@ -1,11 +1,11 @@
 import * as React from "react";
 import { Route } from "react-router-dom";
 
-import About from "./pages/About";
+import About from "./pages/about";
 import BenchmarkDetails from "src/./pages/BenchmarkDetails";
 import Benchmarks from "./pages/benchmarks";
 import Login from "./pages/Login";
-import NewsDetails from "./pages/NewsDetails";
+import NewsDetails from "./pages/news";
 import EditBenchmark from "src/./pages/benchmarks/EditBenchmark/";
 import Datasets from "src/./pages/Datasets/";
 import DatasetDetails from "src/./pages/DatasetDetails/";

@@ -1,22 +1,22 @@
-import classNames from "classnames";
-import * as React from "react";
+import classNames from 'classnames';
+import * as React from 'react';
 import {
   Route,
   RouteComponentProps,
   Switch,
   withRouter,
-} from "react-router-dom";
-import { CSSTransition, TransitionGroup } from "react-transition-group";
+} from 'react-router-dom';
+import { CSSTransition, TransitionGroup } from 'react-transition-group';
 
-import Footer from "../Footer/Footer";
-import Header from "../Header/Header";
-import SideDrawer from "../SideDrawer/SideDrawer";
-import ScrollToTop from "../ScrollToTop";
-import Routes from "../../Routes";
-import Home from "src/pages/Home";
+import Footer from '../Footer/Footer';
+import Header from '../Header/Header';
+import SideDrawer from '../SideDrawer/SideDrawer';
+import ScrollToTop from '../ScrollToTop';
+import Routes from '../../Routes';
+import Home from 'src/pages/Home';
 
-import styles from "./Layout.module.css";
-import paw from "../../assets/images/PawLight.png";
+import styles from './Layout.module.css';
+import paw from '../../assets/images/PawLight.png';
 
 interface IState {
   isShrink: boolean;
@@ -30,7 +30,7 @@ const defaultPage = () => (
         <img src="/static/images/PawLight.png" />
       </div>
 
-      <TransitionGroup style={{ width: "100%", height: "100%" }}>
+      <TransitionGroup style={{ width: '100%', height: '100%' }}>
         <CSSTransition
           key={location.pathname}
           classNames="fade"
@@ -59,11 +59,11 @@ class Layout extends React.Component<RouteComponentProps<{}>, IState> {
   }
 
   componentDidMount() {
-    window.addEventListener("scroll", this.handleScroll.bind(this));
+    window.addEventListener('scroll', this.handleScroll.bind(this));
   }
 
   componentWillUnmount() {
-    window.removeEventListener("scroll", this.handleScroll.bind(this));
+    window.removeEventListener('scroll', this.handleScroll.bind(this));
   }
 
   public handleScroll = () => {
@@ -77,7 +77,7 @@ class Layout extends React.Component<RouteComponentProps<{}>, IState> {
 
   public render() {
     const { isShrink } = this.state;
-    const isHomePage = this.props.location.pathname === "/";
+    const isHomePage = this.props.location.pathname === '/';
     return (
       <React.Fragment>
         <Header

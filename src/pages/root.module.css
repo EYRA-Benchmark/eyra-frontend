@@ -1,20 +1,3 @@
-.appBar {
-  height: 80px;
-  transition: height 1s;
-  -webkit-transition: height 1s;
-  background: #fafafa !important;
-}
-
-.homePage {
-  background: transparent !important;
-  box-shadow: none !important;
-}
-/* // #204864d1  previous color for header*/
-.shrink {
-  height: 64px;
-  background: #fafafa !important;
-}
-
 .container {
   display: flex;
   width: 70%;
@@ -39,9 +22,6 @@
   z-index: -1;
 }
 @media (max-width: 600px) {
-  .appBar {
-    background: #fafafa !important;
-  }
   .container {
     width: 100%;
   }
