@@ -9,8 +9,8 @@ import { getPrismicClient } from 'src/services/prismicApi';
 import { NextContext } from 'next';
 
 interface IProps {
-  title: string;
-  desc: string;
+  title: any;
+  desc: any;
   image: string;
   date: string;
 }
@@ -20,8 +20,8 @@ class NewsDetails extends React.Component<IProps> {
     const prismicApi = await getPrismicClient();
     const prismicResponse: IPrismicResult<INews> = await prismicApi.getByUID('news', ctx.query.id);
     return {
-      title: RichText.render(prismicResponse.data.title),
-      desc: RichText.render(prismicResponse.data.description),
+      title: prismicResponse.data.title,
+      desc: prismicResponse.data.description,
       image: prismicResponse.data.image.url,
       date: formatDate(new Date(prismicResponse.data.date)),
     };
@@ -40,13 +40,15 @@ class NewsDetails extends React.Component<IProps> {
           </Grid>
           <Grid item={true} xs={9} sm={9} md={9}>
             <div className={styles.headerContainer}>
-              <div className={styles.title}>{title}</div>
+              <div className={styles.title}>
+                {RichText.render(title)}
+              </div>
               <p>{date}</p>
             </div>
           </Grid>
         </Grid>
         <Grid item={true} xs={12} sm={12} md={12}>
-          {desc}
+          {RichText.render(desc)}
         </Grid>
       </Grid>
     );

@@ -4,8 +4,8 @@ const RichText = require('prismic-reactjs').RichText;
 import styles from './About.module.css';
 
 interface IProps {
-  title: string;
-  desc: string;
+  title: any;
+  desc: any;
 }
 
 class About extends React.Component<IProps> {
@@ -13,8 +13,8 @@ class About extends React.Component<IProps> {
     const prismicApi = await getPrismicClient();
     const prismicResponse = await prismicApi.getSingle('aboutus');
     return {
-      title: RichText.render(prismicResponse.data.title),
-      desc: RichText.render(prismicResponse.data.description),
+      title: prismicResponse.data.title,
+      desc: prismicResponse.data.description,
     };
   }
 
@@ -25,10 +25,9 @@ class About extends React.Component<IProps> {
         <div className={styles.container}>
           <div className={styles.caption}>
             <div className={styles.article}>
-              <h3>{title}</h3>
+              <h3>{RichText.render(title)}</h3>
             </div>
-
-            {desc}
+            {RichText.render(desc)}
           </div>
         </div>
       </React.Fragment>
