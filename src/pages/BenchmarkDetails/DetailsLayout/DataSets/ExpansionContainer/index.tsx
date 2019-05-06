@@ -3,11 +3,11 @@ import {
   ExpansionPanelDetails,
   ExpansionPanelSummary,
   Typography,
-} from "@material-ui/core";
-import { ExpandMore as ExpandMoreIcon } from "@material-ui/icons";
-import * as React from "react";
-import VerticalTabs from "../VerticalTabs";
-import styles from "./ExpansionContainer.module.css";
+} from '@material-ui/core';
+import { ExpandMore as ExpandMoreIcon } from '@material-ui/icons';
+import * as React from 'react';
+import VerticalTabs from '../VerticalTabs';
+import styles from './ExpansionContainer.module.css';
 interface IProps {
   testDataSets: any[];
   trainingDataSets: any[];

@@ -2,19 +2,19 @@ import * as React from 'react';
 import { isLoggedIn, IUserProps, withUser } from 'src/context/User';
 import styles from './NavigationMenu.module.css';
 
-import Link from 'next/link';
+import { Link } from 'src/routes';
 
 function NavigationMenu({ user, logout }: IUserProps) {
   return (
     <React.Fragment>
       <ul className={styles.nav}>
         <li>
-          <Link href="/about">
+          <Link route="about">
             <a>About Us</a>
           </Link>
         </li>
         <li>
-          <Link href="/benchmarks">
+          <Link route="benchmarks">
             <a>Benchmarks</a>
           </Link>
         </li>
@@ -27,7 +27,7 @@ function NavigationMenu({ user, logout }: IUserProps) {
           {isLoggedIn(user) ? (
               <a onClick={logout}>Logout {user.first_name}</a>
           ) : (
-            <Link href="/login">
+            <Link route="login">
               <a>Login</a>
             </Link>
           )}

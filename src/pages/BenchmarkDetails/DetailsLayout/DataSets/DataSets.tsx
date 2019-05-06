@@ -1,7 +1,7 @@
-import * as React from "react";
-import ExpansionContainer from "./ExpansionContainer";
-import { Typography } from "@material-ui/core";
-import { Link } from "react-router-dom";
+import * as React from 'react';
+import ExpansionContainer from './ExpansionContainer';
+import { Typography } from '@material-ui/core';
+import { Link } from 'src/routes';
 interface IProps {
   testDataSets: any[];
   trainingDataSets: any[];
@@ -18,8 +18,8 @@ class DataSets extends React.Component<IProps, {}> {
           correct header information. Filterbank files will have a simulated
           Gaussian noise background (mean 100, standard deviation 5) and FRBs
           will be injected at random locations with widths, fluences, spectral
-          index, and dispersion measures (DM) drawn from broad distributions.{" "}
-          <Link to="/datasets">More...</Link>
+          index, and dispersion measures (DM) drawn from broad distributions.{' '}
+          <Link route="datasets"><a>More...</a></Link>
         </Typography>
 
         <ExpansionContainer

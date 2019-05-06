@@ -15,7 +15,7 @@ export interface IPrismicResult<T> {
 }
 
 export interface IPrismicSearchResponse<T> {
-  license?: "string";
+  license?: 'string';
   next_page: any;
   page: number;
   prev_page: any;

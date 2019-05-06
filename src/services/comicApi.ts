@@ -1,4 +1,4 @@
-import Axios, { AxiosInstance } from "axios";
+import Axios, { AxiosInstance } from 'axios';
 
 import {
   IAlgorithm,
@@ -10,23 +10,23 @@ import {
   UUID4,
   IJob,
   IDataset,
-} from "../types";
+} from '../types';
 
-import { objectToQueryParams } from "../utils";
+import { objectToQueryParams } from '../utils';
 
 import getConfig from 'next/config';
 
 export class ComicApi {
   protected axios!: AxiosInstance;
-  constructor(baseURL: string = "", headers = {}) {
+  constructor(baseURL: string = '', headers = {}) {
     let token = null;
     if (typeof document !== 'undefined') {
       token =
-        document && document.location.href.split("?token=")[1] ||
-        localStorage.getItem("comicToken") ||
+        document && document.location.href.split('?token=')[1] ||
+        localStorage.getItem('comicToken') ||
         null;
     }
-    if (token && token.slice(-1) === "#") {
+    if (token && token.slice(-1) === '#') {
       token = token.slice(0, -1);
     }
     this.axios = Axios.create({
@@ -39,9 +39,9 @@ export class ComicApi {
   public setToken(token: string | null): void {
     if (typeof localStorage !== 'undefined') {
       if (token) {
-        localStorage.setItem("comicToken", token);
+        localStorage.setItem('comicToken', token);
       } else {
-        localStorage.removeItem("comicToken");
+        localStorage.removeItem('comicToken');
       }
     }
     if (token) {
@@ -57,10 +57,10 @@ export class ComicApi {
 
   async me(): Promise<IUser> {
     if (!this.axios.defaults.headers.Authorization) {
-      throw Error("Trying to get /me/ user without token");
+      throw Error('Trying to get /me/ user without token');
     }
     try {
-      const result = await this.axios.get("me/");
+      const result = await this.axios.get('me/');
       return result.data;
     } catch (e) {
       this.setToken(null);
@@ -74,28 +74,28 @@ export class ComicApi {
     email: string;
     password: string;
   }): Promise<IUser> {
-    return (await this.axios.post<IUser>("auth/register/", details)).data;
+    return (await this.axios.post<IUser>('auth/register/', details)).data;
   }
 
   async login(details: {
     email: string;
     password: string;
   }): Promise<IResponse> {
-    return (await this.axios.post<IResponse>("auth/login/", details)).data;
+    return (await this.axios.post<IResponse>('auth/login/', details)).data;
   }
 
   async jobs(): Promise<IJob[]> {
-    return (await this.axios.get<IJob[]>("jobs/")).data;
+    return (await this.axios.get<IJob[]>('jobs/')).data;
   }
   async benchmarks(): Promise<IBenchmark[]> {
-    return (await this.axios.get<IBenchmark[]>("benchmarks/")).data;
+    return (await this.axios.get<IBenchmark[]>('benchmarks/')).data;
   }
 
   async benchmark(id: string): Promise<IBenchmark> {
     return (await this.axios.get<IBenchmark>(`benchmarks/${id}/`)).data;
   }
   async datasets(): Promise<IDataset[]> {
-    return (await this.axios.get<IDataset[]>("datasets/")).data;
+    return (await this.axios.get<IDataset[]>('datasets/')).data;
   }
 
   async dataset(id: string): Promise<IDataset> {
@@ -144,7 +144,7 @@ export class ComicApi {
     description: string;
     container: UUID4;
   }): Promise<IAlgorithm> {
-    return (await this.axios.post<IAlgorithm>("algorithmSubmission/", details))
+    return (await this.axios.post<IAlgorithm>('algorithmSubmission/', details))
       .data;
   }
 }

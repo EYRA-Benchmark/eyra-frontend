@@ -1,11 +1,11 @@
-import * as React from "react";
-import { RouteComponentProps, withRouter } from "react-router";
+import * as React from 'react';
+import { RouteComponentProps, withRouter } from 'react-router';
 // import { Typography } from "@material-ui/core";
-import { comicApi } from "../../../services/comicApi";
-import styles from "../../Home/Home.module.css";
-import { IBenchmark } from "../../../types/benchmark";
-import BenchmarkForm from "../../../components/Forms/Benchmark/BenchmarkForm";
-import Spinner from "../../../components/Spinner";
+import { comicApi } from '../../services/comicApi';
+import styles from '../Home/Home.module.css';
+import { IBenchmark } from '../../types/benchmark';
+import BenchmarkForm from '../../components/Forms/Benchmark/BenchmarkForm';
+import Spinner from '../../components/Spinner';
 
 interface IState {
   benchmark: IBenchmark | null;

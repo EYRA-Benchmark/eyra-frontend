@@ -13,7 +13,6 @@
   top: 30%;
   width: 550px;
   height: 600px;
-  -webkit-transform: rotate(-10deg);
   transform: rotate(-10deg);
   z-index: 1;
 }

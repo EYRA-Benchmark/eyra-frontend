@@ -1,6 +1,6 @@
 // @ts-ignore
-const withTypescript = require('@zeit/next-typescript');
-const withCSS = require('@zeit/next-css');
+const withTypescript = require("@zeit/next-typescript");
+const withCSS = require("@zeit/next-css");
 
 // const infiProxy = () => new Proxy({}, {
 //   get: infiProxy
@@ -12,12 +12,12 @@ const withCSS = require('@zeit/next-css');
 module.exports = withTypescript(withCSS({
   cssModules: true,
   cssLoaderOptions: {
-    localIdentName: '[name]__[local]--[hash:base64:5]'
+    localIdentName: "[name]__[local]--[hash:base64:5]",
   },
   useFileSystemPublicRoutes: false,
   serverRuntimeConfig: {
     // Will only be available on the server side
-    mySecret: 'secret',
+    mySecret: "secret",
     secondSecret: process.env.SECOND_SECRET, // Pass through env variables
   },
   publicRuntimeConfig: {
@@ -30,12 +30,11 @@ module.exports = withTypescript(withCSS({
       use: [
         options.defaultLoaders.babel,
         {
-          loader: 'file-loader',
-          options: {}
-        }
-      ]
+          loader: "file-loader",
+          options: {},
+        },
+      ],
     });
     return config;
-  }
+  },
 }));
-

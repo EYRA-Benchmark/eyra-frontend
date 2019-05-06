@@ -1,5 +1,5 @@
-import React from "react";
-import styles from "./CustomTextEditor.module.css";
+import React from 'react';
+import styles from './CustomTextEditor.module.css';
 const RichTextEditor = (typeof window !== 'undefined') ? require('react-rte') : null;
 
 interface IProps {
@@ -24,7 +24,7 @@ class CustomTextEditor extends React.Component<IProps, {}> {
   setDesc = (value: any) => {
     this.setState({ value });
     this.props.onChange(
-      value.toString("markdown"),
+      value.toString('markdown'),
     ); /** Description will be submitted as markdown only */
   }
   onChangeSource = (event: any) => {
@@ -55,7 +55,7 @@ class CustomTextEditor extends React.Component<IProps, {}> {
     return (
       <React.Fragment>
         <div className={styles.descContainer}>
-          <div style={{ display: "flex" }}>
+          <div style={{ display: 'flex' }}>
             {showEditor ? textArea : null}
 
             <div className={styles.col1}>
@@ -65,7 +65,7 @@ class CustomTextEditor extends React.Component<IProps, {}> {
                 rootStyle={{
                   minHeight: 400,
                   maxHeight: 400,
-                  overflowY: "scroll",
+                  overflowY: 'scroll',
                 }}
               />
             </div>
@@ -76,7 +76,7 @@ class CustomTextEditor extends React.Component<IProps, {}> {
                 type="radio"
                 name="format"
                 value="html"
-                checked={format === "html"}
+                checked={format === 'html'}
                 onChange={this.onChangeFormat}
               />
               <span>HTML</span>
@@ -86,7 +86,7 @@ class CustomTextEditor extends React.Component<IProps, {}> {
                 type="radio"
                 name="format"
                 value="markdown"
-                checked={format === "markdown"}
+                checked={format === 'markdown'}
                 onChange={this.onChangeFormat}
               />
               <span>Markdown</span>

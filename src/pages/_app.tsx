@@ -43,7 +43,7 @@ export default class MyApp extends App {
     const {Component, pageProps, router} = this.props;
 
     const Wrapper = (props: any) => router.route === '/'
-      ? <React.Fragment>{props.children}</React.Fragment>
+      ? <>{props.children}</>
       : (
         <div id="root_container">
           <main className={styles.container}>

@@ -1,9 +1,9 @@
-import * as React from "react";
+import * as React from 'react';
 
-import { Grid } from "@material-ui/core";
-import { IBenchmark } from "src/types";
+import { Grid } from '@material-ui/core';
+import { IBenchmark } from 'src/types';
 
-import { BenchmarkCard } from "src/components/BenchmarkCard";
+import { BenchmarkCard } from 'src/components/BenchmarkCard';
 
 interface IProps {
   size: number;

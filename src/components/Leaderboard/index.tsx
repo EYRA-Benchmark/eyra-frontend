@@ -1,12 +1,12 @@
-import * as React from "react";
-import LeaderboardTable from "./LeaderboardTable/LeaderboardTable";
-import { ISubmission, IAlgorithm } from "src/types";
-import { comicApi } from "src/services/comicApi";
+import * as React from 'react';
+import LeaderboardTable from './LeaderboardTable/LeaderboardTable';
+import { ISubmission, IAlgorithm } from 'src/types';
+import { comicApi } from 'src/services/comicApi';
 
 // Omit allows one to remove a property from a type/interface
 type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;
 // NestedSubmission is a Submission with a nested Algorithm
-export type INestedSubmission = Omit<ISubmission, "algorithm"> & {
+export type INestedSubmission = Omit<ISubmission, 'algorithm'> & {
   algorithm: IAlgorithm;
 };
 

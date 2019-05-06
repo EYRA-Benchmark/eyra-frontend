@@ -3,9 +3,9 @@ import { Menu as MenuIcon } from '@material-ui/icons';
 import * as React from 'react';
 import Navbar from '../Navigation/NavigationMenu/NavigationMenu';
 import styles from './Header.module.css';
-import Link from 'next/link';
 import { withRouter, WithRouterProps } from 'next/router';
 import classNames from 'classnames';
+import { Link } from 'src/routes';
 
 export interface IOwnProps {
   drawerToggle: () => void;
@@ -57,7 +57,7 @@ class Header extends React.Component<IOwnProps & WithRouterProps> {
       >
         <Toolbar className={styles.toolbar}>
           <div className={styles.logo}>
-            <Link href="/">
+            <Link route="home">
               <a title="Home"><img src="/static/images/logo.png" alt="logo" className={styles.logoImage} /></a>
             </Link>
           </div>

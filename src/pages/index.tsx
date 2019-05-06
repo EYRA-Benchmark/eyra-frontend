@@ -10,7 +10,7 @@ import { IBenchmark } from 'src/types';
 import ChallengesGrid from 'src/components/BenchmarkCardGrid';
 import NewsGallery from 'src/components/NewsGallery';
 
-import styles from './Home.module.css';
+import styles from './Home/Home.module.css';
 import { INews, IPrismicResult } from 'src/types/prismic';
 
 interface IProps {

@@ -1,21 +1,21 @@
-import React from "react";
+import React from 'react';
 
-import classNames from "classnames";
-import { Formik, FormikActions, Field } from "formik";
-import * as yup from "yup";
+import classNames from 'classnames';
+import { Formik, FormikActions, Field } from 'formik';
+import * as yup from 'yup';
 
 import {
   Button,
   DialogActions,
   DialogContent,
   DialogTitle,
-} from "@material-ui/core";
+} from '@material-ui/core';
 
-import styles from "./SubscriptionDialog.module.css";
+import styles from './SubscriptionDialog.module.css';
 
-import MailImage from "src/assets/images/mail.png";
-import { submitContactForm } from "src/services/contactFormSubmission";
-import { mapValues } from "src/utils";
+import MailImage from 'src/assets/images/mail.png';
+import { submitContactForm } from 'src/services/contactFormSubmission';
+import { mapValues } from 'src/utils';
 
 const formSchema = yup.object().shape({
   email: yup
@@ -27,17 +27,17 @@ const formSchema = yup.object().shape({
   permission: yup
     .bool()
     .test(
-      "permission",
-      "You have to agree with our Terms and Conditions!",
+      'permission',
+      'You have to agree with our Terms and Conditions!',
       (value) => value === true,
     )
-    .required("You have to agree with our Terms and Conditions!"),
+    .required('You have to agree with our Terms and Conditions!'),
 });
 
 const interests = {
-  setup: "Setting up a benchmark",
-  submit: "Submitting an algorithm",
-  update: "Stay up-to-date about EYRA platform",
+  setup: 'Setting up a benchmark',
+  submit: 'Submitting an algorithm',
+  update: 'Stay up-to-date about EYRA platform',
 };
 
 interface IValues {
@@ -53,9 +53,9 @@ interface IValues {
 }
 
 const initialValues: IValues = {
-  email: "",
-  name: "",
-  organization: "",
+  email: '',
+  name: '',
+  organization: '',
   interests: mapValues(interests, (_) => false),
   permission: false,
   isSuccess: false,
@@ -70,7 +70,7 @@ const onSubmit = async (
     values.name,
     values.organization,
     values.email,
-    Object.entries(values.interests).filter(([k, v]) => v).map(([k, v]) => k).join(","),
+    Object.entries(values.interests).filter(([k, v]) => v).map(([k, v]) => k).join(','),
   );
   values.isSuccess = isSuccess;
   if (!isSuccess) {
@@ -130,7 +130,7 @@ const SubscriptionDialog: React.FunctionComponent = () => (
                     placeholder="Email"
                   />
                   {errors.email && touched.email && (
-                    <div style={{ color: "red", marginTop: ".5rem" }}>
+                    <div style={{ color: 'red', marginTop: '.5rem' }}>
                       {errors.email}
                     </div>
                   )}

@@ -4,8 +4,8 @@ import {
   TableRow,
   TableSortLabel,
   Tooltip,
-} from "@material-ui/core";
-import * as React from "react";
+} from '@material-ui/core';
+import * as React from 'react';
 interface IProps {
   onRequestSort: (event: any, property: any) => void;
   order: any;
@@ -21,10 +21,10 @@ class Leaderboard extends React.Component<IProps, {}> {
   render() {
     const rows = [
       {
-        id: "name",
+        id: 'name',
         numeric: false,
         disablePadding: false,
-        label: "Name",
+        label: 'Name',
       },
       ...this.props.metricFields.map((fieldName) => ({
         id: fieldName,
@@ -32,7 +32,7 @@ class Leaderboard extends React.Component<IProps, {}> {
         disablePadding: false,
         label: fieldName,
       })),
-      { id: "date", numeric: true, disablePadding: false, label: "Date" },
+      { id: 'date', numeric: true, disablePadding: false, label: 'Date' },
     ];
 
     const { order, orderBy } = this.props;
@@ -44,13 +44,13 @@ class Leaderboard extends React.Component<IProps, {}> {
             return (
               <TableCell
                 key={row.id}
-                align={row.numeric ? "right" : "left"}
-                padding={row.disablePadding ? "none" : "default"}
+                align={row.numeric ? 'right' : 'left'}
+                padding={row.disablePadding ? 'none' : 'default'}
                 sortDirection={orderBy === row.id ? order : false}
               >
                 <Tooltip
                   title="Sort"
-                  placement={row.numeric ? "bottom-end" : "bottom-start"}
+                  placement={row.numeric ? 'bottom-end' : 'bottom-start'}
                   enterDelay={300}
                 >
                   <TableSortLabel

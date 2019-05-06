@@ -1,8 +1,8 @@
-import React from "react";
-import Login from "src/components/Forms/LoginForm";
-import SignUp from "src/components/Forms/SignUp";
-import { CssBaseline, Paper, Typography, Tabs, Tab } from "@material-ui/core";
-import styles from "./Login.module.css";
+import React from 'react';
+import Login from 'src/components/Forms/LoginForm';
+import SignUp from 'src/components/Forms/SignUp';
+import { CssBaseline, Paper, Typography, Tabs, Tab } from '@material-ui/core';
+import styles from './Login.module.css';
 interface IContainerProps {
   children: React.ReactNode;
 }

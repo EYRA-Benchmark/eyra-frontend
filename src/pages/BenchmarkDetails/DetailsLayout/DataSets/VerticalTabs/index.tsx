@@ -1,10 +1,10 @@
 // import { Icon } from "@material-ui/core";
-import { Grid, Tab, Tabs, Typography } from "@material-ui/core";
+import { Grid, Tab, Tabs, Typography } from '@material-ui/core';
 // import PropTypes from "prop-types";
-import * as React from "react";
-import styles from "./VerticalTabs.module.css";
-import { comicApi } from "../../../../../services/comicApi";
-import { IDataFile } from "../../../../../types/data_file";
+import * as React from 'react';
+import styles from './VerticalTabs.module.css';
+import { comicApi } from '../../../../../services/comicApi';
+import { IDataFile } from '../../../../../types/data_file';
 
 interface IState {
   value: number;
@@ -65,7 +65,7 @@ class VerticalTabs extends React.Component<IProps, IState> {
     }
 
     return (
-      <Grid container={true} spacing={24} className={styles.noMargin}>
+      <Grid container={true} spacing={3} className={styles.noMargin}>
         <Grid item={true} xs={2} sm={2} md={2} className={styles.divider}>
           <div className={styles.borderBottom}>
             <h5>Data Sources</h5>

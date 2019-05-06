@@ -1,13 +1,13 @@
-import { Grid, Paper, Tab, Tabs, Typography } from "@material-ui/core";
-import Markdown from "@nteract/markdown";
-import * as React from "react";
-import AlgorithmSubmissionForm from "../../../components/Forms/Algorithm/AlgorithmSubmission";
-import Datasets from "./DataSets/DataSets";
-import styles from "./DetailsLayout.module.css";
-import Leaderboard from "../../../components/Leaderboard";
+import { Grid, Paper, Tab, Tabs, Typography } from '@material-ui/core';
+import Markdown from '@nteract/markdown';
+import * as React from 'react';
+import AlgorithmSubmissionForm from '../../../components/Forms/Algorithm/AlgorithmSubmission';
+import Datasets from './DataSets/DataSets';
+import styles from './DetailsLayout.module.css';
+import Leaderboard from '../../../components/Leaderboard';
 
-import { IBenchmark } from "../../../types/benchmark";
-import Logs from "../../../components/Logs";
+import { IBenchmark } from '../../../types/benchmark';
+import Logs from '../../../components/Logs';
 
 interface IContainerProps {
   children: React.ReactNode;
@@ -65,7 +65,7 @@ class Details extends React.Component<IProps, IState> {
             ]
           : [];
       return (
-        <Grid container={true} spacing={24}>
+        <Grid container={true} spacing={3}>
           <Grid item={true} xs={12} sm={12} md={12}>
             <Paper className={styles.paper}>
               <h2>{data.name}</h2>
