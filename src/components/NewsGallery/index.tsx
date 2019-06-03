@@ -15,7 +15,7 @@ interface IProps {
 export class Gallery extends React.Component<
   RouteComponentProps<{}> & IProps,
   {}
-> {
+  > {
   render() {
     const { data } = this.props;
 
@@ -28,7 +28,7 @@ export class Gallery extends React.Component<
                 <CardMedia
                   className={styles.media}
                   image={card.data.image.url}
-                  title="Image title"
+                  title="Image"
                 />
                 <CardHeader
                   title={RichText.asText(card.data.title)}
