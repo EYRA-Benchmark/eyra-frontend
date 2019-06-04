@@ -3,9 +3,9 @@ import Markdown from '@nteract/markdown';
 import * as React from 'react';
 import AlgorithmSubmissionForm from '../../../components/Forms/Algorithm/AlgorithmSubmission';
 import Datasets from './DataSets/DataSets';
-import styles from './DetailsLayout.module.css';
+import styles from './DetailsLayout.css';
 import Leaderboard from '../../../components/Leaderboard';
-
+import classNames from 'classnames';
 import { IBenchmark } from '../../../types/benchmark';
 import Logs from '../../../components/Logs';
 
@@ -39,35 +39,40 @@ class Details extends React.Component<IProps, IState> {
   }
 
   render() {
+
     const { value } = this.state;
     const { data } = this.props;
     if (data) {
       /* Get the test and training data sets */
       const testDataSets =
         data.test_data_file !== null &&
-        data.test_ground_truth_data_file !== null
+          data.test_ground_truth_data_file !== null
           ? [
-              {
-                data: data.test_data_file,
-                ground_truth: data.test_ground_truth_data_file,
-              },
-            ]
+            {
+              data: data.test_data_file,
+              ground_truth: data.test_ground_truth_data_file,
+            },
+          ]
           : [];
 
       const trainingDataSets =
         data.training_data_file !== null &&
-        data.training_ground_truth_data_file !== null
+          data.training_ground_truth_data_file !== null
           ? [
-              {
-                data: data.training_data_file,
-                ground_truth: data.training_ground_truth_data_file,
-              },
-            ]
+            {
+              data: data.training_data_file,
+              ground_truth: data.training_ground_truth_data_file,
+            },
+          ]
           : [];
       return (
         <Grid container={true} spacing={3}>
           <Grid item={true} xs={12} sm={12} md={12}>
-            <Paper className={styles.paper}>
+            <Paper className={styles.paper} >
+              <div className={classNames(styles.bannerImage, styles.cover)}
+                style={{ backgroundImage: `url(${data.image})` }} />
+
+              <div className={classNames(styles.overlay, styles.cover)} />
               <h2>{data.name}</h2>
               {/* <Markdown
                 source={data.short_description}

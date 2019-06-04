@@ -1,0 +1,53 @@
+.banner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 300px;
+}
+.detailsContainer {
+  min-height: 200px;
+}
+.detailsContainer a {
+  color: #1fb8ea;
+}
+.paper {
+  height: 400px;
+  position: relative;
+  
+}
+.cover {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0; 
+}
+.bannerImage {
+  background-position: 100% 100%;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.overlay {
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+.paper h2 {
+ position: absolute;
+  top: 10%;
+  left: 10%;
+  color: #fff;
+}
+.paper p {
+  position: absolute;
+  top: 25%;
+  left: 10%;
+  color: #fff;
+  font-weight: 500;
+}
+.container {
+  max-height: 700px;
+  overflow: auto;
+}
+.tabsContainer {
+  background-color: aliceblue;
+}
