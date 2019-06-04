@@ -24,26 +24,26 @@ interface IState {
 }
 
 const defaultPage = () => (
-  <div id="root_container">
-    <main className={styles.container}>
-      <div className={styles.bannerBackground} id="about">
-        <img src="/static/images/PawLight.png" />
-      </div>
+  // <div id="root_container">
+  //   <main className={styles.container}>
+  //     <div className={styles.bannerBackground} id="about">
+  //       <img src="/static/images/PawLight.png" />
+  //     </div>
 
-      <TransitionGroup style={{ width: '100%', height: '100%' }}>
-        <CSSTransition
-          key={location.pathname}
-          classNames="fade"
-          timeout={2000}
-          exit={false}
-        >
-          <Switch>
-            <Routes />
-          </Switch>
-        </CSSTransition>
-      </TransitionGroup>
-    </main>
-  </div>
+  <TransitionGroup style={{ width: '100%', height: '100%' }}>
+    <CSSTransition
+      key={location.pathname}
+      classNames="fade"
+      timeout={2000}
+      exit={false}
+    >
+      <Switch>
+        <Routes />
+      </Switch>
+    </CSSTransition>
+  </TransitionGroup>
+  //   </main>
+  // </div>
 );
 
 class Layout extends React.Component<RouteComponentProps<{}>, IState> {

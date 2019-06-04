@@ -45,7 +45,7 @@ class Header extends React.Component<IOwnProps & WithRouterProps> {
 
   render() {
     const { drawerToggle, router } = this.props;
-    const isHomePage = router!.route === '/';
+    const isHomePage = router!.route === '/Home';
 
     return (
       <AppBar

@@ -1,8 +1,8 @@
-import App, {Container, NextAppContext} from 'next/app';
+import App, { Container, NextAppContext } from 'next/app';
 import React from 'react';
 import { ThemeProvider } from '@material-ui/styles';
 import { CssBaseline } from '@material-ui/core';
-
+import classNames from 'classnames';
 import { UserProvider } from 'src/context/User';
 import Header from 'src/components/Header/Header';
 import SideDrawer from 'src/components/SideDrawer/SideDrawer';
@@ -36,13 +36,14 @@ export default class MyApp extends App {
       pageProps = await Component.getInitialProps(ctx);
     }
 
-    return {pageProps};
+    return { pageProps };
   }
 
   render() {
-    const {Component, pageProps, router} = this.props;
+    const { Component, pageProps, router } = this.props;
 
-    const Wrapper = (props: any) => router.route === '/'
+
+    const Wrapper = (props: any) => router.route === '/Home'
       ? <>{props.children}</>
       : (
         <div id="root_container">
@@ -56,19 +57,19 @@ export default class MyApp extends App {
       );
 
     return (
-        <Container>
-          <UserProvider>
-            <ThemeProvider theme={theme}>
-              <CssBaseline />
-              <Header />
-              <SideDrawer open={true} />
-              <Wrapper>
-                  <Component {...pageProps} />
-              </Wrapper>
-              <Footer />
-            </ThemeProvider>
-          </UserProvider>
-        </Container>
+      <Container>
+        <UserProvider>
+          <ThemeProvider theme={theme}>
+            <CssBaseline />
+            <Header />
+            <SideDrawer open={true} />
+            <Wrapper>
+              <Component {...pageProps} />
+            </Wrapper>
+            <Footer />
+          </ThemeProvider>
+        </UserProvider>
+      </Container>
     );
   }
 }
