@@ -20,25 +20,25 @@ export const BenchmarkCard = (props: IProps) => {
 
   return (
     <Link route="benchmarkDetails" params={{ id: benchmark.id }}>
-
-      <Card square={true} className={styles.card}>
-        <CardMedia
-          className={styles.media}
-          image={benchmark.image}
-          title="Image title"
-        />
-        {canEdit ? (
-          getHeader(benchmark)
-        ) : (
-            <CardHeader
-              title={benchmark.name}
-              titleTypographyProps={{
-                variant: 'h6',
-              }}
-            />
-          )}
-      </Card>
-
+      <a>
+        <Card square={true} className={styles.card}>
+          <CardMedia
+            className={styles.media}
+            image={benchmark.image}
+            title="Image title"
+          />
+          {canEdit ? (
+            getHeader(benchmark)
+          ) : (
+              <CardHeader
+                title={benchmark.name}
+                titleTypographyProps={{
+                  variant: 'h6',
+                }}
+              />
+            )}
+        </Card>
+      </a>
     </Link>
   );
 };
