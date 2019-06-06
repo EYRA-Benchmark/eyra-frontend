@@ -12,7 +12,7 @@ import { INews, IPrismicResult } from 'src/types/prismic';
 import ChallengesGrid from 'src/components/BenchmarkCardGrid';
 import NewsGallery from 'src/components/NewsGallery';
 
-import styles from './Home.module.css';
+import styles from './Home.css';
 
 interface IProps {
   news: Array<IPrismicResult<INews>>;
@@ -84,6 +84,7 @@ class Index extends React.Component<IProps> {
             </div>
           </div>
         </div>
+
       </React.Fragment>
     );
   }

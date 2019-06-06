@@ -19,17 +19,17 @@ export const BenchmarkCard = (props: IProps) => {
   canEdit = benchmark.permissions.indexOf('change_benchmark') > -1;
 
   return (
-    <Link route="benchmarkDetails" params={{id: benchmark.id}}>
-      <a>
-        <Card square={true} className={styles.card}>
-          <CardMedia
-            className={styles.media}
-            image={benchmark.image}
-            title="Image title"
-          />
-          {canEdit ? (
-            getHeader(benchmark)
-          ) : (
+    <Link route="benchmarkDetails" params={{ id: benchmark.id }}>
+
+      <Card square={true} className={styles.card}>
+        <CardMedia
+          className={styles.media}
+          image={benchmark.image}
+          title="Image title"
+        />
+        {canEdit ? (
+          getHeader(benchmark)
+        ) : (
             <CardHeader
               title={benchmark.name}
               titleTypographyProps={{
@@ -37,8 +37,8 @@ export const BenchmarkCard = (props: IProps) => {
               }}
             />
           )}
-        </Card>
-      </a>
+      </Card>
+
     </Link>
   );
 };
@@ -50,14 +50,14 @@ export const getHeader = (benchmark: IBenchmark) => (
     }}
     action={
       <div>
-        <Link route="benchmarkDetails" params={{id: benchmark.id}}>
+        <Link route="benchmarkDetails" params={{ id: benchmark.id }}>
           <a>
             <IconButton title="Details">
               <DetailsIcon />
             </IconButton>
           </a>
         </Link>
-        <Link route="benchmarkEdit" params={{id: benchmarkId}}>
+        <Link route="benchmarkEdit" params={{ id: benchmarkId }}>
           <a>
             <IconButton title="Edit">
               <EditIcon />
