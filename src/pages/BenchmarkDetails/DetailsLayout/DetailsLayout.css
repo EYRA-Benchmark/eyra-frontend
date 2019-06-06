@@ -5,13 +5,13 @@
   min-height: 300px;
 }
 .detailsContainer {
-  min-height: 200px;
+  min-height: 300px;
 }
 .detailsContainer a {
   color: #1fb8ea;
 }
 .paper {
-  height: 400px;
+  height: 300px;
   position: relative;
   
 }
@@ -22,10 +22,14 @@
   left: 0;
   right: 0; 
 }
+.imageContainer {
+  width: 100%;
+  height: 100%;
+}
 .bannerImage {
-  background-position: 100% 100%;
-  background-repeat: no-repeat;
-  background-size: cover;
+  height: 100%;
+  width: 100%;
+  object-fit: fill;
 }
 .overlay {
   position: absolute;
@@ -45,6 +49,7 @@
   font-weight: 500;
 }
 .container {
+  min-height: 300px;
   max-height: 700px;
   overflow: auto;
 }
