@@ -3,10 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "build": "next build src",
+    "build": "next build src && tsc --project tsconfig.server.json",
     "dev": "ts-node --compiler-options '{\"module\":\"commonjs\"}' server.ts",
     "start": "ts-node --compiler-options '{\"module\":\"commonjs\"}' server.ts",
-    "start:production": "NODE_ENV=production ts-node --compiler-options '{\"module\":\"commonjs\"}' server.ts",
+    "start:production": "NODE_ENV=production node dist/server.js",
     "test": "react-scripts test --env=jsdom",
     "lint": "tslint --project .",
     "cypress-install": "yarn add --peer @cypress/webpack-preprocessor@3.0.1 cypress@3.1.4",
