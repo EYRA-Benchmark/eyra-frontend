@@ -40,13 +40,14 @@
   top: 10%;
   left: 10%;
   color: #fff;
+  font: 25px Lato,sans-serif
 }
 .paper p {
   position: absolute;
   top: 25%;
   left: 10%;
   color: #fff;
-  font-weight: 500;
+  font: 14px Lato,sans-serif
 }
 .container {
   min-height: 300px;
