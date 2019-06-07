@@ -1,10 +1,10 @@
-import { Button } from "@material-ui/core";
-import { Field, Form, Formik } from "formik";
-import { FormikActions } from "formik";
-import React from "react";
+import { Button } from '@material-ui/core';
+import { Field, Form, Formik } from 'formik';
+import { FormikActions } from 'formik';
+import React from 'react';
 
-import styles from "../Algorithm/AlgorithmSubmission.module.css";
-import CustomTextEditor from "../CustomTextEditor";
+import styles from '../Algorithm/AlgorithmSubmission.module.css';
+import CustomTextEditor from '../CustomTextEditor';
 
 interface IValues {
   name: string;
@@ -13,9 +13,9 @@ interface IValues {
 }
 
 const initialValues: IValues = {
-  name: "",
-  short_description: "",
-  overview: "",
+  name: '',
+  short_description: '',
+  overview: '',
 };
 const onSubmit = async (
   values: IValues,
@@ -32,8 +32,8 @@ const onSubmit = async (
 class OrganizeBenchmark extends React.Component<{}, {}> {
   render() {
     const defaultValue =
-      "<b>Add Description Here..</b><br/>" +
-      "<p>Here You can add description or paste HTML/ Markdown code for description in left Container</p>";
+      '<b>Add Description Here..</b><br/>' +
+      '<p>Here You can add description or paste HTML/ Markdown code for description in left Container</p>';
     return (
       <Formik initialValues={initialValues} onSubmit={onSubmit}>
         {({ isSubmitting, setFieldValue }) => (
@@ -55,7 +55,7 @@ class OrganizeBenchmark extends React.Component<{}, {}> {
                   defaultFormat="html"
                   showEditor={true}
                   onChange={(value) => {
-                    setFieldValue("description", value);
+                    setFieldValue('description', value);
                   }}
                 />
               </div>

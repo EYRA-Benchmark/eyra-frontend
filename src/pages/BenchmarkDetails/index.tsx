@@ -1,37 +1,23 @@
-import * as React from "react";
-import { RouteComponentProps, withRouter } from "react-router";
+import * as React from 'react';
+import { NextContext } from 'next';
 
-import { comicApi } from "src/services/comicApi";
+import { comicApi } from '../../services/comicApi';
+import { IBenchmark } from '../../types/benchmark';
+import Details from './DetailsLayout';
 
-import { IBenchmark } from "src/types/benchmark";
-
-import Spinner from "src/components/Spinner/index";
-import Details from "./DetailsLayout/";
-
-interface IState {
-  benchmark: IBenchmark | null;
+interface IProps {
+  benchmark: IBenchmark;
 }
 
-class BenchmarkDetails extends React.Component<
-  RouteComponentProps<{ id: string }>,
-  IState
-> {
-  state = {
-    benchmark: null,
-  };
-  async componentDidMount() {
-    // await new Promise(resolve => setTimeout(resolve, 2000));
-    this.setState({
-      benchmark: await comicApi.benchmark(this.props.match.params.id),
-    });
+export default class BenchmarkDetails extends React.Component<IProps> {
+  static async getInitialProps(ctx: NextContext<{id: string}>): Promise<IProps> {
+    return {
+      benchmark: await comicApi.benchmark(ctx.query.id),
+    };
   }
+
   render() {
-    const content = this.state.benchmark ? (
-      <Details data={this.state.benchmark!} />
-    ) : (
-      <Spinner />
-    );
-    return <div>{content}</div>;
+    return <Details data={this.props.benchmark} />
   }
 }
-export default withRouter(BenchmarkDetails);
+

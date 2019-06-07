@@ -1,17 +1,17 @@
-import React from "react";
-import * as yup from "yup";
-import styles from "./LoginForm.module.css";
-import { Formik, Form, Field, FormikActions } from "formik";
-import { Button, Dialog, DialogContent } from "@material-ui/core";
-import { comicApi } from "src/services/comicApi";
-import { RouteComponentProps, withRouter } from "react-router";
+import React from 'react';
+import * as yup from 'yup';
+import styles from './LoginForm.module.css';
+import { Formik, Form, Field, FormikActions } from 'formik';
+import { Button, Dialog, DialogContent } from '@material-ui/core';
+import { comicApi } from 'src/services/comicApi';
+import { RouteComponentProps, withRouter } from 'react-router';
 
 const formSchema = yup.object().shape({
   email: yup
     .string()
     .email()
-    .required("Email is required."),
-  password: yup.string().required("Password is required"),
+    .required('Email is required.'),
+  password: yup.string().required('Password is required'),
 });
 interface IValues {
   email: string;
@@ -20,9 +20,9 @@ interface IValues {
 }
 
 const initialValues: IValues = {
-  email: "",
-  password: "",
-  response: "",
+  email: '',
+  password: '',
+  response: '',
 };
 const onSubmit = (props: IProps) => async (
   values: IValues,
@@ -38,7 +38,7 @@ const onSubmit = (props: IProps) => async (
         if (response) {
           comicApi.setToken(response.token);
           props.onLogin();
-          props.history.push("/");
+          props.history.push('/');
         }
       })
       .catch((error) => {
@@ -86,7 +86,7 @@ const Login = (props: IProps) => {
             <Dialog
               open={values.response.length > 0}
               onClose={() => {
-                setFieldValue("response", "");
+                setFieldValue('response', '');
               }}
             >
               <DialogContent>{values.response}</DialogContent>

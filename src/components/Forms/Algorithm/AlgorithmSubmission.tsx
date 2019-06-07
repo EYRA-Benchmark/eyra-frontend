@@ -1,11 +1,11 @@
-import { comicApi } from "src/services/comicApi";
+import { comicApi } from 'src/services/comicApi';
 
-import { Button } from "@material-ui/core";
-import { Field, Form, Formik } from "formik";
-import { FormikActions } from "formik";
-import React from "react";
-import CustomTextEditor from "../CustomTextEditor";
-import styles from "./AlgorithmSubmission.module.css";
+import { Button } from '@material-ui/core';
+import { Field, Form, Formik } from 'formik';
+import { FormikActions } from 'formik';
+import React from 'react';
+import CustomTextEditor from '../CustomTextEditor';
+import styles from './AlgorithmSubmission.module.css';
 
 interface IProps {
   benchmarkId: string;
@@ -18,10 +18,10 @@ interface IValues {
 }
 
 const initialValues: IValues = {
-  id: "",
-  name: "",
-  description: "",
-  containerName: "",
+  id: '',
+  name: '',
+  description: '',
+  containerName: '',
 };
 const onSubmit = async (
   values: IValues,
@@ -48,8 +48,8 @@ class AlgorithmSubmission extends React.Component<IProps, {}> {
   render() {
     const { benchmarkId } = this.props;
     const defaultValue =
-      "<b>Add Description Here..</b><br/>" +
-      "<p>Here You can add description or paste HTML/ Markdown code for description in left Container</p>";
+      '<b>Add Description Here..</b><br/>' +
+      '<p>Here You can add description or paste HTML/ Markdown code for description in left Container</p>';
     initialValues.id = benchmarkId;
     return (
       <Formik initialValues={initialValues} onSubmit={onSubmit}>
@@ -67,14 +67,14 @@ class AlgorithmSubmission extends React.Component<IProps, {}> {
               </div>
               <div className={styles.inputContainer}>
                 <label htmlFor="description">Description</label>
-                <CustomTextEditor
+                {/* <CustomTextEditor
                   defaultValue={defaultValue}
                   defaultFormat="html"
                   showEditor={true}
                   onChange={(value) => {
-                    setFieldValue("description", value);
+                    setFieldValue('description', value);
                   }}
-                />
+                /> */}
               </div>
 
               <div className={styles.inputContainer}>

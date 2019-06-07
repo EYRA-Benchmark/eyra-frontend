@@ -1,19 +1,21 @@
-import { createStyles, Theme } from "@material-ui/core";
+import { Theme } from '@material-ui/core';
+import { createStyles } from '@material-ui/styles';
+
 const styles = (theme: Theme) =>
   createStyles({
     table: {
       fontFamily: theme.typography.fontFamily,
     },
     flexContainer: {
-      display: "flex",
-      alignItems: "center",
-      boxSizing: "border-box",
+      display: 'flex',
+      alignItems: 'center',
+      boxSizing: 'border-box',
     },
     tableRow: {
-      cursor: "pointer",
+      cursor: 'pointer',
     },
     tableRowHover: {
-      "&:hover": {
+      '&:hover': {
         backgroundColor: theme.palette.grey[200],
       },
     },
@@ -21,7 +23,7 @@ const styles = (theme: Theme) =>
       flex: 1,
     },
     noClick: {
-      cursor: "initial",
+      cursor: 'initial',
     },
   });
 export default styles;

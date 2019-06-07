@@ -9,10 +9,12 @@
     "no-var-requires": false,
     "ordered-imports": false,
     "no-implicit-dependencies": [true, "dev", ["src"]],
-    "no-submodule-imports": [true, "src"],
+    "no-submodule-imports": [false],
     "semicolon": [true, "always"],
     "jsx-no-multiline-js": false,
-    "member-ordering": false
+    "member-ordering": false,
+    "quotemark": [true, "single", "jsx-double"],
+    "max-classes-per-file": false
   },
   "linterOptions": {
     "exclude": [

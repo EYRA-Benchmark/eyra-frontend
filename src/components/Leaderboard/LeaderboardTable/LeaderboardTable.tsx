@@ -6,11 +6,11 @@ import {
   TableRow,
   withStyles,
   WithStyles,
-} from "@material-ui/core";
-import * as React from "react";
-import LeaderboardHead from "../LeaderboardHead/LeaderboardHead";
-import styles from "./LeaderboardTableStyle";
-import { INestedSubmission } from "../index";
+} from '@material-ui/core';
+import * as React from 'react';
+import LeaderboardHead from '../LeaderboardHead/LeaderboardHead';
+import styles from './LeaderboardTableStyle';
+import { INestedSubmission } from '../index';
 
 function desc(a: any, b: any, orderBy: any) {
   if (b[orderBy] < a[orderBy]) {
@@ -34,7 +34,7 @@ function stableSort(array: any, cmp: any) {
 }
 
 function getSorting(order: any, orderBy: any) {
-  return order === "desc"
+  return order === 'desc'
     ? (a: any, b: any) => desc(a, b, orderBy)
     : (a: any, b: any) => -desc(a, b, orderBy);
 }
@@ -49,16 +49,16 @@ interface IProps extends WithStyles<typeof styles> {
 }
 class LeaderboardTable extends React.Component<IProps, IState> {
   state = {
-    order: "asc",
-    orderBy: "score",
+    order: 'asc',
+    orderBy: 'score',
   };
 
   handleRequestSort = (event: any, property: any) => {
     const orderBy = property;
-    let order = "desc";
+    let order = 'desc';
 
-    if (this.state.orderBy === property && this.state.order === "desc") {
-      order = "asc";
+    if (this.state.orderBy === property && this.state.order === 'desc') {
+      order = 'asc';
     }
 
     this.setState({ order, orderBy });

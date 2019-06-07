@@ -1,14 +1,13 @@
-import React from "react";
-import { Card, CardHeader, CardMedia, IconButton } from "@material-ui/core";
-import { IBenchmark } from "src/types";
+import React from 'react';
+import { Card, CardHeader, CardMedia, IconButton } from '@material-ui/core';
+import { IBenchmark } from 'src/types';
 import {
   Description as DetailsIcon,
   Edit as EditIcon,
-} from "@material-ui/icons";
+} from '@material-ui/icons';
 
-import FRBImage from "src/assets/images/FRB.jpg";
-import styles from "./BenchmarkCard.module.css";
-import { Link } from "react-router-dom";
+import styles from './BenchmarkCard.module.css';
+import { Link } from 'src/routes';
 
 interface IProps {
   benchmark: IBenchmark;
@@ -17,47 +16,53 @@ interface IProps {
 export const BenchmarkCard = (props: IProps) => {
   const benchmark = props.benchmark;
   let canEdit = false;
-  canEdit = benchmark.permissions.indexOf("change_benchmark") > -1;
+  canEdit = benchmark.permissions.indexOf('change_benchmark') > -1;
 
   return (
-    <Card square={true} className={styles.card}>
-      <Link to={`benchmark/${benchmark.id}`}>
-        <CardMedia
-          className={styles.media}
-          image={FRBImage}
-          title="Image title"
-        />
-      </Link>
-      {canEdit ? (
-        getHeader(benchmark)
-      ) : (
-        <CardHeader
-          title={benchmark.name}
-          titleTypographyProps={{
-            variant: "title",
-          }}
-        />
-      )}
-    </Card>
+    <Link route="benchmarkDetails" params={{ id: benchmark.id }}>
+      <a>
+        <Card square={true} className={styles.card}>
+          <CardMedia
+            className={styles.media}
+            image={benchmark.image}
+            title="Image title"
+          />
+          {canEdit ? (
+            getHeader(benchmark)
+          ) : (
+              <CardHeader
+                title={benchmark.name}
+                titleTypographyProps={{
+                  variant: 'h6',
+                }}
+              />
+            )}
+        </Card>
+      </a>
+    </Link>
   );
 };
 export const getHeader = (benchmark: IBenchmark) => (
   <CardHeader
     title={benchmark.name}
     titleTypographyProps={{
-      variant: "title",
+      variant: 'h1',
     }}
     action={
       <div>
-        <Link to={`benchmark/${benchmark.id}`}>
-          <IconButton title="Details">
-            <DetailsIcon />
-          </IconButton>
+        <Link route="benchmarkDetails" params={{ id: benchmark.id }}>
+          <a>
+            <IconButton title="Details">
+              <DetailsIcon />
+            </IconButton>
+          </a>
         </Link>
-        <Link to={`edit_benchmark/${benchmark.id}`}>
-          <IconButton title="Edit">
-            <EditIcon />
-          </IconButton>
+        <Link route="benchmarkEdit" params={{ id: benchmarkId }}>
+          <a>
+            <IconButton title="Edit">
+              <EditIcon />
+            </IconButton>
+          </a>
         </Link>
       </div>
     }

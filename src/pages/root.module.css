@@ -1,0 +1,28 @@
+.container {
+  display: flex;
+  width: 70%;
+  height: auto;
+  min-height: 700px;
+  margin: 20px auto;
+}
+.bannerBackground {
+  right: 5%;
+  top: 20vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  width: 500px;
+  height: 600px;
+  overflow: hidden;
+  -webkit-transform: rotate(-14deg);
+  transform: rotate(-14deg);
+  -webkit-transform-origin: 0;
+  transform-origin: 0;
+  z-index: -1;
+}
+@media (max-width: 600px) {
+  .container {
+    width: 100%;
+  }
+}

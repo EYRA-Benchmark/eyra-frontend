@@ -1,15 +1,15 @@
-import { Field, Form, Formik } from "formik";
-import { FormikActions } from "formik";
-import React from "react";
-import Markdown from "@nteract/markdown";
-import { Button, Fab, Paper, TextField } from "@material-ui/core";
-import styles from "./DatasetForm.module.css";
-import { comicApi } from "src/services/comicApi";
+import { Field, Form, Formik } from 'formik';
+import { FormikActions } from 'formik';
+import React from 'react';
+import Markdown from '@nteract/markdown';
+import { Button, Fab, Paper, TextField } from '@material-ui/core';
+import styles from './DatasetForm.module.css';
+import { comicApi } from 'src/services/comicApi';
 import {
   Edit as EditIcon,
   Visibility as VisibilityIcon,
-} from "@material-ui/icons";
-import { IDataset } from "src/types";
+} from '@material-ui/icons';
+import { IDataset } from 'src/types';
 
 interface IProps {
   dataset: IDataset;
@@ -90,7 +90,7 @@ class DatasetForm extends React.Component<IProps, IState> {
                     color="primary"
                   >
                     {isEdit ? <EditIcon /> : <VisibilityIcon />}
-                    {isEdit ? "Edit" : " Preview"}
+                    {isEdit ? 'Edit' : ' Preview'}
                   </Fab>
                   {this.state.isEdit ? (
                     <Markdown source={desc} className={styles.desc} />
@@ -100,7 +100,7 @@ class DatasetForm extends React.Component<IProps, IState> {
                       defaultValue={desc}
                       multiline={true}
                       onChange={(event: any) => {
-                        setFieldValue("description", event.target.value);
+                        setFieldValue('description', event.target.value);
                         this.setState({
                           desc: event.target.value,
                         });

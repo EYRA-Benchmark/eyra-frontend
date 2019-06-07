@@ -12,15 +12,28 @@
   width: auto;
   height: 100%;
 }
+.appBar {
+  height: 80px;
+  transition: height 1s;
+  -webkit-transition: height 1s;
+  background: #fafafa !important;
+}
+/*.shrink {*/
+/*  height: 64px;*/
+/*}*/
+.homePage {
+  background: transparent !important;
+  box-shadow: none !important;
+}
+/* // #204864d1  previous color for header*/
 .shrink {
   height: 64px;
+  background: #fafafa !important;
 }
+
 @media (min-width: 600px) {
   .drawerToggle {
     display: none !important;
-  }
-  .appBar {
-    height: 64px;
   }
 }
 @media (max-width: 600px) {

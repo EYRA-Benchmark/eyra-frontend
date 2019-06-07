@@ -4,35 +4,35 @@ node_js:
 cache:
   directories:
     - node_modules
-    - /home/travis/.cache/Cypress
+#    - /home/travis/.cache/Cypress
 install:
   - yarn
 
 stages:
-  - "Warm up cache"
-  - "Tests"
+#  - "Warm up cache"
+#  - "Tests"
   - name: "Docker build & push"
     if: branch = master AND type = push
 
 jobs:
   include:
-    - stage: "Warm up cache"
-      script: true
-    - stage: "Tests"
-      name: "Unit tests"
-      before_script:
-        - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
-        - chmod +x ./cc-test-reporter
-        - ./cc-test-reporter before-build
-      script: yarn test --coverage
-      after_script:
-        - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
-    - script: yarn cypress-install && yarn cypress-test
-      name: "Cypress tests"
+#    - stage: "Warm up cache"
+#      script: true
+#    - stage: "Tests"
+#      name: "Unit tests"
+#      before_script:
+#        - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+#        - chmod +x ./cc-test-reporter
+#        - ./cc-test-reporter before-build
+#      script: yarn test --coverage
+#      after_script:
+#        - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
+#    - script: yarn cypress-install && yarn cypress-test
+#      name: "Cypress tests"
     - stage: "Docker build & push"
       install: skip
       script:
         - docker build . -t eyra/frontend:latest -t eyra/frontend:$TRAVIS_BUILD_NUMBER
-        - docker login -u eyrabenchmark -p "$DOCKER_PASSWORD"
+        - docker login -u eyrabenchmark1 -p "$DOCKER_PASSWORD"
         - docker push eyra/frontend:$TRAVIS_BUILD_NUMBER
         - docker push eyra/frontend:latest
