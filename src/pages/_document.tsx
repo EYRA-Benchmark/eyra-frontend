@@ -4,6 +4,7 @@ import { ServerStyleSheets } from '@material-ui/styles';
 import flush from 'styled-jsx/server';
 import theme from 'src/theme';
 import NextHead from 'next/head';
+import CleanCSS from 'clean-css';
 
 class MyDocument extends Document {
   render() {
@@ -48,6 +49,12 @@ class MyDocument extends Document {
   }
 }
 
+class MinimizedServerStyleSheets extends ServerStyleSheets {
+  toString(): string {
+    return new CleanCSS().minify(super.toString()).styles;
+  }
+}
+
 // There is some magic involved getting Material UI style right client+server side, see the ref:
 // tslint:disable-next-line:max-line-length
 // https://github.com/mui-org/material-ui/blob/4723c57a9f9a8a5008da08602428c190a46ef494/examples/nextjs-next/pages/_document.js
@@ -76,7 +83,7 @@ MyDocument.getInitialProps = async (ctx) => {
   // 4. page.render
 
   // Render app and page and get the context of the page with collected side effects.
-  const sheets = new ServerStyleSheets();
+  const sheets = new MinimizedServerStyleSheets();
   const originalRenderPage = ctx.renderPage;
 
   ctx.renderPage = () =>

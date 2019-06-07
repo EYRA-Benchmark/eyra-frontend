@@ -26,3 +26,5 @@ cypress/screenshots
 
 # next
 src/.next/
+
+dist/
