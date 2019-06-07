@@ -2,7 +2,6 @@ import App, { Container, NextAppContext } from 'next/app';
 import React from 'react';
 import { ThemeProvider } from '@material-ui/styles';
 import { CssBaseline } from '@material-ui/core';
-import classNames from 'classnames';
 import { UserProvider } from 'src/context/User';
 import Header from 'src/components/Header/Header';
 import SideDrawer from 'src/components/SideDrawer/SideDrawer';

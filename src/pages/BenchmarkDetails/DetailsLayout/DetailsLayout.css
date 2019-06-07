@@ -40,6 +40,8 @@
   top: 10%;
   left: 10%;
   color: #fff;
+  font: 25px "Lato", sans-serif;
+  letter-spacing: 2px;
 }
 .paper p {
   position: absolute;
@@ -47,6 +49,7 @@
   left: 10%;
   color: #fff;
   font-weight: 500;
+  font: 14px "Lato", sans-serif
 }
 .container {
   min-height: 300px;

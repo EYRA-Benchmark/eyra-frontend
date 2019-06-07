@@ -73,7 +73,7 @@ class Details extends React.Component<IProps, IState> {
               {/* <div className={classNames(styles.bannerImage, styles.cover)}
                 style={{ backgroundImage: `url(${data.image})` }} > */}
               <div className={styles.imageContainer}>
-                <img src={data.image} className={styles.bannerImage}/>
+                <img src={data.image} className={styles.bannerImage} />
               </div>
 
               <div className={classNames(styles.overlay, styles.cover)} />
@@ -143,7 +143,7 @@ class Details extends React.Component<IProps, IState> {
               )}
               {value === 4 && (
                 <TabContainer>
-                  <AlgorithmSubmissionForm benchmarkId={data.id} />
+                  <Leaderboard benchmarkID={data.id} />
                 </TabContainer>
               )}
               {value === 5 && (
