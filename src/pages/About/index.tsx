@@ -1,45 +1,33 @@
-import * as React from "react";
+import * as React from 'react';
+import { getPrismicClient } from 'src/services/prismicApi';
+const RichText = require('prismic-reactjs').RichText;
+import styles from './About.module.css';
 
-import { RouteComponentProps } from "react-router-dom";
+interface IProps {
+  title: any;
+  desc: any;
+}
 
-import { prismicApi } from "src/services/prismicApi";
-import styles from "./About.module.css";
-const RichText = require("prismic-reactjs").RichText;
-class About extends React.Component<RouteComponentProps<{}>, {}> {
-  state = {
-    title: "",
-    desc: "",
-  };
-  componentWillMount() {
-    prismicApi.getSingle("aboutus").then((response: any) => {
-      const title = RichText.render(response.data.title);
-      const desc = RichText.render(response.data.description);
-      this.setState({ title, desc });
-    });
-  }
-  componentDidUpdate(prevProps: any) {
-    if (this.props.location !== prevProps.location) {
-      if (this.props.location.hash !== "") {
-        const id = this.props.location.hash.substring(1);
-        const element: HTMLElement | null = document.getElementById(id);
-        if (element) {
-          element.scrollIntoView({ behavior: "smooth" });
-        }
-      }
-    }
+class About extends React.Component<IProps> {
+  static async getInitialProps(...args: any[]): Promise<IProps> {
+    const prismicApi = await getPrismicClient();
+    const prismicResponse = await prismicApi.getSingle('aboutus');
+    return {
+      title: prismicResponse.data.title,
+      desc: prismicResponse.data.description,
+    };
   }
 
   public render() {
-    const { title, desc } = this.state;
+    const { title, desc } = this.props;
     return (
       <React.Fragment>
         <div className={styles.container}>
           <div className={styles.caption}>
             <div className={styles.article}>
-              <h3>{title}</h3>
+              <h3>{RichText.render(title)}</h3>
             </div>
-
-            {desc}
+            {RichText.render(desc)}
           </div>
         </div>
       </React.Fragment>

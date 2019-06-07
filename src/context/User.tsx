@@ -1,8 +1,10 @@
-import React from "react";
+import React from 'react';
 
-import { comicApi } from "../services/comicApi";
-import { settings } from "../settings";
-import { IUser } from "../types";
+import { comicApi } from 'src/services/comicApi';
+import { IUser } from '../types';
+import getConfig from 'next/config';
+
+const { publicRuntimeConfig } = getConfig();
 
 enum Status {
   LOGGING_IN,
@@ -65,7 +67,7 @@ export class UserProvider extends React.Component<{}, IState> {
 
   login() {
     document.location.href = `${
-      settings.backendURL
+      publicRuntimeConfig.backendURL
     }social/login/google-oauth2/?next=${document.location.origin}`;
   }
 

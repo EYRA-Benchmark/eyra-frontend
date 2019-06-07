@@ -1,6 +1,6 @@
-import classNames from "classnames";
-import * as React from "react";
-import styles from "./CardFront.module.css";
+import classNames from 'classnames';
+import * as React from 'react';
+import styles from './CardFront.module.css';
 
 class CardFront extends React.Component<{ name: string }, {}> {
   render() {

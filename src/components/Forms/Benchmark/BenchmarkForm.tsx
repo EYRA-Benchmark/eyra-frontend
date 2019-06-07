@@ -1,8 +1,8 @@
-import { Field, Form, Formik } from "formik";
-import { FormikActions } from "formik";
-import React from "react";
+import { Field, Form, Formik } from 'formik';
+import { FormikActions } from 'formik';
+import React from 'react';
 // import CustomTextEditor from "../CustomTextEditor";
-import Markdown from "@nteract/markdown";
+import Markdown from '@nteract/markdown';
 import {
   Button,
   Fab,
@@ -10,14 +10,14 @@ import {
   TextField,
   Dialog,
   DialogContent,
-} from "@material-ui/core";
-import styles from "./BenchmarkForm.module.css";
-import { comicApi } from "src/services/comicApi";
+} from '@material-ui/core';
+import styles from './BenchmarkForm.module.css';
+import { comicApi } from 'src/services/comicApi';
 import {
   Edit as EditIcon,
   Visibility as VisibilityIcon,
-} from "@material-ui/icons";
-import { IBenchmark } from "src/types";
+} from '@material-ui/icons';
+import { IBenchmark } from 'src/types';
 interface IProps {
   benchmark: IBenchmark;
 }
@@ -103,7 +103,7 @@ class BenchmarkForm extends React.Component<IProps> {
                     color="primary"
                   >
                     {isEdit ? <EditIcon /> : <VisibilityIcon />}
-                    {isEdit ? "Edit" : " Preview"}
+                    {isEdit ? 'Edit' : ' Preview'}
                   </Fab>
                   {this.state.isEdit ? (
                     <Markdown source={desc} className={styles.desc} />
@@ -113,7 +113,7 @@ class BenchmarkForm extends React.Component<IProps> {
                       defaultValue={desc}
                       multiline={true}
                       onChange={(event: any) => {
-                        setFieldValue("description", event.target.value);
+                        setFieldValue('description', event.target.value);
                         this.setState({
                           desc: event.target.value,
                         });
@@ -141,7 +141,7 @@ class BenchmarkForm extends React.Component<IProps> {
                 <Dialog
                   open={values.isSaved}
                   onClose={() => {
-                    setFieldValue("isSaved", false);
+                    setFieldValue('isSaved', false);
                   }}
                 >
                   <DialogContent>

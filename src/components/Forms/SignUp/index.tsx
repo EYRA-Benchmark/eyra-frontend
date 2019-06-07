@@ -1,20 +1,20 @@
-import React from "react";
-import styles from "./SignUp.module.css";
-import * as yup from "yup";
-import { Formik, Form, Field, FormikActions } from "formik";
-import { Button, Dialog, DialogContent } from "@material-ui/core";
-import { comicApi } from "src/services/comicApi";
+import React from 'react';
+import styles from './SignUp.module.css';
+import * as yup from 'yup';
+import { Formik, Form, Field, FormikActions } from 'formik';
+import { Button, Dialog, DialogContent } from '@material-ui/core';
+import { comicApi } from 'src/services/comicApi';
 const formSchema = yup.object().shape({
-  firstName: yup.string().required("First Name is required."),
-  lastName: yup.string().required("Last Name is required."),
+  firstName: yup.string().required('First Name is required.'),
+  lastName: yup.string().required('Last Name is required.'),
   email: yup
     .string()
     .email()
-    .required("Email is required."),
+    .required('Email is required.'),
   password: yup
     .string()
-    .required("Password is required")
-    .min(8, "Password is too short - should be 8 chars minimum."),
+    .required('Password is required')
+    .min(8, 'Password is too short - should be 8 chars minimum.'),
 });
 interface IValues {
   firstName: string;
@@ -26,12 +26,12 @@ interface IValues {
 }
 
 const initialValues: IValues = {
-  firstName: "",
-  lastName: "",
-  organization: "",
-  email: "",
-  password: "",
-  response: "",
+  firstName: '',
+  lastName: '',
+  organization: '',
+  email: '',
+  password: '',
+  response: '',
 };
 const onSubmit = async (
   values: IValues,
@@ -48,7 +48,7 @@ const onSubmit = async (
 
       .then((response) => {
         if (response) {
-          values.response = "Thank You for Registering!";
+          values.response = 'Thank You for Registering!';
         }
       })
       .catch((error) => {
@@ -116,7 +116,7 @@ const Signup = () => {
             <Dialog
               open={values.response.length > 0}
               onClose={() => {
-                setFieldValue("response", "");
+                setFieldValue('response', '');
               }}
             >
               <DialogContent>{values.response}</DialogContent>

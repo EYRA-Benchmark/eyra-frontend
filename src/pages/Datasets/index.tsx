@@ -1,10 +1,10 @@
-import * as React from "react";
-import { RouteComponentProps } from "react-router-dom";
-import Spinner from "src/components/Spinner/index";
-import DatasetCardGrid from "src/components/DatasetCardGrid";
-import { comicApi } from "src/services/comicApi";
-import { IDataset } from "src/types";
-import { Typography } from "@material-ui/core";
+import * as React from 'react';
+import { RouteComponentProps } from 'react-router-dom';
+import Spinner from '../../components/Spinner';
+import DatasetCardGrid from '../../components/DatasetCardGrid';
+import { comicApi } from '../../services/comicApi';
+import { IDataset } from '../../types';
+import { Typography } from '@material-ui/core';
 
 interface IState {
   datasets: IDataset[] | null;

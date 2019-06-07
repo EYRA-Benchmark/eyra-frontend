@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import {
   Paper,
   Typography,
@@ -7,16 +7,16 @@ import {
   TableCell,
   TableHead,
   TableBody,
-} from "@material-ui/core";
-import ExpansionContainer from "src/pages/BenchmarkDetails/DetailsLayout/DataSets/ExpansionContainer/";
-import styles from "./DatasetDetails.module.css";
-import { ItemsList } from "./ItemsList";
+} from '@material-ui/core';
+import ExpansionContainer from 'src/pages/BenchmarkDetails/DetailsLayout/DataSets/ExpansionContainer';
+import styles from './DatasetDetails.module.css';
+import { ItemsList } from './ItemsList';
 export default class DatasetDetails extends React.Component {
   state = {
     testDatasets: [
       {
-        data: "df4f89ce-9350-4a23-b513-8215786a7ccb",
-        ground_truth: "5fb95faf-2d20-421c-853a-9dc4d32896db",
+        data: 'df4f89ce-9350-4a23-b513-8215786a7ccb',
+        ground_truth: '5fb95faf-2d20-421c-853a-9dc4d32896db',
       },
     ],
     trainingDatasets: [],

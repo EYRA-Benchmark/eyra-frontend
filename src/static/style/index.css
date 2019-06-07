@@ -1,0 +1,48 @@
+html,
+body,
+#root,
+#__next {
+    height: 100%;
+}
+body {
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+}
+#root_container {
+    margin-top: 100px;
+    width: 100%;
+}
+
+/* Scrollbar styles */
+
+::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+::-webkit-scrollbar-thumb {
+    background: #888;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+.fade-enter,
+.fade-exit {
+    /*position: absolute;*/
+    /*top: 0;*/
+    /*left: 0;*/
+    transition: 2s ease opacity;
+}
+.fade-enter,
+.fade-exit-active {
+    opacity: 0;
+}
+.fade-enter-active {
+    opacity: 1;
+    z-index: 1;
+}

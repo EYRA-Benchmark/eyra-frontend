@@ -1,4 +1,4 @@
-import { UUID4 } from "./utils";
+import { UUID4 } from './utils';
 
 export interface ISubmission {
   algorithm_job: any;

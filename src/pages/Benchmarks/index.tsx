@@ -1,45 +1,27 @@
-import * as React from "react";
-import { RouteComponentProps } from "react-router-dom";
-import Spinner from "src/components/Spinner/index";
-import BenchmarkCardGrid from "src/components/BenchmarkCardGrid";
-import { comicApi } from "src/services/comicApi";
-import { IBenchmark } from "src/types";
-import { Typography } from "@material-ui/core";
+import * as React from 'react';
+import BenchmarkCardGrid from 'src/components/BenchmarkCardGrid';
+import { comicApi } from 'src/services/comicApi';
+import { IBenchmark } from 'src/types';
+import { Typography } from '@material-ui/core';
 
-interface IState {
-  benchmarks: IBenchmark[] | null;
+interface IProps {
+  benchmarks: IBenchmark[];
 }
 
-class Benchmarks extends React.Component<RouteComponentProps<{}>, IState> {
-  state = {
-    benchmarks: null,
-  };
-
-  shouldComponentUpdate(nextProps: any, nextState: any) {
-    return this.state.benchmarks !== nextState.benchmarks;
-  }
-
-  async componentDidMount() {
-    this.setState({
+class Benchmarks extends React.Component<IProps> {
+  static async getInitialProps(): Promise<IProps> {
+    return {
       benchmarks: await comicApi.benchmarks(),
-    });
-  }
-
-  private getContent() {
-    if (this.state.benchmarks === null) {
-      return <Spinner />;
-    } else {
-      return <BenchmarkCardGrid size={0} benchmarks={this.state.benchmarks!} />;
-    }
+    };
   }
 
   public render() {
     return (
-      <div>
+      <div style={{width: '100%'}}>
         <Typography component="h1" variant="h5">
           Benchmarks
         </Typography>
-        {this.getContent()}
+        <BenchmarkCardGrid size={0} benchmarks={this.props.benchmarks} />
       </div>
     );
   }

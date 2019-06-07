@@ -1,9 +1,9 @@
-import * as React from "react";
+import * as React from 'react';
 
-import { Grid } from "@material-ui/core";
-import { IDataset } from "src/types";
+import { Grid } from '@material-ui/core';
+import { IDataset } from 'src/types';
 
-import { DatasetCard } from "src/components/DatasetCard";
+import { DatasetCard } from 'src/components/DatasetCard';
 
 interface IProps {
   size: number;

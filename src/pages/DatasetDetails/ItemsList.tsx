@@ -1,12 +1,12 @@
-import React from "react";
+import React from 'react';
 import {
   List,
   ListItem,
   ListItemAvatar,
   Avatar,
   ListItemText,
-} from "@material-ui/core";
-import FRBImage from "src/assets/images/FRB.jpg";
+} from '@material-ui/core';
+import FRBImage from '../../assets/images/FRB.jpg';
 
 export const ItemsList = () => {
   return (

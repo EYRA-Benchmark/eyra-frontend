@@ -1,6 +1,6 @@
-import React from "react";
-import { comicApi } from "src/services/comicApi";
-import Spinner from "src/components/Spinner/index";
+import React from 'react';
+import { comicApi } from 'src/services/comicApi';
+import Spinner from 'src/components/Spinner/index';
 import {
   Typography,
   Table,
@@ -8,20 +8,20 @@ import {
   TableCell,
   TableHead,
   TableBody,
-} from "@material-ui/core";
-import styles from "./Logs.module.css";
+} from '@material-ui/core';
+import styles from './Logs.module.css';
 class Logs extends React.Component {
   state = {
     logs: null,
     jobs: [
       {
-        id: "f4bd7b29-6d07-4107-aa97-7dd697b4c0d8",
+        id: 'f4bd7b29-6d07-4107-aa97-7dd697b4c0d8',
         creator: 10,
-        created: "2019-04-04T14:57:41.253723Z",
-        modified: "2019-04-04T14:57:41.386793Z",
-        short_description: "",
-        description: "",
-        name: "Toms Beaama",
+        created: '2019-04-04T14:57:41.253723Z',
+        modified: '2019-04-04T14:57:41.386793Z',
+        short_description: '',
+        description: '',
+        name: 'Toms Beaama',
         evaluator: null,
         training_data_file: null,
         training_ground_truth_data_file: null,
@@ -29,7 +29,7 @@ class Logs extends React.Component {
         test_ground_truth_data_file: null,
         interface: null,
         admin_group: 8,
-        permissions: ["change_benchmark"],
+        permissions: ['change_benchmark'],
       },
     ],
   };

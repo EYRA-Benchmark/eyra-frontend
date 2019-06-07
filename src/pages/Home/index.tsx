@@ -1,86 +1,47 @@
-import classNames from "classnames";
-import Prismic from "prismic-javascript";
-import * as React from "react";
-import { RouteComponentProps } from "react-router-dom";
-import { KeyboardArrowDown as DownIcon } from "@material-ui/icons";
-import { prismicApi } from "src/services/prismicApi";
-import { comicApi } from "src/services/comicApi";
-import { Fab } from "@material-ui/core";
-import { IBenchmark } from "src/types";
+import * as React from 'react';
+import Prismic from 'prismic-javascript';
+import { Fab } from '@material-ui/core';
+import { KeyboardArrowDown as DownIcon } from '@material-ui/icons';
+import classNames from 'classnames';
 
-import Spinner from "src/components/Spinner/index";
-import ChallengesGrid from "src/components/BenchmarkCardGrid/index";
-import NewsGallery from "src/components/NewsGallery";
+import { getPrismicClient } from 'src/services/prismicApi';
+import { comicApi } from 'src/services/comicApi';
+import { IBenchmark } from 'src/types';
+import { INews, IPrismicResult } from 'src/types/prismic';
 
-import bannerImage from "src/assets/images/black_paw.png";
-import styles from "./Home.module.css";
-import { INews, IPrismicResult, IPrismicSearchResponse } from "src/types/prismic";
+import ChallengesGrid from 'src/components/BenchmarkCardGrid';
+import NewsGallery from 'src/components/NewsGallery';
 
-interface IState {
+import styles from './Home.css';
+
+interface IProps {
   news: Array<IPrismicResult<INews>>;
-  challengesData: IBenchmark[] | null;
-  selectedItem: any;
-  loading: boolean;
+  benchmarks: IBenchmark[];
 }
 
-class Index extends React.Component<RouteComponentProps<{}>, IState> {
-  state = {
-    news: [],
-    challengesData: null,
-    selectedItem: null,
-    loading: true,
-  };
-
-  public edit = (selectedItemId: string) => {
-    this.props.history.push({
-      pathname: `edit_benchmark/${selectedItemId}`,
-      state: { selectedItemId },
-    });
-  }
-
-  componentWillMount() {
-    prismicApi
-      .query(Prismic.Predicates.at("document.type", "news"), {})
-      .then((response: IPrismicSearchResponse<INews>) => {
-        if (response) {
-          this.setState({ news: response.results });
-        }
-      });
-  }
-
-  shouldComponentUpdate(nextProps: any, nextState: any) {
-    return (
-      this.state.challengesData !== nextState.challengesData ||
-      this.state.news !== nextState.news
-    );
-  }
-  async componentDidMount() {
-    this.setState({
-      loading: false,
-      challengesData: await comicApi.benchmarks(),
-    });
+class Index extends React.Component<IProps> {
+  static async getInitialProps(...args: any[]): Promise<IProps> {
+    const prismicApi = await getPrismicClient();
+    const prismicResponse = await prismicApi.query(Prismic.Predicates.at('document.type', 'news'), {});
+    return {
+      news: prismicResponse.results,
+      benchmarks: await comicApi.benchmarks(),
+    };
   }
 
   scrollToNext() {
-    const benchmarkSection = document.getElementById("benchmarks");
+    const benchmarkSection = document.getElementById('benchmarks');
     if (benchmarkSection) {
-      benchmarkSection.scrollIntoView({ behavior: "smooth", block: "center" });
+      benchmarkSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
   }
   public render() {
-    let challengeContent = null;
-
-    if (this.state.loading) {
-      challengeContent = <Spinner />;
-    } else {
-      challengeContent = (
-        <ChallengesGrid
-          size={3}
-          benchmarks={this.state.challengesData!}
-          // edit={this.edit}
-        />
-      );
-    }
+    const challengeContent = (
+      <ChallengesGrid
+        size={3}
+        benchmarks={this.props.benchmarks}
+      />
+    );
 
     return (
       <React.Fragment>
@@ -97,7 +58,7 @@ class Index extends React.Component<RouteComponentProps<{}>, IState> {
             <p>A platform for benchmarking scientific algorithms</p>
           </div>
           <div className={styles.bannerImage}>
-            <img src={bannerImage} alt="logo" />
+            <img src="/static/images/black_paw.png" alt="logo" />
           </div>
         </div>
 
@@ -119,10 +80,11 @@ class Index extends React.Component<RouteComponentProps<{}>, IState> {
             <div className={styles.section}>
               <h3 className={classNames(styles.sectionHeader)}>News</h3>
 
-              <NewsGallery data={this.state.news} />
+              <NewsGallery data={this.props.news} />
             </div>
           </div>
         </div>
+
       </React.Fragment>
     );
   }
