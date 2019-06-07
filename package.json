@@ -19,7 +19,7 @@
     "@material-ui/icons": "next",
     "@material-ui/styles": "next",
     "@nteract/markdown": "^4.0.0",
-    "axios": "^0.18.0",
+    "axios": "^0.18.1",
     "classnames": "^2.2.6",
     "express": "^4.16.4",
     "font-awesome": "^4.7.0",
