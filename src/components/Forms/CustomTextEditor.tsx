@@ -1,6 +1,7 @@
 import React from 'react';
 import styles from './CustomTextEditor.module.css';
-const RichTextEditor = (typeof window !== 'undefined') ? require('react-rte') : null;
+// import RichTextEditor from 'react-rte';
+// const RichTextEditor = (typeof window !== 'undefined') ? require('react-rte') : null;
 
 interface IProps {
   onChange: (value: string) => void;
@@ -11,10 +12,11 @@ interface IProps {
 class CustomTextEditor extends React.Component<IProps, {}> {
   state = {
     // value: RichTextEditor.createValueFromString(
-    //   "<b>Add Description Here..</b><br/>" +
-    //     "<p>Here You can add description or paste HTML/ Markdown code for description in left Container</p>",
-    //   "html",
+    //   '<b>Add Description Here..</b><br/>' +
+    //   '<p>Here You can add description or paste HTML/ Markdown code for description in left Container</p>',
+    //   'html',
     // ),
+    // value: RichTextEditor.createEmptyValue(),
     value: RichTextEditor.createValueFromString(
       this.props.defaultValue,
       this.props.defaultFormat,
@@ -59,15 +61,15 @@ class CustomTextEditor extends React.Component<IProps, {}> {
             {showEditor ? textArea : null}
 
             <div className={styles.col1}>
-              <RichTextEditor
-                value={value}
-                onChange={this.setDesc}
-                rootStyle={{
-                  minHeight: 400,
-                  maxHeight: 400,
-                  overflowY: 'scroll',
-                }}
-              />
+              {/* <RichTextEditor
+              // value={value}
+              // onChange={this.setDesc}
+              // rootStyle={{
+              //   minHeight: 400,
+              //   maxHeight: 400,
+              //   overflowY: 'scroll',
+              // }}
+             />*/}
             </div>
           </div>
           <div>

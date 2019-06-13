@@ -11,7 +11,7 @@ import * as React from 'react';
 import LeaderboardHead from '../LeaderboardHead/LeaderboardHead';
 import styles from './LeaderboardTableStyle';
 import { INestedSubmission } from '../index';
-
+import { formatDateTime } from 'src/utils';
 function desc(a: any, b: any, orderBy: any) {
   if (b[orderBy] < a[orderBy]) {
     return -1;
@@ -67,12 +67,19 @@ class LeaderboardTable extends React.Component<IProps, IState> {
   render() {
     const { classes } = this.props;
     const { order, orderBy } = this.state;
-    const metricFields = Object.keys(this.props.submissions[0].metrics_json);
-    const data = this.props.submissions.map((submission) => ({
-      name: submission.algorithm.name,
-      date: submission.created,
-      ...submission.metrics_json,
-    }));
+
+    const metricFields = Object.keys(JSON.parse(this.props.submissions[0].metrics_json)).slice(3);
+
+    const data = this.props.submissions.map((submission) => {
+      const metricsJson = JSON.parse(submission.metrics_json.replace(/\bNaN\b/g, 'null'));
+      return {
+        name: submission.implementation.name,
+        date: submission.created,
+        n_correct: metricsJson.n_correct,
+        n_false_positive: metricsJson.n_false_positive,
+        n_false_negative: metricsJson.n_false_negative,
+      };
+    });
     return (
       <Paper className={classes.root}>
         <div className={classes.tableWrapper}>
@@ -97,7 +104,7 @@ class LeaderboardTable extends React.Component<IProps, IState> {
                           {n[fieldName]}
                         </TableCell>
                       ))}
-                      <TableCell align="right">{n.date}</TableCell>
+                      <TableCell align="right">{formatDateTime(new Date(n.date))}</TableCell>
                     </TableRow>
                   );
                 },

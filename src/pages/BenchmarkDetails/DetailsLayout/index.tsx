@@ -1,4 +1,4 @@
-import { Grid, Paper, Tab, Tabs, Typography } from '@material-ui/core';
+import { Grid, Paper, Tab, Tabs, Typography, Button, Dialog } from '@material-ui/core';
 import Markdown from '@nteract/markdown';
 import * as React from 'react';
 import AlgorithmSubmissionForm from '../../../components/Forms/Algorithm/AlgorithmSubmission';
@@ -30,15 +30,21 @@ function TabContainer(props: IContainerProps) {
 
 interface IState {
   value: number;
+  dialogOpen: boolean;
 }
 class Details extends React.Component<IProps, IState> {
   state = {
     value: 0,
+    dialogOpen: false,
   };
   handleChange = (event: any, value: number) => {
     this.setState({ value });
   }
-
+  toggleModal = (enabled: boolean | undefined) => () => {
+    const newState =
+      enabled === undefined ? !this.state.dialogOpen : enabled;
+    this.setState({ dialogOpen: newState });
+  }
   render() {
 
     const { value } = this.state;
@@ -73,7 +79,7 @@ class Details extends React.Component<IProps, IState> {
               {/* <div className={classNames(styles.bannerImage, styles.cover)}
                 style={{ backgroundImage: `url(${data.image})` }} > */}
               <div className={styles.imageContainer}>
-                <img src={data.image} className={styles.bannerImage}/>
+                <img src={data.image} className={styles.bannerImage} />
               </div>
 
               <div className={classNames(styles.overlay, styles.cover)} />
@@ -99,8 +105,8 @@ class Details extends React.Component<IProps, IState> {
                 <Tab label="Truth" />
                 <Tab label="Metrics" />
                 <Tab label="Results" />
-                <Tab label="Logs" />
-                <Tab label="Submit" />
+                {/* <Tab label="Logs" /> */}
+                {/* <Tab label="Submit" /> */}
               </Tabs>
               {value === 0 && (
                 <TabContainer>
@@ -112,7 +118,6 @@ class Details extends React.Component<IProps, IState> {
               )}
               {value === 1 && (
                 <TabContainer>
-                  {/* <Leaderboard benchmarkID={data.id} /> */}
                   <Markdown
                     source={data.data_description}
                     className={styles.container}
@@ -143,19 +148,33 @@ class Details extends React.Component<IProps, IState> {
               )}
               {value === 4 && (
                 <TabContainer>
-                  <AlgorithmSubmissionForm benchmarkId={data.id} />
+                  <Leaderboard benchmarkID={data.id} />
                 </TabContainer>
               )}
-              {value === 5 && (
+              {/* {value === 5 && (
                 <TabContainer>
                   <Logs />
                 </TabContainer>
-              )}
-              {value === 6 && (
+              )} */}
+              {/* {value === 6 && (
                 <TabContainer>
                   <AlgorithmSubmissionForm benchmarkId={data.id} />
                 </TabContainer>
-              )}
+              )} */}
+              <Dialog
+                open={this.state.dialogOpen}
+                onClose={this.toggleModal(false)}
+                className={styles.formContainer}
+              >
+                <AlgorithmSubmissionForm benchmarkId={data.id} />
+              </Dialog>
+              <Button
+                variant="contained"
+                onClick={this.toggleModal(true)}
+                id="submit"
+              >
+                Submit Algorithm
+              </Button>
             </Paper>
           </Grid>
         </Grid>

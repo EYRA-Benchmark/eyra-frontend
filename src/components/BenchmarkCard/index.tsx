@@ -20,7 +20,7 @@ export const BenchmarkCard = (props: IProps) => {
 
   return (
     <Link route="benchmarkDetails" params={{ id: benchmark.id }}>
-      <a>
+
         <Card square={true} className={styles.card}>
           <CardMedia
             className={styles.media}
@@ -38,7 +38,7 @@ export const BenchmarkCard = (props: IProps) => {
               />
             )}
         </Card>
-      </a>
+
     </Link>
   );
 };
@@ -51,18 +51,18 @@ export const getHeader = (benchmark: IBenchmark) => (
     action={
       <div>
         <Link route="benchmarkDetails" params={{ id: benchmark.id }}>
-          <a>
-            <IconButton title="Details">
-              <DetailsIcon />
-            </IconButton>
-          </a>
+
+          <IconButton title="Details">
+            <DetailsIcon />
+          </IconButton>
+
         </Link>
         <Link route="benchmarkEdit" params={{ id: benchmarkId }}>
-          <a>
-            <IconButton title="Edit">
-              <EditIcon />
-            </IconButton>
-          </a>
+
+          <IconButton title="Edit">
+            <EditIcon />
+          </IconButton>
+
         </Link>
       </div>
     }

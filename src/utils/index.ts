@@ -28,6 +28,15 @@ export const formatDate = (date: Date) => {
 // maps the values of an object to something else
 export const mapValues = (obj: any, f: (val: any) => any) => Object.assign({},
   ...Object.entries(obj).map(
-    ([k, v]) => ({[k]: f(v)}),
+    ([k, v]) => ({ [k]: f(v) }),
   ),
 );
+
+export const formatDateTime = (date: Date) => {
+  const OPTIONS = {
+
+    year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit',
+  };
+  const format = date.toLocaleDateString('en-US', OPTIONS);
+  return format;
+};

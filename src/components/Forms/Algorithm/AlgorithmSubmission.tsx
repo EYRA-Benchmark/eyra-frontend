@@ -67,14 +67,14 @@ class AlgorithmSubmission extends React.Component<IProps, {}> {
               </div>
               <div className={styles.inputContainer}>
                 <label htmlFor="description">Description</label>
-                {/* <CustomTextEditor
+                <CustomTextEditor
                   defaultValue={defaultValue}
                   defaultFormat="html"
                   showEditor={true}
                   onChange={(value) => {
                     setFieldValue('description', value);
                   }}
-                /> */}
+                />
               </div>
 
               <div className={styles.inputContainer}>
@@ -85,7 +85,7 @@ class AlgorithmSubmission extends React.Component<IProps, {}> {
                   placeholder="Container Name"
                 />
                 {/* <CustomFileUpload
-                  onChange={value => setFieldValue("file", value)}
+                  onChange={(value) => setFieldValue('file', value)}
                 /> */}
               </div>
               <div className={styles.inputContainer}>

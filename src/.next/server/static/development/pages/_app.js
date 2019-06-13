@@ -3102,7 +3102,7 @@ function () {
               case 2:
                 return _context10.abrupt("return", _context10.sent.data);
 
-              case 3:
+              case 4:
               case "end":
                 return _context10.stop();
             }
@@ -3147,17 +3147,17 @@ function () {
       return algorithm;
     }()
   }, {
-    key: "benchmarkSubmission",
+    key: "implementation",
     value: function () {
-      var _benchmarkSubmission = Object(_babel_runtime_corejs2_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_1__["default"])(
+      var _implementation = Object(_babel_runtime_corejs2_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_1__["default"])(
       /*#__PURE__*/
-      _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee12(id, details) {
+      _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee12(id) {
         return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee12$(_context12) {
           while (1) {
             switch (_context12.prev = _context12.next) {
               case 0:
                 _context12.next = 2;
-                return this.axios.patch("benchmarks/".concat(id, "/"), details);
+                return this.axios.get("implementations/".concat(id, "/"));
 
               case 2:
                 return _context12.abrupt("return", _context12.sent.data);
@@ -3170,16 +3170,16 @@ function () {
         }, _callee12, this);
       }));
 
-      function benchmarkSubmission(_x8, _x9) {
-        return _benchmarkSubmission.apply(this, arguments);
+      function implementation(_x8) {
+        return _implementation.apply(this, arguments);
       }
 
-      return benchmarkSubmission;
+      return implementation;
     }()
   }, {
-    key: "datasetSubmission",
+    key: "benchmarkSubmission",
     value: function () {
-      var _datasetSubmission = Object(_babel_runtime_corejs2_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_1__["default"])(
+      var _benchmarkSubmission = Object(_babel_runtime_corejs2_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_1__["default"])(
       /*#__PURE__*/
       _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee13(id, details) {
         return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee13$(_context13) {
@@ -3187,7 +3187,7 @@ function () {
             switch (_context13.prev = _context13.next) {
               case 0:
                 _context13.next = 2;
-                return this.axios.patch("dataset/".concat(id, "/"), details);
+                return this.axios.patch("benchmarks / ".concat(id, " / "), details);
 
               case 2:
                 return _context13.abrupt("return", _context13.sent.data);
@@ -3200,24 +3200,24 @@ function () {
         }, _callee13, this);
       }));
 
-      function datasetSubmission(_x10, _x11) {
-        return _datasetSubmission.apply(this, arguments);
+      function benchmarkSubmission(_x9, _x10) {
+        return _benchmarkSubmission.apply(this, arguments);
       }
 
-      return datasetSubmission;
+      return benchmarkSubmission;
     }()
   }, {
-    key: "algorithmSubmission",
+    key: "datasetSubmission",
     value: function () {
-      var _algorithmSubmission = Object(_babel_runtime_corejs2_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_1__["default"])(
+      var _datasetSubmission = Object(_babel_runtime_corejs2_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_1__["default"])(
       /*#__PURE__*/
-      _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee14(details) {
+      _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee14(id, details) {
         return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee14$(_context14) {
           while (1) {
             switch (_context14.prev = _context14.next) {
               case 0:
                 _context14.next = 2;
-                return this.axios.post('algorithmSubmission/', details);
+                return this.axios.patch("dataset / ".concat(id, " / "), details);
 
               case 2:
                 return _context14.abrupt("return", _context14.sent.data);
@@ -3230,7 +3230,37 @@ function () {
         }, _callee14, this);
       }));
 
-      function algorithmSubmission(_x12) {
+      function datasetSubmission(_x11, _x12) {
+        return _datasetSubmission.apply(this, arguments);
+      }
+
+      return datasetSubmission;
+    }()
+  }, {
+    key: "algorithmSubmission",
+    value: function () {
+      var _algorithmSubmission = Object(_babel_runtime_corejs2_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_1__["default"])(
+      /*#__PURE__*/
+      _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee15(details) {
+        return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee15$(_context15) {
+          while (1) {
+            switch (_context15.prev = _context15.next) {
+              case 0:
+                _context15.next = 2;
+                return this.axios.post('algorithmSubmission/', details);
+
+              case 2:
+                return _context15.abrupt("return", _context15.sent.data);
+
+              case 3:
+              case "end":
+                return _context15.stop();
+            }
+          }
+        }, _callee15, this);
+      }));
+
+      function algorithmSubmission(_x13) {
         return _algorithmSubmission.apply(this, arguments);
       }
 
@@ -3341,7 +3371,7 @@ __webpack_require__.r(__webpack_exports__);
 /*!************************!*\
   !*** ./utils/index.ts ***!
   \************************/
-/*! exports provided: objectToQueryParams, formatDate, mapValues */
+/*! exports provided: objectToQueryParams, formatDate, mapValues, formatDateTime */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -3349,6 +3379,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "objectToQueryParams", function() { return objectToQueryParams; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "formatDate", function() { return formatDate; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "mapValues", function() { return mapValues; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "formatDateTime", function() { return formatDateTime; });
 /* harmony import */ var _babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/defineProperty */ "../node_modules/@babel/runtime-corejs2/helpers/esm/defineProperty.js");
 /* harmony import */ var _babel_runtime_corejs2_helpers_esm_slicedToArray__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/slicedToArray */ "../node_modules/@babel/runtime-corejs2/helpers/esm/slicedToArray.js");
 /* harmony import */ var _babel_runtime_corejs2_core_js_object_entries__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @babel/runtime-corejs2/core-js/object/entries */ "../node_modules/@babel/runtime-corejs2/core-js/object/entries.js");
@@ -3386,6 +3417,18 @@ var mapValues = function mapValues(obj, f) {
 
     return Object(_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_0__["default"])({}, k, f(v));
   }))));
+};
+var formatDateTime = function formatDateTime(date) {
+  var OPTIONS = {
+    year: 'numeric',
+    month: 'short',
+    day: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit',
+    second: '2-digit'
+  };
+  var format = date.toLocaleDateString('en-US', OPTIONS);
+  return format;
 };
 
 /***/ }),

@@ -1,13 +1,13 @@
 import * as React from 'react';
 import LeaderboardTable from './LeaderboardTable/LeaderboardTable';
-import { ISubmission, IAlgorithm } from 'src/types';
+import { ISubmission, IAlgorithm, IImplementation } from 'src/types';
 import { comicApi } from 'src/services/comicApi';
 
 // Omit allows one to remove a property from a type/interface
 type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;
 // NestedSubmission is a Submission with a nested Algorithm
-export type INestedSubmission = Omit<ISubmission, 'algorithm'> & {
-  algorithm: IAlgorithm;
+export type INestedSubmission = Omit<ISubmission, 'implementation'> & {
+  implementation: IImplementation;
 };
 
 interface IProps {
@@ -25,9 +25,11 @@ class Leaderboard extends React.Component<IProps, IState> {
     isLoading: true,
   };
   async componentWillMount() {
+
     const submissions = await comicApi.submissions({
       benchmark: this.props.benchmarkID,
     });
+    debugger;
     const evaluatedSubmissions = submissions.filter(
       (submission) => submission.metrics_json !== null,
     );
@@ -36,7 +38,7 @@ class Leaderboard extends React.Component<IProps, IState> {
       evaluatedSubmissions.map(async (submission) => {
         nestedSubmissions.push({
           ...submission,
-          algorithm: await comicApi.algorithm(submission.algorithm),
+          implementation: await comicApi.implementation(submission.implementation),
         });
       }),
     );

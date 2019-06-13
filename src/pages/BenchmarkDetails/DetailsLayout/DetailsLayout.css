@@ -57,3 +57,6 @@
 .tabsContainer {
   background-color: aliceblue;
 }
+.formContainer {
+  max-width: 100% !important;
+}

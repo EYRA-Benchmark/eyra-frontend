@@ -10,6 +10,7 @@ import {
   UUID4,
   IJob,
   IDataset,
+  IImplementation,
 } from '../types';
 
 import { objectToQueryParams } from '../utils';
@@ -110,10 +111,14 @@ export class ComicApi {
     return (await this.axios.get<ISubmission[]>(
       `submissions/?${objectToQueryParams(filters)}`,
     )).data;
+    debugger;
   }
 
   async algorithm(id: string): Promise<IAlgorithm> {
     return (await this.axios.get<IAlgorithm>(`algorithms/${id}/`)).data;
+  }
+  async implementation(id: string): Promise<IImplementation> {
+    return (await this.axios.get<IImplementation>(`implementations/${id}/`)).data;
   }
   async benchmarkSubmission(
     id: UUID4,
@@ -123,7 +128,7 @@ export class ComicApi {
       short_description: string;
     },
   ): Promise<IBenchmark> {
-    return (await this.axios.patch<IBenchmark>(`benchmarks/${id}/`, details))
+    return (await this.axios.patch<IBenchmark>(`benchmarks / ${id} / `, details))
       .data;
   }
   async datasetSubmission(
@@ -134,7 +139,7 @@ export class ComicApi {
       long_description: string;
     },
   ): Promise<IDataset> {
-    return (await this.axios.patch<IDataset>(`dataset/${id}/`, details))
+    return (await this.axios.patch<IDataset>(`dataset / ${id} / `, details))
       .data;
   }
 
