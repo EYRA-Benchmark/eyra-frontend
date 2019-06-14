@@ -76,6 +76,7 @@ class LeaderboardTable extends React.Component<IProps, IState> {
 
       return {
         name: submission.implementation.name,
+        version: submission.implementation.version,
         date: submission.created,
         ...metrics,
       };
@@ -99,12 +100,20 @@ class LeaderboardTable extends React.Component<IProps, IState> {
                       <TableCell component="td" scope="row">
                         {n.name}
                       </TableCell>
+                      <TableCell component="td" scope="row" align="left">
+                        {n.version}
+                      </TableCell>
                       {metricFields.map((fieldName, j: number) => (
-                        <TableCell key={j} align="right">
+                        <TableCell key={j} align="left">
                           {n[fieldName]}
                         </TableCell>
                       ))}
-                      <TableCell align="right">{formatDateTime(new Date(n.date))}</TableCell>
+                      <TableCell align="left">{
+                        <a href="https://observablehq.com/@maartenvm/frb-detection-evaluation/3" target="_blank">
+                          visualization
+                        </a>
+                      }</TableCell>
+                      <TableCell align="left">{formatDateTime(new Date(n.date))}</TableCell>
                     </TableRow>
                   );
                 },

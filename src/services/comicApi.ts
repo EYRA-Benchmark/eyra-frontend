@@ -111,7 +111,6 @@ export class ComicApi {
     return (await this.axios.get<ISubmission[]>(
       `submissions/?${objectToQueryParams(filters)}`,
     )).data;
-    debugger;
   }
 
   async algorithm(id: string): Promise<IAlgorithm> {

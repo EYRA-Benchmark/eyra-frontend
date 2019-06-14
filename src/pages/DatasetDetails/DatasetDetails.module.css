@@ -6,11 +6,11 @@
   border: 1px solid #ccc;
 }
 .tableContainer th,
-td {
+.tableContainer td {
   border-right: 1px solid #ccc;
 }
 
 .tableContainer th:last-child,
-td:last-child {
+.tableContainer td:last-child {
   border-right: none;
 }

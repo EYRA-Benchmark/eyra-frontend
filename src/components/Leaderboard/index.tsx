@@ -29,7 +29,7 @@ class Leaderboard extends React.Component<IProps, IState> {
     const submissions = await comicApi.submissions({
       benchmark: this.props.benchmarkID,
     });
-    debugger;
+
     const evaluatedSubmissions = submissions.filter(
       (submission) => submission.metrics_json !== null,
     );

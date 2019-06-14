@@ -26,12 +26,19 @@ class Leaderboard extends React.Component<IProps, {}> {
         disablePadding: false,
         label: 'Name',
       },
+      {
+        id: 'version',
+        numeric: false,
+        disablePadding: false,
+        label: 'Version',
+      },
       ...this.props.metricFields.map((fieldName) => ({
         id: fieldName,
         numeric: true,
         disablePadding: false,
         label: fieldName,
       })),
+      { id: 'visualization', numeric: false, disablePadding: false, label: 'Visualization' },
       { id: 'date', numeric: true, disablePadding: false, label: 'Date' },
     ];
 
@@ -44,7 +51,7 @@ class Leaderboard extends React.Component<IProps, {}> {
             return (
               <TableCell
                 key={row.id}
-                align={row.numeric ? 'right' : 'left'}
+                align={'left'}
                 padding={row.disablePadding ? 'none' : 'default'}
                 sortDirection={orderBy === row.id ? order : false}
               >
