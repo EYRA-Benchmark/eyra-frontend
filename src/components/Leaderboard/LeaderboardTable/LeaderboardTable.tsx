@@ -68,16 +68,16 @@ class LeaderboardTable extends React.Component<IProps, IState> {
     const { classes } = this.props;
     const { order, orderBy } = this.state;
 
-    const metricFields = Object.keys(JSON.parse(this.props.submissions[0].metrics_json)).slice(3);
+    const metricFields = Object.keys(JSON.parse(this.props.submissions[0].metrics_json).metrics);
 
     const data = this.props.submissions.map((submission) => {
-      const metricsJson = JSON.parse(submission.metrics_json.replace(/\bNaN\b/g, 'null'));
+      // const metricsJson = JSON.parse(submission.metrics_json.replace(/\bNaN\b/g, 'null'));
+      const metrics = JSON.parse(submission.metrics_json).metrics;
+
       return {
         name: submission.implementation.name,
         date: submission.created,
-        n_correct: metricsJson.n_correct,
-        n_false_positive: metricsJson.n_false_positive,
-        n_false_negative: metricsJson.n_false_negative,
+        ...metrics,
       };
     });
     return (
