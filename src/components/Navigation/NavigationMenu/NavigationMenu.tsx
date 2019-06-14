@@ -59,9 +59,13 @@ function NavigationMenu({ user, logout }: IUserProps) {
                 open={Boolean(anchorEl)}
                 onClose={handleClose}
               >
-                <Link route="profile">
-                  <a><MenuItem onClick={handleClose}>Profile</MenuItem></a>
-                </Link>
+                <MenuItem onClick={handleClose}>
+                  <Link route="/profile">
+                    <a>
+                      Profile
+                    </a>
+                  </Link>
+                </MenuItem>
                 <MenuItem onClick={logout}>Logout</MenuItem>
               </Menu>
             </>
