@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './CustomTextEditor.module.css';
-// import RichTextEditor from 'react-rte';
+import RichTextEditor from 'react-rte';
 // const RichTextEditor = (typeof window !== 'undefined') ? require('react-rte') : null;
 
 interface IProps {
@@ -11,24 +11,24 @@ interface IProps {
 }
 class CustomTextEditor extends React.Component<IProps, {}> {
   state = {
-    // value: RichTextEditor.createValueFromString(
-    //   '<b>Add Description Here..</b><br/>' +
-    //   '<p>Here You can add description or paste HTML/ Markdown code for description in left Container</p>',
-    //   'html',
-    // ),
-    // value: RichTextEditor.createEmptyValue(),
     value: RichTextEditor.createValueFromString(
-      this.props.defaultValue,
-      this.props.defaultFormat,
+      '<b>Add Description Here..</b><br/>' +
+      '<p>Here You can add description or paste HTML/ Markdown code for description in left Container</p>',
+      'html',
     ),
+    // value: RichTextEditor.createEmptyValue(),
+    // value: RichTextEditor.createValueFromString(
+    //   this.props.defaultValue,
+    //   this.props.defaultFormat,
+    // ),
     format: this.props.defaultFormat,
   };
-  setDesc = (value: any) => {
-    this.setState({ value });
-    this.props.onChange(
-      value.toString('markdown'),
-    ); /** Description will be submitted as markdown only */
-  }
+  // setDesc = (value: any) => {
+  //   this.setState({ value });
+  //   this.props.onChange(
+  //     value.toString('markdown'),
+  //   ); /** Description will be submitted as markdown only */
+  // }
   onChangeSource = (event: any) => {
     const source = event.target.value;
     const oldValue = this.state.value;

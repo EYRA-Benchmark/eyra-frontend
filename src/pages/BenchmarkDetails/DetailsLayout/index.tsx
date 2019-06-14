@@ -1,14 +1,14 @@
-import { Grid, Paper, Tab, Tabs, Typography, Button, Dialog } from '@material-ui/core';
+import { Grid, Paper, Tab, Tabs, Typography } from '@material-ui/core';
 import Markdown from '@nteract/markdown';
 import * as React from 'react';
 import AlgorithmSubmissionForm from '../../../components/Forms/Algorithm/AlgorithmSubmission';
-import Datasets from './DataSets/DataSets';
+// import Datasets from './DataSets/DataSets';
 import styles from './DetailsLayout.css';
 import Leaderboard from '../../../components/Leaderboard';
 import DataFileCard from '../../../components/DataFileCard/';
 import classNames from 'classnames';
 import { IBenchmark } from '../../../types/benchmark';
-import Logs from '../../../components/Logs';
+// import Logs from '../../../components/Logs';
 
 interface IContainerProps {
   children: React.ReactNode;
@@ -161,20 +161,20 @@ class Details extends React.Component<IProps, IState> {
                   <AlgorithmSubmissionForm benchmarkId={data.id} />
                 </TabContainer>
               )} */}
-              <Dialog
+              {/* <Dialog
                 open={this.state.dialogOpen}
                 onClose={this.toggleModal(false)}
                 className={styles.formContainer}
               >
                 <AlgorithmSubmissionForm benchmarkId={data.id} />
-              </Dialog>
-              <Button
+              </Dialog> */}
+              {/* <Button
                 variant="contained"
                 onClick={this.toggleModal(true)}
                 id="submit"
               >
                 Submit Algorithm
-              </Button>
+              </Button> */}
             </Paper>
           </Grid>
         </Grid>

@@ -4,7 +4,7 @@ import { Button } from '@material-ui/core';
 import { Field, Form, Formik } from 'formik';
 import { FormikActions } from 'formik';
 import React from 'react';
-import CustomTextEditor from '../CustomTextEditor';
+//import CustomTextEditor from '../CustomTextEditor';
 import styles from './AlgorithmSubmission.module.css';
 
 interface IProps {
@@ -67,14 +67,14 @@ class AlgorithmSubmission extends React.Component<IProps, {}> {
               </div>
               <div className={styles.inputContainer}>
                 <label htmlFor="description">Description</label>
-                <CustomTextEditor
+                {/* <CustomTextEditor
                   defaultValue={defaultValue}
                   defaultFormat="html"
                   showEditor={true}
                   onChange={(value) => {
                     setFieldValue('description', value);
                   }}
-                />
+                /> */}
               </div>
 
               <div className={styles.inputContainer}>
