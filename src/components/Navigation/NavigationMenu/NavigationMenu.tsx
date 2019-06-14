@@ -1,11 +1,22 @@
 import * as React from 'react';
+import { Link } from 'src/routes';
+import { Menu, MenuItem } from '@material-ui/core';
+
 import { isLoggedIn, IUserProps, withUser } from 'src/context/User';
+import LoginDialog from 'src/components/LoginDialog';
 import styles from './NavigationMenu.module.css';
 
-import { Link } from 'src/routes';
-import LoginDialog from 'src/components/LoginDialog';
-
 function NavigationMenu({ user, logout }: IUserProps) {
+  const [anchorEl, setAnchorEl] = React.useState<null | HTMLAnchorElement>(null);
+
+  function handleClick(event: React.MouseEvent<HTMLAnchorElement>) {
+    setAnchorEl(event.currentTarget);
+  }
+
+  function handleClose() {
+    setAnchorEl(null);
+  }
+
   const [ loginDialogOpen, setLoginDialogOpen ] = React.useState(false);
   React.useEffect(() => {
     if (user) {
@@ -37,7 +48,27 @@ function NavigationMenu({ user, logout }: IUserProps) {
         {/*</li>*/}
         <li>
           {isLoggedIn(user) ? (
-              <a href="#" onClick={logout}>Logout {user.first_name}</a>
+            <>
+              <a aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
+                {user.first_name}
+              </a>
+              <Menu
+                id="simple-menu"
+                anchorEl={anchorEl}
+                keepMounted={true}
+                open={Boolean(anchorEl)}
+                onClose={handleClose}
+              >
+                <MenuItem onClick={handleClose}>
+                  <Link route="/profile">
+                    <a>
+                      Profile
+                    </a>
+                  </Link>
+                </MenuItem>
+                <MenuItem onClick={logout}>Logout</MenuItem>
+              </Menu>
+            </>
           ) : (
             <a href="#" onClick={() => setLoginDialogOpen(true)}>Login</a>
           )}
