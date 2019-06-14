@@ -58,7 +58,7 @@ export const getHeader = (benchmark: IBenchmark) => (
           </IconButton>
 
         </Link>
-        <Link route="benchmarkEdit" params={{ id: benchmarkId }}>
+        <Link route="benchmarkEdit" params={{ id: benchmark.id }}>
 
           <IconButton title="Edit">
             <EditIcon />
