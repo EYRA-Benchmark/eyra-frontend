@@ -10,40 +10,41 @@ class MyDocument extends Document {
   render() {
     return (
       <html lang="en" dir="ltr">
-      <Head>
-        <meta charSet="utf-8" />
-        {/* Use minimum-scale=1 to enable GPU rasterization */}
-        <meta
-          name="viewport"
-          content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no"
-        />
-        {/* PWA primary color */}
-        <meta name="theme-color" content={theme.palette.primary.main} />
-        <link
-          rel="stylesheet"
-          href="https://fonts.googleapis.com/css?family=Roboto:300,400,500"
-        />
-        <link
-          rel="stylesheet"
-          href="/static/style/index.css"
-        />
-        <link
-          rel="stylesheet"
-          href="/static/style/nprogress.css"
-        />
-        <link
-          rel="stylesheet"
-          href="https://use.fontawesome.com/releases/v5.1.0/css/all.css"
-          integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt"
-          crossOrigin="anonymous"
-        />
-        <link rel="shortcut icon" href="/static/favicon.ico"/>
+        <Head>
+          <meta charSet="utf-8" />
+          {/* Use minimum-scale=1 to enable GPU rasterization */}
+          <meta
+            name="viewport"
+            content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no"
+          />
+          {/* PWA primary color */}
+          <meta name="theme-color" content={theme.palette.primary.main} />
+          <link
+            rel="stylesheet"
+            href="https://fonts.googleapis.com/css?family=Roboto:300,400,500"
+          />
+          <link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet" />
+          <link
+            rel="stylesheet"
+            href="/static/style/index.css"
+          />
+          <link
+            rel="stylesheet"
+            href="/static/style/nprogress.css"
+          />
+          <link
+            rel="stylesheet"
+            href="https://use.fontawesome.com/releases/v5.1.0/css/all.css"
+            integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt"
+            crossOrigin="anonymous"
+          />
+          <link rel="shortcut icon" href="/static/favicon.ico" />
 
-      </Head>
-      <body>
-      <Main />
-      <NextScript />
-      </body>
+        </Head>
+        <body>
+          <Main />
+          <NextScript />
+        </body>
       </html>
     );
   }
