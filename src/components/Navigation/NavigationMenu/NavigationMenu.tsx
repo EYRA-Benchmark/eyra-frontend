@@ -3,10 +3,22 @@ import { isLoggedIn, IUserProps, withUser } from 'src/context/User';
 import styles from './NavigationMenu.module.css';
 
 import { Link } from 'src/routes';
+import LoginDialog from 'src/components/LoginDialog';
 
 function NavigationMenu({ user, logout }: IUserProps) {
+  const [ loginDialogOpen, setLoginDialogOpen ] = React.useState(false);
+  React.useEffect(() => {
+    if (user) {
+      // user just logged in
+      setLoginDialogOpen(false);
+    }
+  });
   return (
     <React.Fragment>
+      { loginDialogOpen && (
+        <LoginDialog open={true} onClose={() => setLoginDialogOpen(false)}/>
+      )}
+
       <ul className={styles.nav}>
         <li>
           <Link route="about">
@@ -25,11 +37,9 @@ function NavigationMenu({ user, logout }: IUserProps) {
         {/*</li>*/}
         <li>
           {isLoggedIn(user) ? (
-              <a onClick={logout}>Logout {user.first_name}</a>
+              <a href="#" onClick={logout}>Logout {user.first_name}</a>
           ) : (
-            <Link route="login">
-              <a>Login</a>
-            </Link>
+            <a href="#" onClick={() => setLoginDialogOpen(true)}>Login</a>
           )}
         </li>
       </ul>
