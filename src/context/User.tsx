@@ -26,6 +26,7 @@ export type IUserProps = IState & {
   login: typeof UserProvider.prototype.login;
   logout: typeof UserProvider.prototype.logout;
   refresh: typeof UserProvider.prototype.refresh;
+  oauthLogin: typeof UserProvider.prototype.oauthLogin;
 };
 
 const defaultState: IState = {
@@ -61,14 +62,39 @@ export class UserProvider extends React.Component<{}, IState> {
     }
   }
 
-  signup() {
-    // todo
+  async signup(
+  {
+    first_name,
+    last_name,
+    email,
+    password,
+  }: {
+    first_name: string,
+    last_name: string,
+    email: string,
+    password: string,
+  }) {
+    return await comicApi.registration({ first_name, last_name, email, password });
   }
 
-  login() {
+  oauthLogin() {
     document.location.href = `${
       publicRuntimeConfig.backendURL
     }social/login/google-oauth2/?next=${document.location.origin}`;
+  }
+
+  async login({email, password}: {email: string, password: string}) {
+    try {
+      const result = await comicApi.login({ email, password });
+      if (result && result.token) {
+        comicApi.setToken(result.token);
+        return this.refresh();
+      } else {
+        throw new Error('Login error');
+      }
+    } catch (e) {
+      throw e;
+    }
   }
 
   logout() {
@@ -89,6 +115,7 @@ export class UserProvider extends React.Component<{}, IState> {
           login: this.login.bind(this),
           logout: this.logout.bind(this),
           refresh: this.refresh.bind(this),
+          oauthLogin: this.oauthLogin.bind(this),
         }}
       >
         {children}
