@@ -2,11 +2,16 @@ import React from 'react';
 import styles from './SignUp.module.css';
 import * as yup from 'yup';
 import { Formik, Form, Field, FormikActions } from 'formik';
-import { Button, Dialog, DialogContent } from '@material-ui/core';
-import { comicApi } from 'src/services/comicApi';
+import { Button } from '@material-ui/core';
+import { IUserProps, withUser } from 'src/context/User';
+
 const formSchema = yup.object().shape({
-  firstName: yup.string().required('First Name is required.'),
-  lastName: yup.string().required('Last Name is required.'),
+  firstName: yup
+    .string()
+    .required('First Name is required.'),
+  lastName: yup
+    .string()
+    .required('Last Name is required.'),
   email: yup
     .string()
     .email()
@@ -16,13 +21,13 @@ const formSchema = yup.object().shape({
     .required('Password is required')
     .min(8, 'Password is too short - should be 8 chars minimum.'),
 });
+
 interface IValues {
   firstName: string;
   lastName: string;
   organization: string;
   email: string;
   password: string;
-  response: string;
 }
 
 const initialValues: IValues = {
@@ -31,43 +36,30 @@ const initialValues: IValues = {
   organization: '',
   email: '',
   password: '',
-  response: '',
 };
-const onSubmit = async (
-  values: IValues,
-  { setSubmitting }: FormikActions<IValues>,
-) => {
-  try {
-    await comicApi
-      .registration({
+
+const Signup = (props: IUserProps) => {
+  const handleSubmit = async (values: IValues, formik: FormikActions<IValues>) => {
+    try {
+      await props.signup({
         first_name: values.firstName,
         last_name: values.lastName,
         email: values.email,
         password: values.password,
-      })
-
-      .then((response) => {
-        if (response) {
-          values.response = 'Thank You for Registering!';
-        }
-      })
-      .catch((error) => {
-        values.response = `${error.response.data.error}`;
-        console.log(error.response);
       });
-  } catch (e) {
-    console.log(e);
-  }
-  setSubmitting(false);
-};
-const Signup = () => {
+      formik.setStatus({ success: true });
+    } catch (e) {
+      formik.setStatus({ signupFail: e.message});
+    }
+    formik.setSubmitting(false);
+  };
   return (
     <Formik
       initialValues={initialValues}
       validationSchema={formSchema}
-      onSubmit={onSubmit}
+      onSubmit={handleSubmit}
     >
-      {({ isSubmitting, setFieldValue, errors, touched, isValid, values }) => (
+      {({ isSubmitting, setFieldValue, errors, status, touched, isValid, values }) => (
         <Form>
           <div className={styles.container}>
             <Field
@@ -113,22 +105,20 @@ const Signup = () => {
             {errors.password && touched.password && (
               <div className={styles.error}>{errors.password}</div>
             )}
-            <Dialog
-              open={values.response.length > 0}
-              onClose={() => {
-                setFieldValue('response', '');
-              }}
-            >
-              <DialogContent>{values.response}</DialogContent>
-            </Dialog>
             <Button
               variant="outlined"
               color="primary"
-              disabled={!isValid || isSubmitting}
+              disabled={!isValid || isSubmitting || (status && status.success)}
               type="submit"
             >
               Sign Up
             </Button>
+            { status && status.success && (
+              <div>Thanks for signing up!</div>
+            )}
+            { status && status.signupFail && (
+              <div className={styles.error}>{status.signupFail}</div>
+            )}
           </div>
         </Form>
       )}
@@ -136,4 +126,4 @@ const Signup = () => {
   );
 };
 
-export default Signup;
+export default withUser(Signup);

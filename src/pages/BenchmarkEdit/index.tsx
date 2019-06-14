@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { RouteComponentProps, withRouter } from 'react-router';
 // import { Typography } from "@material-ui/core";
 import { comicApi } from '../../services/comicApi';
 import styles from '../Home/Home.css';
@@ -11,16 +10,13 @@ interface IState {
   benchmark: IBenchmark | null;
 }
 
-class EditBenchmark extends React.Component<
-  RouteComponentProps<{ id: string }>,
-  IState
-> {
+class EditBenchmark extends React.Component<{}, IState> {
   state = {
     benchmark: null,
   };
   async componentDidMount() {
     this.setState({
-      benchmark: await comicApi.benchmark(this.props.match.params.id),
+      // benchmark: await comicApi.benchmark(this.props.match.params.id),
     });
   }
   render() {
@@ -38,4 +34,4 @@ class EditBenchmark extends React.Component<
     );
   }
 }
-export default withRouter(EditBenchmark);
+export default EditBenchmark;

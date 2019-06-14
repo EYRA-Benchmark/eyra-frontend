@@ -75,14 +75,35 @@ export class ComicApi {
     email: string;
     password: string;
   }): Promise<IUser> {
-    return (await this.axios.post<IUser>('auth/register/', details)).data;
+    try {
+      return (await this.axios.post<IUser>('auth/register/', details)).data;
+    } catch (e) {
+      if (e.response && e.response.data && e.response.data.error) {
+        throw new Error(e.response.data.error);
+      }
+      if (e.response && e.response.data && e.response.data.detail) {
+        throw new Error(e.response.data.detail);
+      }
+      throw(e);
+    }
   }
 
   async login(details: {
     email: string;
     password: string;
   }): Promise<IResponse> {
-    return (await this.axios.post<IResponse>('auth/login/', details)).data;
+    try {
+      return (await this.axios.post<IResponse>('auth/login/', details)).data;
+    } catch (e) {
+      if (e.response && e.response.data && e.response.data.error) {
+        throw new Error(e.response.data.error);
+      }
+      if (e.response && e.response.data && e.response.data.detail) {
+        throw new Error(e.response.data.detail);
+      }
+      throw(e);
+    }
+
   }
 
   async jobs(): Promise<IJob[]> {
