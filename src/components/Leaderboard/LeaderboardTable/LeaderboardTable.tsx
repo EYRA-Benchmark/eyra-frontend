@@ -96,7 +96,7 @@ class LeaderboardTable extends React.Component<IProps, IState> {
                 (n: any, i: number) => {
                   return (
                     <TableRow hover={true} tabIndex={-1} key={i}>
-                      <TableCell component="th" scope="row">
+                      <TableCell component="td" scope="row">
                         {n.name}
                       </TableCell>
                       {metricFields.map((fieldName, j: number) => (
