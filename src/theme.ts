@@ -2,7 +2,7 @@ import { createMuiTheme } from '@material-ui/core';
 
 export default createMuiTheme({
   typography: {
-    // useNextVariants: true,
+    fontFamily: 'Lato,san-serif',
   },
   overrides: {
     // MuiSvgIcon: {
@@ -10,6 +10,7 @@ export default createMuiTheme({
     //     color: "#000",
     //   },
     // },
+
     MuiButton: {
       textPrimary: {
         textTransform: 'none',
@@ -31,10 +32,15 @@ export default createMuiTheme({
         color: '#1fb8ea',
         margin: '20px 0',
       },
+      h6: {
+        fontFamily: 'Lato',
+      },
       subtitle1: {
         color: '#1fb8ea',
       },
+
     },
+
   },
   palette: {
     primary: {

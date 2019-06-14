@@ -8,9 +8,10 @@
   border-radius: 0px;
   cursor: pointer;
 }
-.tilte {
-  font-size: 8px;
+.title{
+  font:  1.25rem  Lato, sans-serif
 }
+
 .card img {
   max-width: 100%;
 }
