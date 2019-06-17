@@ -5,7 +5,7 @@ import { Grid, Tab, Tabs, Typography } from '@material-ui/core';
 import * as React from 'react';
 import styles from './VerticalTabs.module.css';
 import { comicApi } from '../../../../../services/comicApi';
-import { IDataFile } from '../../../../../types/data_file';
+import { IDataFile } from '../../../../../types';
 
 interface IState {
   value: number;

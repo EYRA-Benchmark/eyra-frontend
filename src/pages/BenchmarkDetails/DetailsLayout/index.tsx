@@ -51,27 +51,27 @@ class Details extends React.Component<IProps, IState> {
     const { data } = this.props;
     if (data) {
       /* Get the test and training data sets */
-      const testDataSets =
-        data.test_data_file !== null &&
-          data.test_ground_truth_data_file !== null
-          ? [
-            {
-              data: data.test_data_file,
-              ground_truth: data.test_ground_truth_data_file,
-            },
-          ]
-          : [];
+      // const testDataSets =
+      //   data.test_data_file !== null &&
+      //     data.test_ground_truth_data_file !== null
+      //     ? [
+      //       {
+      //         data: data.test_data_file,
+      //         ground_truth: data.test_ground_truth_data_file,
+      //       },
+      //     ]
+      //     : [];
 
-      const trainingDataSets =
-        data.training_data_file !== null &&
-          data.training_ground_truth_data_file !== null
-          ? [
-            {
-              data: data.training_data_file,
-              ground_truth: data.training_ground_truth_data_file,
-            },
-          ]
-          : [];
+      // const trainingDataSets =
+      //   data.training_data_file !== null &&
+      //     data.training_ground_truth_data_file !== null
+      //     ? [
+      //       {
+      //         data: data.training_data_file,
+      //         ground_truth: data.training_ground_truth_data_file,
+      //       },
+      //     ]
+      //     : [];
       return (
         <Grid container={true} spacing={3}>
           <Grid item={true} xs={12} sm={12} md={12}>
@@ -79,7 +79,7 @@ class Details extends React.Component<IProps, IState> {
               {/* <div className={classNames(styles.bannerImage, styles.cover)}
                 style={{ backgroundImage: `url(${data.image})` }} > */}
               <div className={styles.imageContainer}>
-                <img src={data.image} className={styles.bannerImage} />
+                <img src={data.banner_image_url} className={styles.bannerImage} />
               </div>
 
               <div className={classNames(styles.overlay, styles.cover)} />
@@ -122,7 +122,7 @@ class Details extends React.Component<IProps, IState> {
                     source={data.data_description}
                     className={styles.container}
                   />
-                  <DataFileCard></DataFileCard>
+                  {data.data_set !== null ? <DataFileCard datasetId={data.data_set} /> : null}
                 </TabContainer>
               )}
               {value === 2 && (
