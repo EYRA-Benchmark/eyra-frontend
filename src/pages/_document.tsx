@@ -24,6 +24,7 @@ class MyDocument extends Document {
             href="https://fonts.googleapis.com/css?family=Roboto:300,400,500"
           />
           <link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet" />
+          <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
           <link
             rel="stylesheet"
             href="/static/style/index.css"
@@ -32,12 +33,12 @@ class MyDocument extends Document {
             rel="stylesheet"
             href="/static/style/nprogress.css"
           />
-          <link
-            rel="stylesheet"
-            href="https://use.fontawesome.com/releases/v5.1.0/css/all.css"
-            integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt"
-            crossOrigin="anonymous"
-          />
+          {/*<link*/}
+          {/*  rel="stylesheet"*/}
+          {/*  href="https://use.fontawesome.com/releases/v5.1.0/css/all.css"*/}
+          {/*  integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt"*/}
+          {/*  crossOrigin="anonymous"*/}
+          {/*/>*/}
           <link rel="shortcut icon" href="/static/favicon.ico" />
 
         </Head>

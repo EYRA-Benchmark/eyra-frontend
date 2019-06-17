@@ -1,4 +1,5 @@
 import Axios, { AxiosInstance } from 'axios';
+import https from 'https';
 
 import {
   IAlgorithm,
@@ -33,6 +34,11 @@ export class ComicApi {
     this.axios = Axios.create({
       baseURL,
       headers,
+      ...(process.env.NODE_ENV === 'production'
+        ? {}
+        // ignore HTTPS verification errors in DEV
+        : { httpsAgent: new https.Agent({ rejectUnauthorized: false }) }
+      ),
     });
     this.setToken(token);
   }
@@ -109,6 +115,9 @@ export class ComicApi {
   async jobs(): Promise<IJob[]> {
     return (await this.axios.get<IJob[]>('jobs/')).data;
   }
+  async job(id: string): Promise<IJob> {
+    return (await this.axios.get<IJob>(`jobs/${id}/`)).data;
+  }
   async benchmarks(): Promise<IBenchmark[]> {
     return (await this.axios.get<IBenchmark[]>('benchmarks/')).data;
   }
@@ -128,12 +137,16 @@ export class ComicApi {
     return (await this.axios.get<IDataFile>(`data_files/${id}/`)).data;
   }
 
-  async submissions(filters: {}): Promise<ISubmission[]> {
+  async submissions(filters: {} = {}): Promise<ISubmission[]> {
     return (await this.axios.get<ISubmission[]>(
       `submissions/?${objectToQueryParams(filters)}`,
     )).data;
   }
-
+  async algorithms(filters: {} = {}): Promise<IAlgorithm[]> {
+    return (await this.axios.get<IAlgorithm[]>(
+      `algorithms/?${objectToQueryParams(filters)}`,
+    )).data;
+  }
   async algorithm(id: string): Promise<IAlgorithm> {
     return (await this.axios.get<IAlgorithm>(`algorithms/${id}/`)).data;
   }
