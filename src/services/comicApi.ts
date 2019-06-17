@@ -90,7 +90,7 @@ export class ComicApi {
       if (e.response && e.response.data && e.response.data.detail) {
         throw new Error(e.response.data.detail);
       }
-      throw(e);
+      throw (e);
     }
   }
 
@@ -107,7 +107,7 @@ export class ComicApi {
       if (e.response && e.response.data && e.response.data.detail) {
         throw new Error(e.response.data.detail);
       }
-      throw(e);
+      throw (e);
     }
 
   }
@@ -126,11 +126,11 @@ export class ComicApi {
     return (await this.axios.get<IBenchmark>(`benchmarks/${id}/`)).data;
   }
   async datasets(): Promise<IDataset[]> {
-    return (await this.axios.get<IDataset[]>('datasets/')).data;
+    return (await this.axios.get<IDataset[]>('data_sets/')).data;
   }
 
   async dataset(id: string): Promise<IDataset> {
-    return (await this.axios.get<IDataset>(`dataset/${id}/`)).data;
+    return (await this.axios.get<IDataset>(`data_sets/${id}/`)).data;
   }
 
   async data_file(id: string): Promise<IDataFile> {

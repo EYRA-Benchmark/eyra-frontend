@@ -24,7 +24,7 @@ export const BenchmarkCard = (props: IProps) => {
       <Card square={true} className={styles.card}>
         <CardMedia
           className={styles.media}
-          image={benchmark.image}
+          image={benchmark.card_image_url}
           title="Image title"
         />
         {canEdit ? (

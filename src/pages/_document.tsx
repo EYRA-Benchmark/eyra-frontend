@@ -11,6 +11,8 @@ class MyDocument extends Document {
     return (
       <html lang="en" dir="ltr">
         <Head>
+
+          <meta name="description" content="EYRA is platform for benchmarking scientific algorithms"></meta>
           <meta charSet="utf-8" />
           {/* Use minimum-scale=1 to enable GPU rasterization */}
           <meta

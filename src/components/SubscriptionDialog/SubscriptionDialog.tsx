@@ -13,7 +13,6 @@ import {
 
 import styles from './SubscriptionDialog.module.css';
 
-import MailImage from 'src/assets/images/mail.png';
 import { submitContactForm } from 'src/services/contactFormSubmission';
 import { mapValues } from 'src/utils';
 
@@ -96,107 +95,107 @@ const SubscriptionDialog: React.FunctionComponent = () => (
       setFieldValue,
       isSubmitting,
     }) => (
-      <React.Fragment>
-        <DialogTitle>Subscribe to stay up to date</DialogTitle>
-        <DialogContent>
-          <div className={styles.container}>
-            <div className={styles.mail}>
-              <img src={MailImage} alt="Mail" />
-            </div>
-            {values.isSuccess ? (
-              <div className={styles.formContainer}>
-                <h3>Thank You!</h3>
-                <p>
-                  Your subscription has been confirmed. You've been added to our
-                  list and will hear from us soon.
-                </p>
+        <React.Fragment>
+          <DialogTitle>Subscribe to stay up to date</DialogTitle>
+          <DialogContent>
+            <div className={styles.container}>
+              <div className={styles.mail}>
+                <img src="/static/images/mail.png" alt="Mail" />
               </div>
-            ) : (
-              <form onSubmit={handleSubmit} className={styles.formContainer}>
-                <div
-                  className={classNames(
-                    styles.wrapInput,
-                    styles.validateInput,
-                    errors.email && styles.alertValidate,
-                  )}
-                >
-                  <input
-                    type="email"
-                    name="email"
-                    value={values.email}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    className={styles.input1}
-                    placeholder="Email"
-                  />
-                  {errors.email && touched.email && (
-                    <div style={{ color: 'red', marginTop: '.5rem' }}>
-                      {errors.email}
-                    </div>
-                  )}
-                </div>
-                <input
-                  type="text"
-                  name="name"
-                  value={values.name}
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  className={styles.input1}
-                  placeholder="Name"
-                />
-                <input
-                  type="text"
-                  name="organization"
-                  value={values.organization}
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  className={styles.input1}
-                  placeholder="Organization"
-                />
-                <div className={styles.intersts}>
-                  <p>What is your main interest?</p>
-
-                  { Object.keys(interests).map((interest, index) => (
-                      <div key={index}>
-                        <label>
-                          <Field type="checkbox" name={`interests.${interest}`} />
-                          {interests[interest]}
-                        </label>
-                      </div>
-                    ) )}
-                </div>
-
-                <div className={styles.permission}>
-                  <Field name="permission" type="checkbox" />
+              {values.isSuccess ? (
+                <div className={styles.formContainer}>
+                  <h3>Thank You!</h3>
                   <p>
-                    The information you provide on this form will only be used
-                    to get in touch with you and to provide updates about the
-                    EYRA platform every once in a while.
+                    Your subscription has been confirmed. You've been added to our
+                    list and will hear from us soon.
+                </p>
+                </div>
+              ) : (
+                  <form onSubmit={handleSubmit} className={styles.formContainer}>
+                    <div
+                      className={classNames(
+                        styles.wrapInput,
+                        styles.validateInput,
+                        errors.email && styles.alertValidate,
+                      )}
+                    >
+                      <input
+                        type="email"
+                        name="email"
+                        value={values.email}
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        className={styles.input1}
+                        placeholder="Email"
+                      />
+                      {errors.email && touched.email && (
+                        <div style={{ color: 'red', marginTop: '.5rem' }}>
+                          {errors.email}
+                        </div>
+                      )}
+                    </div>
+                    <input
+                      type="text"
+                      name="name"
+                      value={values.name}
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      className={styles.input1}
+                      placeholder="Name"
+                    />
+                    <input
+                      type="text"
+                      name="organization"
+                      value={values.organization}
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      className={styles.input1}
+                      placeholder="Organization"
+                    />
+                    <div className={styles.intersts}>
+                      <p>What is your main interest?</p>
+
+                      {Object.keys(interests).map((interest, index) => (
+                        <div key={index}>
+                          <label>
+                            <Field type="checkbox" name={`interests.${interest}`} />
+                            {interests[interest]}
+                          </label>
+                        </div>
+                      ))}
+                    </div>
+
+                    <div className={styles.permission}>
+                      <Field name="permission" type="checkbox" />
+                      <p>
+                        The information you provide on this form will only be used
+                        to get in touch with you and to provide updates about the
+                        EYRA platform every once in a while.
                   </p>
-                  {/* {errors.permission && (
+                      {/* {errors.permission && (
                     <div style={{ color: "red", marginTop: ".5rem" }}>
                       {errors.permission}
                     </div>
                   )}*/}
-                </div>
+                    </div>
 
-                {values.isError ? <p>Please try again later!</p> : null}
-                <DialogActions>
-                  <Button
-                    variant="outlined"
-                    color="primary"
-                    disabled={!isValid || isSubmitting}
-                    type="submit"
-                  >
-                    Subscribe
+                    {values.isError ? <p>Please try again later!</p> : null}
+                    <DialogActions>
+                      <Button
+                        variant="outlined"
+                        color="primary"
+                        disabled={!isValid || isSubmitting}
+                        type="submit"
+                      >
+                        Subscribe
                   </Button>
-                </DialogActions>
-              </form>
-            )}
-          </div>
-        </DialogContent>
-      </React.Fragment>
-    )}
+                    </DialogActions>
+                  </form>
+                )}
+            </div>
+          </DialogContent>
+        </React.Fragment>
+      )}
   </Formik>
 );
 
