@@ -11,7 +11,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  position: absolute;
+  position: fixed;
   width: 500px;
   height: 600px;
   overflow: hidden;

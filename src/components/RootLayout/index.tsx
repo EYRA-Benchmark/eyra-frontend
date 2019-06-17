@@ -16,7 +16,7 @@ import Routes from '../../Routes';
 import Home from 'src/pages/Home';
 
 import styles from './Layout.module.css';
-import paw from '../../assets/images/PawLight.png';
+import paw from '../../assets/images/lightPaw.png';
 
 interface IState {
   isShrink: boolean;
