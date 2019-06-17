@@ -11,7 +11,7 @@ const r = new NextRoutes()
   .add('datasets',          '/datasets',            'Datasets')
   .add('datasetDetails',    '/dataset/:id',         'DatasetDetails')
   .add('datasetEdit',       '/dataset/:id/edit',    'DatasetEdit')
-  .add('login',             '/login',               'Login')
+  .add('profile',           '/profile',             'Profile')
 ;
 
 export default r;
