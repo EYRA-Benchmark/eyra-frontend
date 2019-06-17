@@ -42,14 +42,13 @@ export default class MyApp extends App {
   render() {
     const { Component, pageProps, router } = this.props;
 
-
     const Wrapper = (props: any) => router.route === '/Home'
       ? <>{props.children}</>
       : (
         <div id="root_container">
           <main className={styles.container}>
             <div className={styles.bannerBackground} id="about">
-              <img src="/static/images/PawLight.png" />
+              <img src="/static/images/lightPaw.png" style={{ maxWidth: '100%' }} />
             </div>
             {props.children}
           </main>
