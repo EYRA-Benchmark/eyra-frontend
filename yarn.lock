@@ -646,13 +646,7 @@
   dependencies:
     regenerator-runtime "^0.12.0"
 
-"@babel/runtime@^7.1.2", "@babel/runtime@^7.2.0":
-  version "7.4.2"
-  resolved "https://registry.npmjs.org/@babel/runtime/-/runtime-7.4.2.tgz#f5ab6897320f16decd855eed70b705908a313fe8"
-  dependencies:
-    regenerator-runtime "^0.13.2"
-
-"@babel/runtime@^7.3.1":
+"@babel/runtime@^7.1.2", "@babel/runtime@^7.2.0", "@babel/runtime@^7.3.1":
   version "7.4.4"
   resolved "https://registry.npmjs.org/@babel/runtime/-/runtime-7.4.4.tgz#dc2e34982eb236803aa27a07fea6857af1b9171d"
   dependencies:
@@ -735,12 +729,14 @@
     "@babel/runtime" "^7.2.0"
 
 "@material-ui/styles@^4.0.0-beta.0", "@material-ui/styles@next":
-  version "4.0.0-beta.0"
-  resolved "https://registry.npmjs.org/@material-ui/styles/-/styles-4.0.0-beta.0.tgz#81954873523f8a255410fe085fe0e082e6eafed3"
+  version "4.0.0-rc.0"
+  resolved "https://registry.yarnpkg.com/@material-ui/styles/-/styles-4.0.0-rc.0.tgz#c805bdd2439bee0259a2b2d24fc7fc4fce4a1cd3"
+  integrity sha512-TUb0j9gIZDPoIzEr4TEOVCWo3EeDW4J61B3CR2VVgXiaLneU/l0wzRg1KzalVBjw6Bq/97D+wPBTL+uE4wD3xg==
   dependencies:
     "@babel/runtime" "^7.2.0"
     "@emotion/hash" "^0.7.1"
-    "@material-ui/utils" "^4.0.0-beta.0"
+    "@material-ui/types" "^4.0.0-rc.0"
+    "@material-ui/utils" "^4.0.0-rc.0"
     clsx "^1.0.2"
     deepmerge "^3.0.0"
     hoist-non-react-statics "^3.2.1"
@@ -764,9 +760,15 @@
     prop-types "^15.7.2"
     warning "^4.0.1"
 
-"@material-ui/utils@^4.0.0-beta.0":
-  version "4.0.0-beta.0"
-  resolved "https://registry.npmjs.org/@material-ui/utils/-/utils-4.0.0-beta.0.tgz#29f9c29cefbae3b7b7ef5b90a97e22dbe1af88f1"
+"@material-ui/types@^4.0.0-rc.0":
+  version "4.1.0"
+  resolved "https://registry.yarnpkg.com/@material-ui/types/-/types-4.1.0.tgz#58e60d86f5a554e60c06a4a91f2030ac2c56a5fd"
+  integrity sha512-F4z7GOAeEucPjrrhJ2PHBhMZjhggE6Jjnzmap5W2PdZ3TSWNlqucB+oOzT6EzWRkHDDhVmANMU8QMfT/kcZtOg==
+
+"@material-ui/utils@^4.0.0-beta.0", "@material-ui/utils@^4.0.0-rc.0":
+  version "4.1.0"
+  resolved "https://registry.yarnpkg.com/@material-ui/utils/-/utils-4.1.0.tgz#45fd6698db49f3528fe45c922c496235021d76ec"
+  integrity sha512-muwmVU799tzPjzb+Q5E/CTDle0rXwkCAdvMVyU0BfbJhenkUsFmuYiCmbvMVOU1m6F1S5HWfXz8EP4pXwwAvrw==
   dependencies:
     "@babel/runtime" "^7.2.0"
     prop-types "^15.7.2"
