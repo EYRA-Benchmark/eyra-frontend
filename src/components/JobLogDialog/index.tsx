@@ -43,9 +43,7 @@ const JobLogDialog = (props: IJobLogDialogProps) => {
       aria-describedby="alert-dialog-slide-description"
     >
       <DialogTitle id="alert-dialog-slide-title">
-        <Typography component="h1" variant="h5">
-          Job log
-        </Typography>
+        Job log
       </DialogTitle>
       <DialogContent>
         <Paper>
