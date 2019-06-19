@@ -1,0 +1,25 @@
+
+.container {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    overflow-x: scroll;
+}
+.container h5{
+    text-align: center
+}
+.filesContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.container span{
+    font-weight: 700;
+}
+.container td{
+    border: 0;
+}
+.container tr:nth-child(even) {
+    border-bottom: 1px solid
+    rgba(224, 224, 224, 1);
+}

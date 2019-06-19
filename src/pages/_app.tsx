@@ -21,6 +21,9 @@ Router.onRouteChangeComplete = () => NProgress.done();
 Router.onRouteChangeError = () => NProgress.done();
 
 export default class MyApp extends App {
+  state = {
+    showSideDrawer: false,
+  };
   componentDidMount() {
     // Remove the server-side injected CSS.
     // const jssStyles = document.querySelector('#jss-server-side');
@@ -28,7 +31,11 @@ export default class MyApp extends App {
     //   jssStyles.parentNode.removeChild(jssStyles);
     // }
   }
-
+  sideDrawerToggleHandler = () => {
+    this.setState((prevState) => {
+      return { showSideDrawer: !prevState.showSideDrawer };
+    });
+  }
   static async getInitialProps({ Component, router, ctx }: NextAppContext) {
     let pageProps = {};
 
@@ -60,8 +67,8 @@ export default class MyApp extends App {
         <UserProvider>
           <ThemeProvider theme={theme}>
             <CssBaseline />
-            <Header />
-            <SideDrawer open={true} />
+            <Header drawerToggle={this.sideDrawerToggleHandler} />
+            <SideDrawer open={this.state.showSideDrawer} />
             <Wrapper>
               <Component {...pageProps} />
             </Wrapper>

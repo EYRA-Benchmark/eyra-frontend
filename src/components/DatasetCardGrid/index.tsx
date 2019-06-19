@@ -22,10 +22,10 @@ export class CardGrid extends React.Component<IProps, {}> {
       .slice(0, size > 0 ? size : datasets.length);
 
     return (
-      <Grid container={true} spacing={24}>
+      <Grid container={true} spacing={10}>
         {filteredDatasets.map((dataset, index: number) => (
           <Grid item={true} key={index} xs={12} sm={4} md={4}>
-            <DatasetCard dataset={dataset}/>
+            <DatasetCard dataset={dataset} />
           </Grid>
         ))}
       </Grid>

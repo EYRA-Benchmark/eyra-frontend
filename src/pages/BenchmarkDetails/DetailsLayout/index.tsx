@@ -5,10 +5,10 @@ import AlgorithmSubmissionForm from '../../../components/Forms/Algorithm/Algorit
 // import Datasets from './DataSets/DataSets';
 import styles from './DetailsLayout.css';
 import Leaderboard from '../../../components/Leaderboard';
-import DataFileCard from '../../../components/DataFileCard/';
+
 import classNames from 'classnames';
 import { IBenchmark } from '../../../types/benchmark';
-// import Logs from '../../../components/Logs';
+import DataDescription from '../../../components/DataDescription/';
 
 interface IContainerProps {
   children: React.ReactNode;
@@ -122,7 +122,8 @@ class Details extends React.Component<IProps, IState> {
                     source={data.data_description}
                     className={styles.container}
                   />
-                  {data.data_set !== null ? <DataFileCard datasetId={data.data_set} /> : null}
+
+                  {data.data_set ? <DataDescription datasetId={'1facb4ff-e2c0-4e5e-9e2e-c0476662d33d'} /> : null}
                 </TabContainer>
               )}
               {value === 2 && (
