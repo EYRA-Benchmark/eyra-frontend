@@ -1,8 +1,7 @@
 import { useState, useEffect } from 'react';
 import { comicApi } from '../../../../services/comicApi';
 import { IDataFile } from '../../../../types';
-import styles from '../../DataFileCard/style.css';
-
+import Spinner from '../../../Spinner';
 import { formatDateTime } from 'src/utils';
 import {
     TableCell,
@@ -29,7 +28,7 @@ const FileDetailsRow = (props: IProps) => {
             };
         }, [dataFileId],
     );
-    debugger;
+
     const content = data ? (
 
         <>
@@ -44,17 +43,8 @@ const FileDetailsRow = (props: IProps) => {
                     <p><span>Description:  </span>{data.long_description}</p>
                 </TableCell>
             </TableRow>
-            {/* <div className={styles.filesContainer}>
-                <p>{data.name}</p>
-                <span>
-                    <a href={data.file} download={true} title="download">
-                        <DownloadIcon />
-                    </a>
-                </span>
-            </div>
-            <p><span>Sampling Type:</span>{data.long_description ? data.long_description : ' Sampling Type not available'}</p> */}
         </>
-    ) : null;
+    ) : <Spinner />;
     return content;
 };
 
