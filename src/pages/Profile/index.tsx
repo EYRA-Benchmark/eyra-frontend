@@ -1,8 +1,7 @@
 import * as React from 'react';
-import { Typography, Paper, Container, Divider } from '@material-ui/core';
-import { styled } from '@material-ui/styles';
-
-import { IAlgorithm, IUser } from 'src/types';
+import { Typography, Paper, Container } from '@material-ui/core';
+import styles from './styles.css';
+import { IAlgorithm } from 'src/types';
 import { IUserProps, withUser } from 'src/context/User';
 import { getSubmissionsWithJobs, INestedSubmission } from 'src/pages/Submissions';
 import { comicApi } from 'src/services/comicApi';
@@ -10,45 +9,49 @@ import { comicApi } from 'src/services/comicApi';
 import SubmissionsTable from 'src/components/SubmissionsTable';
 import AlgorithmsTable from 'src/components/AlgorithmsTable';
 
-interface IProps extends IUserProps {
+interface IProps {
   submissions: INestedSubmission[];
   algorithms: IAlgorithm[];
-  user: IUser;
 }
 
-// const UserDetails = withUser((props: IUser) => <div>{JSON.stringify(props)}</div>);
+const UserDetails = withUser((props: IUserProps) => {
+  const { user } = props;
+  return (
+    user ?
+      (
+        <div ><span>Name:</span>{'  ' + user.first_name + '  ' + user.last_name}</div>
+      ) : null
+  );
+});
 
 class Profile extends React.Component<IProps & IUserProps> {
   static async getInitialProps(): Promise<IProps> {
+    debugger;
     return {
       // submissions: await getSubmissionsWithJobs(),
-      // algorithms: await comicApi.algorithms(),
-      // submissions: getSubmissionsWithJobs({ creator:  })
+      algorithms: await comicApi.algorithms({ creator: 9 }),
+      submissions: await getSubmissionsWithJobs({ creator: 9 }),
     };
   }
 
   public render() {
-    const { user } = this.props;
+    debugger;
+    const { submissions, algorithms } = this.props;
     return (
       <Container>
-        {user ? <div>{user.first_name}</div> : null}
-        <Paper>
-          {/* <Typography variant="h3" component="h3">My submissions:</Typography>
-          <SubmissionsTable submissions={this.props.submissions} />
+        <UserDetails />
+        <Paper className={styles.container}>
+          <Typography variant="h5" component="h5">My submissions:</Typography>
+          {submissions.length > 1 ? <SubmissionsTable submissions={submissions} /> : <p>No Submissions found</p>}
         </Paper>
-        <MiddleDivider variant="middle" />
-        <Paper>
-          <Typography variant="h3" component="h3">My algorithms:</Typography>
-          <AlgorithmsTable algorithms={this.props.algorithms} /> */}
+
+        <Paper className={styles.container}>
+          <Typography variant="h5" component="h5">My algorithms:</Typography>
+          {algorithms.length > 1 ? <AlgorithmsTable algorithms={algorithms} /> : <p>No Algorithms found</p>}
         </Paper>
       </Container>
     );
   }
 }
 
-export default withUser(Profile);
-
-const MiddleDivider = styled(Divider)({
-  marginTop: '1em',
-  marginBottom: '1em',
-});
+export default Profile;
