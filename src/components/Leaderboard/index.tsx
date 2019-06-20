@@ -11,6 +11,7 @@ export type INestedSubmission = Omit<ISubmission, 'implementation'> & {
 
 interface IProps {
   benchmarkID: string;
+  isPrivate: boolean;
 }
 
 interface IState {
@@ -29,12 +30,12 @@ class Leaderboard extends React.Component<IProps, IState> {
       benchmark: this.props.benchmarkID,
     });
 
-    const evaluatedSubmissions = submissions.filter(
-      (submission) => submission.metrics_json !== null,
-    );
+    // const evaluatedSubmissions = submissions.filter(
+    //   (submission) => submission.metrics_json !== null,
+    // );
     const nestedSubmissions: INestedSubmission[] = [];
     await Promise.all(
-      evaluatedSubmissions.map(async (submission) => {
+      submissions.map(async (submission) => {
         nestedSubmissions.push({
           ...submission,
           implementation: await comicApi.implementation(submission.implementation),
@@ -48,10 +49,11 @@ class Leaderboard extends React.Component<IProps, IState> {
     if (this.state.isLoading) {
       return <div>Loading...</div>;
     }
+
     if (this.state.submissions.length === 0) {
       return <div>No submissions found...</div>;
     }
-    return <LeaderboardTable submissions={this.state.submissions} />;
+    return <LeaderboardTable submissions={this.state.submissions} isPrivate={this.props.isPrivate} />;
   }
 }
 export default Leaderboard;

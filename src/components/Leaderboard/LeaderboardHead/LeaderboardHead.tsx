@@ -12,6 +12,7 @@ interface IProps {
   orderBy: string;
   rowCount: number;
   metricFields: string[];
+  isPrivate: boolean;
 }
 
 class Leaderboard extends React.Component<IProps, {}> {
@@ -19,7 +20,8 @@ class Leaderboard extends React.Component<IProps, {}> {
     this.props.onRequestSort(event, property);
   }
   render() {
-    const rows = [
+
+    const publicRows = [
       {
         id: 'name',
         numeric: false,
@@ -39,9 +41,33 @@ class Leaderboard extends React.Component<IProps, {}> {
         label: fieldName,
       })),
       { id: 'visualization', numeric: false, disablePadding: false, label: 'Visualization' },
-      { id: 'date', numeric: true, disablePadding: false, label: 'Date' },
+      { id: 'date', numeric: false, disablePadding: false, label: 'Date' },
+      { id: 'log', numeric: false, disablePadding: false, label: 'Logs' },
     ];
-
+    const privateRows = [
+      {
+        id: 'name',
+        numeric: false,
+        disablePadding: false,
+        label: 'Name',
+      },
+      {
+        id: 'version',
+        numeric: false,
+        disablePadding: false,
+        label: 'Version',
+      },
+      ...this.props.metricFields.map((fieldName) => ({
+        id: fieldName,
+        numeric: true,
+        disablePadding: false,
+        label: fieldName,
+      })),
+      { id: 'date', numeric: false, disablePadding: false, label: 'Date' },
+      { id: 'log', numeric: false, disablePadding: false, label: 'Logs' },
+    ];
+    let rows;
+    { this.props.isPrivate ? rows = privateRows : rows = publicRows; }
     const { order, orderBy } = this.props;
 
     return (

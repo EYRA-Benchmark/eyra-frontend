@@ -16,7 +16,7 @@ class EditBenchmark extends React.Component<{}, IState> {
   };
   async componentDidMount() {
     this.setState({
-      // benchmark: await comicApi.benchmark(this.props.match.params.id),
+      benchmark: await comicApi.benchmark(this.props.match.params.id),
     });
   }
   render() {
@@ -24,8 +24,8 @@ class EditBenchmark extends React.Component<{}, IState> {
     const content = benchmark ? (
       <BenchmarkForm benchmark={benchmark} />
     ) : (
-      <Spinner />
-    );
+        <Spinner />
+      );
     return (
       <div>
         <h3 className={styles.sectionHeader}>Edit Benchmark</h3>

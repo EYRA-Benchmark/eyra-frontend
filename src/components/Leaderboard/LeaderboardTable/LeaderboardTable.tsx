@@ -2,6 +2,7 @@ import * as React from 'react';
 
 import {
   Button,
+  Fab,
   Icon,
   Paper,
   Table,
@@ -60,6 +61,7 @@ interface IState {
 interface IProps extends WithStyles<typeof styles> {
   classes: any;
   submissions: INestedSubmission[];
+  isPrivate: boolean;
 }
 
 type IDataRow = {
@@ -67,7 +69,7 @@ type IDataRow = {
   version: string,
   date: string,
   implementation_job: UUID4,
-} & {[label: string]: number};
+} & { [label: string]: number };
 
 class LeaderboardTable extends React.Component<IProps, IState> {
   state = {
@@ -88,21 +90,20 @@ class LeaderboardTable extends React.Component<IProps, IState> {
   }
 
   render() {
-    const { classes } = this.props;
+    const { classes, isPrivate } = this.props;
     const { order, orderBy, openJobLogID } = this.state;
-
-    const metricFields = Object.keys(JSON.parse(this.props.submissions[0].metrics_json).metrics);
-
+    const metrics = this.props.submissions[0].metrics;
+    let metricFields: string[];
+    metrics ? metricFields = Object.keys(metrics) : metricFields = [];
     const data: IDataRow[] = this.props.submissions.map((submission) => {
-      // const metricsJson = JSON.parse(submission.metrics_json.replace(/\bNaN\b/g, 'null'));
-      const metrics = JSON.parse(submission.metrics_json).metrics;
+      const metric = submission.metrics;
 
       return {
         name: submission.implementation.name,
         version: submission.implementation.version,
-        implementationJob : submission.implementation_job,
+        implementationJob: submission.implementation_job,
         date: submission.created,
-        ...metrics,
+        ...metric,
       };
     });
 
@@ -110,7 +111,7 @@ class LeaderboardTable extends React.Component<IProps, IState> {
 
     return (
       <Paper className={classes.root}>
-        { openJobLogID && (
+        {openJobLogID && (
           <JobLogDialog jobID={openJobLogID!} onClose={() => this.setState({ openJobLogID: null })} />
         )}
         <div className={classes.tableWrapper}>
@@ -121,6 +122,7 @@ class LeaderboardTable extends React.Component<IProps, IState> {
               onRequestSort={this.handleRequestSort}
               rowCount={data.length}
               metricFields={metricFields}
+              isPrivate={isPrivate}
             />
             <TableBody>
               {sortedData.map(
@@ -138,21 +140,30 @@ class LeaderboardTable extends React.Component<IProps, IState> {
                           {n[fieldName]}
                         </TableCell>
                       ))}
-                      <TableCell align="left">{
-                        <a href="https://observablehq.com/@maartenvm/frb-detection-evaluation/3" target="_blank">
-                          visualization
+
+                      {!isPrivate ?
+                        <TableCell align="left">{
+                          <a href="https://observablehq.com/@maartenvm/frb-detection-evaluation/3" target="_blank">
+                            visualization
                         </a>
-                      }</TableCell>
+                        }</TableCell> : null
+                      }
                       <TableCell align="left">{formatDateTime(new Date(n.date))}</TableCell>
                       <TableCell align="left">
-                        <Button
+                        <Fab
+                          title="Log"
+                          variant="round"
+                          size="small"
+                          onClick={() => this.setState({ openJobLogID: n.implementationJob })}>
+                          {/* <Button
                           variant="outlined"
                           color="primary"
                           type="button"
                           onClick={() => this.setState({ openJobLogID: n.implementationJob })}
-                        >
-                          <Icon>wrap_text</Icon> Log
-                        </Button>
+                        > */}
+                          <Icon color="primary">wrap_text</Icon>
+                        </Fab>
+                        {/* </Button> */}
                       </TableCell>
                     </TableRow>
                   );

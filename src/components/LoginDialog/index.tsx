@@ -70,9 +70,7 @@ const LoginDialog = (props: ILoginDialogProps) => {
           </Container>
         </Paper>
 
-        <DialogContentText id="alert-dialog-slide-description">
-
-        </DialogContentText>
+        <DialogContentText id="alert-dialog-slide-description" />
       </DialogContent>
     </Dialog>
   );

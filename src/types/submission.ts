@@ -8,7 +8,7 @@ export interface ISubmission {
   creator: number;
   evaluation_job: UUID4;
   id: string;
-  metrics_json: any;
+  metrics: any;
   modified: string;
   name: string;
 }
