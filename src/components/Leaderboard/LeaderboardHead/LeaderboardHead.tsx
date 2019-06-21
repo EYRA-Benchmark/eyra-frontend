@@ -38,6 +38,7 @@ class Leaderboard extends React.Component<IProps, {}> {
         disablePadding: false,
         label: fieldName,
       })),
+      { id: 'visualization', numeric: false, disablePadding: false, label: 'Visualization' },
       { id: 'date', numeric: false, disablePadding: false, label: 'Date' },
       { id: 'log', numeric: false, disablePadding: false, label: 'Logs' },
     ];
