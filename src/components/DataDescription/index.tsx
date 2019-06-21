@@ -10,6 +10,8 @@ interface IProps {
 const DataDescription = (props: IProps) => {
     const [data, setData] = useState<IDataset>(null);
     const { datasetId } = props;
+    const publicLbData: [string] = [];
+    const privateLbData: [string] = [];
     const content = [];
     const controller = new AbortController();
     async function fetchData() {
@@ -25,26 +27,49 @@ const DataDescription = (props: IProps) => {
             };
         }, [datasetId],
     );
-    if (data) {
-        // data.test_data_file &&
-        //     content.push(<DataFileCard dataFileId={data.test_data_file} type={'Public Leaderboard Data'} />);
-        data.additional_data_files.length > 0
-            &&
-            content.push(<>
-                <Grid item={true} key={1} xs={12} sm={6} md={6}>
-                    <DataFileCard dataFiles={data.additional_data_files} type={'Public Data'} />
-                </Grid>
-                <Grid item={true} key={2} xs={12} sm={6} md={6}>
-                    <DataFileCard dataFiles={data.additional_data_files} type={'Public Data'} />
-                </Grid>
-            </>);
 
+    if (data) {
+        if (data.public_test_data_file && publicLbData.push(data.public_test_data_file),
+            data.public_ground_truth_data_file && publicLbData.push(data.public_ground_truth_data_file)) {
+            publicLbData.push(data.public_ground_truth_data_file);
+            publicLbData.push(data.public_ground_truth_data_file);
+            publicLbData.push(data.public_ground_truth_data_file);
+            publicLbData.push(data.public_ground_truth_data_file);
+            publicLbData.push(data.public_ground_truth_data_file);
+            content.push(
+                (
+                    <Grid item={true} key={1} xs={12} sm={6} md={6}>
+                        <DataFileCard dataFiles={publicLbData} type={'Public Leaderboard Data'} />
+                    </Grid>
+                ),
+            );
+        }
+        if (data.private_test_data_file && privateLbData.push(data.private_test_data_file),
+            data.private_ground_truth_data_file && privateLbData.push(data.private_ground_truth_data_file)) {
+            content.push(
+                (
+                    <Grid item={true} key={2} xs={12} sm={6} md={6}>
+                        <DataFileCard dataFiles={publicLbData} type={'Private Leaderboard Data'} />
+                    </Grid>
+                ),
+            );
+        }
+        if (data.participant_data_files.length > 0) {
+            content.push(
+                (
+                    <Grid item={true} key={3} xs={12} sm={6} md={6}>
+                        <DataFileCard dataFiles={data.participant_data_files} type={'Public(Participant) Data'} />
+                    </Grid>
+                ),
+            );
+        }
     }
     return (
         <Grid container={true} spacing={10}>
-            {content}
+            {content.length > 0 ? content : null}
         </Grid>
     );
+
 };
 
 export default DataDescription;

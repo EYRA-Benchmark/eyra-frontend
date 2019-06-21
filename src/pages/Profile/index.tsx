@@ -26,16 +26,13 @@ const UserDetails = withUser((props: IUserProps) => {
 
 class Profile extends React.Component<IProps & IUserProps> {
   static async getInitialProps(): Promise<IProps> {
-    debugger;
     return {
-      // submissions: await getSubmissionsWithJobs(),
-      algorithms: await comicApi.algorithms({ creator: 9 }),
-      submissions: await getSubmissionsWithJobs({ creator: 9 }),
+      algorithms: await comicApi.algorithms({ creator: 3 }),
+      submissions: await getSubmissionsWithJobs({ creator: 3 }),
     };
   }
 
   public render() {
-    debugger;
     const { submissions, algorithms } = this.props;
     return (
       <Container>
