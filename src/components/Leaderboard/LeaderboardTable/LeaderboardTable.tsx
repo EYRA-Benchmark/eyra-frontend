@@ -96,11 +96,12 @@ class LeaderboardTable extends React.Component<IProps, IState> {
     metrics ? metricFields = Object.keys(metrics) : metricFields = [];
     const data: IDataRow[] = this.props.submissions.map((submission) => {
       const metric = submission.metrics;
-
+      const url = submission.visualization_url + '?id=' + submission.evaluation_job;
       return {
         name: submission.implementation.name,
         version: submission.implementation.version,
         implementationJob: submission.implementation_job,
+        visualization: url,
         date: submission.created,
         ...metric,
       };
@@ -139,7 +140,7 @@ class LeaderboardTable extends React.Component<IProps, IState> {
                         </TableCell>
                       ))}
                       <TableCell align="left">{
-                        <a href="https://observablehq.com/@maartenvm/frb-detection-evaluation/3" target="_blank">
+                        <a href={n.visualization.toString()} target="_blank">
                           visualization
                         </a>
                       }</TableCell>

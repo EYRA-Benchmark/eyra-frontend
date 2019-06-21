@@ -11,4 +11,5 @@ export interface ISubmission {
   metrics: any;
   modified: string;
   name: string;
+  visualization_url: string;
 }

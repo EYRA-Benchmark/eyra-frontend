@@ -4,8 +4,8 @@ import { Button } from '@material-ui/core';
 import { Field, Form, Formik } from 'formik';
 import { FormikActions } from 'formik';
 import React from 'react';
-//import CustomTextEditor from '../CustomTextEditor';
-import styles from './AlgorithmSubmission.module.css';
+// import CustomTextEditor from '../CustomTextEditor';
+import styles from './AlgorithmSubmission.css';
 
 interface IProps {
   benchmarkId: string;
