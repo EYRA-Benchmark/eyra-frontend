@@ -1,5 +1,7 @@
 
 .container {
+    height: 400px;
+    overflow: scroll;
     border: 1px solid #ccc;
     border-radius: 5px;
     padding: 10px;

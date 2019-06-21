@@ -6,7 +6,7 @@ import {
   Edit as EditIcon,
 } from '@material-ui/icons';
 
-import styles from './BenchmarkCard.module.css';
+import styles from './BenchmarkCard.css';
 import { Link } from 'src/routes';
 
 interface IProps {
@@ -20,26 +20,25 @@ export const BenchmarkCard = (props: IProps) => {
 
   return (
     <Link route="benchmarkDetails" params={{ id: benchmark.id }}>
-
-      <Card square={true} className={styles.card}>
-        <CardMedia
-          className={styles.media}
-          image={benchmark.card_image_url}
-          title="Image title"
-        />
-        {canEdit ? (
-          getHeader(benchmark)
-        ) : (
-            <CardHeader
-              title={benchmark.name}
-              titleTypographyProps={{
-                variant: 'h6',
-              }}
-              className={styles.header}
-            />
-          )}
-      </Card>
-
+      <a className={styles.links}>
+        <Card square={true} className={styles.card}>
+          <CardMedia
+            className={styles.media}
+            image={benchmark.card_image_url}
+            title="Image title"
+          />
+          {canEdit ? (
+            getHeader(benchmark)
+          ) : (
+              <CardHeader
+                title={benchmark.name}
+                titleTypographyProps={{
+                  variant: 'h6',
+                }}
+              />
+            )}
+        </Card>
+      </a>
     </Link>
   );
 };
@@ -52,18 +51,18 @@ export const getHeader = (benchmark: IBenchmark) => (
     action={
       <div>
         <Link route="benchmarkDetails" params={{ id: benchmark.id }}>
-
-          <IconButton title="Details">
-            <DetailsIcon />
-          </IconButton>
-
+          <a className={styles.link}>
+            <IconButton title="Details">
+              <DetailsIcon />
+            </IconButton>
+          </a>
         </Link>
         <Link route="benchmarkEdit" params={{ id: benchmark.id }}>
-
-          <IconButton title="Edit">
-            <EditIcon />
-          </IconButton>
-
+          <a className={styles.link}>
+            <IconButton title="Edit">
+              <EditIcon />
+            </IconButton>
+          </a>
         </Link>
       </div>
     }

@@ -31,15 +31,13 @@ const DataDescription = (props: IProps) => {
     if (data) {
         if (data.public_test_data_file && publicLbData.push(data.public_test_data_file),
             data.public_ground_truth_data_file && publicLbData.push(data.public_ground_truth_data_file)) {
-            publicLbData.push(data.public_ground_truth_data_file);
-            publicLbData.push(data.public_ground_truth_data_file);
-            publicLbData.push(data.public_ground_truth_data_file);
-            publicLbData.push(data.public_ground_truth_data_file);
-            publicLbData.push(data.public_ground_truth_data_file);
             content.push(
                 (
                     <Grid item={true} key={1} xs={12} sm={6} md={6}>
-                        <DataFileCard dataFiles={publicLbData} type={'Public Leaderboard Data'} />
+                        <DataFileCard dataFiles={publicLbData}
+                            type={'Public Leaderboard Data'}
+                            desc={data.public_test_data_description}
+                            sampling={data.public_test_data_sampling_method} />
                     </Grid>
                 ),
             );
@@ -49,7 +47,10 @@ const DataDescription = (props: IProps) => {
             content.push(
                 (
                     <Grid item={true} key={2} xs={12} sm={6} md={6}>
-                        <DataFileCard dataFiles={publicLbData} type={'Private Leaderboard Data'} />
+                        <DataFileCard dataFiles={publicLbData}
+                            type={'Private Leaderboard Data'}
+                            desc={data.private_test_data_description}
+                            sampling={data.private_test_data_sampling_method} />
                     </Grid>
                 ),
             );
@@ -58,7 +59,10 @@ const DataDescription = (props: IProps) => {
             content.push(
                 (
                     <Grid item={true} key={3} xs={12} sm={6} md={6}>
-                        <DataFileCard dataFiles={data.participant_data_files} type={'Public(Participant) Data'} />
+                        <DataFileCard dataFiles={data.participant_data_files}
+                            type={'Public Participant Data'}
+                            desc={data.participant_data_description}
+                            sampling={data.participant_data_sampling_method} />
                     </Grid>
                 ),
             );

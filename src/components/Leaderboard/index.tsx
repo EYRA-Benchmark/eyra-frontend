@@ -25,11 +25,18 @@ class Leaderboard extends React.Component<IProps, IState> {
     isLoading: true,
   };
   async componentWillMount() {
-
-    const submissions = await comicApi.submissions({
-      benchmark: this.props.benchmarkID,
-    });
-
+    let submissions;
+    if (this.props.isPrivate) {
+      submissions = await comicApi.submissions({
+        benchmark: this.props.benchmarkID,
+        is_private: 1,
+      });
+    } else {
+      submissions = await comicApi.submissions({
+        benchmark: this.props.benchmarkID,
+        is_private: 0,
+      });
+    }
     // const evaluatedSubmissions = submissions.filter(
     //   (submission) => submission.metrics_json !== null,
     // );
@@ -53,7 +60,7 @@ class Leaderboard extends React.Component<IProps, IState> {
     if (this.state.submissions.length === 0) {
       return <div>No submissions found...</div>;
     }
-    return <LeaderboardTable submissions={this.state.submissions} isPrivate={this.props.isPrivate} />;
+    return <LeaderboardTable submissions={this.state.submissions} />;
   }
 }
 export default Leaderboard;

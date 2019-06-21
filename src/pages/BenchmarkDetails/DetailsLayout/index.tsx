@@ -77,7 +77,7 @@ class Details extends React.Component<IProps, IState> {
                 <Tab label="Truth" />
                 <Tab label="Metrics" />
                 <Tab label="Results" />
-                <Tab label="Private Results" />
+                {/* <Tab label="Private Results" /> */}
               </Tabs>
               {value === 0 && (
                 <TabContainer>
@@ -118,11 +118,11 @@ class Details extends React.Component<IProps, IState> {
                   <Leaderboard benchmarkID={data.id} isPrivate={false} />
                 </TabContainer>
               )}
-              {value === 5 && (
+              {/* {value === 5 && (
                 <TabContainer>
                   <Leaderboard benchmarkID={data.id} isPrivate={true} />
                 </TabContainer>
-              )}
+              )} */}
               {/* {value === 6 && (
                 <TabContainer>
                   <AlgorithmSubmissionForm benchmarkId={data.id} />

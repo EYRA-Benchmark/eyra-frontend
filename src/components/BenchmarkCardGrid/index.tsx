@@ -20,12 +20,13 @@ export class CardGrid extends React.Component<IProps, {}> {
     const filteredBenchmarks = benchmarks
       .sort(sortByDate)
       .slice(0, size > 0 ? size : benchmarks.length);
-
+    // Remove dynaslum
+    filteredBenchmarks.splice(filteredBenchmarks.findIndex((e) => e.id === 'c5c803c9-d7b2-4d99-8c50-fb9dc267a0b0'), 1);
     return (
       <Grid container={true} spacing={3}>
         {filteredBenchmarks.map((benchmark, index: number) => (
           <Grid item={true} key={index} xs={12} sm={4} md={4}>
-            <BenchmarkCard benchmark={benchmark}/>
+            <BenchmarkCard benchmark={benchmark} />
           </Grid>
         ))}
       </Grid>

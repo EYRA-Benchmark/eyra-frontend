@@ -61,7 +61,6 @@ interface IState {
 interface IProps extends WithStyles<typeof styles> {
   classes: any;
   submissions: INestedSubmission[];
-  isPrivate: boolean;
 }
 
 type IDataRow = {
@@ -90,7 +89,7 @@ class LeaderboardTable extends React.Component<IProps, IState> {
   }
 
   render() {
-    const { classes, isPrivate } = this.props;
+    const { classes } = this.props;
     const { order, orderBy, openJobLogID } = this.state;
     const metrics = this.props.submissions[0].metrics;
     let metricFields: string[];
@@ -122,7 +121,6 @@ class LeaderboardTable extends React.Component<IProps, IState> {
               onRequestSort={this.handleRequestSort}
               rowCount={data.length}
               metricFields={metricFields}
-              isPrivate={isPrivate}
             />
             <TableBody>
               {sortedData.map(
@@ -140,14 +138,11 @@ class LeaderboardTable extends React.Component<IProps, IState> {
                           {n[fieldName]}
                         </TableCell>
                       ))}
-
-                      {!isPrivate ?
-                        <TableCell align="left">{
-                          <a href="https://observablehq.com/@maartenvm/frb-detection-evaluation/3" target="_blank">
-                            visualization
+                      <TableCell align="left">{
+                        <a href="https://observablehq.com/@maartenvm/frb-detection-evaluation/3" target="_blank">
+                          visualization
                         </a>
-                        }</TableCell> : null
-                      }
+                      }</TableCell>
                       <TableCell align="left">{formatDateTime(new Date(n.date))}</TableCell>
                       <TableCell align="left">
                         <Fab
