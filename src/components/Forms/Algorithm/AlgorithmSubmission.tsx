@@ -11,82 +11,89 @@ interface IProps {
   benchmarkId: string;
 }
 interface IValues {
-  id: string;
-  name: string;
-  description: string;
+  algorithmName: string;
+  implementationName: string;
+  version: string;
   containerName: string;
 }
 
 const initialValues: IValues = {
-  id: '',
-  name: '',
-  description: '',
+  algorithmName: '',
+  implementationName: '',
+  version: '',
   containerName: '',
 };
-const onSubmit = async (
-  values: IValues,
-  { setSubmitting }: FormikActions<IValues>,
-) => {
-  // const formData = new FormData();
-  // Object.keys(values).forEach(valueKey => {
-  //   formData.append(valueKey, values[valueKey]);
-  // });
-  try {
-    const algorithm = await comicApi.algorithmSubmission({
-      benchmark: values.id,
-      name: values.name,
-      description: values.description,
-      container: values.containerName,
-    });
-    console.log(algorithm);
-  } catch (e) {
-    console.log(e);
-  }
-  setSubmitting(false);
-};
+
 class AlgorithmSubmission extends React.Component<IProps, {}> {
+  onSubmit = async (
+    values: IValues,
+    { setSubmitting }: FormikActions<IValues>,
+  ) => {
+    try {
+      const algorithm = await comicApi.algorithmSubmission({
+        benchmark: this.props.benchmarkId,
+        algorithm_name: values.algorithmName,
+        implementation_name: values.implementationName,
+        version: values.version,
+        container_name: values.containerName,
+      });
+      console.log(algorithm);
+      alert('Submission successful!');
+    } catch (e) {
+      console.log(e);
+    }
+    setSubmitting(false);
+  }
+
   render() {
-    const { benchmarkId } = this.props;
-    const defaultValue =
-      '<b>Add Description Here..</b><br/>' +
-      '<p>Here You can add description or paste HTML/ Markdown code for description in left Container</p>';
-    initialValues.id = benchmarkId;
     return (
-      <Formik initialValues={initialValues} onSubmit={onSubmit}>
-        {({ isSubmitting, setFieldValue }) => (
+      <Formik initialValues={initialValues} onSubmit={this.onSubmit}>
+        {({ isSubmitting }) => (
           <Form>
             <div className={styles.container}>
               <div className={styles.inputContainer}>
-                <label htmlFor="name">Name</label>
+                <label htmlFor="algorithName">Algorithm name</label>
                 <Field
-                  name="name"
+                  name="algorithmName"
                   type="text"
-                  placeholder="Submission Name"
+                  placeholder="(e.g. Amber)"
                   autoFocus={true}
                 />
               </div>
               <div className={styles.inputContainer}>
+                <label htmlFor="implementationName">Implementation Name</label>
+                <Field
+                  name="implementationName"
+                  type="text"
+                  placeholder="(e.g. Amber v3)"
+                />
+              </div>
+              <div className={styles.inputContainer}>
+                <label htmlFor="version">Version</label>
+                <Field
+                  name="version"
+                  type="text"
+                  placeholder="(e.g. 3)"
+                />
+              </div>
+              {/*<div className={styles.inputContainer}>
                 <label htmlFor="description">Description</label>
-                {/* <CustomTextEditor
+                <CustomTextEditor
                   defaultValue={defaultValue}
                   defaultFormat="html"
                   showEditor={true}
                   onChange={(value) => {
                     setFieldValue('description', value);
-                  }}
-                /> */}
-              </div>
+                />
+              </div>*/}
 
               <div className={styles.inputContainer}>
-                <label htmlFor="containerName">Container</label>
+                <label htmlFor="containerName">Docker container name</label>
                 <Field
                   name="containerName"
                   type="text"
-                  placeholder="Container Name"
+                  placeholder="(e.g. eyra/amber:3)"
                 />
-                {/* <CustomFileUpload
-                  onChange={(value) => setFieldValue('file', value)}
-                /> */}
               </div>
               <div className={styles.inputContainer}>
                 <Button
