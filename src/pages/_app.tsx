@@ -16,7 +16,6 @@ import styles from './root.module.css';
 
 NProgress.configure({ easing: 'ease', speed: 500 });
 Router.onRouteChangeStart = () => NProgress.start();
-Router.onRouteChangeComplete = () => NProgress.done();
 Router.onRouteChangeError = () => NProgress.done();
 
 export default class MyApp extends App {
@@ -29,6 +28,21 @@ export default class MyApp extends App {
     // if (jssStyles && jssStyles.parentNode) {
     //   jssStyles.parentNode.removeChild(jssStyles);
     // }
+    Router.onRouteChangeComplete = (url) => {
+      try {
+        NProgress.done();
+      } catch (e) {
+        console.log(e);
+      }
+      try {
+        (window as any).gtag('config', 'UA-142543978-1', {
+          page_location: url,
+          anonymize_ip: true,
+        });
+      } catch (error) {
+        console.log(error);
+      }
+    };
   }
   sideDrawerToggleHandler = () => {
     this.setState((prevState) => {

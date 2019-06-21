@@ -78,6 +78,7 @@ class Details extends React.Component<IProps, IState> {
                 <Tab label="Metrics" />
                 <Tab label="Results" />
                 {/* <Tab label="Private Results" /> */}
+                <Tab label="Create submission" />
               </Tabs>
               {value === 0 && (
                 <TabContainer>
@@ -123,11 +124,11 @@ class Details extends React.Component<IProps, IState> {
                   <Leaderboard benchmarkID={data.id} isPrivate={true} />
                 </TabContainer>
               )} */}
-              {/* {value === 6 && (
+              {value === 5 && (
                 <TabContainer>
                   <AlgorithmSubmissionForm benchmarkId={data.id} />
                 </TabContainer>
-              )} */}
+              )}
               {/* <Dialog
                 open={this.state.dialogOpen}
                 onClose={this.toggleModal(false)}

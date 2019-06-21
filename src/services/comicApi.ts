@@ -178,9 +178,10 @@ export class ComicApi {
 
   async algorithmSubmission(details: {
     benchmark: UUID4;
-    name: string;
-    description: string;
-    container: UUID4;
+    algorithm_name: string;
+    implementation_name: string;
+    version: string;
+    container_name: string;
   }): Promise<IAlgorithm> {
     return (await this.axios.post<IAlgorithm>('algorithmSubmission/', details))
       .data;
