@@ -29,6 +29,16 @@ export default class MyApp extends App {
     // if (jssStyles && jssStyles.parentNode) {
     //   jssStyles.parentNode.removeChild(jssStyles);
     // }
+    Router.onRouteChangeComplete = (url) => {
+      try {
+        (window as any).gtag('config', 'UA-142543978-1', {
+          page_location: url,
+          anonymize_ip: true,
+        });
+      } catch (error) {
+        console.log(error);
+      }
+    };
   }
   sideDrawerToggleHandler = () => {
     this.setState((prevState) => {
