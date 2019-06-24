@@ -52,7 +52,7 @@
     "@types/react-rte": "^0.16.0",
     "@types/react-transition-group": "^2.9.2",
     "@types/styled-jsx": "^2.2.8",
-    "@types/yup": "^0.26.16",
+    "@types/yup": "^0.26.17",
     "@zeit/next-css": "1.0.1",
     "@zeit/next-typescript": "^1.1.1",
     "autoprefixer": "^9.6.0",
