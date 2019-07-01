@@ -1004,10 +1004,10 @@
     "@types/react" "*"
     "@types/webpack" "*"
 
-"@types/react-rte@^0.16.0":
-  version "0.16.0"
-  resolved "https://registry.npmjs.org/@types/react-rte/-/react-rte-0.16.0.tgz#78ff69dc65742ee4c57f3eb1b03c586f42a4c4ec"
-  integrity sha512-/7eTRDdNK8pPAkog5U6TWH4GO96L4oVNENqdPgdFIxjdG14x8hYqj+nOUkQour15NrIW+3+nBf5OckBGZPpN6g==
+"@types/react-rte@^0.16.1":
+  version "0.16.1"
+  resolved "https://registry.yarnpkg.com/@types/react-rte/-/react-rte-0.16.1.tgz#f4a8355208b81ef89d9e010ce94ba2e9fdd3b72e"
+  integrity sha512-yg+wskX1KdUY3N/40b81Dw3ue7Kx1vuw9hJpdcAN4DFQWcNc0Qr5DLLLYzSBanlSkq+EbMr35zTMnvdtVVgGcg==
   dependencies:
     "@types/draft-js" "*"
     "@types/react" "*"
