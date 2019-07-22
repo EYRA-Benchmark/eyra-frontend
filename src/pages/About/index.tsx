@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { getPrismicClient } from 'src/services/prismicApi';
 const RichText = require('prismic-reactjs').RichText;
-import styles from './About.module.css';
+import styles from './About.css';
 
 interface IProps {
   title: any;

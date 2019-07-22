@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import * as React from 'react';
-import styles from './SearchBar.module.css';
+import styles from './SearchBar.css';
 function SearchBar() {
   return (
     <form className={classNames(styles.search_form, styles.desktopOnly)}>

@@ -2,7 +2,7 @@ import { AppBar, IconButton, Toolbar } from '@material-ui/core';
 import { Menu as MenuIcon } from '@material-ui/icons';
 import * as React from 'react';
 import Navbar from '../Navigation/NavigationMenu/NavigationMenu';
-import styles from './Header.module.css';
+import styles from './Header.css';
 import { withRouter, WithRouterProps } from 'next/router';
 import classNames from 'classnames';
 import { Link } from 'src/routes';

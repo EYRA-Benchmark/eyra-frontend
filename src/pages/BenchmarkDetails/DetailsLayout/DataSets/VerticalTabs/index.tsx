@@ -3,7 +3,7 @@ import { Grid, Tab, Tabs, Typography } from '@material-ui/core';
 // import PropTypes from "prop-types";
 
 import * as React from 'react';
-import styles from './VerticalTabs.module.css';
+import styles from './VerticalTabs.css';
 import { comicApi } from '../../../../../services/comicApi';
 import { IDataFile } from '../../../../../types';
 

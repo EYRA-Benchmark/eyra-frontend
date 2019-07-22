@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import * as React from 'react';
 import Navbar from '../Navigation/NavigationMenu/NavigationMenu';
-import styles from './SideDrawer.module.css';
+import styles from './SideDrawer.css';
 export interface IProps {
   open: boolean;
 }

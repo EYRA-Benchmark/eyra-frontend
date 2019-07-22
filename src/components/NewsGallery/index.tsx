@@ -2,7 +2,7 @@ import { Card, CardMedia, Grid } from '@material-ui/core';
 
 import { CardHeader } from '@material-ui/core';
 import * as React from 'react';
-import styles from './NewsGallery.module.css';
+import styles from './NewsGallery.css';
 import { INews, IPrismicResult } from 'src/types/prismic';
 import { formatDate } from 'src/utils';
 

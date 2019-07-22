@@ -11,7 +11,7 @@ import {
   Dialog,
   DialogContent,
 } from '@material-ui/core';
-import styles from './BenchmarkForm.module.css';
+import styles from './BenchmarkForm.css';
 import { comicApi } from 'src/services/comicApi';
 import {
   Edit as EditIcon,

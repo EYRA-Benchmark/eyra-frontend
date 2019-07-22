@@ -3,7 +3,7 @@ import { Field, Form, Formik } from 'formik';
 import { FormikActions } from 'formik';
 import React from 'react';
 
-import styles from '../Algorithm/AlgorithmSubmission.module.css';
+import styles from '../Algorithm/AlgorithmSubmission.css';
 import CustomTextEditor from '../CustomTextEditor';
 
 interface IValues {

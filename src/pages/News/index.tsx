@@ -3,7 +3,7 @@ import { Grid } from '@material-ui/core';
 const RichText = require('prismic-reactjs').RichText;
 
 import { formatDate } from '../../utils';
-import styles from './NewsDetails.module.css';
+import styles from './NewsDetails.css';
 import { IPrismicResult, INews } from '../../types/prismic';
 import { getPrismicClient } from 'src/services/prismicApi';
 import { NextContext } from 'next';
@@ -16,7 +16,7 @@ interface IProps {
 }
 
 class NewsDetails extends React.Component<IProps> {
-  static async getInitialProps(ctx: NextContext<{id: string}>): Promise<IProps> {
+  static async getInitialProps(ctx: NextContext<{ id: string }>): Promise<IProps> {
     const prismicApi = await getPrismicClient();
     const prismicResponse: IPrismicResult<INews> = await prismicApi.getByUID('news', ctx.query.id);
     return {
@@ -30,7 +30,7 @@ class NewsDetails extends React.Component<IProps> {
   render() {
     const { title, image, desc, date } = this.props;
     return (
-      <Grid container={true} spacing={3}>
+      <Grid container={true} spacing={3} className={styles.container}>
         <Grid container={true} item={true} xs={12}>
           <Grid item={true} xs={3} sm={3} md={3}>
             <div
@@ -47,7 +47,7 @@ class NewsDetails extends React.Component<IProps> {
             </div>
           </Grid>
         </Grid>
-        <Grid item={true} xs={12} sm={12} md={12}>
+        <Grid item={true} xs={9} sm={9} md={9}>
           {RichText.render(desc)}
         </Grid>
       </Grid>

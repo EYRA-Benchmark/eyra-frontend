@@ -3,7 +3,7 @@ import Login from 'src/components/Forms/LoginForm';
 import SignUp from 'src/components/Forms/SignUp';
 
 import { Paper, Typography, Tabs, Tab, Container } from '@material-ui/core';
-import styles from './Login.module.css';
+import styles from './Login.css';
 
 import Slide from '@material-ui/core/Slide';
 

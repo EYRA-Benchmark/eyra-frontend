@@ -9,7 +9,7 @@ import {
   TableBody,
 } from '@material-ui/core';
 import ExpansionContainer from 'src/pages/BenchmarkDetails/DetailsLayout/DataSets/ExpansionContainer';
-import styles from './DatasetDetails.module.css';
+import styles from './DatasetDetails.css';
 import { ItemsList } from './ItemsList';
 export default class DatasetDetails extends React.Component {
   state = {

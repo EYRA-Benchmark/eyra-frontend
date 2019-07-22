@@ -11,7 +11,7 @@ import {
   DialogTitle,
 } from '@material-ui/core';
 
-import styles from './SubscriptionDialog.module.css';
+import styles from './SubscriptionDialog.css';
 
 import { submitContactForm } from 'src/services/contactFormSubmission';
 import { mapValues } from 'src/utils';

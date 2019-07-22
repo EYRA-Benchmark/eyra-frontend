@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './SignUp.module.css';
+import styles from './SignUp.css';
 import * as yup from 'yup';
 import { Formik, Form, Field, FormikActions } from 'formik';
 import { Button } from '@material-ui/core';

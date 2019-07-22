@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import * as React from 'react';
-import styles from './CardBack.module.css';
+import styles from './CardBack.css';
 class CardBack extends React.Component {
   render() {
     return (

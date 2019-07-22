@@ -12,7 +12,7 @@ import Router from 'next/router';
 
 import NProgress from 'nprogress';
 
-import styles from './root.module.css';
+import styles from './root.css';
 
 NProgress.configure({ easing: 'ease', speed: 500 });
 Router.onRouteChangeStart = () => NProgress.start();

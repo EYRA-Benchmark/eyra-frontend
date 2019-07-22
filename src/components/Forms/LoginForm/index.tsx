@@ -4,7 +4,7 @@ import { Formik, Form, Field, FormikActions } from 'formik';
 import { Button } from '@material-ui/core';
 
 import { withUser, IUserProps } from 'src/context/User';
-import styles from './LoginForm.module.css';
+import styles from './LoginForm.css';
 
 const formSchema = yup.object().shape({
   email: yup

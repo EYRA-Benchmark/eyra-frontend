@@ -2,7 +2,7 @@ import { Dialog, Button } from '@material-ui/core';
 import classNames from 'classnames';
 import React from 'react';
 import SubscriptionDialog from '../SubscriptionDialog/SubscriptionDialog';
-import styles from './Footer.module.css';
+import styles from './Footer.css';
 
 class Footer extends React.Component<{}, { subscriptionDialogOpen: boolean }> {
   state = {

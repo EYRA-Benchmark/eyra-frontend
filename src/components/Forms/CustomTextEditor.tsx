@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './CustomTextEditor.module.css';
+import styles from './CustomTextEditor.css';
 import RichTextEditor from 'react-rte';
 // const RichTextEditor = (typeof window !== 'undefined') ? require('react-rte') : null;
 

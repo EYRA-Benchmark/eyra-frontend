@@ -4,7 +4,7 @@ import { Menu, MenuItem } from '@material-ui/core';
 
 import { isLoggedIn, IUserProps, withUser } from 'src/context/User';
 import LoginDialog from 'src/components/LoginDialog';
-import styles from './NavigationMenu.module.css';
+import styles from './NavigationMenu.css';
 
 function NavigationMenu({ user, logout }: IUserProps) {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLAnchorElement>(null);
@@ -17,7 +17,7 @@ function NavigationMenu({ user, logout }: IUserProps) {
     setAnchorEl(null);
   }
 
-  const [ loginDialogOpen, setLoginDialogOpen ] = React.useState(false);
+  const [loginDialogOpen, setLoginDialogOpen] = React.useState(false);
   React.useEffect(() => {
     if (user) {
       // user just logged in
@@ -26,8 +26,8 @@ function NavigationMenu({ user, logout }: IUserProps) {
   });
   return (
     <React.Fragment>
-      { loginDialogOpen && (
-        <LoginDialog open={true} onClose={() => setLoginDialogOpen(false)}/>
+      {loginDialogOpen && (
+        <LoginDialog open={true} onClose={() => setLoginDialogOpen(false)} />
       )}
 
       <ul className={styles.nav}>
@@ -42,9 +42,9 @@ function NavigationMenu({ user, logout }: IUserProps) {
           </Link>
         </li>
         {/*<li>*/}
-          {/*<NavLink to="/datasets" activeClassName={styles.active}>*/}
-            {/*Datasets*/}
-          {/*</NavLink>*/}
+        {/*<NavLink to="/datasets" activeClassName={styles.active}>*/}
+        {/*Datasets*/}
+        {/*</NavLink>*/}
         {/*</li>*/}
         <li>
           {isLoggedIn(user) ? (
@@ -70,8 +70,8 @@ function NavigationMenu({ user, logout }: IUserProps) {
               </Menu>
             </>
           ) : (
-            <a href="#" onClick={() => setLoginDialogOpen(true)}>Login</a>
-          )}
+              <a href="#" onClick={() => setLoginDialogOpen(true)}>Login</a>
+            )}
         </li>
       </ul>
     </React.Fragment>
