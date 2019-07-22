@@ -23,12 +23,10 @@ class About extends React.Component<IProps> {
     return (
       <React.Fragment>
         <div className={styles.container}>
-          <div className={styles.caption}>
-            <div className={styles.article}>
-              <h3>{RichText.render(title)}</h3>
-            </div>
-            {RichText.render(desc)}
+          <div className={styles.title}>
+            {RichText.render(title)}
           </div>
+          {RichText.render(desc)}
         </div>
       </React.Fragment>
     );

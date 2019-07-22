@@ -3,14 +3,15 @@
   margin: 0 auto;
   max-width: 50%;
 }
+.title {
+  color:#1fb8ea;
+}
 .paper {
   display: flex;
   flex-direction: column;
   padding: 20px;
 }
-.avatar {
-  background-color: var(--primary-color) !important;
-}
+
 .form {
   width: 100%;
 }
@@ -26,7 +27,7 @@
 .forgotPasswordLink {
   text-align: center;
   padding: 20px;
-  color: var(--primary-color);
+  
 }
 .tabsContainer {
   background-color: aliceblue;

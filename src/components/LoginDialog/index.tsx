@@ -46,10 +46,8 @@ const LoginDialog = (props: ILoginDialogProps) => {
       aria-labelledby="alert-dialog-slide-title"
       aria-describedby="alert-dialog-slide-description"
     >
-      <DialogTitle id="alert-dialog-slide-title">
-        <Typography component="h1" variant="h5">
-          Welcome to EYRA!
-        </Typography>
+      <DialogTitle id="alert-dialog-slide-title" classes={{ root: styles.title }}>
+        Welcome to EYRA!
       </DialogTitle>
       <DialogContent>
         <Paper className={styles.paper}>
