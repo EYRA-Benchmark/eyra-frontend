@@ -3,8 +3,20 @@
   margin: 0 auto;
   max-width: 50%;
 }
+.header {
+  display: flex;
+  flex-direction: row
+}
 .title {
   color:#1fb8ea;
+  flex: 4;
+}
+.close {
+  
+  width: 20px;
+  height: 20px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
 }
 .paper {
   display: flex;

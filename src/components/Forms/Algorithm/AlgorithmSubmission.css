@@ -11,8 +11,7 @@
   margin-bottom: 20px;
 }
 .inputContainer label {
-  width: 100px;
-  text-align: right;
+  flex: 1
 }
 .inputContainer input {
   margin-left: 10px;
