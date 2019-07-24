@@ -121,6 +121,11 @@ export class ComicApi {
   async benchmarks(): Promise<IBenchmark[]> {
     return (await this.axios.get<IBenchmark[]>('benchmarks/')).data;
   }
+  async filter_benchmarks(filters: {} = {}): Promise<IBenchmark[]> {
+    return (await this.axios.get<IBenchmark[]>(
+      `benchmarks/?${objectToQueryParams(filters)}`,
+    )).data;
+  }
 
   async benchmark(id: string): Promise<IBenchmark> {
     return (await this.axios.get<IBenchmark>(`benchmarks/${id}/`)).data;

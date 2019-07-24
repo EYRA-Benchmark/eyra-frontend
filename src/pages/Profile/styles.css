@@ -2,3 +2,11 @@
     padding: 10px;
     margin: 10px 0;
 }
+.category {
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    right: 7px;
+    top: -11px;
+    z-index: 1;
+}

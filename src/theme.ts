@@ -24,10 +24,11 @@ export default createMuiTheme({
         textTransform: 'none',
       },
     },
-    MuiTab: {
-      // label: {
-      //   textTransform: "none",
-      // },
+    MuiAvatar: {
+      root: {
+        width: '60px',
+        height: '60px'
+      },
     },
     MuiTypography: {
       h5: {

@@ -1,19 +1,22 @@
-import { IUserProps, withUser } from 'src/context/User';
+import { Avatar, Typography } from '@material-ui/core'
 import { IUser } from 'src/types';
-interface IProps extends IUserProps {
-    user: IUser;
-    setUserId: (id: number) => {};
+import styles from './styles.css';
+
+interface IProps {
+    user: IUser | null;
 }
 const UserDetails = (props: IProps) => {
-    const { user, setUserId } = props;
-    if (user.id) {
-        setUserId(user.id);
-    }
+    const { user } = props;
     return (
         user ?
             (
-                <div ><span>Name:</span>{'  ' + user.first_name + '  ' + user.last_name}</div>
+                <div className={styles.container}>
+                    <Avatar src='/static/images/profile.png' ></Avatar>
+                    <Typography variant='subtitle2'>{'  ' + user.first_name + '  ' + user.last_name}</Typography>
+                    <Typography variant='subtitle2'>Netherlands eScience Center</Typography>
+                </div>
+
             ) : null
     );
 };
-export default withUser(UserDetails);
+export default UserDetails;
