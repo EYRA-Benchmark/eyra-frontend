@@ -1,0 +1,11 @@
+.container {
+    display: flex;
+    flex: 1;
+    flex-direction: row;
+    justify-content:space-between;
+
+}
+.item {
+    margin-left: 20px;
+    padding: 20px;
+}

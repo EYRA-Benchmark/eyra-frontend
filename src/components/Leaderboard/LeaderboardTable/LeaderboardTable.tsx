@@ -1,7 +1,7 @@
 import * as React from 'react';
-
+import LeadeboardToolbar from '../LeaderboardToolbar/';
 import {
-  Button,
+  Checkbox,
   Fab,
   Icon,
   Paper,
@@ -20,6 +20,8 @@ import LeaderboardHead from '../LeaderboardHead/LeaderboardHead';
 
 import styles from './LeaderboardTableStyle';
 import JobLogDialog from 'src/components/JobLogDialog';
+import Observable from 'src/components/Observables';
+import CompareDialog from '../CompareDialog';
 
 // https://material-ui.com/components/tables/#EnhancedTable.tsx
 function desc<T>(a: T, b: T, orderBy: keyof T) {
@@ -57,6 +59,9 @@ interface IState {
   order: Order;
   orderBy: string;
   openJobLogID: UUID4 | null;
+  observableUrl: string;
+  selected: string[];
+  itemsToCompare: INestedSubmission[];
 }
 interface IProps extends WithStyles<typeof styles> {
   classes: any;
@@ -64,6 +69,7 @@ interface IProps extends WithStyles<typeof styles> {
 }
 
 type IDataRow = {
+  id: string,
   name: string,
   version: string,
   date: string,
@@ -75,6 +81,9 @@ class LeaderboardTable extends React.Component<IProps, IState> {
     order: 'asc' as Order,
     orderBy: 'score',
     openJobLogID: null,
+    observableUrl: '',
+    selected: [],
+    itemsToCompare: [],
   };
 
   handleRequestSort = (event: any, property: any) => {
@@ -87,17 +96,23 @@ class LeaderboardTable extends React.Component<IProps, IState> {
 
     this.setState({ order: order as Order, orderBy });
   }
-
+  // compareItems = () => {
+  //   if (this.state.itemsToCompare.length === 2) {
+  //     this.setState({ showComparision: true });
+  //   }
+  // }
   render() {
     const { classes } = this.props;
-    const { order, orderBy, openJobLogID } = this.state;
+    const { order, orderBy, openJobLogID, observableUrl, selected, itemsToCompare } = this.state;
     const metrics = this.props.submissions[0].metrics;
     let metricFields: string[];
     metrics ? metricFields = Object.keys(metrics) : metricFields = [];
+
     const data: IDataRow[] = this.props.submissions.map((submission) => {
       const metric = submission.metrics;
       const url = submission.visualization_url + '?id=' + submission.evaluation_job;
       return {
+        id: submission.id,
         name: submission.implementation.name,
         version: submission.implementation.version,
         implementationJob: submission.implementation_job,
@@ -108,13 +123,57 @@ class LeaderboardTable extends React.Component<IProps, IState> {
     });
 
     const sortedData = stableSort(data, getSorting(order, orderBy));
+    const isSelected = (id: string) => selected.indexOf(id) !== -1;
 
+    const handleClick = (event: React.ChangeEvent<unknown>, checked: boolean, id: string) => {
+      if (checked && this.state.selected.length === 2) {
+        alert('You can select maximum two algorithms to compare');
+        return;
+      }
+      const selectedIndex = selected.indexOf(id);
+      let newSelected: string[] = [];
+      let itemsToCompare: INestedSubmission[] = [];
+      if (selectedIndex === -1) {
+        newSelected = newSelected.concat(selected, id);
+      } else if (selectedIndex === 0) {
+        newSelected = newSelected.concat(selected.slice(1));
+      } else if (selectedIndex === selected.length - 1) {
+        newSelected = newSelected.concat(selected.slice(0, -1));
+      } else if (selectedIndex > 0) {
+        newSelected = newSelected.concat(
+          selected.slice(0, selectedIndex),
+          selected.slice(selectedIndex + 1),
+        );
+      }
+      this.props.submissions.filter((submission) => {
+        const index = newSelected.indexOf(submission.id);
+        if (index >= 0) { itemsToCompare.push(submission); }
+      })
+      this.setState({
+        itemsToCompare,
+        selected: newSelected,
+      });
+    };
     return (
       <Paper className={classes.root}>
         {openJobLogID && (
-          <JobLogDialog jobID={openJobLogID!} onClose={() => this.setState({ openJobLogID: null })} />
+          <JobLogDialog
+            jobID={openJobLogID!}
+            onClose={() => this.setState({ openJobLogID: null })}
+          />
         )}
+        {observableUrl !== '' && (
+          <Observable url={observableUrl} onClose={() => this.setState({ observableUrl: '' })} />
+        )}
+        {itemsToCompare.length === 2 && (
+          <CompareDialog
+            items={itemsToCompare}
+            onClose={() => this.setState({ itemsToCompare: [] })}
+          />
+        )
+        }
         <div className={classes.tableWrapper}>
+          <LeadeboardToolbar numSelected={selected.length} />
           <Table className={classes.table} aria-labelledby="tableTitle">
             <LeaderboardHead
               order={order}
@@ -126,8 +185,24 @@ class LeaderboardTable extends React.Component<IProps, IState> {
             <TableBody>
               {sortedData.map(
                 (n: IDataRow, i: number) => {
+                  const isItemSelected = isSelected(n.id);
+                  const labelId = `table-checkbox-${i}`;
                   return (
-                    <TableRow hover={true} tabIndex={-1} key={i}>
+                    <TableRow
+                      hover={true}
+                      tabIndex={-1}
+                      key={i}
+                      aria-checked={isItemSelected}
+                      selected={isItemSelected}
+                    >
+                      <TableCell padding="checkbox">
+                        <Checkbox
+                          color='primary'
+                          checked={isItemSelected}
+                          inputProps={{ 'aria-labelledby': labelId }}
+                          onChange={(event, checked) => handleClick(event, checked, n.id)}
+                        />
+                      </TableCell>
                       <TableCell component="td" scope="row">
                         {n.name}
                       </TableCell>
@@ -140,9 +215,12 @@ class LeaderboardTable extends React.Component<IProps, IState> {
                         </TableCell>
                       ))}
                       <TableCell align="left">{
-                        <a href={n.visualization.toString()} target="_blank">
-                          visualization
-                        </a>
+                        // <a href={n.visualization.toString()} target="_blank">
+                        //   visualization
+                        // </a>
+                        <button onClick={() => this.setState({ observableUrl: n.visualization.toString() })}>
+                          visualize
+                          </button>
                       }</TableCell>
                       <TableCell align="left">{formatDateTime(new Date(n.date))}</TableCell>
                       <TableCell align="left">

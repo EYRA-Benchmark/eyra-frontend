@@ -21,6 +21,12 @@ class Leaderboard extends React.Component<IProps, {}> {
   render() {
     const rows = [
       {
+        id: 'compare',
+        numeric: false,
+        disablePadding: false,
+        label: 'Compare',
+      },
+      {
         id: 'name',
         numeric: false,
         disablePadding: false,

@@ -14,8 +14,6 @@ interface IProps {
   algorithms: IAlgorithm[];
 }
 
-
-
 class Profile extends React.Component<IProps & IUserProps> {
   static async getInitialProps(): Promise<IProps> {
     return {
