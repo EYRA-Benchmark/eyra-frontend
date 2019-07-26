@@ -62,6 +62,7 @@ interface IState {
   observableUrl: string;
   selected: string[];
   itemsToCompare: INestedSubmission[];
+  showComparision: boolean;
 }
 interface IProps extends WithStyles<typeof styles> {
   classes: any;
@@ -84,6 +85,7 @@ class LeaderboardTable extends React.Component<IProps, IState> {
     observableUrl: '',
     selected: [],
     itemsToCompare: [],
+    showComparision: false,
   };
 
   handleRequestSort = (event: any, property: any) => {
@@ -96,14 +98,10 @@ class LeaderboardTable extends React.Component<IProps, IState> {
 
     this.setState({ order: order as Order, orderBy });
   }
-  // compareItems = () => {
-  //   if (this.state.itemsToCompare.length === 2) {
-  //     this.setState({ showComparision: true });
-  //   }
-  // }
+
   render() {
     const { classes } = this.props;
-    const { order, orderBy, openJobLogID, observableUrl, selected, itemsToCompare } = this.state;
+    const { order, orderBy, openJobLogID, observableUrl, selected, itemsToCompare, showComparision } = this.state;
     const metrics = this.props.submissions[0].metrics;
     let metricFields: string[];
     metrics ? metricFields = Object.keys(metrics) : metricFields = [];
@@ -125,14 +123,19 @@ class LeaderboardTable extends React.Component<IProps, IState> {
     const sortedData = stableSort(data, getSorting(order, orderBy));
     const isSelected = (id: string) => selected.indexOf(id) !== -1;
 
-    const handleClick = (event: React.ChangeEvent<unknown>, checked: boolean, id: string) => {
-      if (checked && this.state.selected.length === 2) {
-        alert('You can select maximum two algorithms to compare');
+    const handleSelectAllClick = (event: React.ChangeEvent<HTMLInputElement>) => {
+      if (event.target.checked) {
+        const newSelecteds = data.map(n => n.id);
+        this.setState({ selected: newSelecteds, itemsToCompare: this.props.submissions });
         return;
       }
+      this.setState({ selected: [], itemsToCompare: [] });
+    }
+
+    const handleClick = (event: React.ChangeEvent<unknown>, checked: boolean, id: string) => {
       const selectedIndex = selected.indexOf(id);
       let newSelected: string[] = [];
-      let itemsToCompare: INestedSubmission[] = [];
+      const itemsToCompare: INestedSubmission[] = [];
       if (selectedIndex === -1) {
         newSelected = newSelected.concat(selected, id);
       } else if (selectedIndex === 0) {
@@ -165,15 +168,15 @@ class LeaderboardTable extends React.Component<IProps, IState> {
         {observableUrl !== '' && (
           <Observable url={observableUrl} onClose={() => this.setState({ observableUrl: '' })} />
         )}
-        {itemsToCompare.length === 2 && (
+        {showComparision && (
           <CompareDialog
             items={itemsToCompare}
-            onClose={() => this.setState({ itemsToCompare: [] })}
+            onClose={() => this.setState({ itemsToCompare: [], showComparision: false, selected: [] })}
           />
         )
         }
         <div className={classes.tableWrapper}>
-          <LeadeboardToolbar numSelected={selected.length} />
+          <LeadeboardToolbar numSelected={selected.length} compareItems={() => { this.setState({ showComparision: true }) }} />
           <Table className={classes.table} aria-labelledby="tableTitle">
             <LeaderboardHead
               order={order}
@@ -181,6 +184,8 @@ class LeaderboardTable extends React.Component<IProps, IState> {
               onRequestSort={this.handleRequestSort}
               rowCount={data.length}
               metricFields={metricFields}
+              onSelectAllClick={handleSelectAllClick}
+              numSelected={selected.length}
             />
             <TableBody>
               {sortedData.map(
@@ -228,6 +233,7 @@ class LeaderboardTable extends React.Component<IProps, IState> {
                           title="Log"
                           variant="round"
                           size="small"
+                          color='secondary'
                           onClick={() => this.setState({ openJobLogID: n.implementationJob })}>
                           {/* <Button
                           variant="outlined"
