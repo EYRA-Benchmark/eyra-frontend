@@ -12,8 +12,9 @@ import {
 } from '@material-ui/core';
 import { INestedSubmission } from 'src/pages/Submissions';
 import { UUID4 } from 'src/types';
+import CheckIcon from '@material-ui/icons/CheckCircle';
 import JobLogDialog from 'src/components/JobLogDialog';
-
+import FailedIcon from '@material-ui/icons/Close';
 interface IProps {
   submissions: INestedSubmission[];
 }
@@ -47,20 +48,20 @@ const SubmissionsTable = (props: IProps) => {
     'Actions',
   ];
 
-  const [ openJobLogID, setOpenJobLogID ] = React.useState<UUID4 | null>(null);
-
+  const [openJobLogID, setOpenJobLogID] = React.useState<UUID4 | null>(null);
+  debugger;
   return (
     <Paper>
-      { openJobLogID && (
-        <JobLogDialog jobID={openJobLogID} onClose={() => setOpenJobLogID(null)}/>
+      {openJobLogID && (
+        <JobLogDialog jobID={openJobLogID} onClose={() => setOpenJobLogID(null)} />
       )}
       <div>
         <Table aria-labelledby="tableTitle">
           <TableHead>
             <TableRow>
-              { tableHeaders.map((header) => (
+              {tableHeaders.map((header) => (
                 <TableCell key={header}>{header}</TableCell>
-              )) }
+              ))}
             </TableRow>
           </TableHead>
           <TableBody>
@@ -73,13 +74,13 @@ const SubmissionsTable = (props: IProps) => {
                   {n.name}
                 </TableCell>
                 <TableCell component="td" scope="row">
-                  {jobStatusCodes[n.implementation_job.status]}
+                  {jobStatusCodes[n.implementation_job.status] === 'Success' ? <Icon><CheckIcon style={{ color: '#4caf50' }} /></Icon> : <Icon><FailedIcon /></Icon>}
                 </TableCell>
                 <TableCell component="td" scope="row">
                   {timeDiff(n.implementation_job.started, n.implementation_job.stopped)}
                 </TableCell>
                 <TableCell component="td" scope="row">
-                  {jobStatusCodes[n.evaluation_job.status]}
+                  {jobStatusCodes[n.evaluation_job.status] === 'Success' ? <Icon><CheckIcon style={{ color: '#4caf50' }} /></Icon> : <Icon><FailedIcon /></Icon>}
                 </TableCell>
                 <TableCell component="td" scope="row">
                   {timeDiff(n.evaluation_job.started, n.evaluation_job.stopped)}
