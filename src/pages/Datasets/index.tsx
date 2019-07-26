@@ -4,7 +4,7 @@ import Spinner from '../../components/Spinner';
 import DatasetCardGrid from '../../components/DatasetCardGrid';
 import { comicApi } from '../../services/comicApi';
 import { IDataset } from '../../types';
-import { Typography } from '@material-ui/core';
+import { Typography, Container } from '@material-ui/core';
 
 interface IState {
   datasets: IDataset[] | null;
@@ -35,12 +35,12 @@ class Datasets extends React.Component<RouteComponentProps<{}>, IState> {
 
   public render() {
     return (
-      <div>
+      <Container>
         <Typography component="h1" variant="h5">
           Datasets
         </Typography>
         {this.getContent()}
-      </div>
+      </Container>
     );
   }
 }

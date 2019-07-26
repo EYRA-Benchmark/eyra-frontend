@@ -7,6 +7,7 @@ import {
   TableCell,
   TableHead,
   TableBody,
+  Container
 } from '@material-ui/core';
 import ExpansionContainer from 'src/pages/BenchmarkDetails/DetailsLayout/DataSets/ExpansionContainer';
 import styles from './DatasetDetails.css';
@@ -23,52 +24,54 @@ export default class DatasetDetails extends React.Component {
   };
   render() {
     return (
-      <Paper>
-        <div className={styles.container}>
-          <Typography variant="h5">Data Set Title</Typography>
-          <Typography paragraph={true}>
-            Filterbank format: Standard radio astronomical data format,
-            consisting of a real frequency/time intensity array. Data should be
-            8bit with correct header information. Filterbank files will have a
-            simulated Gaussian noise background (mean 100, standard deviation 5)
-            and FRBs will be injected at random locations with widths, fluences,
-            spectral index, and dispersion measures (DM) drawn from broad
-            distributions.
+      <Container>
+        <Paper>
+          <div className={styles.container}>
+            <Typography variant="h5">Data Set Title</Typography>
+            <Typography paragraph={true}>
+              Filterbank format: Standard radio astronomical data format,
+              consisting of a real frequency/time intensity array. Data should be
+              8bit with correct header information. Filterbank files will have a
+              simulated Gaussian noise background (mean 100, standard deviation 5)
+              and FRBs will be injected at random locations with widths, fluences,
+              spectral index, and dispersion measures (DM) drawn from broad
+              distributions.
           </Typography>
-          <Typography component="div" className={styles.tableContainer}>
-            <Table>
-              <TableHead>
-                <TableRow>
-                  <TableCell>File Name</TableCell>
-                  <TableCell>Format</TableCell>
-                  <TableCell>File Size</TableCell>
-                  <TableCell>Description</TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                <TableRow>
-                  <TableCell>FRB Data</TableCell>
-                  <TableCell>.txt</TableCell>
-                  <TableCell>3 KB</TableCell>
-                  <TableCell>
-                    A corresponding .txt file will contain the parameters of
-                    each injected FRB, including at least arrival_time, DM,
-                    pulse_width, spectral_index, S/N. This will be used as the
-                    “truth” file.
+            <Typography component="div" className={styles.tableContainer}>
+              <Table>
+                <TableHead>
+                  <TableRow>
+                    <TableCell>File Name</TableCell>
+                    <TableCell>Format</TableCell>
+                    <TableCell>File Size</TableCell>
+                    <TableCell>Description</TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  <TableRow>
+                    <TableCell>FRB Data</TableCell>
+                    <TableCell>.txt</TableCell>
+                    <TableCell>3 KB</TableCell>
+                    <TableCell>
+                      A corresponding .txt file will contain the parameters of
+                      each injected FRB, including at least arrival_time, DM,
+                      pulse_width, spectral_index, S/N. This will be used as the
+                      “truth” file.
                   </TableCell>
-                </TableRow>
-              </TableBody>
-            </Table>
-          </Typography>
-          <Typography variant="h5">Derived Datasets</Typography>
-          <ExpansionContainer
-            trainingDataSets={this.state.trainingDatasets}
-            testDataSets={this.state.testDatasets}
-          />
-          <Typography variant="h5">Benchmarks</Typography>
-          <ItemsList />
-        </div>
-      </Paper>
+                  </TableRow>
+                </TableBody>
+              </Table>
+            </Typography>
+            <Typography variant="h5">Derived Datasets</Typography>
+            <ExpansionContainer
+              trainingDataSets={this.state.trainingDatasets}
+              testDataSets={this.state.testDatasets}
+            />
+            <Typography variant="h5">Benchmarks</Typography>
+            <ItemsList />
+          </div>
+        </Paper>
+      </Container>
     );
   }
 }

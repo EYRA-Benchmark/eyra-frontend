@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Grid } from '@material-ui/core';
+import { Grid, Container, Paper } from '@material-ui/core';
 const RichText = require('prismic-reactjs').RichText;
 
 import { formatDate } from '../../utils';
@@ -30,27 +30,31 @@ class NewsDetails extends React.Component<IProps> {
   render() {
     const { title, image, desc, date } = this.props;
     return (
-      <Grid container={true} spacing={3} className={styles.container}>
-        <Grid container={true} item={true} xs={12}>
-          <Grid item={true} xs={3} sm={3} md={3}>
-            <div
-              className={styles.coverImage}
-              style={{ backgroundImage: `url(${image})` }}
-            />
+      <Container>
+        <Paper>
+          <Grid container={true} spacing={3} className={styles.container}>
+            <Grid container={true} item={true} xs={12}>
+              <Grid item={true} xs={2} sm={2} md={2}>
+                <div
+                  className={styles.coverImage}
+                  style={{ backgroundImage: `url(${image})` }}
+                />
+              </Grid>
+              <Grid item={true} xs={9} sm={9} md={9}>
+                <div className={styles.headerContainer}>
+                  <div className={styles.title}>
+                    {RichText.render(title)}
+                  </div>
+                  <p>{date}</p>
+                </div>
+              </Grid>
+            </Grid>
+            <Grid item={true} xs={10} sm={10} md={10}>
+              {RichText.render(desc)}
+            </Grid>
           </Grid>
-          <Grid item={true} xs={9} sm={9} md={9}>
-            <div className={styles.headerContainer}>
-              <div className={styles.title}>
-                {RichText.render(title)}
-              </div>
-              <p>{date}</p>
-            </div>
-          </Grid>
-        </Grid>
-        <Grid item={true} xs={9} sm={9} md={9}>
-          {RichText.render(desc)}
-        </Grid>
-      </Grid>
+        </Paper>
+      </Container>
     );
   }
 }

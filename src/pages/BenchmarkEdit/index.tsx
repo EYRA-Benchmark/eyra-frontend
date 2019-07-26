@@ -1,5 +1,5 @@
 import * as React from 'react';
-// import { Typography } from "@material-ui/core";
+import { Container } from "@material-ui/core";
 import { comicApi } from '../../services/comicApi';
 import styles from '../Home/Home.css';
 import { IBenchmark } from '../../types/benchmark';
@@ -27,10 +27,10 @@ class EditBenchmark extends React.Component<{}, IState> {
         <Spinner />
       );
     return (
-      <div>
+      <Container>
         <h3 className={styles.sectionHeader}>Edit Benchmark</h3>
         {content}
-      </div>
+      </Container>
     );
   }
 }
