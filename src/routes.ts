@@ -13,6 +13,7 @@ const r = new NextRoutes()
   .add('datasetEdit',       '/dataset/:id/edit',    'DatasetEdit')
   .add('profile',           '/profile',             'Profile')
   .add('submissions',       '/submissions',         'Submissions')
+  .add('sitemap',           '/sitemap.xml',         'Sitemap')
 ;
 
 export default r;
