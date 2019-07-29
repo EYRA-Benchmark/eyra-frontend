@@ -11,7 +11,7 @@ class MyDocument extends Document {
     return (
       <html lang="en" dir="ltr">
         <Head>
-          <meta name="description" content="EYRA is platform for benchmarking scientific algorithms"></meta>
+          <meta name="description" content="EYRA is a platform for benchmarking the performance of scientific algorithms"></meta>
           <meta charSet="utf-8" />
           {/* Use minimum-scale=1 to enable GPU rasterization */}
           <meta
@@ -51,7 +51,7 @@ class MyDocument extends Document {
           {/*  crossOrigin="anonymous"*/}
           {/*/>*/}
           <link rel="shortcut icon" href="/static/favicon.ico" />
-
+          <title>EYRA Benchmark Platform</title>
         </Head>
         <body>
           <Main />

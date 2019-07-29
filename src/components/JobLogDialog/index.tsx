@@ -3,15 +3,13 @@ import JobLog from 'src/components/JobLog';
 
 import {
   Paper,
-  Typography,
   DialogActions,
   Button,
   Dialog,
   DialogTitle,
   DialogContent,
+  Slide,
 } from '@material-ui/core';
-
-import Slide from '@material-ui/core/Slide';
 
 import { UUID4 } from 'src/types';
 
