@@ -3,6 +3,25 @@
   flex-direction: column;
   margin: 0 auto;
 }
+.imageContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+.imageContainer label {
+  flex: 1;
+}
+.imageContainer input {
+  flex: 4;
+  margin-top: 10px;
+}
+.thumbnailContainer {
+  display: flex;
+  flex-direction: column;
+  flex: 4;
+  justify-content: space-around;
+}
 .inputContainer {
   display: flex;
   justify-content: center;

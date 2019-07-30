@@ -39,10 +39,10 @@ class Profile extends React.Component<IUserProps, IState> {
   async refresh(props: IUserProps) {
     const { user } = props;
     if (user) {
-      const submissions = await getSubmissionsWithJobs({creator: user.id});
-      const benchmarks = await comicApi.filter_benchmarks({creator: user.id});
-      const algorithms = await comicApi.algorithms({creator: user.id});
-      this.setState({submissions, benchmarks, algorithms});
+      const submissions = await getSubmissionsWithJobs({ creator: user.id });
+      const benchmarks = await comicApi.filter_benchmarks({ creator: user.id });
+      const algorithms = await comicApi.algorithms({ creator: user.id });
+      this.setState({ submissions, benchmarks, algorithms });
     }
   }
 
@@ -62,9 +62,7 @@ class Profile extends React.Component<IUserProps, IState> {
   handleTabChange = (_: any, activeIndex: number) => this.setState({ activeIndex });
 
   public render() {
-    // const { submissions, algorithms, benchmarks } = this.props;
     const { activeIndex, submissions, benchmarks, algorithms } = this.state;
-    // debugger;
     return (
       <Container>
         <Paper>
@@ -80,11 +78,11 @@ class Profile extends React.Component<IUserProps, IState> {
             </Grid>
             <Grid item={true} xs={12} lg={9} md={9}>
               {activeIndex === 0 && <TabContainer>
-                <Overview loadMore={this.loadMore} algorithms={algorithms} submissions={submissions} benchmarks={benchmarks}/>
+                <Overview loadMore={this.loadMore} algorithms={algorithms} submissions={submissions} benchmarks={benchmarks} />
               </TabContainer>
               }
-              {activeIndex === 1 && <TabContainer><Benchmarks benchmarks={benchmarks}/></TabContainer>}
-              {activeIndex === 2 && <TabContainer><SubmissionsTable submissions={submissions}/></TabContainer>}
+              {activeIndex === 1 && <TabContainer><Benchmarks benchmarks={benchmarks} /></TabContainer>}
+              {activeIndex === 2 && <TabContainer><SubmissionsTable submissions={submissions} /></TabContainer>}
             </Grid>
           </Grid>
         </Paper>

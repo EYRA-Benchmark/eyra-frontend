@@ -24,7 +24,7 @@ export const BenchmarkCard = (props: IProps) => {
         <Card square={true} className={styles.card}>
           <CardMedia
             className={styles.media}
-            image={benchmark.card_image_url}
+            image={benchmark.card_image}
             title="Image title"
           />
           <BenchmarkHeader benchmark={benchmark} />

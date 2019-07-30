@@ -55,7 +55,7 @@ class Details extends React.Component<IProps, IState> {
           <Grid item={true} xs={12} sm={12} md={12}>
             <Paper className={styles.paper} >
               <div className={styles.imageContainer}>
-                <img src={data.banner_image_url} className={styles.bannerImage} />
+                <img src={data.banner_image} className={styles.bannerImage} />
               </div>
 
               <div className={classNames(styles.overlay, styles.cover)} />

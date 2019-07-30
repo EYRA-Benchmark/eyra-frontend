@@ -1,6 +1,7 @@
 import { Field, Form, Formik } from 'formik';
 import { FormikActions } from 'formik';
 import React from 'react';
+import Thumb from '../../ThumbnailImage/Thumbnail';
 // import CustomTextEditor from "../CustomTextEditor";
 import Markdown from '@nteract/markdown';
 import {
@@ -28,19 +29,23 @@ interface IValues {
   short_description: string;
   description: string;
   isSaved: boolean;
+  banner_image: any;
+  card_image: any;
 }
 
 const onSubmit = async (
   values: IValues,
   { setSubmitting }: FormikActions<IValues>,
 ) => {
+  const formdata = new FormData();
+  formdata.append('name', values.name);
+  formdata.append('description', values.description);
+  formdata.append('shor_description', values.short_description);
+  formdata.append('banner_image', values.banner_image);
+  formdata.append('card_image', values.card_image);
   try {
     await comicApi
-      .benchmarkSubmission(values.id, {
-        name: values.name,
-        description: values.description,
-        short_description: values.short_description,
-      })
+      .benchmarkSubmission(values.id, formdata)
       .then((response) => {
         if (response) {
           values.isSaved = true;
@@ -67,6 +72,8 @@ class BenchmarkForm extends React.Component<IProps> {
       short_description,
       description: desc,
       isSaved: false,
+      banner_image: null,
+      card_image: null,
     };
 
     return (
@@ -83,6 +90,34 @@ class BenchmarkForm extends React.Component<IProps> {
                   autoFocus={true}
                 />
               </div>
+              <div className={styles.imageContainer}>
+                <label htmlFor="banner_file">Banner Image</label>
+                <div className={styles.thumbnailContainer}>
+                  <Thumb file={values.banner_image} />
+                  <input
+                    id="banner_file"
+                    name="banner_file"
+                    type="file"
+                    onChange={(event) => {
+                      setFieldValue("banner_image", event.currentTarget.files[0]);
+                    }}
+                    className="form-control" />
+
+                </div>
+                <label htmlFor="card_file">Card Image</label>
+                <div className={styles.thumbnailContainer}>
+                  <Thumb file={values.card_image} />
+                  <input
+                    id="card_file"
+                    name="card_file"
+                    type="file"
+                    onChange={(event) => {
+                      setFieldValue("card_image", event.currentTarget.files[0]);
+                    }}
+                    className="form-control" />
+
+                </div>
+              </div>
               <div className={styles.inputContainer}>
                 <label htmlFor="short_description">Short Description</label>
                 <Field
@@ -91,6 +126,7 @@ class BenchmarkForm extends React.Component<IProps> {
                   placeholder="Short Description"
                 />
               </div>
+
               <div className={styles.inputContainer}>
                 <label htmlFor="description">Description</label>
                 <Paper className={styles.descContainer}>
@@ -108,32 +144,32 @@ class BenchmarkForm extends React.Component<IProps> {
                   {this.state.isEdit ? (
                     <Markdown source={desc} className={styles.desc} />
                   ) : (
-                    <TextField
-                      className={styles.desc}
-                      defaultValue={desc}
-                      multiline={true}
-                      onChange={(event: any) => {
-                        setFieldValue('description', event.target.value);
-                        this.setState({
-                          desc: event.target.value,
-                        });
-                      }}
-                    />
-                    // <CustomTextEditor
-                    //   defaultValue={desc}
-                    //   defaultFormat="markdown"
-                    //   showEditor={false}
-                    //   onChange={(value) => {
-                    //     setFieldValue("description", value);
-                    //     this.setState({
-                    //       desc: RichTextEditor.createValueFromString(
-                    //         value,
-                    //         "markdown",
-                    //       ),
-                    //     });
-                    //   }}
-                    // />
-                  )}
+                      <TextField
+                        className={styles.desc}
+                        defaultValue={desc}
+                        multiline={true}
+                        onChange={(event: any) => {
+                          setFieldValue('description', event.target.value);
+                          this.setState({
+                            desc: event.target.value,
+                          });
+                        }}
+                      />
+                      // <CustomTextEditor
+                      //   defaultValue={desc}
+                      //   defaultFormat="markdown"
+                      //   showEditor={false}
+                      //   onChange={(value) => {
+                      //     setFieldValue("description", value);
+                      //     this.setState({
+                      //       desc: RichTextEditor.createValueFromString(
+                      //         value,
+                      //         "markdown",
+                      //       ),
+                      //     });
+                      //   }}
+                      // />
+                    )}
                 </Paper>
               </div>
 

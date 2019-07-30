@@ -160,13 +160,9 @@ export class ComicApi {
   }
   async benchmarkSubmission(
     id: UUID4,
-    details: {
-      name: string;
-      description: string;
-      short_description: string;
-    },
+    details: FormData,
   ): Promise<IBenchmark> {
-    return (await this.axios.patch<IBenchmark>(`benchmarks / ${id} / `, details))
+    return (await this.axios.patch<IBenchmark>(`benchmarks/${id}/ `, details))
       .data;
   }
   async datasetSubmission(

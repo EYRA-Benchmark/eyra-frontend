@@ -6,21 +6,19 @@ import { IBenchmark } from '../../types/benchmark';
 import BenchmarkForm from '../../components/Forms/Benchmark/BenchmarkForm';
 import Spinner from '../../components/Spinner';
 
-interface IState {
-  benchmark: IBenchmark | null;
+interface IProps {
+  benchmark: IBenchmark;
 }
 
 class EditBenchmark extends React.Component<{}, IState> {
-  state = {
-    benchmark: null,
-  };
-  async componentDidMount() {
-    this.setState({
-      benchmark: await comicApi.benchmark(this.props.match.params.id),
-    });
+  static async getInitialProps(ctx: NextContext<{ id: string }>): Promise<IProps> {
+    return {
+      benchmark: await comicApi.benchmark(ctx.query.id),
+    };
   }
+
   render() {
-    const { benchmark } = this.state;
+    const { benchmark } = this.props;
     const content = benchmark ? (
       <BenchmarkForm benchmark={benchmark} />
     ) : (
