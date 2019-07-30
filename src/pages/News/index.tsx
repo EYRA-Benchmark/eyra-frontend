@@ -7,12 +7,15 @@ import styles from './NewsDetails.css';
 import { IPrismicResult, INews } from '../../types/prismic';
 import { getPrismicClient } from 'src/services/prismicApi';
 import { NextContext } from 'next';
+import BreadCrumbs from 'src/components/BreadCrumbs';
+import Head from 'next/head';
 
 interface IProps {
   title: any;
   desc: any;
   image: string;
   date: string;
+  id: string;
 }
 
 class NewsDetails extends React.Component<IProps> {
@@ -23,14 +26,29 @@ class NewsDetails extends React.Component<IProps> {
       title: prismicResponse.data.title,
       desc: prismicResponse.data.description,
       image: prismicResponse.data.image.url,
+      id: ctx.query.id,
       date: formatDate(new Date(prismicResponse.data.date)),
     };
   }
 
   render() {
-    const { title, image, desc, date } = this.props;
+    const { title, image, desc, date, id } = this.props;
     return (
       <Container>
+        <Head>
+          <title>{title[0].text} | EYRA Benchmark Platform</title>
+          <BreadCrumbs
+            crumbs={[
+              {
+                id: 'news',
+                name: 'News',
+              }, {
+                id: `news/${id}`,
+                name: title[0].text,
+              },
+            ]}
+          />
+        </Head>
         <Paper>
           <Grid container={true} spacing={3} className={styles.container}>
             <Grid container={true} item={true} xs={12}>

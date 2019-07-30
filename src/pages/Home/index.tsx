@@ -13,6 +13,8 @@ import ChallengesGrid from 'src/components/BenchmarkCardGrid';
 import NewsGallery from 'src/components/NewsGallery';
 
 import styles from './Home.css';
+import BreadCrumbs from 'src/components/BreadCrumbs';
+import Head from 'next-server/head';
 
 interface IProps {
   news: Array<IPrismicResult<INews>>;
@@ -45,6 +47,10 @@ class Index extends React.Component<IProps> {
 
     return (
       <React.Fragment>
+        <Head>
+          <title>EYRA Benchmark Platform</title>
+          <BreadCrumbs crumbs={[]} />
+        </Head>
         <div className={styles.container}>
           <div className={styles.bannerBackground} id="demo">
             <span />
