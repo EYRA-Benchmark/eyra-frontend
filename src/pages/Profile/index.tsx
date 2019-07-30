@@ -3,19 +3,22 @@ import { Paper, Container, Grid, Typography } from '@material-ui/core';
 import { IAlgorithm, IBenchmark } from 'src/types';
 import { getSubmissionsWithJobs, INestedSubmission } from 'src/pages/Submissions';
 import { comicApi } from 'src/services/comicApi';
-import { UserConsumer, IUserProps } from '../../context/User';
+import { UserConsumer, IUserProps, withUser } from '../../context/User';
 import UserDetails from 'src/components/Profile/UserDetails';
 import Overview from '../../components/Profile/Overview';
 import ProfileTabs from '../../components/Profile/ProfileTabs';
 import Benchmarks from '../../components/Profile/Benchmarks';
 import SubmissionsTable from '../../components/SubmissionsTable';
-interface IProps {
-  submissions: INestedSubmission[];
-  algorithms: IAlgorithm[];
-  benchmarks: IBenchmark[];
-}
+// interface IProps {
+//   submissions: INestedSubmission[];
+//   algorithms: IAlgorithm[];
+//   benchmarks: IBenchmark[];
+// }
 interface IState {
-  activeIndex: number
+  activeIndex: number;
+  submissions: INestedSubmission[];
+  benchmarks: Ibenchmark[];
+  algorithms: IAlgorithm[];
 }
 function TabContainer(props) {
   return (
@@ -24,22 +27,36 @@ function TabContainer(props) {
     </Typography>
   );
 }
-class Profile extends React.Component<IProps & IUserProps, IState> {
+class Profile extends React.Component<IUserProps, IState> {
   state = {
     activeIndex: 0,
+    submissions: [],
+    benchmarks: [],
+    algorithms: []
+  }
+  async componentDidMount() {
+    let submissions = await getSubmissionsWithJobs({ creator: 3 })
+    let benchmarks = await comicApi.filter_benchmarks({ creator: 2 })
+    let algorithms = await comicApi.algorithms({ creator: 2 })
+    this.setState({ submissions, benchmarks, algorithms });
   }
 
-  static async getInitialProps(): Promise<IProps> {
-    return {
-      algorithms: await comicApi.algorithms({ creator: 3 }),
-      submissions: await getSubmissionsWithJobs({ creator: 3 }),
-      benchmarks: await comicApi.filter_benchmarks({ creator: 2 }),
-    };
+  // static async getInitialProps(): Promise<IProps> {
+  //   return {
+  //     algorithms: await comicApi.algorithms({ creator: 3 }),
+  //     submissions: await getSubmissionsWithJobs({ creator: 3 }),
+  //     benchmarks: await comicApi.filter_benchmarks({ creator: 2 }),
+  //   };
+  // }
+  loadMore = (index: number) => {
+    window.scrollTo(0, 0);
+    this.setState({ activeIndex: index })
   }
   handleTabChange = (_, activeIndex: number) => this.setState({ activeIndex });
   public render() {
-    const { submissions, algorithms, benchmarks } = this.props;
-    const { activeIndex } = this.state;
+    // const { submissions, algorithms, benchmarks } = this.props;
+    const { activeIndex, submissions, benchmarks, algorithms } = this.state;
+    debugger;
     return (
       <Container>
         <Paper>
@@ -52,7 +69,7 @@ class Profile extends React.Component<IProps & IUserProps, IState> {
             </Grid>
             <Grid item xs={12} lg={9} md={9}>
               {activeIndex === 0 && <TabContainer>
-                <Overview algorithms={algorithms} submissions={submissions} benchmarks={benchmarks}></Overview>
+                <Overview loadMore={this.loadMore} algorithms={algorithms} submissions={submissions} benchmarks={benchmarks}></Overview>
               </TabContainer>
               }
               {activeIndex === 1 && <TabContainer><Benchmarks benchmarks={benchmarks}></Benchmarks></TabContainer>}
@@ -65,4 +82,4 @@ class Profile extends React.Component<IProps & IUserProps, IState> {
   }
 }
 
-export default Profile;
+export default withUser(Profile);

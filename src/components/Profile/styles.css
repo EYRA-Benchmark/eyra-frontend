@@ -18,3 +18,11 @@
     top: -11px;
     z-index: 1;
 }
+.link {
+    float: right;
+    color: #1fb8ea;
+    cursor: pointer;
+    font-size: 14px;
+    border-bottom: 1px solid #1fb8ea;
+    padding-top: 10px; 
+}

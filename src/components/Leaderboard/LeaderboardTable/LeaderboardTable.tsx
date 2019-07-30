@@ -9,6 +9,7 @@ import {
   TableBody,
   TableCell,
   TableRow,
+  TablePagination,
   withStyles,
   WithStyles,
 } from '@material-ui/core';
@@ -24,7 +25,7 @@ import Observable from 'src/components/Observables';
 import CompareDialog from '../CompareDialog';
 
 // https://material-ui.com/components/tables/#EnhancedTable.tsx
-function desc<T>(a: T, b: T, orderBy: keyof T) {
+export function desc<T>(a: T, b: T, orderBy: keyof T) {
   if (b[orderBy] < a[orderBy]) {
     return -1;
   }
@@ -34,7 +35,7 @@ function desc<T>(a: T, b: T, orderBy: keyof T) {
   return 0;
 }
 
-function stableSort<T>(array: T[], cmp: (a: T, b: T) => number) {
+export function stableSort<T>(array: T[], cmp: (a: T, b: T) => number) {
   const stabilizedThis = array.map((el, index) => [el, index] as [T, number]);
   stabilizedThis.sort((a, b) => {
     const order = cmp(a[0], b[0]);
@@ -46,9 +47,9 @@ function stableSort<T>(array: T[], cmp: (a: T, b: T) => number) {
   return stabilizedThis.map((el) => el[0]);
 }
 
-type Order = 'asc' | 'desc';
+export type Order = 'asc' | 'desc';
 
-function getSorting<K extends keyof any>(
+export function getSorting<K extends keyof any>(
   order: Order,
   orderBy: K,
 ): (a: { [key in K]: number | string }, b: { [key in K]: number | string }) => number {
@@ -63,6 +64,8 @@ interface IState {
   selected: string[];
   itemsToCompare: INestedSubmission[];
   showComparision: boolean;
+  rowsPerPage: number;
+  page: number;
 }
 interface IProps extends WithStyles<typeof styles> {
   classes: any;
@@ -86,6 +89,8 @@ class LeaderboardTable extends React.Component<IProps, IState> {
     selected: [],
     itemsToCompare: [],
     showComparision: false,
+    rowsPerPage: 5,
+    page: 0,
   };
 
   handleRequestSort = (event: any, property: any) => {
@@ -99,9 +104,11 @@ class LeaderboardTable extends React.Component<IProps, IState> {
     this.setState({ order: order as Order, orderBy });
   }
 
+
+
   render() {
     const { classes } = this.props;
-    const { order, orderBy, openJobLogID, observableUrl, selected, itemsToCompare, showComparision } = this.state;
+    const { order, orderBy, openJobLogID, observableUrl, selected, itemsToCompare, showComparision, rowsPerPage, page } = this.state;
     const metrics = this.props.submissions[0].metrics;
     let metricFields: string[];
     metrics ? metricFields = Object.keys(metrics) : metricFields = [];
@@ -122,7 +129,7 @@ class LeaderboardTable extends React.Component<IProps, IState> {
 
     const sortedData = stableSort(data, getSorting(order, orderBy));
     const isSelected = (id: string) => selected.indexOf(id) !== -1;
-
+    const emptyRows = rowsPerPage - Math.min(rowsPerPage, data.length - page * rowsPerPage);
     const handleSelectAllClick = (event: React.ChangeEvent<HTMLInputElement>) => {
       if (event.target.checked) {
         const newSelecteds = data.map(n => n.id);
@@ -131,7 +138,14 @@ class LeaderboardTable extends React.Component<IProps, IState> {
       }
       this.setState({ selected: [], itemsToCompare: [] });
     }
+    const handleChangePage = (event: unknown, newPage: number) => {
+      this.setState({ page: newPage })
+    }
 
+    const handleChangeRowsPerPage = (event: React.ChangeEvent<HTMLInputElement>) => {
+      this.setState({ rowsPerPage: +event.target.value });
+      this.setState({ page: 0 });
+    }
     const handleClick = (event: React.ChangeEvent<unknown>, checked: boolean, id: string) => {
       const selectedIndex = selected.indexOf(id);
       let newSelected: string[] = [];
@@ -188,7 +202,7 @@ class LeaderboardTable extends React.Component<IProps, IState> {
               numSelected={selected.length}
             />
             <TableBody>
-              {sortedData.map(
+              {sortedData.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map(
                 (n: IDataRow, i: number) => {
                   const isItemSelected = isSelected(n.id);
                   const labelId = `table-checkbox-${i}`;
@@ -249,9 +263,29 @@ class LeaderboardTable extends React.Component<IProps, IState> {
                   );
                 },
               )}
+              {/* {emptyRows > 0 && (
+                <TableRow style={{ height: 49 * emptyRows }}>
+                  <TableCell colSpan={6} />
+                </TableRow>
+              )} */}
             </TableBody>
           </Table>
         </div>
+        <TablePagination
+          rowsPerPageOptions={[5, 10, 25]}
+          component="div"
+          count={data.length}
+          rowsPerPage={rowsPerPage}
+          page={page}
+          backIconButtonProps={{
+            'aria-label': 'previous page',
+          }}
+          nextIconButtonProps={{
+            'aria-label': 'next page',
+          }}
+          onChangePage={handleChangePage}
+          onChangeRowsPerPage={handleChangeRowsPerPage}
+        />
       </Paper>
     );
   }
