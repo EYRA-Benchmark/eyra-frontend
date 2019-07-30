@@ -53,8 +53,8 @@ export class UserProvider extends React.Component<{}, IState> {
     this.setState({ status: Status.LOGGING_IN });
     try {
       const me = await comicApi.me();
-      if (me) {
-        Router.push(Router.router!.route);
+      if (me && Router.router) {
+        Router.push(Router.router.route, Router.router.route.toLowerCase());
       }
       this.setState({
         user: me || null,
@@ -106,7 +106,9 @@ export class UserProvider extends React.Component<{}, IState> {
   logout() {
     this.setState({ user: null, status: Status.LOGGED_OUT });
     comicApi.setToken(null);
-    Router.push(Router.router!.route);
+    if (Router.router) {
+      Router.push(Router.router.route, Router.router.route.toLowerCase());
+    }
   }
 
   render() {
