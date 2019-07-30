@@ -13,11 +13,11 @@ interface IProps {
   benchmark: IBenchmark;
 }
 
+const canEdit = (benchmark: IBenchmark) =>
+  benchmark.permissions.indexOf('change_benchmark') > -1;
+
 export const BenchmarkCard = (props: IProps) => {
   const benchmark = props.benchmark;
-  let canEdit = false;
-  canEdit = benchmark.permissions.indexOf('change_benchmark') > -1;
-  debugger;
   return (
     <Link route="benchmarkDetails" params={{ id: benchmark.id }}>
       <a className={styles.links}>
@@ -27,28 +27,20 @@ export const BenchmarkCard = (props: IProps) => {
             image={benchmark.card_image_url}
             title="Image title"
           />
-          {canEdit ? (
-            getHeader(benchmark)
-          ) : (
-              <CardHeader
-                title={benchmark.name}
-                titleTypographyProps={{
-                  variant: 'h6',
-                }}
-              />
-            )}
+          <BenchmarkHeader benchmark={benchmark} />
         </Card>
       </a>
     </Link>
   );
 };
-export const getHeader = (benchmark: IBenchmark) => (
+
+export const BenchmarkHeader = ({ benchmark }: { benchmark: IBenchmark }) => (
   <CardHeader
     title={benchmark.name}
     titleTypographyProps={{
       variant: 'h6',
     }}
-    action={
+    action={canEdit(benchmark) &&
       <div>
         <Link route="benchmarkDetails" params={{ id: benchmark.id }}>
           <a className={styles.link}>

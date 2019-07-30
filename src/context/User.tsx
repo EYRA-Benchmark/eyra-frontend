@@ -4,6 +4,8 @@ import { comicApi } from 'src/services/comicApi';
 import { IUser } from '../types';
 import getConfig from 'next/config';
 
+import Router from 'next/router';
+
 const { publicRuntimeConfig } = getConfig();
 
 enum Status {
@@ -50,8 +52,15 @@ export class UserProvider extends React.Component<{}, IState> {
   async refresh() {
     this.setState({ status: Status.LOGGING_IN });
     try {
+      const me = await comicApi.me();
+      if (me) {
+        console.log(Router);
+        if (Router.router) {
+          Router.push(Router.router.route.toLowerCase());
+        }
+      }
       this.setState({
-        user: (await comicApi.me()) || null,
+        user: me || null,
         status: Status.LOGGED_IN,
       });
     } catch (e) {
@@ -100,6 +109,9 @@ export class UserProvider extends React.Component<{}, IState> {
   logout() {
     this.setState({ user: null, status: Status.LOGGED_OUT });
     comicApi.setToken(null);
+    if (Router.router) {
+      Router.push(Router.router.route.toLowerCase());
+    }
   }
 
   render() {
@@ -129,8 +141,14 @@ export const UserConsumer = UserContext.Consumer;
 // https://github.com/Microsoft/TypeScript/issues/15713
 export const withUser = <T extends object>(
   Component: React.ComponentType<T & IUserProps>,
-) => (props: T) => (
-  <UserConsumer>
-    {(userProps: IUserProps) => <Component {...props} {...userProps} />}
-  </UserConsumer>
-);
+) => {
+  const WrappedComponent = (props: T) => (
+    <UserConsumer>
+      {(userProps: IUserProps) => <Component {...props} {...userProps} />}
+    </UserConsumer>
+  );
+
+  WrappedComponent.getInitialProps = (Component as any).getInitialProps;
+
+  return WrappedComponent;
+};

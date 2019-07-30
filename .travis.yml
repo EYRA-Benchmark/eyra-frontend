@@ -9,15 +9,21 @@ install:
   - yarn
 
 stages:
-#  - "Warm up cache"
+  - "Warm up cache"
+  - "Static analysis"
 #  - "Tests"
   - name: "Docker build & push"
     if: branch = master AND type = push
 
 jobs:
   include:
-#    - stage: "Warm up cache"
-#      script: true
+    - stage: "Warm up cache"
+      script: true
+    - stage: "Static analysis"
+      name: "Typecheck"
+      script: yarn tsc --noEmit
+    - name: "Lint"
+      script: yarn lint
 #    - stage: "Tests"
 #      name: "Unit tests"
 #      before_script:

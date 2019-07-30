@@ -20,7 +20,6 @@ class Benchmarks extends React.Component<IProps> {
 
   public render() {
     return (
-
       <Container>
         <Head>
           <title>Benchmarks | EYRA Benchmark Platform</title>
