@@ -4,8 +4,6 @@ import { comicApi } from 'src/services/comicApi';
 import { IUser } from '../types';
 import getConfig from 'next/config';
 
-import Router from 'next/router';
-
 const { publicRuntimeConfig } = getConfig();
 
 enum Status {
@@ -53,12 +51,6 @@ export class UserProvider extends React.Component<{}, IState> {
     this.setState({ status: Status.LOGGING_IN });
     try {
       const me = await comicApi.me();
-      if (me) {
-        console.log(Router);
-        if (Router.router) {
-          Router.push(Router.router.route.toLowerCase());
-        }
-      }
       this.setState({
         user: me || null,
         status: Status.LOGGED_IN,
@@ -109,9 +101,6 @@ export class UserProvider extends React.Component<{}, IState> {
   logout() {
     this.setState({ user: null, status: Status.LOGGED_OUT });
     comicApi.setToken(null);
-    if (Router.router) {
-      Router.push(Router.router.route.toLowerCase());
-    }
   }
 
   render() {
