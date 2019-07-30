@@ -6,12 +6,31 @@ import Head from 'next/head';
 import { Typography, Container } from '@material-ui/core';
 import BenchmarkCardGrid from 'src/components/BenchmarkCardGrid';
 import BreadCrumbs from 'src/components/BreadCrumbs';
+import { withUser, IUserProps } from 'src/context/User';
 
 interface IProps {
   benchmarks: IBenchmark[];
 }
 
-class Benchmarks extends React.Component<IProps> {
+interface IState {
+  benchmarks: IBenchmark[];
+}
+
+class Benchmarks extends React.Component<IUserProps & IProps, IState> {
+  async refresh() {
+    this.setState({
+      benchmarks: await comicApi.benchmarks(),
+    });
+  }
+
+  componentWillMount() {
+    this.setState({ benchmarks: this.props.benchmarks });
+  }
+
+  componentWillReceiveProps(nextProps: Readonly<IProps>, nextContext: any): void {
+    this.refresh();
+  }
+
   static async getInitialProps(): Promise<IProps> {
     return {
       benchmarks: await comicApi.benchmarks(),
@@ -33,9 +52,9 @@ class Benchmarks extends React.Component<IProps> {
         <Typography component="h1" variant="h5">
           Benchmarks
         </Typography>
-        <BenchmarkCardGrid size={0} benchmarks={this.props.benchmarks} />
+        <BenchmarkCardGrid size={0} benchmarks={this.state.benchmarks} />
       </Container>
     );
   }
 }
-export default Benchmarks;
+export default withUser(Benchmarks);
