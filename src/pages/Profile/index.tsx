@@ -32,48 +32,55 @@ class Profile extends React.Component<IUserProps, IState> {
     activeIndex: 0,
     submissions: [],
     benchmarks: [],
-    algorithms: []
-  }
-  async componentDidMount() {
-    let submissions = await getSubmissionsWithJobs({ creator: 3 })
-    let benchmarks = await comicApi.filter_benchmarks({ creator: 2 })
-    let algorithms = await comicApi.algorithms({ creator: 2 })
-    this.setState({ submissions, benchmarks, algorithms });
+    algorithms: [],
+  };
+
+  async refresh(props: IUserProps) {
+    const { user } = props;
+    if (user) {
+      const submissions = await getSubmissionsWithJobs({creator: user.id});
+      const benchmarks = await comicApi.filter_benchmarks({creator: user.id});
+      const algorithms = await comicApi.algorithms({creator: user.id});
+      this.setState({submissions, benchmarks, algorithms});
+    }
   }
 
-  // static async getInitialProps(): Promise<IProps> {
-  //   return {
-  //     algorithms: await comicApi.algorithms({ creator: 3 }),
-  //     submissions: await getSubmissionsWithJobs({ creator: 3 }),
-  //     benchmarks: await comicApi.filter_benchmarks({ creator: 2 }),
-  //   };
-  // }
+  componentDidMount() {
+    this.refresh(this.props);
+  }
+
+  componentWillReceiveProps(props: IUserProps) {
+    this.refresh(props);
+  }
+
   loadMore = (index: number) => {
     window.scrollTo(0, 0);
-    this.setState({ activeIndex: index })
+    this.setState({ activeIndex: index });
   }
+
   handleTabChange = (_, activeIndex: number) => this.setState({ activeIndex });
+
   public render() {
     // const { submissions, algorithms, benchmarks } = this.props;
     const { activeIndex, submissions, benchmarks, algorithms } = this.state;
-    debugger;
+    // debugger;
     return (
       <Container>
         <Paper>
-          <Grid container spacing={3}>
-            <Grid item xs={12} lg={3} md={3} style={{ borderRight: '1px solid #ccc', paddingRight: 0 }}>
+          <Grid container={true} spacing={3}>
+            <Grid item={true} xs={12} lg={3} md={3} style={{ borderRight: '1px solid #ccc', paddingRight: 0 }}>
               <UserConsumer>
                 {({ user }: IUserProps) => <UserDetails user={user} />}
               </UserConsumer>
-              <ProfileTabs onChange={this.handleTabChange} activeIndex={activeIndex}></ProfileTabs>
+              <ProfileTabs onChange={this.handleTabChange} activeIndex={activeIndex}/>
             </Grid>
-            <Grid item xs={12} lg={9} md={9}>
+            <Grid item={true} xs={12} lg={9} md={9}>
               {activeIndex === 0 && <TabContainer>
-                <Overview loadMore={this.loadMore} algorithms={algorithms} submissions={submissions} benchmarks={benchmarks}></Overview>
+                <Overview loadMore={this.loadMore} algorithms={algorithms} submissions={submissions} benchmarks={benchmarks}/>
               </TabContainer>
               }
-              {activeIndex === 1 && <TabContainer><Benchmarks benchmarks={benchmarks}></Benchmarks></TabContainer>}
-              {activeIndex === 2 && <TabContainer><SubmissionsTable submissions={submissions}></SubmissionsTable></TabContainer>}
+              {activeIndex === 1 && <TabContainer><Benchmarks benchmarks={benchmarks}/></TabContainer>}
+              {activeIndex === 2 && <TabContainer><SubmissionsTable submissions={submissions}/></TabContainer>}
             </Grid>
           </Grid>
         </Paper>
