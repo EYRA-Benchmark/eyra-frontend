@@ -17,10 +17,11 @@ import SubmissionsTable from '../../components/SubmissionsTable';
 interface IState {
   activeIndex: number;
   submissions: INestedSubmission[];
-  benchmarks: Ibenchmark[];
+  benchmarks: IBenchmark[];
   algorithms: IAlgorithm[];
 }
-function TabContainer(props) {
+
+function TabContainer(props: any) {
   return (
     <Typography component="div" style={{ padding: 24 }}>
       {props.children}
@@ -58,7 +59,7 @@ class Profile extends React.Component<IUserProps, IState> {
     this.setState({ activeIndex: index });
   }
 
-  handleTabChange = (_, activeIndex: number) => this.setState({ activeIndex });
+  handleTabChange = (_: any, activeIndex: number) => this.setState({ activeIndex });
 
   public render() {
     // const { submissions, algorithms, benchmarks } = this.props;
@@ -72,7 +73,10 @@ class Profile extends React.Component<IUserProps, IState> {
               <UserConsumer>
                 {({ user }: IUserProps) => <UserDetails user={user} />}
               </UserConsumer>
-              <ProfileTabs onChange={this.handleTabChange} activeIndex={activeIndex}/>
+              <ProfileTabs
+                onChange={this.handleTabChange}
+                activeIndex={activeIndex}
+              />
             </Grid>
             <Grid item={true} xs={12} lg={9} md={9}>
               {activeIndex === 0 && <TabContainer>
