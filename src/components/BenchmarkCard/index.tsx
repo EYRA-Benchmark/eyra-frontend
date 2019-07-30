@@ -17,7 +17,7 @@ export const BenchmarkCard = (props: IProps) => {
   const benchmark = props.benchmark;
   let canEdit = false;
   canEdit = benchmark.permissions.indexOf('change_benchmark') > -1;
-
+  debugger;
   return (
     <Link route="benchmarkDetails" params={{ id: benchmark.id }}>
       <a className={styles.links}>
@@ -46,7 +46,7 @@ export const getHeader = (benchmark: IBenchmark) => (
   <CardHeader
     title={benchmark.name}
     titleTypographyProps={{
-      variant: 'h1',
+      variant: 'h6',
     }}
     action={
       <div>
