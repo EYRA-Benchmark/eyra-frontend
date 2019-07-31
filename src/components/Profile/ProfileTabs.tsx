@@ -1,14 +1,12 @@
 import React from 'react';
 
-import { Typography, Tabs, Tab } from '@material-ui/core';
+import { Tabs, Tab } from '@material-ui/core';
 import { withStyles } from '@material-ui/styles';
 interface IProps {
-    onChange: () => {},
+    onChange: (_: any, activeIndex: number) => void,
     activeIndex: number,
 }
 class ProfileTabs extends React.Component<IProps> {
-
-    //handleChange = (_, activeIndex) => this.setState({ activeIndex })
     render() {
 
         return (

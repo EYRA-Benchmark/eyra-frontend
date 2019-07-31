@@ -40,7 +40,7 @@ class Profile extends React.Component<IUserProps, IState> {
     const { user } = props;
     if (user) {
       const submissions = await getSubmissionsWithJobs({ creator: user.id });
-      const benchmarks = await comicApi.filter_benchmarks({ creator: user.id });
+      const benchmarks = await comicApi.benchmarks();
       const algorithms = await comicApi.algorithms({ creator: user.id });
       this.setState({ submissions, benchmarks, algorithms });
     }
@@ -62,7 +62,13 @@ class Profile extends React.Component<IUserProps, IState> {
   handleTabChange = (_: any, activeIndex: number) => this.setState({ activeIndex });
 
   public render() {
+    debugger;
     const { activeIndex, submissions, benchmarks, algorithms } = this.state;
+    const myBenchmarks = benchmarks.filter(
+      (benchmark: IBenchmark) =>
+        benchmark.permissions.indexOf('change_benchmark') > -1,
+    );
+
     return (
       <Container>
         <Paper>
@@ -78,11 +84,26 @@ class Profile extends React.Component<IUserProps, IState> {
             </Grid>
             <Grid item={true} xs={12} lg={9} md={9}>
               {activeIndex === 0 && <TabContainer>
-                <Overview loadMore={this.loadMore} algorithms={algorithms} submissions={submissions} benchmarks={benchmarks} />
+                <Overview
+                  loadMore={this.loadMore}
+                  algorithms={algorithms}
+                  submissions={submissions}
+                  benchmarks={myBenchmarks}
+                />
               </TabContainer>
               }
-              {activeIndex === 1 && <TabContainer><Benchmarks benchmarks={benchmarks} /></TabContainer>}
-              {activeIndex === 2 && <TabContainer><SubmissionsTable submissions={submissions} /></TabContainer>}
+              {activeIndex === 1 &&
+                <TabContainer>
+                  {myBenchmarks.length > 0 ?
+                    <Benchmarks benchmarks={myBenchmarks} />
+                    : <p> No Benchmarks Found</p>
+                  }
+                </TabContainer>}
+              {activeIndex === 2 &&
+                <TabContainer>{submissions.length > 0 ?
+                  <SubmissionsTable submissions={submissions} />
+                  : <p>No Submissions Found</p>}
+                </TabContainer>}
             </Grid>
           </Grid>
         </Paper>

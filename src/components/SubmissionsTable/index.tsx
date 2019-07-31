@@ -98,10 +98,11 @@ class SubmissionsTable extends React.Component<IProps, IState> {
     }
     return (
       <Paper>
+
         {openJobLogID && (
           <JobLogDialog jobID={openJobLogID} onClose={() => this.setState({ openJobLogID: null })} />
         )}
-        <div style={{overflowX: 'scroll'}}>
+        <div style={{ overflowX: 'scroll' }}>
           <Table aria-labelledby="Submission Table" >
             <SubmissionHeader
               order={order}
