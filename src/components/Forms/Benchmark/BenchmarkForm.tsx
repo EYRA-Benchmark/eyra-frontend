@@ -1,23 +1,15 @@
 import { Field, Form, Formik } from 'formik';
 import { FormikActions } from 'formik';
 import React from 'react';
-import Thumb from '../../ThumbnailImage/Thumbnail';
-// import CustomTextEditor from "../CustomTextEditor";
-import Markdown from '@nteract/markdown';
+import Thumb from '../../ThumbnailImage/';
+import DescriptionEditor from './DescriptionEditor';
 import {
   Button,
-  Fab,
-  Paper,
-  TextField,
   Dialog,
   DialogContent,
 } from '@material-ui/core';
 import styles from './BenchmarkForm.css';
 import { comicApi } from 'src/services/comicApi';
-import {
-  Edit as EditIcon,
-  Visibility as VisibilityIcon,
-} from '@material-ui/icons';
 import { IBenchmark } from 'src/types';
 interface IProps {
   benchmark: IBenchmark;
@@ -31,6 +23,7 @@ interface IValues {
   isSaved: boolean;
   banner_image: any;
   card_image: any;
+  data_description: string;
 }
 
 const onSubmit = async (
@@ -40,6 +33,7 @@ const onSubmit = async (
   const formdata = new FormData();
   formdata.append('name', values.name);
   formdata.append('description', values.description);
+  formdata.append('data_description', values.data_description);
   formdata.append('shor_description', values.short_description);
   formdata.append('banner_image', values.banner_image);
   formdata.append('card_image', values.card_image);
@@ -61,10 +55,12 @@ class BenchmarkForm extends React.Component<IProps> {
   state = {
     isEdit: false,
     desc: this.props.benchmark.description,
+    data: this.props.benchmark.data_description,
   };
 
   render() {
-    const { desc, isEdit } = this.state;
+    const { desc, data } = this.state;
+
     const { id, name, short_description } = this.props.benchmark;
     const initialValues: IValues = {
       id,
@@ -74,6 +70,7 @@ class BenchmarkForm extends React.Component<IProps> {
       isSaved: false,
       banner_image: null,
       card_image: null,
+      data_description: data,
     };
 
     return (
@@ -127,35 +124,7 @@ class BenchmarkForm extends React.Component<IProps> {
                 />
               </div>
 
-              <div className={styles.inputContainer}>
-                <label htmlFor="description">Description</label>
-                <Paper className={styles.descContainer}>
-                  <Fab
-                    size="small"
-                    className={styles.fabRoot}
-                    onClick={this.enableEdit}
-                    classes={{ label: styles.label, root: styles.fabRoot }}
-                    variant="extended"
-                    color="primary"
-                  >
-                    {isEdit ? <EditIcon /> : <VisibilityIcon />}
-                    {isEdit ? 'Edit' : ' Preview'}
-                  </Fab>
-                  {this.state.isEdit ? (
-                    <Markdown source={desc} className={styles.desc} />
-                  ) : (
-                      <TextField
-                        className={styles.desc}
-                        defaultValue={desc}
-                        multiline={true}
-                        onChange={(event: any) => {
-                          setFieldValue('description', event.target.value);
-                          this.setState({
-                            desc: event.target.value,
-                          });
-                        }}
-                      />
-                      // <CustomTextEditor
+              {/*    <CustomTextEditor
                       //   defaultValue={desc}
                       //   defaultFormat="markdown"
                       //   showEditor={false}
@@ -170,8 +139,27 @@ class BenchmarkForm extends React.Component<IProps> {
                       //   }}
                       // />
                     )}
-                </Paper>
-              </div>
+               */}
+              <DescriptionEditor
+                label={'Description'}
+                defaultValue={desc}
+                onChange={(event: any) => {
+                  setFieldValue('description', event.target.value);
+                  this.setState({
+                    desc: event.target.value,
+                  });
+                }}
+              />
+              <DescriptionEditor
+                label={'Data Description'}
+                defaultValue={data}
+                onChange={(event: any) => {
+                  setFieldValue('data_description', event.target.value);
+                  this.setState({
+                    data: event.target.value,
+                  });
+                }}
+              />
 
               <div className={styles.inputContainer}>
                 <Dialog
@@ -198,11 +186,6 @@ class BenchmarkForm extends React.Component<IProps> {
         )}
       </Formik>
     );
-  }
-  private enableEdit = () => {
-    this.setState({
-      isEdit: !this.state.isEdit,
-    });
   }
 }
 

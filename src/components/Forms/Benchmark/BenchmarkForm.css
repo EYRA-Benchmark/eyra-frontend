@@ -5,7 +5,7 @@
 }
 .imageContainer {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     margin-bottom: 20px;
 }
@@ -14,12 +14,11 @@
 }
 .imageContainer input {
   flex: 4;
-  margin-top: 10px;
 }
 .thumbnailContainer {
   display: flex;
   flex-direction: column;
-  flex: 4;
+  flex: 3.5;
   justify-content: space-around;
 }
 .inputContainer {
@@ -45,15 +44,15 @@
   max-height: 500px;
 }
 .desc {
-  overflow-y: scroll;
-  height: 490px;
+  overflow-y: auto;
+  max-height: 500px;
   width: 100%;
 }
 .fabRoot {
   position: absolute !important;
-  width: 100px !important;
   z-index: 1;
   right: 0;
+  top: 0;
 }
 .label {
   color: #fff;
