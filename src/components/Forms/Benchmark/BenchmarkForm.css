@@ -41,7 +41,6 @@
   flex: 8;
   padding: 10px;
   position: relative;
-  max-height: 500px;
 }
 .desc {
   overflow-y: auto;

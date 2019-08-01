@@ -1,9 +1,8 @@
 import React from 'react';
-
+import Router from 'next/router';
 import { comicApi } from 'src/services/comicApi';
 import { IUser } from '../types';
 import getConfig from 'next/config';
-
 const { publicRuntimeConfig } = getConfig();
 
 enum Status {
@@ -64,27 +63,27 @@ export class UserProvider extends React.Component<{}, IState> {
   }
 
   async signup(
-  {
-    first_name,
-    last_name,
-    email,
-    password,
-  }: {
-    first_name: string,
-    last_name: string,
-    email: string,
-    password: string,
-  }) {
+    {
+      first_name,
+      last_name,
+      email,
+      password,
+    }: {
+      first_name: string,
+      last_name: string,
+      email: string,
+      password: string,
+    }) {
     return await comicApi.registration({ first_name, last_name, email, password });
   }
 
   oauthLogin() {
     document.location.href = `${
       publicRuntimeConfig.backendURL
-    }social/login/google-oauth2/?next=${document.location.origin}`;
+      }social/login/google-oauth2/?next=${document.location.origin}`;
   }
 
-  async login({email, password}: {email: string, password: string}) {
+  async login({ email, password }: { email: string, password: string }) {
     try {
       const result = await comicApi.login({ email, password });
       if (result && result.token) {
@@ -101,8 +100,9 @@ export class UserProvider extends React.Component<{}, IState> {
   logout() {
     this.setState({ user: null, status: Status.LOGGED_OUT });
     comicApi.setToken(null);
+    this.refresh();
+    if (Router.route === '/profile') { Router.push('/') }
   }
-
   render() {
     const { user, status } = this.state;
     const { children } = this.props;

@@ -24,6 +24,8 @@ interface IValues {
   banner_image: any;
   card_image: any;
   data_description: string;
+  truth_description: string;
+  metrics_description: string;
 }
 
 const onSubmit = async (
@@ -34,7 +36,9 @@ const onSubmit = async (
   formdata.append('name', values.name);
   formdata.append('description', values.description);
   formdata.append('data_description', values.data_description);
-  formdata.append('shor_description', values.short_description);
+  formdata.append('truth_description', values.truth_description);
+  formdata.append('metrics_description', values.metrics_description);
+  formdata.append('short_description', values.short_description);
   formdata.append('banner_image', values.banner_image);
   formdata.append('card_image', values.card_image);
   try {
@@ -52,14 +56,17 @@ const onSubmit = async (
 };
 
 class BenchmarkForm extends React.Component<IProps> {
+
   state = {
     isEdit: false,
     desc: this.props.benchmark.description,
     data: this.props.benchmark.data_description,
+    truth: this.props.benchmark.truth_description,
+    metrics: this.props.benchmark.metrics_description,
   };
 
   render() {
-    const { desc, data } = this.state;
+    const { desc, data, truth, metrics } = this.state;
 
     const { id, name, short_description } = this.props.benchmark;
     const initialValues: IValues = {
@@ -71,6 +78,8 @@ class BenchmarkForm extends React.Component<IProps> {
       banner_image: null,
       card_image: null,
       data_description: data,
+      truth_description: truth,
+      metrics_description: metrics,
     };
 
     return (
@@ -96,9 +105,10 @@ class BenchmarkForm extends React.Component<IProps> {
                     name="banner_file"
                     type="file"
                     onChange={(event) => {
-                      setFieldValue("banner_image", event.currentTarget.files[0]);
+                      setFieldValue('banner_image', event.currentTarget.files[0]);
                     }}
-                    className="form-control" />
+                    className="form-control"
+                  />
 
                 </div>
                 <label htmlFor="card_file">Card Image</label>
@@ -109,9 +119,10 @@ class BenchmarkForm extends React.Component<IProps> {
                     name="card_file"
                     type="file"
                     onChange={(event) => {
-                      setFieldValue("card_image", event.currentTarget.files[0]);
+                      setFieldValue('card_image', event.currentTarget.files[0]);
                     }}
-                    className="form-control" />
+                    className="form-control"
+                  />
 
                 </div>
               </div>
@@ -157,6 +168,26 @@ class BenchmarkForm extends React.Component<IProps> {
                   setFieldValue('data_description', event.target.value);
                   this.setState({
                     data: event.target.value,
+                  });
+                }}
+              />
+              <DescriptionEditor
+                label={'Truth Description'}
+                defaultValue={truth}
+                onChange={(event: any) => {
+                  setFieldValue('truth_description', event.target.value);
+                  this.setState({
+                    truth: event.target.value,
+                  });
+                }}
+              />
+              <DescriptionEditor
+                label={'Metrics Description'}
+                defaultValue={metrics}
+                onChange={(event: any) => {
+                  setFieldValue('metrics_description', event.target.value);
+                  this.setState({
+                    metrics: event.target.value,
                   });
                 }}
               />
