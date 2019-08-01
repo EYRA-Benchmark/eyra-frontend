@@ -1,5 +1,5 @@
 import styles from './style.css';
-import FileDetailsTable from './FileDetails/FileDetailsTable';
+//import FileDetailsTable from './FileDetails/FileDetailsTable';
 interface IProps {
     dataFiles: string[];
     type: string;
@@ -15,7 +15,7 @@ const DataFileCard = (props: IProps) => {
             <h5>{type}</h5>
             {desc ? <p><span>Description:  </span>{desc}</p> : null}
             {sampling ? <p><span>Sampling Method:  </span>{sampling}</p> : null}
-            <FileDetailsTable dataFiles={dataFiles} />
+            {/* <FileDetailsTable dataFiles={dataFiles} /> */}
         </div>
     ) : null;
     return content;

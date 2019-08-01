@@ -10,7 +10,7 @@ import {
   Icon,
   TablePagination,
 } from '@material-ui/core';
-import { INestedSubmission } from 'src/pages/Submissions';
+import { INestedSubmission } from '../Leaderboard';
 import { UUID4 } from 'src/types';
 import CheckIcon from '@material-ui/icons/CheckCircle';
 import JobLogDialog from 'src/components/JobLogDialog';

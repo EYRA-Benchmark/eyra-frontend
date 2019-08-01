@@ -108,7 +108,7 @@ class LeaderboardTable extends React.Component<IProps, IState> {
 
   render() {
     const { classes } = this.props;
-    const { order, orderBy, openJobLogID, observableUrl, selected, itemsToCompare, showComparision, rowsPerPage, page } = this.state;
+    const { order, orderBy, openJobLogID, selected, itemsToCompare, showComparision, rowsPerPage, page } = this.state;
     const metrics = this.props.submissions[0].metrics;
     let metricFields: string[];
     metrics ? metricFields = Object.keys(metrics) : metricFields = [];

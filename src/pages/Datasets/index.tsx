@@ -10,7 +10,7 @@ interface IState {
   datasets: IDataset[] | null;
 }
 
-class Datasets extends React.Component<RouteComponentProps<{}>, IState> {
+class Datasets extends React.Component<{}, IState> {
   state = {
     datasets: null,
   };
