@@ -6,7 +6,7 @@ import {
 } from '@material-ui/core';
 import { ExpandMore as ExpandMoreIcon } from '@material-ui/icons';
 import * as React from 'react';
-import VerticalTabs from '../VerticalTabs';
+
 import styles from './ExpansionContainer.css';
 interface IProps {
   testDataSets: any[];
@@ -24,7 +24,8 @@ class ExpansionContainer extends React.Component<IProps, {}> {
           </ExpansionPanelSummary>
           <ExpansionPanelDetails className={styles.container}>
             {trainingDataSets.length > 0 ? (
-              <VerticalTabs dataSets={trainingDataSets} isTestData={false} />
+              <div>tabs</div>
+              // <VerticalTabs dataSets={trainingDataSets} isTestData={false} />
             ) : (
                 <p>Training data is not available</p>
               )}
@@ -36,7 +37,8 @@ class ExpansionContainer extends React.Component<IProps, {}> {
           </ExpansionPanelSummary>
           <ExpansionPanelDetails className={styles.container}>
             {testDataSets.length > 0 ? (
-              <VerticalTabs dataSets={testDataSets} isTestData={true} />
+              <div>Tabs</div>
+              // <VerticalTabs dataSets={testDataSets} isTestData={true} />
             ) : (
                 <p>Test data is not available</p>
               )}

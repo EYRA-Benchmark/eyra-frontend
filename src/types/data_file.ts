@@ -5,8 +5,8 @@ export interface IDataFile {
   // System requirements
   id: UUID4;
   creator: IUser['id'];
-  //permissions: string[];
-  //version: string;
+  // permissions: string[];
+  // version: string;
   created: SerializedDate;
   modified: SerializedDate;
   file: string;

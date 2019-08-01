@@ -2,12 +2,12 @@ import React from 'react';
 import { Toolbar, Typography, Tooltip, Icon, Button } from '@material-ui/core';
 import useToolbarStyles from './ToolbarStyles';
 import classnames from 'classnames';
-interface LeaderboardToolbarProps {
+interface ILeaderboardToolbarProps {
     numSelected: number;
     compareItems: () => void;
 }
 
-const LeaderboardToolbar = (props: LeaderboardToolbarProps) => {
+const LeaderboardToolbar = (props: ILeaderboardToolbarProps) => {
     const classes = useToolbarStyles();
     const { numSelected } = props;
     return (

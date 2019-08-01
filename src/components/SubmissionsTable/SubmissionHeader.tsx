@@ -32,10 +32,32 @@ class SubmissionHeader extends React.Component<IProps, {}> {
                 sortable: true,
             },
             { id: 'name', numeric: false, disablePadding: false, label: 'Name', sortable: true },
-            { id: 'implementation_status', numeric: false, disablePadding: false, label: 'Status(impl.)', sortable: false },
-            { id: 'runtime_implementation', numeric: false, disablePadding: false, label: 'Run time(impl.)', sortable: true },
-            { id: 'evaluation_status', numeric: false, disablePadding: false, label: 'Status(eval.)', sortable: false },
-            { id: 'runtime_evaluation', numeric: false, disablePadding: false, label: 'Run time(eval.)', sortable: true },
+            {
+                id: 'implementation_status',
+                numeric: false,
+                disablePadding: false,
+                label: 'Status(impl.)', sortable: false,
+            },
+            {
+                id: 'runtime_implementation',
+                numeric: false,
+                disablePadding: false,
+                label: 'Run time(impl.)',
+                sortable: true,
+            },
+            {
+                id: 'evaluation_status',
+                numeric: false,
+                disablePadding: false, label: 'Status(eval.)',
+                sortable: false,
+            },
+            {
+                id: 'runtime_evaluation',
+                numeric: false,
+                disablePadding: false,
+                label: 'Run time(eval.)',
+                sortable: true,
+            },
             { id: 'action', numeric: false, disablePadding: false, label: 'Actions', sortable: false },
         ];
 

@@ -21,7 +21,7 @@ import LeaderboardHead from '../LeaderboardHead/LeaderboardHead';
 
 import styles from './LeaderboardTableStyle';
 import JobLogDialog from 'src/components/JobLogDialog';
-//import Observable from 'src/components/Observables';
+// import Observable from 'src/components/Observables';
 import CompareDialog from '../CompareDialog';
 
 // https://material-ui.com/components/tables/#EnhancedTable.tsx
@@ -103,9 +103,6 @@ class LeaderboardTable extends React.Component<IProps, IState> {
 
     this.setState({ order: order as Order, orderBy });
   }
-
-
-
   render() {
     const { classes } = this.props;
     const { order, orderBy, openJobLogID, selected, itemsToCompare, showComparision, rowsPerPage, page } = this.state;
@@ -133,24 +130,24 @@ class LeaderboardTable extends React.Component<IProps, IState> {
     // const emptyRows = rowsPerPage - Math.min(rowsPerPage, data.length - page * rowsPerPage);
     const handleSelectAllClick = (event: React.ChangeEvent<HTMLInputElement>) => {
       if (event.target.checked) {
-        const newSelecteds = data.map(n => n.id);
+        const newSelecteds = data.map((n) => n.id);
         this.setState({ selected: newSelecteds, itemsToCompare: this.props.submissions });
         return;
       }
       this.setState({ selected: [], itemsToCompare: [] });
-    }
+    };
     const handleChangePage = (event: unknown, newPage: number) => {
-      this.setState({ page: newPage })
-    }
+      this.setState({ page: newPage });
+    };
 
     const handleChangeRowsPerPage = (event: React.ChangeEvent<HTMLInputElement>) => {
       this.setState({ rowsPerPage: +event.target.value });
       this.setState({ page: 0 });
-    }
+    };
     const handleClick = (event: React.ChangeEvent<unknown>, checked: boolean, id: string) => {
       const selectedIndex = selected.indexOf(id);
       let newSelected: string[] = [];
-      const itemsToCompare: INestedSubmission[] = [];
+      const compareItems: INestedSubmission[] = [];
       if (selectedIndex === -1) {
         newSelected = newSelected.concat(selected, id);
       } else if (selectedIndex === 0) {
@@ -165,10 +162,10 @@ class LeaderboardTable extends React.Component<IProps, IState> {
       }
       this.props.submissions.filter((submission) => {
         const index = newSelected.indexOf(submission.id);
-        if (index >= 0) { itemsToCompare.push(submission); }
-      })
+        if (index >= 0) { compareItems.push(submission); }
+      });
       this.setState({
-        itemsToCompare,
+        itemsToCompare: compareItems,
         selected: newSelected,
       });
     };
@@ -191,7 +188,12 @@ class LeaderboardTable extends React.Component<IProps, IState> {
         )
         }
         <div className={classes.tableWrapper}>
-          <LeadeboardToolbar numSelected={selected.length} compareItems={() => { this.setState({ showComparision: true }) }} />
+          <LeadeboardToolbar
+            numSelected={selected.length}
+            compareItems={
+              () => { this.setState({ showComparision: true }); }
+            }
+          />
           <Table className={classes.table} aria-labelledby="tableTitle">
             <LeaderboardHead
               order={order}
@@ -217,7 +219,7 @@ class LeaderboardTable extends React.Component<IProps, IState> {
                     >
                       <TableCell padding="checkbox">
                         <Checkbox
-                          color='primary'
+                          color="primary"
                           checked={isItemSelected}
                           inputProps={{ 'aria-labelledby': labelId }}
                           onChange={(event, checked) => handleClick(event, checked, n.id)}
@@ -248,8 +250,9 @@ class LeaderboardTable extends React.Component<IProps, IState> {
                           title="Log"
                           variant="round"
                           size="small"
-                          color='secondary'
-                          onClick={() => this.setState({ openJobLogID: n.implementationJob })}>
+                          color="secondary"
+                          onClick={() => this.setState({ openJobLogID: n.implementationJob })}
+                        >
                           {/* <Button
                           variant="outlined"
                           color="primary"

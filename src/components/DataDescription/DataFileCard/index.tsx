@@ -1,5 +1,5 @@
 import styles from './style.css';
-//import FileDetailsTable from './FileDetails/FileDetailsTable';
+// import FileDetailsTable from './FileDetails/FileDetailsTable';
 interface IProps {
     dataFiles: string[];
     type: string;

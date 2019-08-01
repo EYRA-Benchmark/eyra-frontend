@@ -1,5 +1,3 @@
-
-
 interface IProps {
     url: string;
     onClose: () => void;

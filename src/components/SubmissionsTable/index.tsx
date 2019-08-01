@@ -10,7 +10,7 @@ import {
   Icon,
   TablePagination,
 } from '@material-ui/core';
-import { INestedSubmission } from '../Leaderboard';
+import { INestedSubmission } from 'src/pages/Submissions';
 import { UUID4 } from 'src/types';
 import CheckIcon from '@material-ui/icons/CheckCircle';
 import JobLogDialog from 'src/components/JobLogDialog';
@@ -50,7 +50,7 @@ interface IState {
   orderBy: string;
   rowsPerPage: number;
   page: number;
-  openJobLogID: UUID4;
+  openJobLogID: UUID4 | null;
 }
 
 class SubmissionsTable extends React.Component<IProps, IState> {
@@ -89,13 +89,13 @@ class SubmissionsTable extends React.Component<IProps, IState> {
     });
     const sortedData = stableSort(data, getSorting(order, orderBy));
     const handleChangePage = (event: unknown, newPage: number) => {
-      this.setState({ page: newPage })
-    }
+      this.setState({ page: newPage });
+    };
 
     const handleChangeRowsPerPage = (event: React.ChangeEvent<HTMLInputElement>) => {
       this.setState({ rowsPerPage: +event.target.value });
       this.setState({ page: 0 });
-    }
+    };
     return (
       <Paper>
 
@@ -143,8 +143,9 @@ class SubmissionsTable extends React.Component<IProps, IState> {
                       title="Log"
                       variant="round"
                       size="small"
-                      color='secondary'
-                      onClick={() => this.setState({ openJobLogID: n.action })}>
+                      color="secondary"
+                      onClick={() => this.setState({ openJobLogID: n.action })}
+                    >
 
                       <Icon color="primary">wrap_text</Icon>
                     </Fab>
@@ -179,7 +180,7 @@ class SubmissionsTable extends React.Component<IProps, IState> {
       </Paper>
     );
   }
-};
+}
 
 // const wrapper = withStyles(styles);
 export default SubmissionsTable;

@@ -47,7 +47,7 @@ const DescriptionEditor = (props: IProps) => {
                     )}
             </Paper>
         </div>
-    )
-}
+    );
+};
 
 export default DescriptionEditor;

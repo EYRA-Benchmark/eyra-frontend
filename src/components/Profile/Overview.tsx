@@ -1,10 +1,10 @@
-import React from 'react'
+import React from 'react';
 import { Typography } from '@material-ui/core';
 import SubmissionsTable from 'src/components/SubmissionsTable';
 import AlgorithmsTable from 'src/components/AlgorithmsTable';
 import Benchmarks from './Benchmarks';
 import styles from './styles.css';
-import { INestedSubmission } from '../Leaderboard';
+import { INestedSubmission } from 'src/pages/Submissions';
 import { IAlgorithm, IBenchmark } from '../../types';
 interface IProps {
     submissions: INestedSubmission[];
@@ -36,7 +36,7 @@ const Overview = (props: IProps) => {
             {algorithms.length > 3 ?
                 <a onClick={() => props.loadMore(1)} className={styles.link}>More Algorithms ></a> : null}
         </>
-    )
-}
+    );
+};
 
 export default Overview;

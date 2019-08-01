@@ -3,8 +3,8 @@ import React from 'react';
 import { Tabs, Tab } from '@material-ui/core';
 import { withStyles } from '@material-ui/styles';
 interface IProps {
-    onChange: (_: any, activeIndex: number) => void,
-    activeIndex: number,
+    onChange: (_: any, activeIndex: number) => void;
+    activeIndex: number;
 }
 class ProfileTabs extends React.Component<IProps> {
     render() {
@@ -19,32 +19,31 @@ class ProfileTabs extends React.Component<IProps> {
                     value={this.props.activeIndex}
                     onChange={this.props.onChange}
                 >
-                    <MyTab label='Overview' />
-                    <MyTab label='Benchmarks' />
-                    <MyTab label='Submissions' />
+                    <MyTab label="Overview" />
+                    <MyTab label="Benchmarks" />
+                    <MyTab label="Submissions" />
                 </VerticalTabs>
             </div>
-        )
+        );
     }
 }
 
-const VerticalTabs = withStyles(theme => ({
+const VerticalTabs = withStyles(() => ({
     flexContainer: {
-        flexDirection: 'column'
+        flexDirection: 'column',
     },
     root: {
-        width: '100%'
+        width: '100%',
     },
     indicator: {
         display: 'none',
-    }
-}))(Tabs)
+    },
+}))(Tabs);
 
-const MyTab = withStyles(theme => ({
+const MyTab = withStyles((theme) => ({
     selected: {
         color: theme.palette.primary.main,
-    }
+    },
 }))(Tab);
-
 
 export default ProfileTabs;

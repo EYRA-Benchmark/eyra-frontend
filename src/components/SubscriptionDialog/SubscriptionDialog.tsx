@@ -188,7 +188,7 @@ const SubscriptionDialog: React.FunctionComponent = () => (
                         type="submit"
                       >
                         Subscribe
-                  </Button>
+                      </Button>
                     </DialogActions>
                   </form>
                 )}

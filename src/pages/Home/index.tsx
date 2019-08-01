@@ -3,7 +3,6 @@ import Prismic from 'prismic-javascript';
 import { Fab } from '@material-ui/core';
 import { KeyboardArrowDown as DownIcon } from '@material-ui/icons';
 import classNames from 'classnames';
-
 import { getPrismicClient } from 'src/services/prismicApi';
 import { comicApi } from 'src/services/comicApi';
 import { IBenchmark } from 'src/types';
@@ -14,7 +13,7 @@ import NewsGallery from 'src/components/NewsGallery';
 
 import styles from './Home.css';
 import BreadCrumbs from 'src/components/BreadCrumbs';
-import Head from 'next-server/head';
+import Head from 'next/head';
 
 interface IProps {
   news: Array<IPrismicResult<INews>>;

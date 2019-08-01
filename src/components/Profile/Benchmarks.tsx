@@ -13,22 +13,23 @@ const Benchmarks = (props: IProps) => {
     return (
         <Grid container={true} spacing={3}>
             {
-                benchmarks.length > 0 ? benchmarks.map((benchmark, index) =>
-                    <Grid item={true} key={index} xs={12} sm={4} md={4} style={{ position: 'relative' }}>
-                        {index % 2 === 0 ?
-                            <div title='Oganizer' className={styles.category}>
-                                <OrganizerIcon />
-                            </div> :
-                            <div title='Participant' className={styles.category}>
-                                <ParticipantIcon />
-                            </div>
-                        }
-                        <BenchmarkCard benchmark={benchmark} />
-                    </Grid>
+                benchmarks.length > 0 ? benchmarks.map(
+                    (benchmark, index) =>
+                        <Grid item={true} key={index} xs={12} sm={4} md={4} style={{ position: 'relative' }}>
+                            {index % 2 === 0 ?
+                                <div title="Oganizer" className={styles.category}>
+                                    <OrganizerIcon />
+                                </div> :
+                                <div title="Participant" className={styles.category}>
+                                    <ParticipantIcon />
+                                </div>
+                            }
+                            <BenchmarkCard benchmark={benchmark} />
+                        </Grid>,
                 ) : null
             }
         </Grid>
-    )
-}
+    );
+};
 
 export default Benchmarks;

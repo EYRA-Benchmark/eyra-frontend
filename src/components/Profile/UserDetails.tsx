@@ -1,4 +1,4 @@
-import { Avatar, Typography } from '@material-ui/core'
+import { Avatar, Typography } from '@material-ui/core';
 import { IUser } from 'src/types';
 import styles from './styles.css';
 
@@ -11,9 +11,9 @@ const UserDetails = (props: IProps) => {
         user ?
             (
                 <div className={styles.container}>
-                    <Avatar src='/static/images/profile.png' ></Avatar>
-                    <Typography variant='subtitle2'>{'  ' + user.first_name + '  ' + user.last_name}</Typography>
-                    <Typography variant='subtitle2'>Netherlands eScience Center</Typography>
+                    <Avatar src="/static/images/profile.png" />
+                    <Typography variant="subtitle2">{'  ' + user.first_name + '  ' + user.last_name}</Typography>
+                    <Typography variant="subtitle2">Netherlands eScience Center</Typography>
                 </div>
 
             ) : null

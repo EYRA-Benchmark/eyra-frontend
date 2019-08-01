@@ -9,7 +9,12 @@ interface IProps {
 export default class extends React.Component<IProps> {
   static async getInitialProps(ctx: NextContext) {
     console.log('oops error', ctx.asPath, ctx.res!.statusCode);
-    return { ctx: ctx.jsonPageRes, path: ctx.asPath, statusCode: ctx.res!.statusCode, statusMessage: ctx.res!.statusMessage };
+    return {
+      ctx: ctx.jsonPageRes,
+      path: ctx.asPath,
+      statusCode: ctx.res!.statusCode,
+      statusMessage: ctx.res!.statusMessage,
+    };
   }
   render() {
     if (this.props.statusCode === 404) {

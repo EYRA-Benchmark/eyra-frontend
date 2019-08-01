@@ -78,7 +78,7 @@ class Thumbnail extends React.Component<IProps> {
                     alt={'image'}
                     className={styles.image}
                 />
-            ) : <PlaceholderImage classes={{ root: styles.placeholderContainer }} color='action' />
+            ) : <PlaceholderImage classes={{ root: styles.placeholderContainer }} color="action" />;
 
         return <Paper classes={{ root: styles.container }}> {content} </Paper>;
     }

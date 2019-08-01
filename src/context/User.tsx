@@ -1,5 +1,4 @@
 import React from 'react';
-import Router from 'next/router';
 import { comicApi } from 'src/services/comicApi';
 import { IUser } from '../types';
 import getConfig from 'next/config';
@@ -101,7 +100,7 @@ export class UserProvider extends React.Component<{}, IState> {
     this.setState({ user: null, status: Status.LOGGED_OUT });
     comicApi.setToken(null);
     this.refresh();
-    if (Router.route === '/profile') { Router.push('/') }
+
   }
   render() {
     const { user, status } = this.state;

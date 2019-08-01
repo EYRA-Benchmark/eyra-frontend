@@ -63,7 +63,7 @@ class Leaderboard extends React.Component<IProps, {}> {
               checked={numSelected === rowCount}
               onChange={onSelectAllClick}
               inputProps={{ 'aria-label': 'Select all desserts' }}
-              color='primary'
+              color="primary"
             />
           </TableCell>
           {rows.map((row) => {

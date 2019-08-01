@@ -11,7 +11,11 @@ class MyDocument extends Document {
     return (
       <html lang="en" dir="ltr">
         <Head>
-          <meta name="description" content="EYRA is a platform for benchmarking the performance of scientific algorithms"></meta>
+          <meta
+            name="description"
+            content="EYRA is a platform for benchmarking the performance of scientific algorithms"
+          />
+
           <meta charSet="utf-8" />
           {/* Use minimum-scale=1 to enable GPU rasterization */}
           <meta
@@ -20,9 +24,10 @@ class MyDocument extends Document {
           />
           {/* PWA primary color */}
           <meta name="theme-color" content={theme.palette.primary.main} />
-          <script async={true} src="https://www.googletagmanager.com/gtag/js?id=UA-142543978-1"/>
+          <script async={true} src="https://www.googletagmanager.com/gtag/js?id=UA-142543978-1" />
           <script
-            dangerouslySetInnerHTML={{__html: `
+            dangerouslySetInnerHTML={{
+              __html: `
               window.dataLayer = window.dataLayer || [];
               function gtag(){dataLayer.push(arguments);}
               gtag('js', new Date());

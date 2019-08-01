@@ -7,7 +7,7 @@ import {
   TableCell,
   TableHead,
   TableBody,
-  Container
+  Container,
 } from '@material-ui/core';
 import ExpansionContainer from 'src/pages/BenchmarkDetails/DetailsLayout/DataSets/ExpansionContainer';
 import styles from './DatasetDetails.css';

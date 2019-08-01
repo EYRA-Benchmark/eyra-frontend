@@ -13,7 +13,7 @@ interface IProps {
 }
 
 const FileDetailsRow = (props: IProps) => {
-    const [data, setData] = useState<IDataFile>(null);
+    const [data, setData] = useState<IDataFile>();
     const { dataFileId } = props;
     const controller = new AbortController();
     async function fetchData() {
