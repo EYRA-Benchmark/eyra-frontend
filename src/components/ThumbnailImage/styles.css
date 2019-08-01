@@ -1,11 +1,8 @@
 .container {
-    width: 200px;
-    height: 200px;
     margin-bottom: 10px;
     padding: 5px;
     display: flex;
-    align-items: center;
-    justify-content: center;
+    flex-direction: column;
 }
 .image {
     width: 100%;
@@ -15,4 +12,16 @@
 .placeholderContainer {
     width: 150px !important;
     height: 150px !important;
+}
+.bannerContainer {
+    position: relative;
+    height: 300px;
+   }
+.bannerImage {
+     height: 100%;
+     width: 100%;
+     object-fit: fill;
+}
+.cardImage {
+    padding: 5px;
 }

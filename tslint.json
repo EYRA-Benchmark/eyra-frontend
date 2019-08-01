@@ -6,7 +6,7 @@
   "rules": {
     "member-access": false,
     "no-console": false,
-    "no-debugger": false,
+    "no-debugger": true,
     "object-literal-sort-keys": false,
     "jsx-no-lambda": false,
     "no-var-requires": false,

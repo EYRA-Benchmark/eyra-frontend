@@ -62,7 +62,6 @@ class Profile extends React.Component<IUserProps, IState> {
   handleTabChange = (_: any, activeIndex: number) => this.setState({ activeIndex });
 
   public render() {
-    debugger;
     const { activeIndex, submissions, benchmarks, algorithms } = this.state;
     const myBenchmarks = benchmarks.filter(
       (benchmark: IBenchmark) =>

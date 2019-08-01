@@ -29,7 +29,6 @@ const DataDescription = (props: IProps) => {
     );
 
     if (data) {
-        debugger;
         if (data.public_test_data_file && publicLbData.push(data.public_test_data_file),
             data.public_ground_truth_data_file && publicLbData.push(data.public_ground_truth_data_file)) {
             content.push(

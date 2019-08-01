@@ -39,8 +39,12 @@ const onSubmit = async (
   formdata.append('truth_description', values.truth_description);
   formdata.append('metrics_description', values.metrics_description);
   formdata.append('short_description', values.short_description);
-  formdata.append('banner_image', values.banner_image);
-  formdata.append('card_image', values.card_image);
+  if (typeof (values.banner_image) === 'object') {
+    formdata.append('banner_image', values.banner_image);
+  }
+  if (typeof (values.card_image) === 'object') {
+    formdata.append('card_image', values.card_image);
+  }
   try {
     await comicApi
       .benchmarkSubmission(values.id, formdata)
@@ -99,34 +103,39 @@ class BenchmarkForm extends React.Component<IProps> {
                   autoFocus={true}
                 />
               </div>
-              <div className={styles.imageContainer}>
+              <div className={styles.inputContainer}>
                 <label htmlFor="banner_file">Banner Image</label>
+                <input
+                  id="banner_file"
+                  name="banner_file"
+                  type="file"
+                  onChange={(event) => {
+                    setFieldValue('banner_image', event.currentTarget.files![0]);
+                  }}
+                  className="form-control"
+                />
+              </div>
+              <div className={styles.imageContainer}>
                 <div className={styles.thumbnailContainer}>
-                  <Thumb file={values.banner_image} />
-                  <input
-                    id="banner_file"
-                    name="banner_file"
-                    type="file"
-                    onChange={(event) => {
-                      setFieldValue('banner_image', event.currentTarget.files![0]);
-                    }}
-                    className="form-control"
-                  />
-
+                  <Thumb file={values.banner_image} isBanner={true} />
                 </div>
+              </div>
+              <div className={styles.inputContainer}>
                 <label htmlFor="card_file">Card Image</label>
-                <div className={styles.thumbnailContainer}>
-                  <Thumb file={values.card_image} />
-                  <input
-                    id="card_file"
-                    name="card_file"
-                    type="file"
-                    onChange={(event) => {
-                      setFieldValue('card_image', event.currentTarget.files![0]);
-                    }}
-                    className="form-control"
-                  />
+                <input
+                  id="card_file"
+                  name="card_file"
+                  type="file"
+                  onChange={(event) => {
+                    setFieldValue('card_image', event.currentTarget.files![0]);
+                  }}
+                  className="form-control"
+                />
 
+              </div>
+              <div className={styles.imageContainer}>
+                <div className={styles.thumbnailContainer}>
+                  <Thumb file={values.card_image} isBanner={false} />
                 </div>
               </div>
               <div className={styles.inputContainer}>
