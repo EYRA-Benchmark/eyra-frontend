@@ -15,7 +15,7 @@ const DataFileCard = (props: IProps) => {
             <h5>{type}</h5>
             {desc ? <p><span>Description:  </span>{desc}</p> : null}
             {sampling ? <p><span>Sampling Method:  </span>{sampling}</p> : null}
-            <FileDetailsTable dataFiles={dataFiles} />
+            {dataFiles.length > 0 ? <FileDetailsTable dataFiles={dataFiles} /> : null}
         </div>
     ) : null;
     return content;

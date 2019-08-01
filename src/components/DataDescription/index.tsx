@@ -51,7 +51,7 @@ const DataDescription = (props: IProps) => {
                 (
                     <Grid item={true} key={2} xs={12} sm={6} md={6}>
                         <DataFileCard
-                            dataFiles={publicLbData}
+                            dataFiles={[]}
                             type={'Private Leaderboard Data'}
                             desc={data.private_test_data_description}
                             sampling={data.private_test_data_sampling_method}
