@@ -9,7 +9,9 @@
     ],
     "baseUrl": ".",
     "paths": {
-      "src/*": ["src/*"]
+      "src/*": [
+        "src/*"
+      ]
     },
     "sourceMap": true,
     "allowJs": true,

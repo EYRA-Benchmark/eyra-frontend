@@ -15,7 +15,7 @@ import { UUID4 } from 'src/types';
 import CheckIcon from '@material-ui/icons/CheckCircle';
 import JobLogDialog from 'src/components/JobLogDialog';
 import FailedIcon from '@material-ui/icons/Close';
-import { Order, desc, getSorting, stableSort } from '../../components/Leaderboard/LeaderboardTable/LeaderboardTable';
+import { Order, getSorting, stableSort } from '../../components/Leaderboard/LeaderboardTable/LeaderboardTable';
 import SubmissionHeader from './SubmissionHeader';
 interface IProps {
   submissions: INestedSubmission[];
@@ -50,7 +50,7 @@ interface IState {
   orderBy: string;
   rowsPerPage: number;
   page: number;
-  openJobLogID: UUID4 | null;
+  openJobLogID: UUID4;
 }
 
 class SubmissionsTable extends React.Component<IProps, IState> {
@@ -59,7 +59,7 @@ class SubmissionsTable extends React.Component<IProps, IState> {
     orderBy: 'benchmark',
     rowsPerPage: 5,
     page: 0,
-    openJobLogID: null,
+    openJobLogID: '',
   };
   handleRequestSort = (event: any, property: any) => {
     const orderBy = property;

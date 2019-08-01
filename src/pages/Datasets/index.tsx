@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { RouteComponentProps } from 'react-router-dom';
+
 import Spinner from '../../components/Spinner';
 import DatasetCardGrid from '../../components/DatasetCardGrid';
 import { comicApi } from '../../services/comicApi';

@@ -1,7 +1,7 @@
 import styles from './style.css';
 import FileDetailsTable from './FileDetails/FileDetailsTable';
 interface IProps {
-    dataFiles: [string];
+    dataFiles: string[];
     type: string;
     desc: string;
     sampling: string;

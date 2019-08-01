@@ -18,12 +18,21 @@ export interface IDataset {
   card_image_alttext: string;
   banner_image_url: string;
   banner_image_alttext: string;
+  public_test_data_description: string;
+  public_test_data_sampling_method: string;
+  private_test_data_description: string;
+  private_test_data_sampling_method: string;
+  participant_data_description: string;
+  participant_data_sampling_method: string;
 
   // Other datasets
   related_datasets: UUID4[];
 
   // Data files
-  additional_data_files: UUID4[];
-  test_data_file: UUID4;
-  test_ground_truth_data_file: UUID4;
+  public_test_data_file: UUID4;
+  public_ground_truth_data_file: UUID4;
+  private_test_data_file: UUID4;
+  private_ground_truth_data_file: UUID4;
+  participant_data_files: UUID4[];
+
 }

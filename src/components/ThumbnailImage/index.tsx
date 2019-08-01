@@ -50,11 +50,11 @@ class Thumbnail extends React.Component<IProps> {
         thumb: undefined,
     };
 
-    componentWillReceiveProps(nextProps) {
+    componentWillReceiveProps(nextProps: IProps) {
         if (!nextProps.file) { return; }
 
         this.setState({ loading: true }, () => {
-            let reader = new FileReader();
+            const reader = new FileReader();
 
             reader.onloadend = () => {
                 this.setState({ loading: false, thumb: reader.result });
@@ -65,7 +65,7 @@ class Thumbnail extends React.Component<IProps> {
     }
 
     render() {
-        const { file } = this.props;
+        // const { file } = this.props;
         const { loading, thumb } = this.state;
 
         // if (!file) { return null; }

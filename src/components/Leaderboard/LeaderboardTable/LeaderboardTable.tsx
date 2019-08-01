@@ -21,7 +21,7 @@ import LeaderboardHead from '../LeaderboardHead/LeaderboardHead';
 
 import styles from './LeaderboardTableStyle';
 import JobLogDialog from 'src/components/JobLogDialog';
-import Observable from 'src/components/Observables';
+//import Observable from 'src/components/Observables';
 import CompareDialog from '../CompareDialog';
 
 // https://material-ui.com/components/tables/#EnhancedTable.tsx
@@ -78,7 +78,7 @@ type IDataRow = {
   version: string,
   date: string,
   implementation_job: UUID4,
-} & { [label: string]: number };
+} & { [label: string]: string };
 
 class LeaderboardTable extends React.Component<IProps, IState> {
   state = {
@@ -86,7 +86,7 @@ class LeaderboardTable extends React.Component<IProps, IState> {
     orderBy: 'score',
     openJobLogID: null,
     observableUrl: '',
-    selected: [],
+    selected: [''],
     itemsToCompare: [],
     showComparision: false,
     rowsPerPage: 5,
@@ -129,7 +129,8 @@ class LeaderboardTable extends React.Component<IProps, IState> {
 
     const sortedData = stableSort(data, getSorting(order, orderBy));
     const isSelected = (id: string) => selected.indexOf(id) !== -1;
-    const emptyRows = rowsPerPage - Math.min(rowsPerPage, data.length - page * rowsPerPage);
+
+    // const emptyRows = rowsPerPage - Math.min(rowsPerPage, data.length - page * rowsPerPage);
     const handleSelectAllClick = (event: React.ChangeEvent<HTMLInputElement>) => {
       if (event.target.checked) {
         const newSelecteds = data.map(n => n.id);
@@ -179,9 +180,9 @@ class LeaderboardTable extends React.Component<IProps, IState> {
             onClose={() => this.setState({ openJobLogID: null })}
           />
         )}
-        {observableUrl !== '' && (
+        {/* {observableUrl !== '' && (
           <Observable url={observableUrl} onClose={() => this.setState({ observableUrl: '' })} />
-        )}
+        )} */}
         {showComparision && (
           <CompareDialog
             items={itemsToCompare}

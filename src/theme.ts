@@ -4,7 +4,6 @@ export default createMuiTheme({
   typography: {
     fontFamily: 'Lato, sans-serif',
     fontSize: 16,
-    fontWeight: 'normal',
   },
   overrides: {
     // MuiSvgIcon: {

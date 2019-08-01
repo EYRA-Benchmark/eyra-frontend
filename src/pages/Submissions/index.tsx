@@ -15,10 +15,10 @@ export type INestedSubmission = Merge<ISubmission, {
 interface IProps {
   submissions: INestedSubmission[];
 }
-interface IState {
-  order: Order;
-  orderBy: string;
-}
+// interface IState {
+//   order: any;
+//   orderBy: string;
+// }
 export const getSubmissionsWithJobs = async (filters = {}) => {
   const submissions = await comicApi.submissions(filters);
   const nestedSubmissions: INestedSubmission[] = [];
@@ -35,7 +35,7 @@ export const getSubmissionsWithJobs = async (filters = {}) => {
   return nestedSubmissions;
 };
 
-class Submissions extends React.Component<IProps, IState> {
+class Submissions extends React.Component<IProps, {}> {
 
   static async getInitialProps(ctx: NextContext): Promise<IProps> {
     return { submissions: await getSubmissionsWithJobs() };

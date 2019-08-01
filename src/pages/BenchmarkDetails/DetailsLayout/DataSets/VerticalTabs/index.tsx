@@ -38,8 +38,8 @@ function TabContainer(props: IContainerProps) {
 class VerticalTabs extends React.Component<IProps, IState> {
   state = {
     value: 0,
-    data: null,
-    groundTruth: null,
+    data: {},
+    groundTruth: {},
   };
   handleChange = (event: any, value: number) => {
     this.setState({ value });
@@ -60,10 +60,12 @@ class VerticalTabs extends React.Component<IProps, IState> {
     }
 
     const desc: any[] = [];
+
     if (Object.keys(data) && Object.keys(groundTruth)) {
       desc.push(data);
       desc.push(groundTruth);
     }
+
 
     return (
       <Grid container={true} spacing={3} className={styles.noMargin}>
@@ -82,7 +84,6 @@ class VerticalTabs extends React.Component<IProps, IState> {
           >
             <Tab
               label="Data"
-              classes={{ labelContainer: styles.labelContainer }}
             />
             <Tab label="Ground Truth(Gold Standard)" />
           </Tabs>

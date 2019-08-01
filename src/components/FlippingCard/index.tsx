@@ -7,7 +7,7 @@ import styles from './FlippingCard.css';
 class FlippingCard extends React.Component {
   render() {
     return (
-      <Grid container={true} spacing={24}>
+      <Grid container={true} spacing={3}>
         <Grid item={true} xs={12} sm={6} md={4}>
           <div className={styles.cardContainer}>
             <div className={styles.cardBody}>

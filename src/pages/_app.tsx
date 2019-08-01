@@ -17,8 +17,10 @@ import styles from './root.css';
 NProgress.configure({ easing: 'ease', speed: 500 });
 Router.onRouteChangeStart = () => NProgress.start();
 Router.onRouteChangeError = () => NProgress.done();
-
-export default class MyApp extends App {
+export interface IState {
+  showSideDrawer: boolean;
+}
+export default class MyApp extends App<{}, IState> {
   state = {
     showSideDrawer: false,
   };

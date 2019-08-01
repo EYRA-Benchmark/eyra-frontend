@@ -4,7 +4,6 @@ import {
     TableRow,
     TableSortLabel,
     Tooltip,
-    Checkbox,
 } from '@material-ui/core';
 import * as React from 'react';
 interface IProps {

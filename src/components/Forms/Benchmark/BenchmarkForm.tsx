@@ -63,10 +63,12 @@ class BenchmarkForm extends React.Component<IProps> {
     data: this.props.benchmark.data_description,
     truth: this.props.benchmark.truth_description,
     metrics: this.props.benchmark.metrics_description,
+    banner_image: this.props.benchmark.banner_image,
+    card_image: this.props.benchmark.card_image,
   };
 
   render() {
-    const { desc, data, truth, metrics } = this.state;
+    const { desc, data, truth, metrics, banner_image, card_image } = this.state;
 
     const { id, name, short_description } = this.props.benchmark;
     const initialValues: IValues = {
@@ -75,11 +77,12 @@ class BenchmarkForm extends React.Component<IProps> {
       short_description,
       description: desc,
       isSaved: false,
-      banner_image: null,
-      card_image: null,
+      banner_image,
+      card_image,
       data_description: data,
       truth_description: truth,
       metrics_description: metrics,
+
     };
 
     return (
@@ -105,7 +108,7 @@ class BenchmarkForm extends React.Component<IProps> {
                     name="banner_file"
                     type="file"
                     onChange={(event) => {
-                      setFieldValue('banner_image', event.currentTarget.files[0]);
+                      setFieldValue('banner_image', event.currentTarget.files![0]);
                     }}
                     className="form-control"
                   />
@@ -119,7 +122,7 @@ class BenchmarkForm extends React.Component<IProps> {
                     name="card_file"
                     type="file"
                     onChange={(event) => {
-                      setFieldValue('card_image', event.currentTarget.files[0]);
+                      setFieldValue('card_image', event.currentTarget.files![0]);
                     }}
                     className="form-control"
                   />

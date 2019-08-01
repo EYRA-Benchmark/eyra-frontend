@@ -13,11 +13,13 @@ export interface IOwnProps {
 
 export interface IState {
   isShrink: boolean;
+  showSideDrawer: boolean;
 }
 
-class Header extends React.Component<IOwnProps & WithRouterProps> {
+class Header extends React.Component<IOwnProps & WithRouterProps, IState> {
   state = {
     isShrink: false,
+    showSideDrawer: false,
   };
 
   sideDrawerToggleHandler = () => {

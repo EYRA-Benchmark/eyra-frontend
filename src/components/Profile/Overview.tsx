@@ -3,7 +3,9 @@ import { Typography } from '@material-ui/core';
 import SubmissionsTable from 'src/components/SubmissionsTable';
 import AlgorithmsTable from 'src/components/AlgorithmsTable';
 import Benchmarks from './Benchmarks';
-import styles from './styles.css'
+import styles from './styles.css';
+import { INestedSubmission } from '../Leaderboard';
+import { IAlgorithm, IBenchmark } from '../../types';
 interface IProps {
     submissions: INestedSubmission[];
     algorithms: IAlgorithm[];

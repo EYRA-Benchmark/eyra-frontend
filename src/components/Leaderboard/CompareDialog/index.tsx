@@ -3,11 +3,9 @@ import CloseIcon from '@material-ui/icons/CloseRounded';
 import {
     Paper,
     DialogActions,
-    Button,
     Dialog,
     DialogTitle,
     DialogContent,
-    Icon,
 } from '@material-ui/core';
 
 import Slide from '@material-ui/core/Slide';

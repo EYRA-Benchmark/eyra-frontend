@@ -9,14 +9,14 @@ import {
 import FileRow from './FileDetailsRow';
 
 interface IProps {
-    dataFiles: [string];
+    dataFiles: string[];
 }
 const FilesDetailsTable = (props: IProps) => {
     const { dataFiles } = props;
-    const tableContainer = {
-        maxHeight: 300,
-        overflow: 'scroll',
-    };
+    // const tableContainer = {
+    //     maxHeight: 300,
+    //     overflow: 'scroll',
+    // };
     return (
         <>
             {/* <div style={tableContainer}> */}
