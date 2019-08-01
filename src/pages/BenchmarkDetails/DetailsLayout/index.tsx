@@ -95,7 +95,7 @@ class Details extends React.Component<IProps, IState> {
                     className={styles.container}
                   />
 
-                  {data.data_set ? <DataDescription datasetId={'1facb4ff-e2c0-4e5e-9e2e-c0476662d33d'} /> : null}
+                  {data.data_set ? <DataDescription datasetId={data.data_set} /> : null}
                 </TabContainer>
               )}
               {value === 2 && (
