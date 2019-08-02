@@ -170,6 +170,7 @@ class LeaderboardTable extends React.Component<IProps, IState> {
     //   });
     // };
     return (
+
       <Paper className={classes.root}>
         {openJobLogID && (
           <JobLogDialog
@@ -229,21 +230,26 @@ class LeaderboardTable extends React.Component<IProps, IState> {
                         {n.name}
                       </TableCell>
                       <TableCell component="td" scope="row" align="left">
-                        {n.version}
+                        {n.version ? n.version : '-'}
                       </TableCell>
                       {metricFields.map((fieldName, j: number) => (
                         <TableCell key={j} align="left">
                           {n[fieldName]}
                         </TableCell>
                       ))}
-                      <TableCell align="left">{
-                        <a href={n.visualization.toString()} target="_blank">
-                          visualization
-                        </a>
-                        // <button onClick={() => this.setState({ observableUrl: n.visualization.toString() })}>
+                      <TableCell align="left">
+                        {
+
+                          n.visualization.split('?')[0] !== 'null' ?
+                            (<a href={n.visualization.toString()} target="_blank">
+                              visualization
+                        </a>)
+                            : '-'
+                        }
+                        {/* // <button onClick={() => this.setState({ observableUrl: n.visualization.toString() })}>
                         //   visualize
-                        //   </button>
-                      }</TableCell>
+                        //   </button> */}
+                      </TableCell>
                       <TableCell align="left">{formatDateTime(new Date(n.date))}</TableCell>
                       <TableCell align="left">
                         <Fab
