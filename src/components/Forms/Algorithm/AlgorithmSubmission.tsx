@@ -1,7 +1,6 @@
 import { comicApi } from 'src/services/comicApi';
 
-import { Button, Fab } from '@material-ui/core';
-import AddIcon from '@material-ui/icons/Add';
+import { Button } from '@material-ui/core';
 import { Field, Form, Formik } from 'formik';
 import { FormikActions } from 'formik';
 import React from 'react';
@@ -23,7 +22,7 @@ interface IValues {
 
 }
 interface IState {
-  usersAlgorithms: IAlgorithm[],
+  usersAlgorithms: IAlgorithm[];
   createNewAlgorithm: boolean;
 }
 const initialValues: IValues = {
