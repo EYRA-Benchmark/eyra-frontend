@@ -7,7 +7,7 @@ import styles from './DetailsLayout.css';
 import Leaderboard from '../../../components/Leaderboard';
 
 import classNames from 'classnames';
-import { IBenchmark } from '../../../types/benchmark';
+import { IBenchmark, IAlgorithm } from '../../../types/';
 import DataDescription from '../../../components/DataDescription/';
 
 interface IContainerProps {
@@ -15,6 +15,7 @@ interface IContainerProps {
 }
 interface IProps {
   data: IBenchmark;
+  algorithms: IAlgorithm[];
 }
 function TabContainer(props: IContainerProps) {
   return (
@@ -48,7 +49,7 @@ class Details extends React.Component<IProps, IState> {
   render() {
 
     const { value } = this.state;
-    const { data } = this.props;
+    const { data, algorithms } = this.props;
     if (data) {
       return (
         <Grid container={true} spacing={3}>
@@ -126,7 +127,7 @@ class Details extends React.Component<IProps, IState> {
               )} */}
               {value === 5 && (
                 <TabContainer>
-                  <AlgorithmSubmissionForm benchmarkId={data.id} />
+                  <AlgorithmSubmissionForm benchmarkId={data.id} algorithms={algorithms} interface={data.interface} />
                 </TabContainer>
               )}
               {/* <Dialog

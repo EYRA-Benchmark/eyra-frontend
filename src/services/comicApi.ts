@@ -155,6 +155,13 @@ export class ComicApi {
   async algorithm(id: string): Promise<IAlgorithm> {
     return (await this.axios.get<IAlgorithm>(`algorithms/${id}/`)).data;
   }
+  async create_algorithm(details: {
+    name: string,
+    interface: UUID4,
+  }): Promise<IAlgorithm> {
+    return (await this.axios.post<IAlgorithm>('algorithms/', details))
+      .data;
+  }
   async implementation(id: string): Promise<IImplementation> {
     return (await this.axios.get<IImplementation>(`implementations/${id}/`)).data;
   }

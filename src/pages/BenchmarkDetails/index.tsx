@@ -7,20 +7,23 @@ import { IBenchmark } from '../../types/benchmark';
 import { Container } from '@material-ui/core';
 import Details from './DetailsLayout';
 import BreadCrumbs from 'src/components/BreadCrumbs';
+import { IAlgorithm } from 'src/types';
 
 interface IProps {
   benchmark: IBenchmark;
+  algorithms: IAlgorithm[];
 }
 
 export default class BenchmarkDetails extends React.Component<IProps> {
   static async getInitialProps(ctx: NextContext<{ id: string }>): Promise<IProps> {
     return {
       benchmark: await comicApi.benchmark(ctx.query.id),
+      algorithms: await comicApi.algorithms(),
     };
   }
 
   render() {
-    const { benchmark } = this.props;
+    const { benchmark, algorithms } = this.props;
     return (
       <Container>
         <Head>
@@ -37,7 +40,7 @@ export default class BenchmarkDetails extends React.Component<IProps> {
             ]}
           />
         </Head>
-        <Details data={benchmark} />
+        <Details data={benchmark} algorithms={algorithms} />
       </Container>
     );
   }

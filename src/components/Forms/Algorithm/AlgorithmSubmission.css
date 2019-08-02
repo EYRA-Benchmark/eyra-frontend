@@ -17,12 +17,32 @@
   margin-left: 10px;
   height: 30px;
   border-radius: 5px;
-  flex: 2;
+  flex: 2.5;
   font-size: 15px;
   padding: 10px;
 }
-.inputContainer select {
+.selectionContainer select {
+  flex: 1;
   height: 30px;
-  margin: 10px 0;
-  flex: 2;
+}
+.selectionContainer {
+  display: flex;
+  flex: 2.5;
+  justify-content: space-between;
+  align-items: center;
+  
+}
+.buttonText {
+  text-transform: capitalize;
+}
+.checkboxContainer {
+  display: flex;
+  flex: 1;
+  align-items: center;
+}
+.checkboxContainer input {
+  flex: 1
+}
+.checkboxContainer label {
+  flex: 8
 }

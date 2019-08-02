@@ -1,22 +1,31 @@
 import { comicApi } from 'src/services/comicApi';
 
-import { Button } from '@material-ui/core';
+import { Button, Fab, Checkbox } from '@material-ui/core';
+import AddIcon from '@material-ui/icons/Add';
 import { Field, Form, Formik } from 'formik';
 import { FormikActions } from 'formik';
 import React from 'react';
 // import CustomTextEditor from '../CustomTextEditor';
 import styles from './AlgorithmSubmission.css';
+import { IAlgorithm, IUser, UUID4 } from 'src/types';
+import { IUserProps, withUser } from 'src/context/User';
 
 interface IProps {
   benchmarkId: string;
+  algorithms: IAlgorithm[];
+  inteface: UUID4;
 }
 interface IValues {
   algorithmName: string;
   implementationName: string;
   version: string;
   containerName: string;
-}
 
+}
+interface IState {
+  usersAlgorithms: IAlgorithm[],
+  createNewAlgorithm: boolean;
+}
 const initialValues: IValues = {
   algorithmName: '',
   implementationName: '',
@@ -24,7 +33,24 @@ const initialValues: IValues = {
   containerName: '',
 };
 
-class AlgorithmSubmission extends React.Component<IProps, {}> {
+class AlgorithmSubmission extends React.Component<IProps & IUserProps, IState> {
+  state = {
+    usersAlgorithms: [],
+    createNewAlgorithm: false,
+  };
+  componentDidMount() {
+    const { algorithms, user } = this.props;
+    if (user != null) {
+      const usersAlgorithms = algorithms.filter((algorithm: IAlgorithm) => algorithm.creator === 2);
+      this.setState({ usersAlgorithms });
+    }
+  }
+  onCheckChanged = () => {
+    this.setState({
+      createNewAlgorithm: !this.state.createNewAlgorithm,
+    });
+  }
+
   onSubmit = async (
     values: IValues,
     { setSubmitting }: FormikActions<IValues>,
@@ -44,21 +70,59 @@ class AlgorithmSubmission extends React.Component<IProps, {}> {
     }
     setSubmitting(false);
   }
-
   render() {
+    const { usersAlgorithms, createNewAlgorithm } = this.state;
+
     return (
       <Formik initialValues={initialValues} onSubmit={this.onSubmit}>
-        {({ isSubmitting }) => (
+        {({ isSubmitting, setFieldValue, values }) => (
           <Form>
             <div className={styles.container}>
               <div className={styles.inputContainer}>
-                <label htmlFor="algorithName">Algorithm name</label>
-                <Field
+                <label htmlFor="algorithName">Algorithm</label>
+                {/* <Field
                   name="algorithmName"
                   type="text"
                   placeholder="(e.g. Amber)"
                   autoFocus={true}
-                />
+                /> */}
+
+                {usersAlgorithms.length > 0 ?
+                  (
+                    <div className={styles.selectionContainer}>
+                      <select
+                        name="Algorithm"
+                        onChange={(value) => setFieldValue('algorithmName', value)}
+                        disabled={createNewAlgorithm}
+                      >
+                        <option value="" label="Select an algorithm" />
+                        {
+                          usersAlgorithms.map((algorithm: IAlgorithm) =>
+                            <option key={algorithm.id} value={algorithm.id} label={algorithm.name} />)
+                        }
+                      </select>
+                      <div className={styles.checkboxContainer}>
+                        <input
+                          name={'newAlgorithm'}
+                          id={'newAlgorithm'}
+                          type="checkbox"
+                          value={'newAlgorithm'}
+                          checked={createNewAlgorithm}
+                          onChange={this.onCheckChanged}
+                        />
+                        <label htmlFor={'newAlgorithm'}>Create New Algorithm</label>
+                      </div>
+                    </div>
+                  )
+                  : (
+                    <div className={styles.selectionContainer}>
+                      <span>You don't have any algorithms created.Want to create new one?
+                      <Fab color="secondary" aria-label="Add" size="small" title={'New Algorithm'}>
+                          <AddIcon color="primary" />
+                        </Fab></span>
+                    </div>
+                  )
+                }
               </div>
               <div className={styles.inputContainer}>
                 <label htmlFor="implementationName">Implementation Name</label>
@@ -113,4 +177,4 @@ class AlgorithmSubmission extends React.Component<IProps, {}> {
   }
 }
 
-export default AlgorithmSubmission;
+export default withUser(AlgorithmSubmission);
