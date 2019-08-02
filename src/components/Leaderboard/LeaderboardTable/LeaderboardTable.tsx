@@ -1,7 +1,7 @@
 import * as React from 'react';
-import LeadeboardToolbar from '../LeaderboardToolbar/';
+// import LeadeboardToolbar from '../LeaderboardToolbar/';
 import {
-  Checkbox,
+  // Checkbox,
   Fab,
   Icon,
   Paper,
@@ -144,31 +144,31 @@ class LeaderboardTable extends React.Component<IProps, IState> {
       this.setState({ rowsPerPage: +event.target.value });
       this.setState({ page: 0 });
     };
-    const handleClick = (event: React.ChangeEvent<unknown>, checked: boolean, id: string) => {
-      const selectedIndex = selected.indexOf(id);
-      let newSelected: string[] = [];
-      const compareItems: INestedSubmission[] = [];
-      if (selectedIndex === -1) {
-        newSelected = newSelected.concat(selected, id);
-      } else if (selectedIndex === 0) {
-        newSelected = newSelected.concat(selected.slice(1));
-      } else if (selectedIndex === selected.length - 1) {
-        newSelected = newSelected.concat(selected.slice(0, -1));
-      } else if (selectedIndex > 0) {
-        newSelected = newSelected.concat(
-          selected.slice(0, selectedIndex),
-          selected.slice(selectedIndex + 1),
-        );
-      }
-      this.props.submissions.filter((submission) => {
-        const index = newSelected.indexOf(submission.id);
-        if (index >= 0) { compareItems.push(submission); }
-      });
-      this.setState({
-        itemsToCompare: compareItems,
-        selected: newSelected,
-      });
-    };
+    // const handleClick = (event: React.ChangeEvent<unknown>, checked: boolean, id: string) => {
+    //   const selectedIndex = selected.indexOf(id);
+    //   let newSelected: string[] = [];
+    //   const compareItems: INestedSubmission[] = [];
+    //   if (selectedIndex === -1) {
+    //     newSelected = newSelected.concat(selected, id);
+    //   } else if (selectedIndex === 0) {
+    //     newSelected = newSelected.concat(selected.slice(1));
+    //   } else if (selectedIndex === selected.length - 1) {
+    //     newSelected = newSelected.concat(selected.slice(0, -1));
+    //   } else if (selectedIndex > 0) {
+    //     newSelected = newSelected.concat(
+    //       selected.slice(0, selectedIndex),
+    //       selected.slice(selectedIndex + 1),
+    //     );
+    //   }
+    //   this.props.submissions.filter((submission) => {
+    //     const index = newSelected.indexOf(submission.id);
+    //     if (index >= 0) { compareItems.push(submission); }
+    //   });
+    //   this.setState({
+    //     itemsToCompare: compareItems,
+    //     selected: newSelected,
+    //   });
+    // };
     return (
       <Paper className={classes.root}>
         {openJobLogID && (
@@ -188,12 +188,12 @@ class LeaderboardTable extends React.Component<IProps, IState> {
         )
         }
         <div className={classes.tableWrapper}>
-          <LeadeboardToolbar
+          {/* <LeadeboardToolbar
             numSelected={selected.length}
             compareItems={
               () => { this.setState({ showComparision: true }); }
             }
-          />
+          /> */}
           <Table className={classes.table} aria-labelledby="tableTitle">
             <LeaderboardHead
               order={order}
@@ -208,7 +208,7 @@ class LeaderboardTable extends React.Component<IProps, IState> {
               {sortedData.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map(
                 (n: IDataRow, i: number) => {
                   const isItemSelected = isSelected(n.id);
-                  const labelId = `table-checkbox-${i}`;
+                  // const labelId = `table-checkbox-${i}`;
                   return (
                     <TableRow
                       hover={true}
@@ -217,14 +217,14 @@ class LeaderboardTable extends React.Component<IProps, IState> {
                       aria-checked={isItemSelected}
                       selected={isItemSelected}
                     >
-                      <TableCell padding="checkbox">
+                      {/* <TableCell padding="checkbox">
                         <Checkbox
                           color="primary"
                           checked={isItemSelected}
                           inputProps={{ 'aria-labelledby': labelId }}
                           onChange={(event, checked) => handleClick(event, checked, n.id)}
                         />
-                      </TableCell>
+                      </TableCell> */}
                       <TableCell component="td" scope="row">
                         {n.name}
                       </TableCell>
@@ -237,12 +237,12 @@ class LeaderboardTable extends React.Component<IProps, IState> {
                         </TableCell>
                       ))}
                       <TableCell align="left">{
-                        // <a href={n.visualization.toString()} target="_blank">
-                        //   visualization
-                        // </a>
-                        <button onClick={() => this.setState({ observableUrl: n.visualization.toString() })}>
-                          visualize
-                          </button>
+                        <a href={n.visualization.toString()} target="_blank">
+                          visualization
+                        </a>
+                        // <button onClick={() => this.setState({ observableUrl: n.visualization.toString() })}>
+                        //   visualize
+                        //   </button>
                       }</TableCell>
                       <TableCell align="left">{formatDateTime(new Date(n.date))}</TableCell>
                       <TableCell align="left">

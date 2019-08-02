@@ -23,7 +23,7 @@ const LeaderboardToolbar = (props: ILeaderboardToolbarProps) => {
             </Typography>
                 ) : (
                         <Typography variant="h6" id="tableTitle">
-                            Algorithms
+                            Submissions
             </Typography>
                     )}
             </div>
