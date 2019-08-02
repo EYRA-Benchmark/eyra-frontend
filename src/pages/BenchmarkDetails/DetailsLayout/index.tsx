@@ -1,22 +1,22 @@
-import { Grid, Paper, Tab, Tabs, Typography } from '@material-ui/core';
-import Markdown from '@nteract/markdown';
 import * as React from 'react';
-import AlgorithmSubmissionForm from '../../../components/Forms/Algorithm/AlgorithmSubmission';
-// import Datasets from './DataSets/DataSets';
-import styles from './DetailsLayout.css';
-import Leaderboard from '../../../components/Leaderboard';
-
+import { IBenchmark } from 'src/types';
+import Markdown from '@nteract/markdown';
 import classNames from 'classnames';
-import { IBenchmark, IAlgorithm } from '../../../types/';
-import DataDescription from '../../../components/DataDescription/';
+
+import AlgorithmSubmissionForm from 'src/components/Forms/Algorithm/AlgorithmSubmission';
+import Leaderboard from 'src/components/Leaderboard';
+import DataDescription from 'src/components/DataDescription/';
+
+import { Grid, Paper, Tab, Tabs, Typography } from '@material-ui/core';
+import styles from './DetailsLayout.css';
 
 interface IContainerProps {
   children: React.ReactNode;
 }
 interface IProps {
   data: IBenchmark;
-  algorithms: IAlgorithm[];
 }
+
 function TabContainer(props: IContainerProps) {
   return (
     <Typography
@@ -49,7 +49,7 @@ class Details extends React.Component<IProps, IState> {
   render() {
 
     const { value } = this.state;
-    const { data, algorithms } = this.props;
+    const { data } = this.props;
     if (data) {
       return (
         <Grid container={true} spacing={3}>
@@ -127,7 +127,7 @@ class Details extends React.Component<IProps, IState> {
               )} */}
               {value === 5 && (
                 <TabContainer>
-                  <AlgorithmSubmissionForm benchmarkId={data.id} algorithms={algorithms} interface={data.interface} />
+                  <AlgorithmSubmissionForm benchmark={data} />
                 </TabContainer>
               )}
               {/* <Dialog

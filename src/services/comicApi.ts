@@ -180,18 +180,35 @@ export class ComicApi {
       long_description: string;
     },
   ): Promise<IDataset> {
-    return (await this.axios.patch<IDataset>(`dataset / ${id} / `, details))
+    return (await this.axios.patch<IDataset>(`dataset/${id}/`, details))
       .data;
   }
 
   async algorithmSubmission(details: {
-    benchmark: UUID4;
-    algorithm_name: string;
-    implementation_name: string;
-    version: string;
-    container_name: string;
+    name: string;
+    interface: UUID4;
+    description?: string;
   }): Promise<IAlgorithm> {
-    return (await this.axios.post<IAlgorithm>('algorithmSubmission/', details))
+    return (await this.axios.post<IAlgorithm>('algorithms/', details))
+      .data;
+  }
+
+  async implementationSubmission(details: {
+    name: string;
+    image: string;
+    algorithm: UUID4;
+    description?: string;
+  }): Promise<IImplementation> {
+    return (await this.axios.post<IImplementation>('implementations/', details))
+      .data;
+  }
+
+  async submissionSubmission(details: {
+    benchmark: UUID4;
+    implementation: UUID4;
+    name?: string;
+  }): Promise<ISubmission> {
+    return (await this.axios.post<ISubmission>('submissions/', details))
       .data;
   }
 }
