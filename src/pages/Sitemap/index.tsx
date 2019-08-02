@@ -34,13 +34,13 @@ Sitemap.getInitialProps = async ({ res }: NextContext): Promise<IProps> => {
   </url>
   ${benchmarks.map((benchmark) => `
     <url>
-      <loc>${publicRuntimeConfig.frontendURL}benchmarks/${benchmark.id}/</loc>
+      <loc>${publicRuntimeConfig.frontendURL}benchmark/${benchmark.id}/</loc>
       <changefreq>weekly</changefreq>
     </url>
   `).join('')}
   ${news.map((newsItem) => `
     <url>
-      <loc>${publicRuntimeConfig.frontendURL}news/${newsItem.id}/</loc>
+      <loc>${publicRuntimeConfig.frontendURL}news/${newsItem.uid}/</loc>
       <changefreq>weekly</changefreq>
     </url>
   `).join('')}
