@@ -29,13 +29,27 @@ const DataDescription = (props: IProps) => {
     );
 
     if (data) {
+        if (data.participant_data_files.length > 0) {
+            content.push(
+                (
+                    <Grid item={true} key={3} xs={12} sm={6} md={6}>
+                        <DataFileCard
+                            dataFiles={data.participant_data_files}
+                            type={'Public Participant Data'}
+                            desc={data.participant_data_description}
+                            sampling={data.participant_data_sampling_method}
+                        />
+                    </Grid>
+                ),
+            );
+        }
         if (data.public_test_data_file && publicLbData.push(data.public_test_data_file),
             data.public_ground_truth_data_file && publicLbData.push(data.public_ground_truth_data_file)) {
             content.push(
                 (
                     <Grid item={true} key={1} xs={12} sm={6} md={6}>
                         <DataFileCard
-                            dataFiles={publicLbData}
+                            dataFiles={[]}
                             type={'Public Leaderboard Data'}
                             desc={data.public_test_data_description}
                             sampling={data.public_test_data_sampling_method}
@@ -59,20 +73,7 @@ const DataDescription = (props: IProps) => {
                 ),
             );
         }
-        if (data.participant_data_files.length > 0) {
-            content.push(
-                (
-                    <Grid item={true} key={3} xs={12} sm={6} md={6}>
-                        <DataFileCard
-                            dataFiles={data.participant_data_files}
-                            type={'Public Participant Data'}
-                            desc={data.participant_data_description}
-                            sampling={data.participant_data_sampling_method}
-                        />
-                    </Grid>
-                ),
-            );
-        }
+
     }
     return (
         <Grid container={true} spacing={10}>

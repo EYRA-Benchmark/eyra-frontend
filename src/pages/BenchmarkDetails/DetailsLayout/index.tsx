@@ -79,7 +79,7 @@ class Details extends React.Component<IProps, IState> {
                 <Tab label="Metrics" />
                 <Tab label="Results" />
                 {/* <Tab label="Private Results" /> */}
-                <Tab label="Create submission" />
+                {data.id === '5a3f722b-61f1-4c44-87a1-eea1d231609b' ? null : <Tab label="Create submission" />}
               </Tabs>
               {value === 0 && (
                 <TabContainer>
