@@ -46,6 +46,7 @@ class Submissions extends React.Component<IProps, {}> {
     return (
       <SubmissionsTable
         submissions={this.props.submissions}
+        showMore={true}
       />
     );
   }

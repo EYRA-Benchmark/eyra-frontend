@@ -14,6 +14,9 @@ interface IProps {
 }
 const Overview = (props: IProps) => {
     const { submissions, algorithms, benchmarks } = props;
+
+    // benchmarks.splice(
+    //     benchmarks.findIndex((e) => e.id === 'c5c803c9-d7b2-4d99-8c50-fb9dc267a0b0'), 1);
     return (
         <>
             <Typography variant="h5" component="h5">My Benchmarks</Typography>
@@ -25,16 +28,16 @@ const Overview = (props: IProps) => {
                 <a onClick={() => props.loadMore(1)} className={styles.link}>More Benchmarks ></a> : null}
             <Typography variant="h5" component="h5">My Submissions</Typography>
             {submissions.length > 0 ?
-                <SubmissionsTable submissions={submissions} />
+                <SubmissionsTable submissions={submissions} showMore={false} />
                 : <p>No Submissions found</p>}
             {submissions.length > 3 ?
-                <a onClick={() => props.loadMore(1)} className={styles.link}>More Submissions ></a> : null}
+                <a onClick={() => props.loadMore(2)} className={styles.link}>More Submissions ></a> : null}
             <Typography variant="h5" component="h5">My Algorithms</Typography>
             {algorithms.length > 0 ?
                 <AlgorithmsTable algorithms={algorithms} />
                 : <p>No Algorithms found</p>}
             {algorithms.length > 3 ?
-                <a onClick={() => props.loadMore(1)} className={styles.link}>More Algorithms ></a> : null}
+                <a onClick={() => props.loadMore(3)} className={styles.link}>More Algorithms ></a> : null}
         </>
     );
 };

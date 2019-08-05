@@ -113,6 +113,7 @@ class AlgorithmSubmission extends React.Component<IProps & IUserProps, IState> {
                             <option key={algorithm.id} value={algorithm.id} label={algorithm.name} />)
                         }
                       </Field>
+                      <span>or</span>
                       <div className={styles.checkboxContainer}>
                         <input
                           name={'newAlgorithm'}

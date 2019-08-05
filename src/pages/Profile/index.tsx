@@ -9,6 +9,7 @@ import Overview from '../../components/Profile/Overview';
 import ProfileTabs from '../../components/Profile/ProfileTabs';
 import Benchmarks from '../../components/Profile/Benchmarks';
 import SubmissionsTable from '../../components/SubmissionsTable';
+import AlgorithmsTable from 'src/components/AlgorithmsTable';
 // interface IProps {
 //   submissions: INestedSubmission[];
 //   algorithms: IAlgorithm[];
@@ -67,7 +68,8 @@ class Profile extends React.Component<IUserProps, IState> {
       (benchmark: IBenchmark) =>
         benchmark.permissions.indexOf('change_benchmark') > -1,
     );
-
+    myBenchmarks.splice(
+      myBenchmarks.findIndex((e: IBenchmark) => e.id === 'c5c803c9-d7b2-4d99-8c50-fb9dc267a0b0'), 1);
     return (
       <Container>
         <Paper>
@@ -100,8 +102,13 @@ class Profile extends React.Component<IUserProps, IState> {
                 </TabContainer>}
               {activeIndex === 2 &&
                 <TabContainer>{submissions.length > 0 ?
-                  <SubmissionsTable submissions={submissions} />
+                  <SubmissionsTable submissions={submissions} showMore={true} />
                   : <p>No Submissions Found</p>}
+                </TabContainer>}
+              {activeIndex === 3 &&
+                <TabContainer>{algorithms.length > 0 ?
+                  <AlgorithmsTable algorithms={algorithms} />
+                  : <p>No Algorithms Found</p>}
                 </TabContainer>}
             </Grid>
           </Grid>

@@ -22,6 +22,7 @@ class ProfileTabs extends React.Component<IProps> {
                     <MyTab label="Overview" />
                     <MyTab label="Benchmarks" />
                     <MyTab label="Submissions" />
+                    <MyTab label="Algorithms" />
                 </VerticalTabs>
             </div>
         );

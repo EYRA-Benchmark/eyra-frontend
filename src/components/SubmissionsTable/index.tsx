@@ -19,6 +19,7 @@ import { Order, getSorting, stableSort } from '../../components/Leaderboard/Lead
 import SubmissionHeader from './SubmissionHeader';
 interface IProps {
   submissions: INestedSubmission[];
+  showMore: boolean;
 }
 type IDataRow = {
   id: string,
@@ -57,7 +58,7 @@ class SubmissionsTable extends React.Component<IProps, IState> {
   state = {
     order: 'asc' as Order,
     orderBy: 'benchmark',
-    rowsPerPage: 5,
+    rowsPerPage: 3,
     page: 0,
     openJobLogID: '',
   };
@@ -74,6 +75,7 @@ class SubmissionsTable extends React.Component<IProps, IState> {
 
   render() {
     const { order, orderBy, openJobLogID, rowsPerPage, page } = this.state;
+    const { showMore } = this.props;
     const data: IDataRow[] = this.props.submissions.map((submission) => {
       return {
         id: submission.id,
@@ -124,7 +126,7 @@ class SubmissionsTable extends React.Component<IProps, IState> {
                   <TableCell component="td" scope="row">
                     {n.implementation_status === 'Success' ?
                       <Icon><CheckIcon style={{ color: '#4caf50' }} /></Icon>
-                      : <Icon><FailedIcon /></Icon>}
+                      : <Icon><FailedIcon style={{ color: '#ed2939' }} /></Icon>}
                   </TableCell>
                   <TableCell component="td" scope="row">
                     {n.runtime_implementation}
@@ -161,9 +163,9 @@ class SubmissionsTable extends React.Component<IProps, IState> {
             </TableBody>
           </Table>
         </div>
-        {data.length > 5 ?
+        {showMore ?
           <TablePagination
-            rowsPerPageOptions={[5, 10, 25]}
+            rowsPerPageOptions={[3, 10, 25]}
             component="div"
             count={data.length}
             rowsPerPage={rowsPerPage}

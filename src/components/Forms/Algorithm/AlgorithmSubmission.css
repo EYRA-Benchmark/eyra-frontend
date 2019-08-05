@@ -32,6 +32,10 @@
   align-items: center;
   
 }
+.selectionContainer span{
+ margin-left: 10px;
+  
+}
 .buttonText {
   text-transform: capitalize;
 }

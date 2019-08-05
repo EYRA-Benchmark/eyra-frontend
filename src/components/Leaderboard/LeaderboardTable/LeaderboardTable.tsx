@@ -239,7 +239,6 @@ class LeaderboardTable extends React.Component<IProps, IState> {
                       ))}
                       <TableCell align="left">
                         {
-
                           n.visualization.split('?')[0] !== 'null' ?
                             (<a href={n.visualization.toString()} target="_blank">
                               visualization
