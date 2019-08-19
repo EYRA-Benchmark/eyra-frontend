@@ -61,7 +61,7 @@
     "clean-css": "^4.2.1",
     "file-loader": "^4.0.0",
     "husky": "^2.4.1",
-    "lint-staged": "^8.2.1",
+    "lint-staged": "^9.2.3",
     "next-routes": "^1.4.2",
     "ts-loader": "^6.0.2",
     "ts-node": "^8.3.0",
