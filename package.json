@@ -33,7 +33,7 @@
     "prismic-javascript": "^2.0.3",
     "prismic-reactjs": "^1.0.0",
     "react": "16.8.6",
-    "react-dom": "16.8.6",
+    "react-dom": "16.9.0",
     "react-popout": "^1.0.2",
     "react-rte": "^0.16.1",
     "react-transition-group": "^4.2.2",
