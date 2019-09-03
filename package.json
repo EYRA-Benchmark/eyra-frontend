@@ -36,7 +36,7 @@
     "react-dom": "16.8.6",
     "react-popout": "^1.0.2",
     "react-rte": "^0.16.1",
-    "react-transition-group": "^4.1.1",
+    "react-transition-group": "^4.2.2",
     "styled-jsx": "^3.2.1",
     "yup": "^0.27.0"
   },
