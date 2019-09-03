@@ -1,7 +1,7 @@
 import * as React from 'react';
-// import LeadeboardToolbar from '../LeaderboardToolbar/';
+import LeadeboardToolbar from '../LeaderboardToolbar/';
 import {
-  // Checkbox,
+  Checkbox,
   Fab,
   Icon,
   Paper,
@@ -21,9 +21,9 @@ import LeaderboardHead from '../LeaderboardHead/LeaderboardHead';
 
 import styles from './LeaderboardTableStyle';
 import JobLogDialog from 'src/components/JobLogDialog';
-// import Observable from 'src/components/Observables';
+import Observable from 'src/components/Observables';
 import CompareDialog from '../CompareDialog';
-
+import VisualizationDialog from '../VisualizationDialog';
 // https://material-ui.com/components/tables/#EnhancedTable.tsx
 export function desc<T>(a: T, b: T, orderBy: keyof T) {
   if (b[orderBy] < a[orderBy]) {
@@ -60,7 +60,7 @@ interface IState {
   order: Order;
   orderBy: string;
   openJobLogID: UUID4 | null;
-  observableUrl: string;
+  observableJobId: UUID4 | null;
   selected: string[];
   itemsToCompare: INestedSubmission[];
   showComparision: boolean;
@@ -78,6 +78,7 @@ type IDataRow = {
   version: string,
   date: string,
   implementation_job: UUID4,
+  evaluation_job: UUID4,
 } & { [label: string]: string };
 
 class LeaderboardTable extends React.Component<IProps, IState> {
@@ -85,12 +86,13 @@ class LeaderboardTable extends React.Component<IProps, IState> {
     order: 'asc' as Order,
     orderBy: 'score',
     openJobLogID: null,
-    observableUrl: '',
-    selected: [''],
+    observableJobId: null,
+    selected: [],
     itemsToCompare: [],
     showComparision: false,
     rowsPerPage: 5,
     page: 0,
+    open: false,
   };
 
   handleRequestSort = (event: any, property: any) => {
@@ -105,7 +107,10 @@ class LeaderboardTable extends React.Component<IProps, IState> {
   }
   render() {
     const { classes } = this.props;
-    const { order, orderBy, openJobLogID, selected, itemsToCompare, showComparision, rowsPerPage, page } = this.state;
+    const {
+      order, orderBy, openJobLogID,
+      selected, itemsToCompare, showComparision,
+      rowsPerPage, page, observableJobId } = this.state;
     const metrics = this.props.submissions[0].metrics;
     let metricFields: string[];
     metrics ? metricFields = Object.keys(metrics) : metricFields = [];
@@ -119,6 +124,7 @@ class LeaderboardTable extends React.Component<IProps, IState> {
         version: submission.implementation.version,
         implementationJob: submission.implementation_job,
         visualization: url,
+        evaluationJob: submission.evaluation_job,
         date: submission.created,
         ...metric,
       };
@@ -127,7 +133,7 @@ class LeaderboardTable extends React.Component<IProps, IState> {
     const sortedData = stableSort(data, getSorting(order, orderBy));
     const isSelected = (id: string) => selected.indexOf(id) !== -1;
 
-    // const emptyRows = rowsPerPage - Math.min(rowsPerPage, data.length - page * rowsPerPage);
+    const emptyRows = rowsPerPage - Math.min(rowsPerPage, data.length - page * rowsPerPage);
     const handleSelectAllClick = (event: React.ChangeEvent<HTMLInputElement>) => {
       if (event.target.checked) {
         const newSelecteds = data.map((n) => n.id);
@@ -144,31 +150,31 @@ class LeaderboardTable extends React.Component<IProps, IState> {
       this.setState({ rowsPerPage: +event.target.value });
       this.setState({ page: 0 });
     };
-    // const handleClick = (event: React.ChangeEvent<unknown>, checked: boolean, id: string) => {
-    //   const selectedIndex = selected.indexOf(id);
-    //   let newSelected: string[] = [];
-    //   const compareItems: INestedSubmission[] = [];
-    //   if (selectedIndex === -1) {
-    //     newSelected = newSelected.concat(selected, id);
-    //   } else if (selectedIndex === 0) {
-    //     newSelected = newSelected.concat(selected.slice(1));
-    //   } else if (selectedIndex === selected.length - 1) {
-    //     newSelected = newSelected.concat(selected.slice(0, -1));
-    //   } else if (selectedIndex > 0) {
-    //     newSelected = newSelected.concat(
-    //       selected.slice(0, selectedIndex),
-    //       selected.slice(selectedIndex + 1),
-    //     );
-    //   }
-    //   this.props.submissions.filter((submission) => {
-    //     const index = newSelected.indexOf(submission.id);
-    //     if (index >= 0) { compareItems.push(submission); }
-    //   });
-    //   this.setState({
-    //     itemsToCompare: compareItems,
-    //     selected: newSelected,
-    //   });
-    // };
+    const handleClick = (event: React.ChangeEvent<unknown>, checked: boolean, id: string) => {
+      const selectedIndex = selected.indexOf(id);
+      let newSelected: string[] = [];
+      const compareItems: INestedSubmission[] = [];
+      if (selectedIndex === -1) {
+        newSelected = newSelected.concat(selected, id);
+      } else if (selectedIndex === 0) {
+        newSelected = newSelected.concat(selected.slice(1));
+      } else if (selectedIndex === selected.length - 1) {
+        newSelected = newSelected.concat(selected.slice(0, -1));
+      } else if (selectedIndex > 0) {
+        newSelected = newSelected.concat(
+          selected.slice(0, selectedIndex),
+          selected.slice(selectedIndex + 1),
+        );
+      }
+      this.props.submissions.filter((submission) => {
+        const index = newSelected.indexOf(submission.id);
+        if (index >= 0) { compareItems.push(submission); }
+      });
+      this.setState({
+        itemsToCompare: compareItems,
+        selected: newSelected,
+      });
+    };
     return (
 
       <Paper className={classes.root}>
@@ -178,23 +184,29 @@ class LeaderboardTable extends React.Component<IProps, IState> {
             onClose={() => this.setState({ openJobLogID: null })}
           />
         )}
-        {/* {observableUrl !== '' && (
-          <Observable url={observableUrl} onClose={() => this.setState({ observableUrl: '' })} />
-        )} */}
+        {observableJobId && (
+          <VisualizationDialog onClose={() => this.setState({ observableJobId: null })} title={'Visualization'}>
+            <Observable jobId={observableJobId} isNotebook={true} />
+          </VisualizationDialog>
+        )}
         {showComparision && (
-          <CompareDialog
-            items={itemsToCompare}
-            onClose={() => this.setState({ itemsToCompare: [], showComparision: false, selected: [] })}
-          />
+          <VisualizationDialog
+            onClose={() => this.setState({ showComparision: false, selected: [] })}
+            title={'Compare Visualization'}
+          >
+            <CompareDialog
+              items={itemsToCompare}
+            />
+          </VisualizationDialog>
         )
         }
         <div className={classes.tableWrapper}>
-          {/* <LeadeboardToolbar
+          <LeadeboardToolbar
             numSelected={selected.length}
             compareItems={
               () => { this.setState({ showComparision: true }); }
             }
-          /> */}
+          />
           <Table className={classes.table} aria-labelledby="tableTitle">
             <LeaderboardHead
               order={order}
@@ -209,7 +221,7 @@ class LeaderboardTable extends React.Component<IProps, IState> {
               {sortedData.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map(
                 (n: IDataRow, i: number) => {
                   const isItemSelected = isSelected(n.id);
-                  // const labelId = `table-checkbox-${i}`;
+                  const labelId = `table-checkbox-${i}`;
                   return (
                     <TableRow
                       hover={true}
@@ -218,14 +230,14 @@ class LeaderboardTable extends React.Component<IProps, IState> {
                       aria-checked={isItemSelected}
                       selected={isItemSelected}
                     >
-                      {/* <TableCell padding="checkbox">
+                      <TableCell padding="checkbox">
                         <Checkbox
                           color="primary"
                           checked={isItemSelected}
                           inputProps={{ 'aria-labelledby': labelId }}
                           onChange={(event, checked) => handleClick(event, checked, n.id)}
                         />
-                      </TableCell> */}
+                      </TableCell>
                       <TableCell component="td" scope="row">
                         {n.name}
                       </TableCell>
@@ -239,15 +251,24 @@ class LeaderboardTable extends React.Component<IProps, IState> {
                       ))}
                       <TableCell align="left">
                         {
-                          n.visualization.split('?')[0] !== 'null' ?
-                            (<a href={n.visualization.toString()} target="_blank">
-                              visualization
-                        </a>)
+                          n.evaluationJob !== 'null' ?
+                            //     (<a href={n.visualization.toString()} target="_blank">
+                            //       visualization
+                            // </a>)
+                            (
+                              <button
+                                onClick={() => {
+                                  this.setState({
+                                    observableJobId: n.evaluationJob,
+                                  });
+                                }}
+                              >
+                                visualize
+                              </button>
+                            )
                             : '-'
                         }
-                        {/* // <button onClick={() => this.setState({ observableUrl: n.visualization.toString() })}>
-                        //   visualize
-                        //   </button> */}
+
                       </TableCell>
                       <TableCell align="left">{formatDateTime(new Date(n.date))}</TableCell>
                       <TableCell align="left">
@@ -272,11 +293,11 @@ class LeaderboardTable extends React.Component<IProps, IState> {
                   );
                 },
               )}
-              {/* {emptyRows > 0 && (
+              {emptyRows > 0 && (
                 <TableRow style={{ height: 49 * emptyRows }}>
                   <TableCell colSpan={6} />
                 </TableRow>
-              )} */}
+              )}
             </TableBody>
           </Table>
         </div>

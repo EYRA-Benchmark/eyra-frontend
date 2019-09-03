@@ -4,7 +4,7 @@ import {
   TableRow,
   TableSortLabel,
   Tooltip,
-  // Checkbox,
+  Checkbox,
 } from '@material-ui/core';
 import * as React from 'react';
 interface IProps {
@@ -48,9 +48,9 @@ class Leaderboard extends React.Component<IProps, {}> {
     ];
 
     const { order, orderBy,
-      // onSelectAllClick,
-      // numSelected,
-      // rowCount
+      onSelectAllClick,
+      numSelected,
+      rowCount,
     }
       = this.props;
 
@@ -58,15 +58,15 @@ class Leaderboard extends React.Component<IProps, {}> {
       <TableHead>
         <TableRow>
           {/*Commented for production  */}
-          {/*<TableCell padding="checkbox">
-             <Checkbox
+          <TableCell padding="checkbox">
+            <Checkbox
               indeterminate={numSelected > 0 && numSelected < rowCount}
               checked={numSelected === rowCount}
               onChange={onSelectAllClick}
               inputProps={{ 'aria-label': 'Select all desserts' }}
               color="primary"
             />
-          </TableCell>*/}
+          </TableCell>
           {rows.map((row) => {
             return (
               <TableCell
