@@ -910,13 +910,7 @@
     "@types/draft-js" "*"
     "@types/react" "*"
 
-"@types/react-transition-group@^2.9.2":
-  version "2.9.2"
-  resolved "https://registry.yarnpkg.com/@types/react-transition-group/-/react-transition-group-2.9.2.tgz#c48cf2a11977c8b4ff539a1c91d259eaa627028d"
-  dependencies:
-    "@types/react" "*"
-
-"@types/react-transition-group@^4.2.0":
+"@types/react-transition-group@^4.2.0", "@types/react-transition-group@^4.2.2":
   version "4.2.2"
   resolved "https://registry.yarnpkg.com/@types/react-transition-group/-/react-transition-group-4.2.2.tgz#8c851c4598a23a3a34173069fb4c5c9e41c02e3f"
   dependencies:
