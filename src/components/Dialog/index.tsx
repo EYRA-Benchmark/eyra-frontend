@@ -1,5 +1,6 @@
 import React, { ReactNode } from 'react';
 import CloseIcon from '@material-ui/icons/CloseRounded';
+import PrintIcon from '@material-ui/icons/Print';
 import {
     DialogActions,
     Dialog,
@@ -8,9 +9,10 @@ import {
 } from '@material-ui/core';
 
 import Slide from '@material-ui/core/Slide';
-
+import styles from './styles.css';
 interface IProps {
     title: string;
+    print: boolean;
     children: ReactNode;
     onClose: () => any | undefined;
 }
@@ -41,8 +43,18 @@ const VisualizationDialog = (props: IProps) => {
                 <DialogTitle id="alert-dialog-slide-title">
                     {props.title}
                 </DialogTitle>
-                <DialogActions style={{ flex: 1 }}>
-                    <CloseIcon onClick={handleClose} color="primary" style={{ cursor: 'pointer' }} />
+                <DialogActions className={styles.hide} style={{ flex: 1 }}>
+                    {props.print &&
+                        <PrintIcon
+                            onClick={() => window.print()}
+                            color="primary"
+                            style={{ cursor: 'pointer' }}
+                        />}
+                    <CloseIcon
+                        onClick={handleClose}
+                        color="primary"
+                        style={{ cursor: 'pointer' }}
+                    />
                 </DialogActions>
             </div>
             <DialogContent >

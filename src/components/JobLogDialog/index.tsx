@@ -33,6 +33,8 @@ const JobLogDialog = (props: IJobLogDialogProps) => {
 
   return (
     <Dialog
+      fullWidth={true}
+      maxWidth={'md'}
       open={true}
       TransitionComponent={Transition as any}
       keepMounted={true}
@@ -45,7 +47,7 @@ const JobLogDialog = (props: IJobLogDialogProps) => {
       </DialogTitle>
       <DialogContent>
         <Paper>
-          <JobLog jobID={props.jobID}/>
+          <JobLog jobID={props.jobID} />
         </Paper>
       </DialogContent>
       <DialogActions>

@@ -1,6 +1,6 @@
 import React from 'react';
 import Observable from 'src/components/Observables';
-import { Paper } from '@material-ui/core';
+import { Paper, Typography } from '@material-ui/core';
 import { INestedSubmission } from '..';
 import styles from './styles.css';
 interface IProps {
@@ -14,8 +14,8 @@ const CompareDialog = (props: IProps) => {
             {props.items.map((item, i) => {
                 return (
                     <Paper key={i} className={styles.item}>
-                        {item.name}
                         <Observable jobId={item.evaluation_job} isNotebook={false} />
+                        <Typography variant="subtitle1" align="center" >{item.name}</Typography>
                     </Paper>);
             })}
         </div>

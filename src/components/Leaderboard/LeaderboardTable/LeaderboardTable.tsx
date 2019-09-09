@@ -23,7 +23,7 @@ import styles from './LeaderboardTableStyle';
 import JobLogDialog from 'src/components/JobLogDialog';
 import Observable from 'src/components/Observables';
 import CompareDialog from '../CompareDialog';
-import VisualizationDialog from '../VisualizationDialog';
+import VisualizationDialog from '../../Dialog/';
 // https://material-ui.com/components/tables/#EnhancedTable.tsx
 export function desc<T>(a: T, b: T, orderBy: keyof T) {
   if (b[orderBy] < a[orderBy]) {
@@ -60,6 +60,7 @@ interface IState {
   order: Order;
   orderBy: string;
   openJobLogID: UUID4 | null;
+  observableUrl: string;
   observableJobId: UUID4 | null;
   selected: string[];
   itemsToCompare: INestedSubmission[];
@@ -86,6 +87,7 @@ class LeaderboardTable extends React.Component<IProps, IState> {
     order: 'asc' as Order,
     orderBy: 'score',
     openJobLogID: null,
+    observableUrl: '',
     observableJobId: null,
     selected: [],
     itemsToCompare: [],
@@ -110,7 +112,7 @@ class LeaderboardTable extends React.Component<IProps, IState> {
     const {
       order, orderBy, openJobLogID,
       selected, itemsToCompare, showComparision,
-      rowsPerPage, page, observableJobId } = this.state;
+      rowsPerPage, page, observableJobId, observableUrl } = this.state;
     const metrics = this.props.submissions[0].metrics;
     let metricFields: string[];
     metrics ? metricFields = Object.keys(metrics) : metricFields = [];
@@ -185,12 +187,17 @@ class LeaderboardTable extends React.Component<IProps, IState> {
           />
         )}
         {observableJobId && (
-          <VisualizationDialog onClose={() => this.setState({ observableJobId: null })} title={'Visualization'}>
-            <Observable jobId={observableJobId} isNotebook={true} />
+          <VisualizationDialog
+            print={false}
+            onClose={() => this.setState({ observableJobId: null, observableUrl: '' })}
+            title={'Visualization'}
+          >
+            <Observable jobId={observableJobId} observableUrl={observableUrl} isNotebook={true} />
           </VisualizationDialog>
         )}
         {showComparision && (
           <VisualizationDialog
+            print={true}
             onClose={() => this.setState({ showComparision: false, selected: [] })}
             title={'Compare Visualization'}
           >
@@ -259,6 +266,7 @@ class LeaderboardTable extends React.Component<IProps, IState> {
                               <button
                                 onClick={() => {
                                   this.setState({
+                                    observableUrl: n.visualization.toString(),
                                     observableJobId: n.evaluationJob,
                                   });
                                 }}
