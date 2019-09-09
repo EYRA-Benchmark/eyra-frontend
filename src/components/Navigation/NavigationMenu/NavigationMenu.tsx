@@ -41,6 +41,11 @@ function NavigationMenu({ user, logout }: IUserProps) {
             <a>Benchmarks</a>
           </Link>
         </li>
+        <li>
+          <Link route="tutorials">
+            <a>Tutorials</a>
+          </Link>
+        </li>
         {/*<li>*/}
         {/*<NavLink to="/datasets" activeClassName={styles.active}>*/}
         {/*Datasets*/}
