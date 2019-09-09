@@ -15,6 +15,7 @@ import { UUID4 } from 'src/types';
 import CheckIcon from '@material-ui/icons/CheckCircle';
 import JobLogDialog from 'src/components/JobLogDialog';
 import FailedIcon from '@material-ui/icons/Close';
+import PendingIcon from '@material-ui/icons/HourglassEmpty';
 import { Order, getSorting, stableSort } from '../../components/Leaderboard/LeaderboardTable/LeaderboardTable';
 import SubmissionHeader from './SubmissionHeader';
 interface IProps {
@@ -98,6 +99,7 @@ class SubmissionsTable extends React.Component<IProps, IState> {
       this.setState({ rowsPerPage: +event.target.value });
       this.setState({ page: 0 });
     };
+    debugger;
     return (
       <Paper>
 
@@ -124,9 +126,23 @@ class SubmissionsTable extends React.Component<IProps, IState> {
                     {n.name}
                   </TableCell>
                   <TableCell component="td" scope="row">
-                    {n.implementation_status === 'Success' ?
-                      <Icon><CheckIcon style={{ color: '#4caf50' }} /></Icon>
-                      : <Icon><FailedIcon style={{ color: '#ed2939' }} /></Icon>}
+
+                    {
+                      (
+                        n.implementation_status === 'Success' &&
+                        <Icon><CheckIcon style={{ color: '#4caf50' }} /></Icon>
+                      )
+                      ||
+                      (
+                        n.implementation_status === 'Failure' &&
+                        <Icon><FailedIcon style={{ color: '#ed2939' }} /></Icon>
+                      )
+                      ||
+                      (
+                        n.implementation_status === 'Pending' || n.implementation_status === 'Started'
+                        && <Icon><PendingIcon /></Icon>
+                      )
+                    }
                   </TableCell>
                   <TableCell component="td" scope="row">
                     {n.runtime_implementation}

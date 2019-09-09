@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 import { UUID4 } from 'src/types';
+import { Typography } from '@material-ui/core';
+
 interface IProps {
     isNotebook: boolean;
+    observableUrl: string;
     jobId: UUID4 | null;
 }
 
@@ -18,7 +21,23 @@ class Observable extends Component<IProps, IState> {
         import {Runtime, Inspector} from "https://cdn.jsdelivr.net/npm/@observablehq/runtime@4/dist/runtime.js";
         import notebook from 'https://api.observablehq.com/@pushpanjalip/frb-detection-visualization-with-zoom.js?v=3';
         if(${isNotebook}) {
-            const main = new Runtime().module(notebook, Inspector.into(document.getElementById('chart${id}')))
+            const renders = {
+                "xAxisLabel":"x-label",
+                "viewof axisX": "axisX",
+                "yAxisLabel":"y-label",
+                "viewof axisY": "axisY",
+                "viewof dotSize": "dotSize",
+                "chart": "chart",
+                "note": "note",
+                "viewof datatable": "datatable",
+              };
+              const main = new Runtime().module(notebook, (name) => {
+                  console.log(name)
+                const selector = renders[name];
+                if (selector) {
+                  return new Inspector(document.getElementById(selector));
+                }
+              });
             main.redefine("job_Id",'${id}')
         }
         else {
@@ -35,13 +54,28 @@ class Observable extends Component<IProps, IState> {
         document.body.appendChild(script);
     }
     render() {
-
-        return (
+        const notebook = (
+            <>
+                <Typography component="p" align="right">
+                    <a href={this.props.observableUrl} target="_blank">Edit in Observable</a>
+                </Typography>
+                <div id="x-label" />
+                <div id="axisX" />
+                <div id="y-label" />
+                <div id="axisY" />
+                <div id="dotSize" />
+                <div id="chart" />
+                <p id="note" />
+                <div id="datatable" />
+            </>
+        );
+        const visualization = (
             <>
                 <div id={'slider' + this.props.jobId} />
                 <div id={'chart' + this.props.jobId} />
             </>
-        );
+        )
+        return this.props.isNotebook ? notebook : visualization;
     }
 }
 

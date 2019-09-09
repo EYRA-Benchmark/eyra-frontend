@@ -49,6 +49,10 @@ class MyDocument extends Document {
             rel="stylesheet"
             href="/static/style/nprogress.css"
           />
+          <link
+            rel="stylesheet"
+            href="/static/style/observable.css"
+          />
           {/*<link*/}
           {/*  rel="stylesheet"*/}
           {/*  href="https://use.fontawesome.com/releases/v5.1.0/css/all.css"*/}

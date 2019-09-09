@@ -1,0 +1,39 @@
+:root{
+    --sans-serif: -apple-system,BlinkMacSystemFont,"avenir next",avenir,helvetica,"helvetica neue",ubuntu,roboto,noto,"segoe ui",arial,sans-serif;
+    --syntax_key:#6636b4;
+    --mono_fonts:82%/1.5 Menlo,Consolas,monospace
+}
+.pretty-table {
+    font-family: var(--sans-serif)
+}
+.pretty-table tr:not(:last-child) {
+        border-bottom: 1px solid #eee;
+    }
+
+.observablehq {
+    position: relative;
+    margin: 17px 0;
+    min-height: 33px;
+}
+.observablehq:before {
+    content: "";
+    position: absolute;
+    left: -14px;
+    height: 100%;
+    width: 4px;
+    background-color: none;
+    transition: background-color .25s linear;
+}
+.observablehq--inspect {
+    font: var(--mono_fonts);
+    overflow-x: auto;
+    display: block;
+    padding: 6px 0;
+    white-space: pre;
+}
+.observablehq--inspect a {
+    cursor: pointer;
+}
+.observablehq--index, .observablehq--key {
+    color: var(--syntax_key);
+}
