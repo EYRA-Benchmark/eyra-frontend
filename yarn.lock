@@ -693,12 +693,12 @@
   version "0.7.2"
   resolved "https://registry.yarnpkg.com/@emotion/hash/-/hash-0.7.2.tgz#53211e564604beb9befa7a4400ebf8147473eeef"
 
-"@material-ui/core@^4.4.0":
-  version "4.4.0"
-  resolved "https://registry.yarnpkg.com/@material-ui/core/-/core-4.4.0.tgz#820b6ee91da9eaf4018ff9e87e6ca04fc985e35a"
+"@material-ui/core@^4.4.1":
+  version "4.4.1"
+  resolved "https://registry.yarnpkg.com/@material-ui/core/-/core-4.4.1.tgz#cc9b8e417ced1ab3145fdeda41a6aee657d3524b"
   dependencies:
     "@babel/runtime" "^7.4.4"
-    "@material-ui/styles" "^4.3.3"
+    "@material-ui/styles" "^4.4.1"
     "@material-ui/system" "^4.3.3"
     "@material-ui/types" "^4.1.1"
     "@material-ui/utils" "^4.4.0"
@@ -720,9 +720,9 @@
   dependencies:
     "@babel/runtime" "^7.2.0"
 
-"@material-ui/styles@^4.1.1", "@material-ui/styles@^4.3.3":
-  version "4.3.3"
-  resolved "https://registry.yarnpkg.com/@material-ui/styles/-/styles-4.3.3.tgz#39867dd6f3779a8326075e097d72208d3c5b4977"
+"@material-ui/styles@^4.1.1", "@material-ui/styles@^4.4.1":
+  version "4.4.1"
+  resolved "https://registry.yarnpkg.com/@material-ui/styles/-/styles-4.4.1.tgz#a53fb39e373636bd2c296a78c54afecb80f68446"
   dependencies:
     "@babel/runtime" "^7.4.4"
     "@emotion/hash" "^0.7.1"
