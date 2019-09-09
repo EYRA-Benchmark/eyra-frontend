@@ -5033,15 +5033,15 @@ prismic-javascript@^2.0.3:
     cross-fetch "^2.2.3"
     promise-polyfill "8.0.0"
 
-prismic-reactjs@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/prismic-reactjs/-/prismic-reactjs-1.0.0.tgz#e494d307fe52f317e5267141e6eebfabfc49f77c"
+prismic-reactjs@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/prismic-reactjs/-/prismic-reactjs-1.1.0.tgz#e3dbff1287434399d773597be5b80d724a98f23a"
   dependencies:
     prismic-helpers "^1.0.0"
-    prismic-richtext "^1.0.1"
+    prismic-richtext "^1.0.3"
     prop-types "^15.7.2"
 
-prismic-richtext@^1.0.1:
+prismic-richtext@^1.0.3:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/prismic-richtext/-/prismic-richtext-1.0.3.tgz#ce8c8c18d65b01f1036f222b993ad2de700199fe"
   dependencies:
