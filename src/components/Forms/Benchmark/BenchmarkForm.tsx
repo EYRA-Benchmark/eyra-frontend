@@ -8,7 +8,7 @@ import {
   Dialog,
   DialogContent,
 } from '@material-ui/core';
-import styles from './BenchmarkForm.css';
+import styles from '../styles.css';
 import { comicApi } from 'src/services/comicApi';
 import { IBenchmark } from 'src/types';
 interface IProps {

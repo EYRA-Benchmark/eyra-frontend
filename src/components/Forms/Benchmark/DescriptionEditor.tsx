@@ -4,7 +4,7 @@ import {
     Paper,
     TextField,
 } from '@material-ui/core';
-import styles from './BenchmarkForm.css';
+import styles from '../styles.css';
 import {
     Edit as EditIcon,
     Visibility as VisibilityIcon,

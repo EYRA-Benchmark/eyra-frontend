@@ -1,0 +1,59 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+  }
+  .imageContainer {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 20px;
+  }
+  .imageContainer label {
+    flex: 1;
+  }
+  .imageContainer input {
+    flex: 4;
+  }
+  .thumbnailContainer {
+    display: flex;
+    flex-direction: column;
+    flex: 3.5;
+    justify-content: space-around;
+  }
+  .inputContainer {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+  .inputContainer label {
+    flex: 1;
+  }
+  
+  .inputContainer input {
+    padding: 0 10px;
+    height: 30px;
+    border-radius: 5px;
+    flex: 8;
+    font-size: 15px;
+  }
+  .descContainer {
+    flex: 8;
+    padding: 10px;
+    position: relative;
+  }
+  .desc {
+    overflow-y: auto;
+    max-height: 500px;
+    width: 100%;
+  }
+  .fabRoot {
+    position: absolute !important;
+    z-index: 1;
+    right: 0;
+    top: 0;
+  }
+  .label {
+    color: #fff;
+  }
+  
