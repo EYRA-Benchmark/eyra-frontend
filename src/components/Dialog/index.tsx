@@ -10,7 +10,6 @@ import {
 
 import Slide from '@material-ui/core/Slide';
 import styles from './styles.css';
-import { style } from '@material-ui/system';
 interface IProps {
     title: string;
     print: boolean;

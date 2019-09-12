@@ -1,0 +1,12 @@
+#suggestions {
+    border: 1px solid #ccc;
+    padding: 5px;
+    border-radius: 5px;
+}
+#suggestions li {
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 5px; 
+}
+#suggestions li:last-child {
+    border: 0;
+}

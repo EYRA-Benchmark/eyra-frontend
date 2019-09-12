@@ -1,5 +1,6 @@
 
 import React, { Component } from 'react';
+import SuggestionList from './SuggestionList/';
 import styles from './styles.css';
 import { FieldProps } from 'formik';
 const ENTER_KEY = 13;
@@ -10,17 +11,28 @@ type Change_Event = React.ChangeEvent<HTMLInputElement>;
 interface IState {
     tags: string[];
     value: string;
+    filteredSuggestions: string[];
+    showSuggestion: boolean;
 }
 
 export default class InputTags extends Component<FieldProps, IState> {
     state = {
-        tags: ['tag1', 'tag2'],
+        tags: ['tag1'],
         value: '',
+        suggestions: ['Algorithms', 'data', 'scans', 'Iris', 'FRB'],
+        filteredSuggestions: [],
+        showSuggestion: false,
     };
     // On input change set the value
     handleChange = (event: Change_Event) => {
+        const userInput = event.target.value;
+        const filteredSuggestions = this.state.suggestions.filter((tag) =>
+            tag.toLowerCase().indexOf(userInput.toLowerCase()) > -1,
+        );
         this.setState({
-            value: event.target.value,
+            value: userInput,
+            filteredSuggestions,
+            showSuggestion: true,
         });
     }
     // Handle Enter Key Event
@@ -57,16 +69,16 @@ export default class InputTags extends Component<FieldProps, IState> {
     }
     deletePrevTag = () => {
         const { tags } = this.state;
-        const tag = tags.pop();
+        tags.pop();
         this.setState({
             tags,
-            value: tag,
+            value: '',
         });
 
     }
 
     render() {
-        const { tags, value } = this.state;
+        const { tags, value, filteredSuggestions, showSuggestion } = this.state;
         return (
             <div className={styles.tagsContainer}>
                 <div className={styles.tags}>
@@ -79,6 +91,20 @@ export default class InputTags extends Component<FieldProps, IState> {
                         className={styles.tagInput}
                         onKeyUp={this.handleKeyUp}
                         onKeyDown={this.handleKeyDown}
+                    />
+                    <SuggestionList
+                        filterSuggestions={filteredSuggestions}
+                        userInput={value}
+                        showSuggestions={showSuggestion}
+                        selectTag={(event) => {
+                            this.setState({
+                                showSuggestion: false,
+                                filteredSuggestions: [],
+                                value: event.currentTarget.innerText,
+                            }, () => {
+                                this.addTag();
+                            });
+                        }}
                     />
                     <div>
                         {
@@ -94,7 +120,6 @@ export default class InputTags extends Component<FieldProps, IState> {
                 </div>
 
             </div>
-        )
+        );
     }
 }
-
