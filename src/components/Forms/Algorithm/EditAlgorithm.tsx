@@ -5,6 +5,7 @@ import { Button } from '@material-ui/core';
 import { IAlgorithm } from 'src/types';
 import styles from '../styles.css';
 import InputTags from '../../InputTags/InputTags';
+import { comicApi } from 'src/services/comicApi';
 interface IProps {
     algorithm: IAlgorithm;
 }
@@ -13,9 +14,9 @@ interface IValues {
     id: string;
     name: string;
     description: string;
-    linkToSource: string;
-    linkToPaper: string;
-    keywords: string[];
+    source_code_link: string;
+    paper_link: string;
+    tags: string[];
 }
 
 const onSubmit = async (
@@ -23,10 +24,8 @@ const onSubmit = async (
     { setSubmitting }: FormikActions<IValues>,
 ) => {
     console.log(values);
-    const formdata = new FormData();
-    formdata.append('name', values.name);
-    formdata.append('description', values.description);
-
+    const algorithm = await comicApi.create_algorithm(values);
+    console.log(algorithm);
     setSubmitting(false);
 };
 
@@ -44,9 +43,9 @@ class EditAlgorithm extends React.Component<IProps> {
             id,
             name,
             description: desc,
-            linkToSource: '',
-            linkToPaper: '',
-            keywords: [],
+            source_code_link: '',
+            paper_link: '',
+            tags: [],
         };
 
         return (
@@ -72,23 +71,23 @@ class EditAlgorithm extends React.Component<IProps> {
                                 />
                             </div>
                             <div className={styles.inputContainer}>
-                                <label htmlFor="linkToSource">Link To Source Code</label>
+                                <label htmlFor="source_code_link">Link To Source Code</label>
                                 <Field
-                                    name="linkToSource"
+                                    name="source_code_link"
                                     type="text"
                                     placeholder="link To Source"
                                 />
                             </div>
                             <div className={styles.inputContainer}>
-                                <label htmlFor="linkToPaper">Link To Paper/Blog</label>
+                                <label htmlFor="paper_link">Link To Paper/Blog</label>
                                 <Field
-                                    name="linkToPaper"
+                                    name="paper_link"
                                     type="text"
                                     placeholder="link To Paper or Blog"
                                 />
                             </div>
                             <div className={styles.inputContainer}>
-                                <label htmlFor="keywords">Keywords</label>
+                                <label htmlFor="tags">Keywords</label>
                                 <Field
                                     component={InputTags}
                                 />

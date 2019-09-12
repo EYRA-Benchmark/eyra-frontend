@@ -58,18 +58,16 @@ export default class InputTags extends Component<FieldProps, IState> {
             value: '',
             tags,
         });
-        this.props.form.setFieldValue('keywords', tags);
+        this.props.form.setFieldValue('tags', tags);
     }
-
-    handleKeyDown = (event: Keyboard_Event) => {
-        const key = event.keyCode;
-        if (key === BACKSPACE_KEY && !this.state.value) {
-            this.deletePrevTag();
-        }
-    }
-    deletePrevTag = () => {
+    deletePrevTag = (event: React.MouseEvent<HTMLElement>) => {
         const { tags } = this.state;
-        tags.pop();
+        if (event.currentTarget.parentElement !== null) {
+            const tagToDelete = event.currentTarget.parentElement.innerText;
+            const index = tags.indexOf(tagToDelete);
+            tags.splice(index, 1);
+        }
+
         this.setState({
             tags,
             value: '',
@@ -90,7 +88,6 @@ export default class InputTags extends Component<FieldProps, IState> {
                         ref={() => 'tag'}
                         className={styles.tagInput}
                         onKeyUp={this.handleKeyUp}
-                        onKeyDown={this.handleKeyDown}
                     />
                     <SuggestionList
                         filterSuggestions={filteredSuggestions}
