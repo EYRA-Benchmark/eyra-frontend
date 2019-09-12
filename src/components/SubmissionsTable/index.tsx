@@ -99,7 +99,6 @@ class SubmissionsTable extends React.Component<IProps, IState> {
       this.setState({ rowsPerPage: +event.target.value });
       this.setState({ page: 0 });
     };
-    debugger;
     return (
       <Paper>
 

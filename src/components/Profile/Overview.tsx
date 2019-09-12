@@ -11,6 +11,7 @@ interface IProps {
     algorithms: IAlgorithm[];
     benchmarks: IBenchmark[];
     loadMore: (index: number) => void;
+    onEdit: (algorithm: IAlgorithm) => void;
 }
 const Overview = (props: IProps) => {
     const { submissions, algorithms, benchmarks } = props;
@@ -34,7 +35,7 @@ const Overview = (props: IProps) => {
                 <a onClick={() => props.loadMore(2)} className={styles.link}>More Submissions ></a> : null}
             <Typography variant="h5" component="h5">My Algorithms</Typography>
             {algorithms.length > 0 ?
-                <AlgorithmsTable algorithms={algorithms} />
+                <AlgorithmsTable algorithms={algorithms} onEdit={props.onEdit} showMore={false} />
                 : <p>No Algorithms found</p>}
             {algorithms.length > 3 ?
                 <a onClick={() => props.loadMore(3)} className={styles.link}>More Algorithms ></a> : null}

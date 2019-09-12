@@ -10,16 +10,14 @@ import ProfileTabs from '../../components/Profile/ProfileTabs';
 import Benchmarks from '../../components/Profile/Benchmarks';
 import SubmissionsTable from '../../components/SubmissionsTable';
 import AlgorithmsTable from 'src/components/AlgorithmsTable';
-// interface IProps {
-//   submissions: INestedSubmission[];
-//   algorithms: IAlgorithm[];
-//   benchmarks: IBenchmark[];
-// }
+import VisualizationDialog from 'src/components/Dialog';
+import EditAlgorithm from 'src/components/Forms/Algorithm/EditAlgorithm';
 interface IState {
   activeIndex: number;
   submissions: INestedSubmission[];
   benchmarks: IBenchmark[];
   algorithms: IAlgorithm[];
+  algorithmToEdit: IAlgorithm | null;
 }
 
 function TabContainer(props: any) {
@@ -35,6 +33,7 @@ class Profile extends React.Component<IUserProps, IState> {
     submissions: [],
     benchmarks: [],
     algorithms: [],
+    algorithmToEdit: null,
   };
 
   async refresh(props: IUserProps) {
@@ -59,11 +58,14 @@ class Profile extends React.Component<IUserProps, IState> {
     window.scrollTo(0, 0);
     this.setState({ activeIndex: index });
   }
-
+  onEdit = (algorithm: IAlgorithm) => {
+    console.log(algorithm)
+    this.setState({ algorithmToEdit: algorithm });
+  }
   handleTabChange = (_: any, activeIndex: number) => this.setState({ activeIndex });
 
   public render() {
-    const { activeIndex, submissions, benchmarks, algorithms } = this.state;
+    const { activeIndex, submissions, benchmarks, algorithms, algorithmToEdit } = this.state;
     const myBenchmarks = benchmarks.filter(
       (benchmark: IBenchmark) =>
         benchmark.permissions.indexOf('change_benchmark') > -1,
@@ -73,6 +75,15 @@ class Profile extends React.Component<IUserProps, IState> {
     return (
       <Container>
         <Paper>
+          {algorithmToEdit ?
+            <VisualizationDialog
+              title={'Algorithm'}
+              print={false}
+              onClose={() => { this.setState({ algorithmToEdit: null }); }}
+            >
+              <EditAlgorithm algorithm={algorithmToEdit!} />
+            </VisualizationDialog> : null
+          }
           <Grid container={true} spacing={3}>
             <Grid item={true} xs={12} lg={3} md={3} style={{ borderRight: '1px solid #ccc', paddingRight: 0 }}>
               <UserConsumer>
@@ -90,6 +101,7 @@ class Profile extends React.Component<IUserProps, IState> {
                   algorithms={algorithms}
                   submissions={submissions}
                   benchmarks={myBenchmarks}
+                  onEdit={this.onEdit}
                 />
               </TabContainer>
               }
@@ -107,7 +119,7 @@ class Profile extends React.Component<IUserProps, IState> {
                 </TabContainer>}
               {activeIndex === 3 &&
                 <TabContainer>{algorithms.length > 0 ?
-                  <AlgorithmsTable algorithms={algorithms} />
+                  <AlgorithmsTable algorithms={algorithms} onEdit={this.onEdit} showMore={true} />
                   : <p>No Algorithms Found</p>}
                 </TabContainer>}
             </Grid>
