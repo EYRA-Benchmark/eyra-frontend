@@ -4,6 +4,7 @@ import React from 'react';
 import { Button } from '@material-ui/core';
 import { IAlgorithm } from 'src/types';
 import styles from '../styles.css';
+import InputTags from '../../InputTags/InputTags';
 interface IProps {
     algorithm: IAlgorithm;
 }
@@ -11,18 +12,21 @@ interface IProps {
 interface IValues {
     id: string;
     name: string;
-    // short_description: string;
     description: string;
+    linkToSource: string;
+    linkToPaper: string;
+    keywords: string[];
 }
 
 const onSubmit = async (
     values: IValues,
     { setSubmitting }: FormikActions<IValues>,
 ) => {
+    console.log(values);
     const formdata = new FormData();
     formdata.append('name', values.name);
     formdata.append('description', values.description);
-    // formdata.append('short_description', values.short_description);
+
     setSubmitting(false);
 };
 
@@ -40,12 +44,15 @@ class EditAlgorithm extends React.Component<IProps> {
             id,
             name,
             description: desc,
+            linkToSource: '',
+            linkToPaper: '',
+            keywords: [],
         };
 
         return (
             <Formik initialValues={initialValues} onSubmit={onSubmit}>
-                {({ isSubmitting, setFieldValue, values }) => (
-                    <Form>
+                {({ isSubmitting, setFieldValue, values, submitForm }) => (
+                    <Form action="#">
                         <div className={styles.container} style={{ width: '70%' }}>
                             <div className={styles.inputContainer}>
                                 <label htmlFor="name">Name</label>
@@ -65,11 +72,34 @@ class EditAlgorithm extends React.Component<IProps> {
                                 />
                             </div>
                             <div className={styles.inputContainer}>
+                                <label htmlFor="linkToSource">Link To Source Code</label>
+                                <Field
+                                    name="linkToSource"
+                                    type="text"
+                                    placeholder="link To Source"
+                                />
+                            </div>
+                            <div className={styles.inputContainer}>
+                                <label htmlFor="linkToPaper">Link To Paper/Blog</label>
+                                <Field
+                                    name="linkToPaper"
+                                    type="text"
+                                    placeholder="link To Paper or Blog"
+                                />
+                            </div>
+                            <div className={styles.inputContainer}>
+                                <label htmlFor="keywords">Keywords</label>
+                                <Field
+                                    component={InputTags}
+                                />
+                            </div>
+                            <div className={styles.inputContainer}>
                                 <Button
                                     variant="outlined"
                                     color="primary"
                                     disabled={isSubmitting}
-                                    type="submit"
+                                    type="button"
+                                    onClick={submitForm}
                                 >
                                     Save
                                 </Button>

@@ -10,6 +10,7 @@ import {
 
 import Slide from '@material-ui/core/Slide';
 import styles from './styles.css';
+import { style } from '@material-ui/system';
 interface IProps {
     title: string;
     print: boolean;
@@ -40,7 +41,7 @@ const VisualizationDialog = (props: IProps) => {
             aria-describedby="alert-dialog-slide-description"
         >
             <div style={{ display: 'flex' }}>
-                <DialogTitle id="alert-dialog-slide-title">
+                <DialogTitle id="alert-dialog-slide-title" style={{ flex: 5, textAlign: 'center' }}>
                     {props.title}
                 </DialogTitle>
                 <DialogActions className={styles.hide} style={{ flex: 1 }}>
