@@ -105,8 +105,8 @@ class LeaderboardTable extends React.Component<IProps, IState> {
       };
     });
 
-    let sortedData = sortBy(data, order);
-    if (orderBy === 'desc') {
+    let sortedData = sortBy(data, orderBy);
+    if (order === 'desc') {
       sortedData = sortedData.reverse();
     }
 
