@@ -1,10 +1,10 @@
 import * as React from 'react';
 // import { Typography } from "@material-ui/core";
 // import { comicApi } from '../../services/comicApi';
-import styles from '../Home/Home.css';
-import { IDataset } from '../../types/dataset';
+import styles from '../Home.css';
+import { IDataset } from 'src/types/dataset';
 
-import Spinner from '../../components/Spinner';
+import Spinner from 'src/components/Spinner';
 
 interface IState {
   dataset: IDataset;

@@ -24,37 +24,9 @@ import JobLogDialog from 'src/components/JobLogDialog';
 import Observable from 'src/components/Observables';
 import CompareDialog from '../CompareDialog';
 import VisualizationDialog from '../../Dialog/';
-// https://material-ui.com/components/tables/#EnhancedTable.tsx
-export function desc<T>(a: T, b: T, orderBy: keyof T) {
-  if (b[orderBy] < a[orderBy]) {
-    return -1;
-  }
-  if (b[orderBy] > a[orderBy]) {
-    return 1;
-  }
-  return 0;
-}
+import { sortBy } from 'lodash';
 
-export function stableSort<T>(array: T[], cmp: (a: T, b: T) => number) {
-  const stabilizedThis = array.map((el, index) => [el, index] as [T, number]);
-  stabilizedThis.sort((a, b) => {
-    const order = cmp(a[0], b[0]);
-    if (order !== 0) {
-      return order;
-    }
-    return a[1] - b[1];
-  });
-  return stabilizedThis.map((el) => el[0]);
-}
-
-export type Order = 'asc' | 'desc';
-
-export function getSorting<K extends keyof any>(
-  order: Order,
-  orderBy: K,
-): (a: { [key in K]: number | string }, b: { [key in K]: number | string }) => number {
-  return order === 'desc' ? (a, b) => desc(a, b, orderBy) : (a, b) => -desc(a, b, orderBy);
-}
+type Order = 'asc' | 'desc';
 
 interface IState {
   order: Order;
@@ -67,6 +39,7 @@ interface IState {
   showComparision: boolean;
   rowsPerPage: number;
   page: number;
+  open: boolean;
 }
 interface IProps extends WithStyles<typeof styles> {
   classes: any;
@@ -83,7 +56,7 @@ type IDataRow = {
 } & { [label: string]: string };
 
 class LeaderboardTable extends React.Component<IProps, IState> {
-  state = {
+  state: IState = {
     order: 'asc' as Order,
     orderBy: 'score',
     openJobLogID: null,
@@ -132,7 +105,11 @@ class LeaderboardTable extends React.Component<IProps, IState> {
       };
     });
 
-    const sortedData = stableSort(data, getSorting(order, orderBy));
+    let sortedData = sortBy(data, order);
+    if (orderBy === 'desc') {
+      sortedData = sortedData.reverse();
+    }
+
     const isSelected = (id: string) => selected.indexOf(id) !== -1;
 
     const emptyRows = rowsPerPage - Math.min(rowsPerPage, data.length - page * rowsPerPage);

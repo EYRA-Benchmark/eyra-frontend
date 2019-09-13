@@ -21,7 +21,7 @@ jobs:
       script: true
     - stage: "Static analysis"
       name: "Typecheck"
-      script: yarn tsc --noEmit
+      script: yarn typecheck
     - name: "Lint"
       script: yarn lint
 #    - stage: "Tests"

@@ -3,6 +3,7 @@ import Observable from 'src/components/Observables';
 import { Paper, Typography } from '@material-ui/core';
 import { INestedSubmission } from '..';
 import styles from './styles.css';
+
 interface IProps {
     items: INestedSubmission[];
 }

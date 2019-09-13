@@ -30,5 +30,5 @@ const SuggestionList = (props: IProps) => {
         }
     }
     return content;
-}
+};
 export default SuggestionList;

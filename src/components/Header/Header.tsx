@@ -3,7 +3,7 @@ import { Menu as MenuIcon } from '@material-ui/icons';
 import * as React from 'react';
 import Navbar from '../Navigation/NavigationMenu/NavigationMenu';
 import styles from './Header.css';
-import { withRouter, WithRouterProps } from 'next/router';
+import { withRouter, SingletonRouter } from 'next/router';
 import classNames from 'classnames';
 import { Link } from 'src/routes';
 
@@ -16,7 +16,7 @@ export interface IState {
   showSideDrawer: boolean;
 }
 
-class Header extends React.Component<IOwnProps & WithRouterProps, IState> {
+class Header extends React.Component<IOwnProps & { router: SingletonRouter }, IState> {
   state = {
     isShrink: false,
     showSideDrawer: false,

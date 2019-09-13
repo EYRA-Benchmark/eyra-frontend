@@ -16,8 +16,9 @@ import CheckIcon from '@material-ui/icons/CheckCircle';
 import JobLogDialog from 'src/components/JobLogDialog';
 import FailedIcon from '@material-ui/icons/Close';
 import PendingIcon from '@material-ui/icons/HourglassEmpty';
-import { Order, getSorting, stableSort } from '../../components/Leaderboard/LeaderboardTable/LeaderboardTable';
 import SubmissionHeader from './SubmissionHeader';
+import { sortBy } from 'lodash';
+
 interface IProps {
   submissions: INestedSubmission[];
   showMore: boolean;
@@ -47,6 +48,9 @@ const timeDiff = (date1: string, date2: string): string => {
   const duration = moment.duration(moment(date2).diff(moment(date1)));
   return `${pad(duration.hours())}:${pad(duration.minutes())}:${pad(duration.seconds())}`;
 };
+
+type Order = 'asc' | 'desc';
+
 interface IState {
   order: Order;
   orderBy: string;
@@ -56,8 +60,8 @@ interface IState {
 }
 
 class SubmissionsTable extends React.Component<IProps, IState> {
-  state = {
-    order: 'asc' as Order,
+  state: IState = {
+    order: 'asc',
     orderBy: 'benchmark',
     rowsPerPage: 3,
     page: 0,
@@ -65,13 +69,13 @@ class SubmissionsTable extends React.Component<IProps, IState> {
   };
   handleRequestSort = (event: any, property: any) => {
     const orderBy = property;
-    let order = 'desc';
+    let order: Order = 'desc';
 
     if (this.state.orderBy === property && this.state.order === 'desc') {
       order = 'asc';
     }
 
-    this.setState({ order: order as Order, orderBy });
+    this.setState({ order, orderBy });
   }
 
   render() {
@@ -90,7 +94,12 @@ class SubmissionsTable extends React.Component<IProps, IState> {
         action: submission.implementation_job.id,
       };
     });
-    const sortedData = stableSort(data, getSorting(order, orderBy));
+
+    let sortedData = sortBy(data, order);
+    if (orderBy === 'desc') {
+      sortedData = sortedData.reverse();
+    }
+
     const handleChangePage = (event: unknown, newPage: number) => {
       this.setState({ page: newPage });
     };

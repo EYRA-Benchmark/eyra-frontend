@@ -59,7 +59,7 @@ class Profile extends React.Component<IUserProps, IState> {
     this.setState({ activeIndex: index });
   }
   onEdit = (algorithm: IAlgorithm) => {
-    console.log(algorithm)
+    console.log(algorithm);
     this.setState({ algorithmToEdit: algorithm });
   }
   handleTabChange = (_: any, activeIndex: number) => this.setState({ activeIndex });

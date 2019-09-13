@@ -4,7 +4,7 @@ import { Typography } from '@material-ui/core';
 
 interface IProps {
     isNotebook: boolean;
-    observableUrl: string;
+    observableUrl?: string;
     jobId: UUID4 | null;
 }
 
@@ -74,7 +74,7 @@ class Observable extends Component<IProps, IState> {
                 <div id={'slider' + this.props.jobId} />
                 <div id={'chart' + this.props.jobId} />
             </>
-        )
+        );
         return this.props.isNotebook ? notebook : visualization;
     }
 }

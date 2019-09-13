@@ -1,5 +1,4 @@
 // @ts-ignore
-const withTypescript = require("@zeit/next-typescript");
 const withCSS = require("@zeit/next-css");
 
 // const infiProxy = () => new Proxy({}, {
@@ -9,7 +8,7 @@ const withCSS = require("@zeit/next-css");
 // window = infiProxy();
 // document = infiProxy();
 
-module.exports = withTypescript(withCSS({
+module.exports = withCSS({
   cssLoaderOptions: {
     localIdentName: "[name]__[local]--[hash:base64:5]",
   },
@@ -25,7 +24,7 @@ module.exports = withTypescript(withCSS({
     mySecret: "secret",
     secondSecret: process.env.SECOND_SECRET, // Pass through env variables
   },
-  useFileSystemPublicRoutes: false,
+  useFileSystemPublicRoutes: true,
   webpack: (config, options) => {
     config.module.rules.push({
       test: /.png|.jpg/,
@@ -39,4 +38,4 @@ module.exports = withTypescript(withCSS({
     });
     return config;
   },
-}));
+});

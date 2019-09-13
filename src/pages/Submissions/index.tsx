@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { NextContext } from 'next';
+import { NextPageContext } from 'next';
 
 import { comicApi } from 'src/services/comicApi';
 import { IJob, ISubmission, IBenchmark } from 'src/types';
@@ -37,7 +37,7 @@ export const getSubmissionsWithJobs = async (filters = {}) => {
 
 class Submissions extends React.Component<IProps, {}> {
 
-  static async getInitialProps(ctx: NextContext): Promise<IProps> {
+  static async getInitialProps(ctx: NextPageContext): Promise<IProps> {
     return { submissions: await getSubmissionsWithJobs() };
   }
 

@@ -6,7 +6,7 @@ import { formatDate } from '../../utils';
 import styles from './NewsDetails.css';
 import { IPrismicResult, INews } from '../../types/prismic';
 import { getPrismicClient } from 'src/services/prismicApi';
-import { NextContext } from 'next';
+import { NextPageContext } from 'next';
 import BreadCrumbs from 'src/components/BreadCrumbs';
 import Head from 'next/head';
 
@@ -19,14 +19,14 @@ interface IProps {
 }
 
 class NewsDetails extends React.Component<IProps> {
-  static async getInitialProps(ctx: NextContext<{ id: string }>): Promise<IProps> {
+  static async getInitialProps(ctx: NextPageContext): Promise<IProps> {
     const prismicApi = await getPrismicClient();
-    const prismicResponse: IPrismicResult<INews> = await prismicApi.getByUID('news', ctx.query.id);
+    const prismicResponse: IPrismicResult<INews> = await prismicApi.getByUID('news', ctx.query.id as string);
     return {
       title: prismicResponse.data.title,
       desc: prismicResponse.data.description,
       image: prismicResponse.data.image.url,
-      id: ctx.query.id,
+      id: ctx.query.id as string,
       date: formatDate(new Date(prismicResponse.data.date)),
     };
   }

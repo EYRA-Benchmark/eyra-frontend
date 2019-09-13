@@ -1,11 +1,11 @@
 import * as React from 'react';
-import { NextContext } from 'next';
+import { NextPageContext } from 'next';
 import Head from 'next/head';
-import { comicApi } from '../../services/comicApi';
-import { IBenchmark } from '../../types/benchmark';
+import { comicApi } from 'src/services/comicApi';
+import { IBenchmark } from 'src/types/benchmark';
 
 import { Container } from '@material-ui/core';
-import Details from './DetailsLayout';
+import Details from 'src/components/BenchmarkDetailsLayout';
 import BreadCrumbs from 'src/components/BreadCrumbs';
 
 interface IProps {
@@ -13,9 +13,9 @@ interface IProps {
 }
 
 export default class BenchmarkDetails extends React.Component<IProps> {
-  static async getInitialProps(ctx: NextContext<{ id: string }>): Promise<IProps> {
+  static async getInitialProps(ctx: NextPageContext): Promise<IProps> {
     return {
-      benchmark: await comicApi.benchmark(ctx.query.id),
+      benchmark: await comicApi.benchmark(ctx.query.id as string),
     };
   }
 

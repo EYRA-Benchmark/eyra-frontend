@@ -1,4 +1,4 @@
-import App, { Container, NextAppContext } from 'next/app';
+import App from 'next/app';
 import React from 'react';
 import { ThemeProvider } from '@material-ui/styles';
 import { CssBaseline } from '@material-ui/core';
@@ -8,20 +8,22 @@ import SideDrawer from 'src/components/SideDrawer/SideDrawer';
 import Footer from 'src/components/Footer/Footer';
 
 import theme from 'src/theme';
-import Router from 'next/router';
+import { Router } from 'next/router';
 
 import NProgress from 'nprogress';
 
 import styles from './root.css';
 
 NProgress.configure({ easing: 'ease', speed: 500 });
-Router.onRouteChangeStart = () => NProgress.start();
-Router.onRouteChangeError = () => NProgress.done();
+Router.events.on('routeChangeStart', () => NProgress.start());
+Router.events.on('routeChangeError', () => NProgress.done());
+
 export interface IState {
   showSideDrawer: boolean;
 }
-export default class MyApp extends App<{}, IState> {
-  state = {
+
+export default class MyApp extends App<{}, {}, IState> {
+  state: IState = {
     showSideDrawer: false,
   };
   componentDidMount() {
@@ -30,7 +32,7 @@ export default class MyApp extends App<{}, IState> {
     // if (jssStyles && jssStyles.parentNode) {
     //   jssStyles.parentNode.removeChild(jssStyles);
     // }
-    Router.onRouteChangeComplete = (url) => {
+    Router.events.on('routeChangeComplete', (url) => {
       try {
         NProgress.done();
       } catch (e) {
@@ -44,22 +46,21 @@ export default class MyApp extends App<{}, IState> {
       } catch (error) {
         console.log(error);
       }
-    };
-  }
-  sideDrawerToggleHandler = () => {
-    this.setState((prevState) => {
-      return { showSideDrawer: !prevState.showSideDrawer };
     });
   }
-  static async getInitialProps({ Component, router, ctx }: NextAppContext) {
-    let pageProps = {};
-
-    if (Component.getInitialProps) {
-      pageProps = await Component.getInitialProps(ctx);
-    }
-
-    return { pageProps };
+  sideDrawerToggleHandler = () => {
+    this.setState({showSideDrawer: !this.state.showSideDrawer });
   }
+
+  // static async getInitialProps({ Component, router, ctx }: AppContext) {
+  //   let pageProps = {};
+  //
+  //   if (Component.getInitialProps) {
+  //     pageProps = await Component.getInitialProps(ctx);
+  //   }
+  //
+  //   return { pageProps };
+  // }
 
   render() {
     const { Component, pageProps, router } = this.props;
@@ -78,19 +79,17 @@ export default class MyApp extends App<{}, IState> {
       );
 
     return (
-      <Container>
-        <UserProvider>
-          <ThemeProvider theme={theme}>
-            <CssBaseline />
-            <Header drawerToggle={this.sideDrawerToggleHandler} />
-            <SideDrawer open={this.state.showSideDrawer} />
-            <Wrapper>
-              <Component {...pageProps} />
-            </Wrapper>
-            <Footer />
-          </ThemeProvider>
-        </UserProvider>
-      </Container>
+      <UserProvider>
+        <ThemeProvider theme={theme}>
+          <CssBaseline />
+          <Header drawerToggle={this.sideDrawerToggleHandler} />
+          <SideDrawer open={this.state.showSideDrawer} />
+          <Wrapper>
+            <Component {...pageProps} />
+          </Wrapper>
+          <Footer />
+        </ThemeProvider>
+      </UserProvider>
     );
   }
 }

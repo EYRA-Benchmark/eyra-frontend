@@ -1,5 +1,5 @@
 import React from 'react';
-import { NextContext } from 'next';
+import { NextPageContext } from 'next';
 import Error404 from 'src/components/Errors/Error404';
 
 interface IProps {
@@ -7,10 +7,9 @@ interface IProps {
 }
 
 export default class extends React.Component<IProps> {
-  static async getInitialProps(ctx: NextContext) {
+  static async getInitialProps(ctx: NextPageContext) {
     console.log('oops error', ctx.asPath, ctx.res!.statusCode);
     return {
-      ctx: ctx.jsonPageRes,
       path: ctx.asPath,
       statusCode: ctx.res!.statusCode,
       statusMessage: ctx.res!.statusMessage,

@@ -5,7 +5,6 @@ import styles from './styles.css';
 import { FieldProps } from 'formik';
 const ENTER_KEY = 13;
 const COMMA_KEY = 188;
-const BACKSPACE_KEY = 8;
 type Keyboard_Event = React.KeyboardEvent<HTMLInputElement>;
 type Change_Event = React.ChangeEvent<HTMLInputElement>;
 interface IState {

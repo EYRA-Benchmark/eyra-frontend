@@ -1,4 +1,4 @@
-import { NextContext } from 'next';
+import { NextPageContext } from 'next';
 import getConfig from 'next/config';
 import { comicApi } from 'src/services/comicApi';
 import { getPrismicClient } from 'src/services/prismicApi';
@@ -12,7 +12,7 @@ interface IProps {
   done: boolean;
 }
 
-Sitemap.getInitialProps = async ({ res }: NextContext): Promise<IProps> => {
+Sitemap.getInitialProps = async ({ res }: NextPageContext): Promise<IProps> => {
   const benchmarks = await comicApi.benchmarks();
   const client = await getPrismicClient();
   const response = await client.query(Prismic.Predicates.at('document.type', 'news'), {});
