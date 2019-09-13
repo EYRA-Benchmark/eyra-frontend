@@ -81,12 +81,10 @@
     ]
   },
   "lint-staged": {
-    "linters": {
-      "src/*.{ts,tsx}": [
-        "yarn lint",
-        "git add"
-      ]
-    }
+    "src/*.{ts,tsx}": [
+      "yarn lint",
+      "git add"
+    ]
   },
   "husky": {
     "hooks": {
