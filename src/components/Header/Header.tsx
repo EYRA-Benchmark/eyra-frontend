@@ -5,7 +5,7 @@ import Navbar from '../Navigation/NavigationMenu/NavigationMenu';
 import styles from './Header.css';
 import { withRouter, SingletonRouter } from 'next/router';
 import classNames from 'classnames';
-import { Link } from 'src/routes';
+import Link from 'next/link';
 
 export interface IOwnProps {
   drawerToggle: () => void;
@@ -59,7 +59,7 @@ class Header extends React.Component<IOwnProps & { router: SingletonRouter }, IS
       >
         <Toolbar className={styles.toolbar}>
           <div className={styles.logo}>
-            <Link route="home">
+            <Link href="/">
               <a title="Home"><img src="/static/images/logo.png" alt="logo" className={styles.logoImage} /></a>
             </Link>
           </div>

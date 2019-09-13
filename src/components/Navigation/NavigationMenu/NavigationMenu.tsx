@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Link } from 'src/routes';
+import Link from 'next/link';
 import { Menu, MenuItem } from '@material-ui/core';
 
 import { isLoggedIn, IUserProps, withUser } from 'src/context/User';
@@ -32,17 +32,17 @@ function NavigationMenu({ user, logout }: IUserProps) {
 
       <ul className={styles.nav}>
         <li>
-          <Link route="about">
+          <Link href="/about">
             <a>About Us</a>
           </Link>
         </li>
         <li>
-          <Link route="benchmarks">
+          <Link href="/benchmarks">
             <a>Benchmarks</a>
           </Link>
         </li>
         <li>
-          <Link route="tutorials">
+          <Link href="/tutorials">
             <a>Tutorials</a>
           </Link>
         </li>
@@ -65,7 +65,7 @@ function NavigationMenu({ user, logout }: IUserProps) {
                 onClose={handleClose}
               >
                 <MenuItem onClick={handleClose}>
-                  <Link route="/profile">
+                  <Link href="/profile">
                     <a>
                       Profile
                     </a>
