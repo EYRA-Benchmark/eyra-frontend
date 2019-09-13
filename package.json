@@ -6,7 +6,7 @@
     "build": "next build src",
     "dev": "next src dev",
     "start": "next src dev",
-    "start:production": "NODE_ENV=production yarn next start src",
+    "start:production": "NODE_ENV=production yarn next start -p 80 src",
     "test": "react-scripts test --env=jsdom",
     "lint": "tslint --project ./src",
     "cypress-install": "yarn add --peer @cypress/webpack-preprocessor@3.0.1 cypress@3.1.4",
