@@ -11,7 +11,7 @@ RUN yarn install
 COPY . .
 
 RUN yarn build
-CMD ["npm", "run", "start:production"]
+CMD ["yarn", "start:production"]
 
 #FROM nginx:stable-alpine
 #RUN apk --no-cache add ca-certificates
