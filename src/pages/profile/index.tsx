@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Paper, Container, Grid, Typography } from '@material-ui/core';
 import { IAlgorithm, IBenchmark } from 'src/types';
-import { getSubmissionsWithJobs, INestedSubmission } from 'src/pages/Submissions';
+import { getSubmissionsWithJobs, INestedSubmission } from 'src/pages/submissions';
 import { comicApi } from 'src/services/comicApi';
 import { UserConsumer, IUserProps, withUser } from '../../context/User';
 import UserDetails from 'src/components/Profile/UserDetails';

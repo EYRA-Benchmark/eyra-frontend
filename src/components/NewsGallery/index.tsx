@@ -6,7 +6,7 @@ import styles from './NewsGallery.css';
 import { INews, IPrismicResult } from 'src/types/prismic';
 import { formatDate } from 'src/utils';
 
-import { Link } from 'src/routes';
+import Link from 'next/link';
 
 const RichText = require('prismic-reactjs').RichText;
 
@@ -25,7 +25,7 @@ export class Gallery extends React.Component<
       <Grid container={true} spacing={3}>
         {data.map((card: IPrismicResult<INews>, index: number) => (
           <Grid item={true} key={index} xs={12} sm={4} md={4}>
-            <Link route="news" params={{ id: card.uid! }}>
+            <Link href="/news/[id]" as={`/news/${card.uid}`}>
               <a className={styles.link}>
                 <Card square={true} className={styles.card}>
                   <CardMedia

@@ -10,7 +10,7 @@ import {
   Icon,
   TablePagination,
 } from '@material-ui/core';
-import { INestedSubmission } from 'src/pages/Submissions';
+import { INestedSubmission } from 'src/pages/submissions';
 import { UUID4 } from 'src/types';
 import CheckIcon from '@material-ui/icons/CheckCircle';
 import JobLogDialog from 'src/components/JobLogDialog';
@@ -95,8 +95,8 @@ class SubmissionsTable extends React.Component<IProps, IState> {
       };
     });
 
-    let sortedData = sortBy(data, order);
-    if (orderBy === 'desc') {
+    let sortedData = sortBy(data, orderBy);
+    if (order === 'desc') {
       sortedData = sortedData.reverse();
     }
 

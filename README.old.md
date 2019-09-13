@@ -1,2 +1,0 @@
-# eyra-frontend
-EYRA Frontend

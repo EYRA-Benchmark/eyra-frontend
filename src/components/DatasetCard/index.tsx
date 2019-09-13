@@ -7,7 +7,7 @@ import {
 } from '@material-ui/icons';
 
 import styles from './DatasetCard.css';
-import { Link } from 'src/routes';
+import Link from 'next/link';
 
 interface IProps {
   dataset: IDataset;
@@ -20,7 +20,7 @@ export const DatasetCard = (props: IProps) => {
 
   return (
     <Card square={true} className={styles.card}>
-      <Link route="datasetDetails" params={{ id: dataset.id }}>
+      <Link href="/dataset/[id]" as={`/dataset/${dataset.id}`}>
         <a>
           <CardMedia
             className={styles.media}
@@ -50,14 +50,14 @@ export const getHeader = (dataset: IDataset) => (
     }}
     action={
       <div>
-        <Link route="datasetDetails" params={{ id: dataset.id }}>
+        <Link href="/dataset/[id]" as={`/dataset/${dataset.id}`}>
           <a>
             <IconButton title="Details">
               <DetailsIcon />
             </IconButton>
           </a>
         </Link>
-        <Link route="datasetEdit" params={{ id: dataset.id }}>
+        <Link href="/dataset/[id]/edit" as={`/dataset/${dataset.id}/edit`}>
           <a>
             <IconButton title="Edit">
               <EditIcon />

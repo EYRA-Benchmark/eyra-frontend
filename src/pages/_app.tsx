@@ -65,7 +65,7 @@ export default class MyApp extends App<{}, {}, IState> {
   render() {
     const { Component, pageProps, router } = this.props;
 
-    const Wrapper = (props: any) => router.route === '/Home'
+    const Wrapper = (props: any) => router.route === '/'
       ? <>{props.children}</>
       : (
         <div id="root_container">

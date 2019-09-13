@@ -1,8 +1,22 @@
-[![Maintainability](https://api.codeclimate.com/v1/badges/6d0e7385cd948a71e77f/maintainability)](https://codeclimate.com/github/EYRA-Benchmark/eyra-frontend/maintainability)
-[![Test Coverage](https://api.codeclimate.com/v1/badges/6d0e7385cd948a71e77f/test_coverage)](https://codeclimate.com/github/EYRA-Benchmark/eyra-frontend/test_coverage)
 [![Build Status](https://travis-ci.org/EYRA-Benchmark/eyra-frontend.svg?branch=master)](https://travis-ci.org/EYRA-Benchmark/eyra-frontend)
 
-This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
+This is the frontend for the [Eyra Benchmark Platform](https://www.eyrabenchmark.net).
 
-Below you will find some information on how to perform common tasks.<br>
-You can find the most recent version of this guide [here](https://github.com/facebookincubator/create-react-app/blob/master/packages/react-scripts/template/README.md).
+# Development
+## Requirements:
+- node (at least version 8)
+- yarn (``npm install -g yarn``)
+
+Clone this repository, from the cloned directory install dependencies using ``yarn install``.
+
+Then, start a development server using ``yarn start``. It should start running on `http://localhost:3000`.
+
+# Build
+Run `yarn build`.
+
+# Run production
+First `yarn build`, then run `yarn start:production`.
+
+# Configuration
+By default the [backend](https://www.github.com/EYRA-Benchmark/comic) running at `https://api.staging.eyrabenchmark.net/api/v1/` is used. This can be changed by setting the environmental variable
+`EYRA_BACKEND_URL`.

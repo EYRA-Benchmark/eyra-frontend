@@ -7,7 +7,7 @@ import {
 } from '@material-ui/icons';
 
 import styles from './BenchmarkCard.css';
-import { Link } from 'src/routes';
+import Link from 'next/link';
 
 interface IProps {
   benchmark: IBenchmark;
@@ -19,7 +19,7 @@ const canEdit = (benchmark: IBenchmark) =>
 export const BenchmarkCard = (props: IProps) => {
   const benchmark = props.benchmark;
   return (
-    <Link route="benchmarkDetails" params={{ id: benchmark.id }}>
+    <Link href="/benchmark/[id]" as={`/benchmark/${benchmark.id}`}>
       <a className={styles.links}>
         <Card square={true} className={styles.card}>
           <CardMedia
@@ -42,14 +42,14 @@ export const BenchmarkHeader = ({ benchmark }: { benchmark: IBenchmark }) => (
     }}
     action={canEdit(benchmark) &&
       <div>
-        <Link route="benchmarkDetails" params={{ id: benchmark.id }}>
+        <Link href="/benchmark/[id]" as={`/benchmark/${benchmark.id}`}>
           <a className={styles.link}>
             <IconButton title="Details">
               <DetailsIcon />
             </IconButton>
           </a>
         </Link>
-        <Link route="benchmarkEdit" params={{ id: benchmark.id }}>
+        <Link href="/benchmark/[id]/edit" as={`/benchmark/${benchmark.id}/edit`}>
           <a className={styles.link}>
             <IconButton title="Edit">
               <EditIcon />
