@@ -1,0 +1,16 @@
+.container {
+  padding: 20px;
+}
+.tableContainer {
+  overflow-x: auto;
+  border: 1px solid #ccc;
+}
+.tableContainer th,
+.tableContainer td {
+  border-right: 1px solid #ccc;
+}
+
+.tableContainer th:last-child,
+.tableContainer td:last-child {
+  border-right: none;
+}
