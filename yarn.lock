@@ -5812,7 +5812,7 @@ postcss-icss-selectors@^2.0.3:
     lodash "^4.17.4"
     postcss "^6.0.2"
 
-postcss-load-config@^2.0.0:
+postcss-load-config@^2.0.0, postcss-load-config@^2.1.0:
   version "2.1.0"
   resolved "https://registry.npmjs.org/postcss-load-config/-/postcss-load-config-2.1.0.tgz#c84d692b7bb7b41ddced94ee62e8ab31b417b003"
   integrity sha512-4pV3JJVPLd5+RueiVVB+gFOAa7GWc25XQcMp86Zexzke69mKf6Nx9LRcQywdz7yZI9n1udOxmLuAwTBypypF8Q==
@@ -7451,16 +7451,17 @@ typedarray@^0.0.6:
   resolved "https://registry.npmjs.org/typedarray/-/typedarray-0.0.6.tgz#867ac74e3864187b1d3d47d996a78ec5c8830777"
   integrity sha1-hnrHTjhkGHsdPUfZlqeOxciDB3c=
 
-typescript-plugin-css-modules@^1.2.0:
-  version "1.2.1"
-  resolved "https://registry.npmjs.org/typescript-plugin-css-modules/-/typescript-plugin-css-modules-1.2.1.tgz#ba1baa83de01c41099d3abcee86a62cbf892eb90"
-  integrity sha512-igWTWHAbwJI0Cx4eQFZar8HerN5AlqA9wS4gFQzKRYzgOUdYHBTPDJkuSryXmC6yyWDfUs+yJhfcLXCBncviKw==
+typescript-plugin-css-modules@^1.3.1:
+  version "1.3.1"
+  resolved "https://registry.yarnpkg.com/typescript-plugin-css-modules/-/typescript-plugin-css-modules-1.3.1.tgz#8d8260bb9e5958a34f882f817486b8dc8e52ccb8"
+  integrity sha512-XQuBdjhgBxBb2b8MT93yO63kf2jnhbug19lWmEoPBQXAY5C3pIopw3uDIUNnrRpt/v3zEQjez5pW4bokfotgbg==
   dependencies:
     icss-utils "^4.1.1"
     less "^3.9.0"
     lodash "^4.17.14"
     postcss "^7.0.17"
     postcss-icss-selectors "^2.0.3"
+    postcss-load-config "^2.1.0"
     reserved-words "^0.1.2"
     sass "^1.22.4"
 
