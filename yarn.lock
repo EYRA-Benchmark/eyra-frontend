@@ -5902,10 +5902,10 @@ prismic-javascript@^2.0.3:
     cross-fetch "^2.2.3"
     promise-polyfill "8.0.0"
 
-prismic-reactjs@^1.1.0:
-  version "1.1.0"
-  resolved "https://registry.npmjs.org/prismic-reactjs/-/prismic-reactjs-1.1.0.tgz#e3dbff1287434399d773597be5b80d724a98f23a"
-  integrity sha512-YaO7LumByUB/Evd8PR0mlLhBE0gB+YuEG6bZjHBWX8AvxIE5w1qpxBgB6W3DMLmA4AMB3jI46qNEbHZaevkHwQ==
+prismic-reactjs@^1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/prismic-reactjs/-/prismic-reactjs-1.1.1.tgz#598b54b611da0bda7591fff710f9ec4422cd2927"
+  integrity sha512-Z1JEmOFUjF4ylm9Rbt19bbRkpDIkDnlG4GJdlXIaD5uZAyW/q+tCWwYIYzuT8a1exod2SWQB7mXEXXCQo9xrgQ==
   dependencies:
     prismic-helpers "^1.0.0"
     prismic-richtext "^1.0.3"
