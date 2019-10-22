@@ -25,7 +25,7 @@ export class CardGrid extends React.Component<IProps, {}> {
     return (
       <Grid container={true} spacing={3}>
         {filteredBenchmarks.map((benchmark, index: number) => (
-          <Grid item={true} key={index} xs={12} sm={4} md={4}>
+          <Grid item={true} key={index} xs={12} sm={3} md={3}>
             <BenchmarkCard benchmark={benchmark} />
           </Grid>
         ))}

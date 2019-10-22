@@ -24,7 +24,7 @@ export class Gallery extends React.Component<
     return (
       <Grid container={true} spacing={3}>
         {data.map((card: IPrismicResult<INews>, index: number) => (
-          <Grid item={true} key={index} xs={12} sm={4} md={4}>
+          <Grid item={true} key={index} xs={12} sm={3} md={3}>
             <Link href="/news/[id]" as={`/news/${card.uid}`}>
               <a className={styles.link}>
                 <Card square={true} className={styles.card}>
@@ -38,9 +38,9 @@ export class Gallery extends React.Component<
                     title={RichText.asText(card.data.title)}
                     subheader={formatDate(new Date(card.data.date))}
                     titleTypographyProps={{
-                      variant: 'h6',
+                      variant: 'subtitle2',
                     }}
-                    subheaderTypographyProps={{ align: 'right' }}
+                    subheaderTypographyProps={{ align: 'right', variant: 'caption' }}
                   />
                 </Card>
               </a>

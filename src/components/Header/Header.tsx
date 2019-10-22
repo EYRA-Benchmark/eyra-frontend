@@ -47,7 +47,7 @@ class Header extends React.Component<IOwnProps & { router: SingletonRouter }, IS
 
   render() {
     const { drawerToggle, router } = this.props;
-    const isHomePage = router!.route === '/Home';
+    const isHomePage = router!.route === '/';
 
     return (
       <AppBar

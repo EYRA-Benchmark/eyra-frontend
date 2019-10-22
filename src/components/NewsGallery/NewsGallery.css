@@ -2,14 +2,14 @@
   text-decoration: none;
 }
 .card {
-  height: 100%;
   display: flex;
   flex-direction: column;
-  border-radius: 0px;
+  border-radius: 2px;
   cursor: pointer;
+  height: 100%;
 }
 .title{
-  font:  1.25rem  Lato, sans-serif
+  font: 1.15rem Lato, sans-serif !important
 }
 
 .card img {

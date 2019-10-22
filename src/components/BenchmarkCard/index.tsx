@@ -36,9 +36,10 @@ export const BenchmarkCard = (props: IProps) => {
 
 export const BenchmarkHeader = ({ benchmark }: { benchmark: IBenchmark }) => (
   <CardHeader
+    classes={{ title: styles.title }}
     title={benchmark.name}
     titleTypographyProps={{
-      variant: 'h6',
+      variant: 'subtitle2',
     }}
     action={canEdit(benchmark) &&
       <div>

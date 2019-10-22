@@ -25,7 +25,6 @@ import Observable from 'src/components/Observables';
 import CompareDialog from '../CompareDialog';
 import VisualizationDialog from '../../Dialog/';
 import { sortBy } from 'lodash';
-
 type Order = 'asc' | 'desc';
 
 interface IState {
