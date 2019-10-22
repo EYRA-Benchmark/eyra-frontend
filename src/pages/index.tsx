@@ -60,7 +60,7 @@ class Index extends React.Component<IProps> {
             <div className={styles.article}>
               <h3>EYRA Benchmark Platform</h3>
             </div>
-            <p>A platform for benchmarking scientific algorithms</p>
+            <p>Benchmarking algorithms for science</p>
           </div>
           <div className={styles.bannerImage}>
             <img src="/static/images/black_paw.png" alt="logo" />
