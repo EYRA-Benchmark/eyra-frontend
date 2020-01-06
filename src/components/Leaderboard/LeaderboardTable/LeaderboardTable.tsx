@@ -40,7 +40,7 @@ interface IState {
   rowsPerPage: number;
   page: number;
   open: boolean;
-  showSubmission: boolean
+  showSubmission: boolean;
 }
 interface IProps extends WithStyles<typeof styles> {
   classes: any;
