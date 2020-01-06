@@ -23,9 +23,7 @@ const onSubmit = async (
     values: IValues,
     { setSubmitting }: FormikActions<IValues>,
 ) => {
-    console.log(values);
     const algorithm = await comicApi.create_algorithm(values);
-    console.log(algorithm);
     setSubmitting(false);
 };
 

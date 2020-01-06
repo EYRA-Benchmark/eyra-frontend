@@ -23,6 +23,7 @@ import styles from './LeaderboardTableStyle';
 import JobLogDialog from 'src/components/JobLogDialog';
 import Observable from 'src/components/Observables';
 import CompareDialog from '../CompareDialog';
+import AlgorithmSubmissionDetails from '../../Forms/Algorithm/AlgorithmSubmissionDetails';
 import VisualizationDialog from '../../Dialog/';
 import { sortBy } from 'lodash';
 type Order = 'asc' | 'desc';
@@ -39,6 +40,7 @@ interface IState {
   rowsPerPage: number;
   page: number;
   open: boolean;
+  showSubmission: boolean
 }
 interface IProps extends WithStyles<typeof styles> {
   classes: any;
@@ -67,6 +69,7 @@ class LeaderboardTable extends React.Component<IProps, IState> {
     rowsPerPage: 5,
     page: 0,
     open: false,
+    showSubmission: false,
   };
 
   handleRequestSort = (event: any, property: any) => {
@@ -84,7 +87,7 @@ class LeaderboardTable extends React.Component<IProps, IState> {
     const {
       order, orderBy, openJobLogID,
       selected, itemsToCompare, showComparision,
-      rowsPerPage, page, observableJobId, observableUrl } = this.state;
+      rowsPerPage, page, observableJobId, observableUrl, showSubmission } = this.state;
     const metrics = this.props.submissions[0].metrics;
     let metricFields: string[];
     metrics ? metricFields = Object.keys(metrics) : metricFields = [];
@@ -183,6 +186,16 @@ class LeaderboardTable extends React.Component<IProps, IState> {
           </VisualizationDialog>
         )
         }
+        {showSubmission && (
+          <VisualizationDialog
+            print={false}
+            onClose={() => this.setState({ showSubmission: false })}
+            title={'Submission'}
+          >
+            <AlgorithmSubmissionDetails />
+          </VisualizationDialog>
+        )
+        }
         <div className={classes.tableWrapper}>
           <LeadeboardToolbar
             numSelected={selected.length}
@@ -222,7 +235,7 @@ class LeaderboardTable extends React.Component<IProps, IState> {
                         />
                       </TableCell>
                       <TableCell component="td" scope="row">
-                        {n.name}
+                        <a onClick={() => this.setState({ showSubmission: true })}>{n.name}</a>
                       </TableCell>
                       <TableCell component="td" scope="row" align="left">
                         {n.version ? n.version : '-'}

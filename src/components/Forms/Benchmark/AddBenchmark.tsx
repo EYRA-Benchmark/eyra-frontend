@@ -26,7 +26,6 @@ const onSubmit = async (
     short_description: values.short_description,
     overview: values.overview,
   };
-  console.log(postData);
   setSubmitting(false);
 };
 class OrganizeBenchmark extends React.Component<{}, {}> {

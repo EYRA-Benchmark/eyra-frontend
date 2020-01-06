@@ -84,12 +84,9 @@ class AlgorithmSubmission extends React.Component<IProps & IUserProps, IState> {
         benchmark: this.props.benchmark.id,
         name: `${values.name} on ${this.props.benchmark.name}`,
       });
-
-      console.log(submission);
       alert('Submission succesful!');
     } catch (e) {
       alert('Error: ' + JSON.stringify(e));
-      console.log(e);
     }
     setSubmitting(false);
   }
