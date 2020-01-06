@@ -12,6 +12,7 @@ import SubmissionsTable from '../../components/SubmissionsTable';
 import AlgorithmsTable from 'src/components/AlgorithmsTable';
 import VisualizationDialog from 'src/components/Dialog';
 import EditAlgorithm from 'src/components/Forms/Algorithm/EditAlgorithm';
+import styles from './styles.css';
 interface IState {
   activeIndex: number;
   submissions: INestedSubmission[];
@@ -85,7 +86,7 @@ class Profile extends React.Component<IUserProps, IState> {
             </VisualizationDialog> : null
           }
           <Grid container={true} spacing={3}>
-            <Grid item={true} xs={12} lg={3} md={3} style={{ borderRight: '1px solid #ccc', paddingRight: 0 }}>
+            <Grid item={true} xs={12} lg={3} md={3} className={styles.leftContainer}>
               <UserConsumer>
                 {({ user }: IUserProps) => <UserDetails user={user} />}
               </UserConsumer>
@@ -94,7 +95,7 @@ class Profile extends React.Component<IUserProps, IState> {
                 activeIndex={activeIndex}
               />
             </Grid>
-            <Grid item={true} xs={12} lg={9} md={9}>
+            <Grid item={true} xs={12} lg={9} md={9} className={styles.rightContainer}>
               {activeIndex === 0 && <TabContainer>
                 <Overview
                   loadMore={this.loadMore}

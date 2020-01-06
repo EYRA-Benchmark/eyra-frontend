@@ -2,3 +2,12 @@
     padding: 10px;
     margin: 10px 0;
 }
+.leftContainer {
+    border-right: 1px solid #ccc;
+    padding-right: 0px !important;
+    background-color: #f0f8ff;
+}
+.rightContainer {
+    height: 80vh;
+    overflow-y: auto;
+}
