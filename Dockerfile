@@ -1,7 +1,7 @@
 FROM node:carbon-alpine as builder
 
 RUN apk --no-cache add ca-certificates
-RUN npm install -g yarn
+#RUN npm install -g yarn
 WORKDIR /app
 
 COPY package.json .
