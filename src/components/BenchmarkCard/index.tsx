@@ -20,16 +20,16 @@ export const BenchmarkCard = (props: IProps) => {
   const benchmark = props.benchmark;
   return (
     <Link href="/benchmark/[id]" as={`/benchmark/${benchmark.id}`}>
-      <a className={styles.links}>
-        <Card square={true} className={styles.card}>
-          <CardMedia
-            className={styles.media}
-            image={benchmark.card_image}
-            title="Image title"
-          />
-          <BenchmarkHeader benchmark={benchmark} />
-        </Card>
-      </a>
+      {/* <a className={styles.links}> */}
+      <Card square={true} className={styles.card}>
+        <CardMedia
+          className={styles.media}
+          image={benchmark.card_image}
+          title="Image title"
+        />
+        <BenchmarkHeader benchmark={benchmark} />
+      </Card>
+      {/* </a> */}
     </Link>
   );
 };

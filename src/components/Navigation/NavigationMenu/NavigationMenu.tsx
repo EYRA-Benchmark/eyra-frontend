@@ -59,6 +59,16 @@ function NavigationMenu({ user, logout }: IUserProps) {
               </a>
               <Menu
                 id="simple-menu"
+                elevation={0}
+                getContentAnchorEl={null}
+                anchorOrigin={{
+                  vertical: 'bottom',
+                  horizontal: 'left',
+                }}
+                transformOrigin={{
+                  vertical: 'top',
+                  horizontal: 'center',
+                }}
                 anchorEl={anchorEl}
                 keepMounted={true}
                 open={Boolean(anchorEl)}
