@@ -12,14 +12,21 @@ interface IState {
     notebook: any;
 }
 class Observable extends Component<IProps, IState> {
+    getNotebookUrl() {
+        let notebookUrl = this.props.observableUrl;
+        notebookUrl = notebookUrl!.replace('https://observablehq.com/', 'https://api.observablehq.com/');
+        notebookUrl = notebookUrl.split('?')[0] + '.js?v=3';
+        return notebookUrl;
+    }
     componentDidMount() {
         const id = this.props.jobId;
         const isNotebook = this.props.isNotebook;
         const script = document.createElement('script');
+        const notebookUrl = this.getNotebookUrl();
         script.type = 'module';
         script.innerHTML = `
         import {Runtime, Inspector} from "https://cdn.jsdelivr.net/npm/@observablehq/runtime@4/dist/runtime.js";
-        import notebook from 'https://api.observablehq.com/@pushpanjalip/frb-detection-visualization-with-zoom.js?v=3';
+        import notebook from "${notebookUrl}";
         if(${isNotebook}) {
             const renders = {
                 "xAxisLabel":"x-label",
@@ -32,23 +39,22 @@ class Observable extends Component<IProps, IState> {
                 "viewof datatable": "datatable",
               };
               const main = new Runtime().module(notebook, (name) => {
-                  console.log(name)
                 const selector = renders[name];
                 if (selector) {
                   return new Inspector(document.getElementById(selector));
                 }
               });
-            main.redefine("job_Id",'${id}')
+              main.redefine("job_Id", '${id}');
         }
         else {
             const main = new Runtime().module(notebook, name => {
-            if (name === "chart") {
-                return new Inspector(document.getElementById('chart${id}'));
-            } else if (name === "viewof dotSize") {
-                return new Inspector(document.getElementById('slider${id}'));
-            }
-        });
-        main.redefine("job_Id",'${id}')
+                if (name === "chart") {
+                    return new Inspector(document.getElementById('chart${id}'));
+                } else if (name === "viewof dotSize") {
+                    return new Inspector(document.getElementById('slider${id}'));
+                }
+            });
+            main.redefine("job_Id", '${id}');
         }
         `;
         document.body.appendChild(script);
