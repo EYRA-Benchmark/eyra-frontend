@@ -3,7 +3,7 @@ import { comicApi } from 'src/services/comicApi';
 import { IUser } from '../types';
 import getConfig from 'next/config';
 const { publicRuntimeConfig } = getConfig();
-
+import Router from 'next/router';
 enum Status {
   LOGGING_IN,
   LOGGED_OUT,
@@ -58,6 +58,7 @@ export class UserProvider extends React.Component<{}, IState> {
         user: null,
         status: Status.LOGGED_OUT,
       });
+
     }
   }
 
@@ -100,6 +101,7 @@ export class UserProvider extends React.Component<{}, IState> {
     this.setState({ user: null, status: Status.LOGGED_OUT });
     comicApi.setToken(null);
     this.refresh();
+    Router.push('/');
 
   }
   render() {
