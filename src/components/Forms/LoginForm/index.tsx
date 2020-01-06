@@ -31,7 +31,7 @@ const Index = (props: IUserProps) => {
     try {
       await props.login(values);
     } catch (e) {
-      formik.setStatus({ loginFail: e.message});
+      formik.setStatus({ loginFail: e.message });
     }
     formik.setSubmitting(false);
   };
@@ -71,18 +71,19 @@ const Index = (props: IUserProps) => {
               >
                 Login
               </Button>
-              { status && status.loginFail && (
+              {status && status.loginFail && (
                 <div className={styles.error}>{status.loginFail}</div>
               )}
             </div>
           </Form>
         )}
       </Formik>
-      <div className={styles.googleLogin}>
+      {/*Google Sign in is not working */}
+      {/* <div className={styles.googleLogin}>
         <a onClick={props.oauthLogin}>
           <img src="/static/images/btn_google_signin_dark_normal_web.png" alt="Sign in with google" />
         </a>
-      </div>
+      </div> */}
     </>
   );
 };
