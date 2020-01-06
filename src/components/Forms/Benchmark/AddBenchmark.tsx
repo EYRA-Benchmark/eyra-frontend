@@ -21,11 +21,11 @@ const onSubmit = async (
   values: IValues,
   { setSubmitting }: FormikActions<IValues>,
 ) => {
-  const postData = {
-    name: values.name,
-    short_description: values.short_description,
-    overview: values.overview,
-  };
+  // const postData = {
+  //   name: values.name,
+  //   short_description: values.short_description,
+  //   overview: values.overview,
+  // };
   setSubmitting(false);
 };
 class OrganizeBenchmark extends React.Component<{}, {}> {

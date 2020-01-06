@@ -79,7 +79,7 @@ class AlgorithmSubmission extends React.Component<IProps & IUserProps, IState> {
         image: values.containerName,
       });
 
-      const submission = await comicApi.submissionSubmission({
+      await comicApi.submissionSubmission({
         implementation: implementation.id,
         benchmark: this.props.benchmark.id,
         name: `${values.name} on ${this.props.benchmark.name}`,
