@@ -24,6 +24,7 @@
 .selectionContainer select {
   flex: 1;
   height: 30px;
+  font: 15px Lato, sans-serif
 }
 .selectionContainer {
   display: flex;

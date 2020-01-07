@@ -29,22 +29,25 @@ class Leaderboard extends React.Component<IProps, {}> {
         numeric: false,
         disablePadding: false,
         label: 'Name',
+        sortable: true,
       },
       {
         id: 'version',
         numeric: false,
         disablePadding: false,
         label: 'Version',
+        sortable: true,
       },
       ...this.props.metricFields.map((fieldName) => ({
         id: fieldName,
         numeric: true,
         disablePadding: false,
         label: fieldName,
+        sortable: true,
       })),
-      { id: 'visualization', numeric: false, disablePadding: false, label: 'Visualization' },
-      { id: 'date', numeric: false, disablePadding: false, label: 'Date' },
-      { id: 'log', numeric: false, disablePadding: false, label: 'Logs' },
+      { id: 'visualization', numeric: false, disablePadding: false, label: 'Visualization', sortable: false },
+      { id: 'date', numeric: false, disablePadding: false, label: 'Date', sortable: true },
+      { id: 'log', numeric: false, disablePadding: false, label: 'Logs', sortable: false },
     ];
 
     const { order, orderBy,
@@ -57,7 +60,6 @@ class Leaderboard extends React.Component<IProps, {}> {
     return (
       <TableHead>
         <TableRow>
-          {/*Commented for production  */}
           <TableCell padding="checkbox">
             <Checkbox
               indeterminate={numSelected > 0 && numSelected < rowCount}
@@ -75,19 +77,21 @@ class Leaderboard extends React.Component<IProps, {}> {
                 padding={row.disablePadding ? 'none' : 'default'}
                 sortDirection={orderBy === row.id ? order : false}
               >
-                <Tooltip
-                  title="Sort"
-                  placement={row.numeric ? 'bottom-end' : 'bottom-start'}
-                  enterDelay={300}
-                >
-                  <TableSortLabel
-                    active={orderBy === row.id}
-                    direction={order}
-                    onClick={this.createSortHandler(row.id)}
+                {row.sortable ?
+                  (<Tooltip
+                    title="Sort"
+                    placement={row.numeric ? 'bottom-end' : 'bottom-start'}
+                    enterDelay={300}
                   >
-                    {row.label}
-                  </TableSortLabel>
-                </Tooltip>
+                    <TableSortLabel
+                      active={orderBy === row.id}
+                      direction={order}
+                      onClick={this.createSortHandler(row.id)}
+                    >
+                      {row.label}
+                    </TableSortLabel>
+                  </Tooltip>) : row.label
+                }
               </TableCell>
             );
           }, this)}
