@@ -23,6 +23,7 @@ class Observable extends Component<IProps, IState> {
         const isNotebook = this.props.isNotebook;
         const script = document.createElement('script');
         const notebookUrl = this.getNotebookUrl();
+        console.log(notebookUrl);
         script.type = 'module';
         script.innerHTML = `
         import {Runtime, Inspector} from "https://cdn.jsdelivr.net/npm/@observablehq/runtime@4/dist/runtime.js";
