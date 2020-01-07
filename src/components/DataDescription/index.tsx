@@ -29,7 +29,10 @@ const DataDescription = (props: IProps) => {
     );
 
     if (data) {
-        if (data.participant_data_files.length > 0) {
+        if (data.participant_data_files.length > 0
+            || data.participant_data_description !== ''
+            || data.participant_data_sampling_method !== ''
+        ) {
             content.push(
                 (
                     <Grid item={true} key={3} xs={12} sm={6} md={6}>
@@ -43,42 +46,44 @@ const DataDescription = (props: IProps) => {
                 ),
             );
         }
-        if (data.public_test_data_file && publicLbData.push(data.public_test_data_file),
-            data.public_ground_truth_data_file && publicLbData.push(data.public_ground_truth_data_file)) {
-            content.push(
-                (
-                    <Grid item={true} key={1} xs={12} sm={6} md={6}>
-                        <DataFileCard
-                            dataFiles={[]}
-                            type={'Public Leaderboard Data'}
-                            desc={data.public_test_data_description}
-                            sampling={data.public_test_data_sampling_method}
-                        />
-                    </Grid>
-                ),
-            );
+        if (data.public_test_data_description !== '' || data.public_test_data_sampling_method !== '') {
+            if (data.public_test_data_file && publicLbData.push(data.public_test_data_file),
+                data.public_ground_truth_data_file && publicLbData.push(data.public_ground_truth_data_file)) {
+                content.push(
+                    (
+                        <Grid item={true} key={1} xs={12} sm={6} md={6}>
+                            <DataFileCard
+                                dataFiles={[]}
+                                type={'Public Leaderboard Data'}
+                                desc={data.public_test_data_description}
+                                sampling={data.public_test_data_sampling_method}
+                            />
+                        </Grid>
+                    ),
+                );
+            }
         }
-        if (data.private_test_data_file && privateLbData.push(data.private_test_data_file),
-            data.private_ground_truth_data_file && privateLbData.push(data.private_ground_truth_data_file)) {
-            content.push(
-                (
-                    <Grid item={true} key={2} xs={12} sm={6} md={6}>
-                        <DataFileCard
-                            dataFiles={[]}
-                            type={'Private Leaderboard Data'}
-                            desc={data.private_test_data_description}
-                            sampling={data.private_test_data_sampling_method}
-                        />
-                    </Grid>
-                ),
-            );
+        if (data.private_test_data_description !== '' || data.private_test_data_sampling_method !== '') {
+            if (data.private_test_data_file && privateLbData.push(data.private_test_data_file),
+                data.private_ground_truth_data_file && privateLbData.push(data.private_ground_truth_data_file)) {
+                content.push(
+                    (
+                        <Grid item={true} key={2} xs={12} sm={6} md={6}>
+                            <DataFileCard
+                                dataFiles={[]}
+                                type={'Private Leaderboard Data'}
+                                desc={data.private_test_data_description}
+                                sampling={data.private_test_data_sampling_method}
+                            />
+                        </Grid>
+                    ),
+                );
+            }
         }
 
     }
     return (
-        <Grid container={true} spacing={10}>
-            {content.length > 0 ? content : null}
-        </Grid>
+        content.length > 0 ? <Grid container={true} spacing={10}>{content}</Grid> : null
     );
 
 };
