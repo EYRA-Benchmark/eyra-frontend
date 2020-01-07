@@ -13,6 +13,7 @@ import {
   withStyles,
   WithStyles,
 } from '@material-ui/core';
+import VisualizationIcon from '@material-ui/icons/BarChart';
 import { formatDateTime } from 'src/utils';
 import { UUID4 } from 'src/types';
 import { INestedSubmission } from '../index';
@@ -113,8 +114,6 @@ class LeaderboardTable extends React.Component<IProps, IState> {
     }
 
     const isSelected = (id: string) => selected.indexOf(id) !== -1;
-
-    const emptyRows = rowsPerPage - Math.min(rowsPerPage, data.length - page * rowsPerPage);
     const handleSelectAllClick = (event: React.ChangeEvent<HTMLInputElement>) => {
       if (event.target.checked) {
         const newSelecteds = data.map((n) => n.id);
@@ -252,7 +251,11 @@ class LeaderboardTable extends React.Component<IProps, IState> {
                             //       visualization
                             // </a>)
                             (
-                              <button
+                              <Fab
+                                variant="extended"
+                                size="small"
+                                aria-label="add"
+                                color="secondary"
                                 onClick={() => {
                                   this.setState({
                                     observableUrl: n.visualization.toString(),
@@ -260,8 +263,19 @@ class LeaderboardTable extends React.Component<IProps, IState> {
                                   });
                                 }}
                               >
+                                <VisualizationIcon color="primary" />
                                 visualize
-                              </button>
+                              </Fab>
+                              // <button
+                              //   onClick={() => {
+                              //     this.setState({
+                              //       observableUrl: n.visualization.toString(),
+                              //       observableJobId: n.evaluationJob,
+                              //     });
+                              //   }}
+                              // >
+                              //   visualize
+                              // </button>
                             )
                             : '-'
                         }
@@ -289,11 +303,6 @@ class LeaderboardTable extends React.Component<IProps, IState> {
                     </TableRow>
                   );
                 },
-              )}
-              {emptyRows > 0 && (
-                <TableRow style={{ height: 49 * emptyRows }}>
-                  <TableCell colSpan={6} />
-                </TableRow>
               )}
             </TableBody>
           </Table>

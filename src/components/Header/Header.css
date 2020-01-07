@@ -14,8 +14,6 @@
 }
 .appBar {
   height: 80px;
-  transition: height 2s;
-  -webkit-transition: height 2s;
   background: #fafafa !important;
 }
 /*.shrink {*/
@@ -28,8 +26,6 @@
 /* // #204864d1  previous color for header*/
 .shrink {
   height: 64px;
-  transition: height 2s;
-  -webkit-transition: height 2s;
   background: #fafafa !important;
 }
 
