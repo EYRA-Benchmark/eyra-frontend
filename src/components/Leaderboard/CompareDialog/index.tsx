@@ -15,7 +15,11 @@ const CompareDialog = (props: IProps) => {
             {props.items.map((item, i) => {
                 return (
                     <Paper key={i} className={styles.item}>
-                        <Observable jobId={item.evaluation_job} isNotebook={false} />
+                        <Observable
+                            jobId={item.evaluation_job}
+                            isNotebook={false}
+                            observableUrl={item.visualization_url}
+                        />
                         <Typography variant="subtitle1" align="center" >{item.name}</Typography>
                     </Paper>);
             })}
