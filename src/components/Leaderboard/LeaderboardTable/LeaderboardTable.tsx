@@ -95,7 +95,7 @@ class LeaderboardTable extends React.Component<IProps, IState> {
 
     const data: IDataRow[] = this.props.submissions.map((submission) => {
       const metric = submission.metrics;
-      const url = submission.visualization_url + '?id=' + submission.evaluation_job;
+      const url = submission.visualization_url && submission.visualization_url + '?id=' + submission.evaluation_job;
       return {
         id: submission.id,
         name: submission.implementation.name,
@@ -234,7 +234,9 @@ class LeaderboardTable extends React.Component<IProps, IState> {
                         />
                       </TableCell>
                       <TableCell component="td" scope="row">
-                        <a onClick={() => this.setState({ showSubmission: true })}>{n.name}</a>
+                        {/* <a onClick={() => this.setState({ showSubmission: true })}> */}
+                        {n.name}
+                        {/* </a> */}
                       </TableCell>
                       <TableCell component="td" scope="row" align="left">
                         {n.version ? n.version : '-'}
@@ -246,10 +248,7 @@ class LeaderboardTable extends React.Component<IProps, IState> {
                       ))}
                       <TableCell align="left">
                         {
-                          n.evaluationJob !== 'null' ?
-                            //     (<a href={n.visualization.toString()} target="_blank">
-                            //       visualization
-                            // </a>)
+                          (n.evaluationJob !== 'null' && n.visualization !== null) ?
                             (
                               <Fab
                                 variant="extended"
@@ -257,6 +256,7 @@ class LeaderboardTable extends React.Component<IProps, IState> {
                                 aria-label="add"
                                 color="secondary"
                                 onClick={() => {
+                                  console.log('url', n.visualization.toString());
                                   this.setState({
                                     observableUrl: n.visualization.toString(),
                                     observableJobId: n.evaluationJob,
@@ -266,16 +266,6 @@ class LeaderboardTable extends React.Component<IProps, IState> {
                                 <VisualizationIcon color="primary" />
                                 visualize
                               </Fab>
-                              // <button
-                              //   onClick={() => {
-                              //     this.setState({
-                              //       observableUrl: n.visualization.toString(),
-                              //       observableJobId: n.evaluationJob,
-                              //     });
-                              //   }}
-                              // >
-                              //   visualize
-                              // </button>
                             )
                             : '-'
                         }
