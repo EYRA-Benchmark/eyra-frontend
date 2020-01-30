@@ -18,10 +18,10 @@
   color: black;
 }
 .nav a:hover {
-  border-bottom: 2px solid #1fb8ea;
+  border-bottom: 2px solid var(--primary-color);
 }
 li a.active {
-  color: #1fb8ea;
+  color: var(--primary-color);
 }
 
 @media (max-width: 600px) {
@@ -41,6 +41,6 @@ li a.active {
     border: none;
   }
   li a.active {
-    color: #1fb8ea;
+    color: var(--primary-color);
   }
 }

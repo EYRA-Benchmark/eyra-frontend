@@ -48,10 +48,10 @@
   top: 0;
   left: 16.66666%;
   right: auto;
-  background: #1fb8ea;
+  background: var(--primary-color);
 }
 .bannerBackground span:nth-child(3) {
-  background: linear-gradient(90deg, #1fb8ea, #d2f0f9);
+  background: linear-gradient(90deg, var(--primary-color), #d2f0f9);
   bottom: 0;
   left: auto;
   width: 33%;
@@ -90,13 +90,13 @@
   text-align: center;
 }
 .caption .article span {
-  color: #1fb8ea;
+  color: var(--primary-color);
 }
 
 .content {
   display: flex;
   flex-direction: column;
-  color: #000;
+  color: var(--black-color);
 }
 
 .section {
@@ -106,14 +106,14 @@
 }
 
 .sectionHeader {
-  color: #1fb8ea;
+  color: var(--primary-color);
   letter-spacing: 3px;
   font-size: 2rem;
   font-weight: normal;
 }
 
 .bg:before {
-  content: '';
+  content: "";
   position: absolute;
   z-index: -1;
   width: 100%;
@@ -134,11 +134,7 @@
     top: 40%;
     width: 100%;
     left: 0;
-    background: linear-gradient(
-      to bottom,
-      rgba(255, 255, 255, 1) 0%,
-      rgba(255, 255, 255, 0.7) 100%
-    );
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0.7) 100%);
   }
   .caption .article {
     font-size: 22px;

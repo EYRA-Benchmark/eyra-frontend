@@ -5,14 +5,14 @@
 }
 .header {
   display: flex;
-  flex-direction: row
+  flex-direction: row;
 }
 .title {
-  color:#1fb8ea;
-  flex: 4;
+  color: var(--primary-color);
+  flex: 5;
+  text-align: center;
 }
 .close {
-  
   width: 20px;
   height: 20px;
   border: 1px solid #ccc;
@@ -39,7 +39,6 @@
 .forgotPasswordLink {
   text-align: center;
   padding: 20px;
-  
 }
 .tabsContainer {
   background-color: aliceblue;

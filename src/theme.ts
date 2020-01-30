@@ -6,12 +6,6 @@ export default createMuiTheme({
     fontSize: 16,
   },
   overrides: {
-    // MuiSvgIcon: {
-    //   root: {
-    //     color: "#000",
-    //   },
-    // },
-
     MuiButton: {
       textPrimary: {
         textTransform: 'none',

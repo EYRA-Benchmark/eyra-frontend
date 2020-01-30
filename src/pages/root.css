@@ -1,5 +1,15 @@
+:root {
+  --primary-color: #1fb8ea;
+  --white-color: #fff;
+  --grey-color: #ddd;
+  --black-color: #000;
+  --dark-footer-color: #204864;
+}
 
-a{
+body {
+  margin: 0;
+}
+a {
   cursor: pointer;
 }
 .container {

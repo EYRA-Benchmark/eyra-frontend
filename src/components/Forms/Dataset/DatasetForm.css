@@ -37,5 +37,5 @@
   right: 0;
 }
 .label {
-  color: #fff;
+  color: var(--white-color);
 }

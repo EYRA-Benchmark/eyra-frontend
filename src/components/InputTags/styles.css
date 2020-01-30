@@ -1,37 +1,37 @@
 .tagsContainer {
-    flex: 8;
-    position: relative;
+  flex: 8;
+  position: relative;
 }
 .tags {
-    display: flex;
-    flex-direction: column;
-  }
+  display: flex;
+  flex-direction: column;
+}
 .tags ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
 }
 .tag {
-    color: #fff;
-    font-weight: bold;
-    background: #65afea;
-    float: left;
-    padding: 5px 10px;
-    border-radius: 5px;
-    margin: 5px;
-  }
-  
-  .tagInput {
-    padding: 5px 10px !important;
-  }
-  
-  .delete {
+  color: var(--white-color);
+  font-weight: bold;
+  background: #65afea;
+  float: left;
+  padding: 5px 10px;
+  border-radius: 5px;
+  margin: 5px;
+}
+
+.tagInput {
+  padding: 5px 10px !important;
+}
+
+.delete {
   display: inline-block;
   margin-left: 5px;
-  padding: 0 4px;;
+  padding: 0 4px;
   width: 15px;
   height: 15px;
-  background-color: rgba(0,0,0,.3);
+  background-color: rgba(0, 0, 0, 0.3);
   color: white;
   font-size: 10px;
   font-weight: bold;
@@ -42,9 +42,9 @@
   user-select: none;
 }
 .delete:after {
-    content: 'X';
-    width: 15px;
-    height: 15px;
-    line-height: 15px;
-    text-align: center;
+  content: "X";
+  width: 15px;
+  height: 15px;
+  line-height: 15px;
+  text-align: center;
 }

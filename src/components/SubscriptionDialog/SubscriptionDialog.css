@@ -55,7 +55,7 @@
   transform: translateY(-25%);
   right: 8px;
   pointer-events: none;
-  color: #1fb8ea;
+  color: var(--primary-color);
   font-size: 12px;
   text-align: left;
   visibility: hidden;
@@ -67,11 +67,11 @@
 }
 
 .alertValidate::after {
-  content: '\f06a';
+  content: "\f06a";
   font-family: FontAwesome;
   display: block;
   position: absolute;
-  color: #1fb8ea;
+  color: var(--primary-color);
   font-size: 15px;
   top: 40%;
   transform: translateY(-25%);

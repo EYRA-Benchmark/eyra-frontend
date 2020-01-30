@@ -1,28 +1,28 @@
 .container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin: 20px 0 0;
-    border-bottom: 1px solid #ccc;
-    padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 20px 0 0;
+  border-bottom: 1px solid #ccc;
+  padding: 20px;
 }
 .avatar {
-    width: 60px;
-    height: 60;
+  width: 60px;
+  height: 60;
 }
 .category {
-    width: 20px;
-    height: 20px;
-    position: absolute;
-    right: 7px;
-    top: -11px;
-    z-index: 1;
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  right: 7px;
+  top: -11px;
+  z-index: 1;
 }
 .link {
-    float: right;
-    color: #1fb8ea;
-    cursor: pointer;
-    font-size: 14px;
-    border-bottom: 1px solid #1fb8ea;
-    padding-top: 10px; 
+  float: right;
+  color: var(--primary-color);
+  cursor: pointer;
+  font-size: 14px;
+  border-bottom: 1px solid var(--primary-color);
+  padding-top: 10px;
 }

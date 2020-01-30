@@ -9,7 +9,7 @@
   font-size: 30px;
   letter-spacing: 3px;
   text-align: left;
-  color: #1fb8ea;
+  color: var(--primary-color);
 }
 .container p {
   padding: 0px 0px;
@@ -17,6 +17,5 @@
   text-align: left;
 }
 .container a {
-  color: #1fb8ea;
+  color: var(--primary-color);
 }
-

@@ -8,19 +8,18 @@
   min-height: 300px;
 }
 .detailsContainer a {
-  color: #1fb8ea;
+  color: var(--primary-color);
 }
 .paper {
   height: 300px;
   position: relative;
-  
 }
 .cover {
   position: absolute;
   top: 0;
   bottom: 0;
   left: 0;
-  right: 0; 
+  right: 0;
 }
 .imageContainer {
   width: 100%;
@@ -36,18 +35,18 @@
   background-color: rgba(0, 0, 0, 0.4);
 }
 .paper h2 {
- position: absolute;
+  position: absolute;
   top: 10%;
   left: 10%;
-  color: #fff;
-  font: 25px Lato,sans-serif
+  color: var(--white-color);
+  font: 25px Lato, sans-serif;
 }
 .paper p {
   position: absolute;
   top: 25%;
   left: 10%;
-  color: #fff;
-  font: 14px Lato,sans-serif
+  color: var(--white-color);
+  font: 14px Lato, sans-serif;
 }
 .container {
   min-height: 300px;

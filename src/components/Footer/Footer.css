@@ -2,13 +2,13 @@
   margin-top: 60px;
 }
 .content {
-  color: #ddd;
+  color: var(--grey-color);
   text-align: center;
   padding: 20px 80px;
 }
 
 .content h3 {
-  color: #000;
+  color: var(--black-color);
   letter-spacing: 3px;
   text-transform: capitalize;
   font: 25px "Lato", sans-serif;
@@ -21,11 +21,11 @@
 }
 
 .bgBlue {
-  background: #1fb8ea;
+  background: var(--primary-color);
 }
 .bgDark {
-  background-color: #204864;
+  background-color: var(--dark-footer-color);
 }
 .bgDark a {
-  color: #fff;
+  color: var(--white-color);
 }
