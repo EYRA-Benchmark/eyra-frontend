@@ -36,25 +36,23 @@ interface IState {
 class Details extends React.Component<IProps, IState> {
   state = {
     value: 0,
-    dialogOpen: false,
+    dialogOpen: false
   };
   handleChange = (event: any, value: number) => {
     this.setState({ value });
-  }
+  };
   toggleModal = (enabled: boolean | undefined) => () => {
-    const newState =
-      enabled === undefined ? !this.state.dialogOpen : enabled;
+    const newState = enabled === undefined ? !this.state.dialogOpen : enabled;
     this.setState({ dialogOpen: newState });
-  }
+  };
   render() {
-
     const { value } = this.state;
     const { data } = this.props;
     if (data) {
       return (
         <Grid container={true} spacing={3}>
           <Grid item={true} xs={12} sm={12} md={12}>
-            <Paper className={styles.paper} >
+            <Paper className={styles.paper}>
               <div className={styles.imageContainer}>
                 <img src={data.banner_image} className={styles.bannerImage} />
               </div>
@@ -81,8 +79,7 @@ class Details extends React.Component<IProps, IState> {
                 <Tab label="Results" />
                 {/* <Tab label="Private Results" /> */}
                 <Tab label="Create submission" />
-                <Tab label="People/Team" />
-
+                <Tab label="About" />
               </Tabs>
               {value === 0 && (
                 <TabContainer>
@@ -99,7 +96,9 @@ class Details extends React.Component<IProps, IState> {
                     className={styles.container}
                   />
 
-                  {data.data_set ? <DataDescription datasetId={data.data_set} /> : null}
+                  {data.data_set ? (
+                    <DataDescription datasetId={data.data_set} />
+                  ) : null}
                 </TabContainer>
               )}
               {value === 2 && (
@@ -135,7 +134,7 @@ class Details extends React.Component<IProps, IState> {
               )}
               {value === 6 && (
                 <TabContainer>
-                  <div>About Team or People</div>
+                  <div>About Collaborators</div>
                 </TabContainer>
               )}
               {/* <Dialog
