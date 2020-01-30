@@ -15,7 +15,7 @@ module.exports = withCSS({
   cssModules: true,
 
   publicRuntimeConfig: {
-    backendURL: process.env.EYRA_BACKEND_URL || "https://api.eyrabenchmark.net/api/v1/",
+    backendURL: process.env.EYRA_BACKEND_URL || "https://api.staging.eyrabenchmark.net/api/v1/",
     frontendURL: process.env.EYRA_FRONTEND_URL || "https://www.eyrabenchmark.net/",
     prismicEndpoint: process.env.PRISMIC_URL || "https://eyra-test.prismic.io/api/v2",
   },
