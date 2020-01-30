@@ -72,6 +72,7 @@ class Details extends React.Component<IProps, IState> {
                 onChange={this.handleChange}
                 indicatorColor="primary"
                 className={styles.tabsContainer}
+                scrollButtons="on"
               >
                 <Tab label="Description" />
                 <Tab label="Data" />
@@ -79,7 +80,9 @@ class Details extends React.Component<IProps, IState> {
                 <Tab label="Metrics" />
                 <Tab label="Results" />
                 {/* <Tab label="Private Results" /> */}
-                {data.id === '5a3f722b-61f1-4c44-87a1-eea1d231609b' ? null : <Tab label="Create submission" />}
+                <Tab label="Create submission" />
+                <Tab label="People/Team" />
+
               </Tabs>
               {value === 0 && (
                 <TabContainer>
@@ -128,6 +131,11 @@ class Details extends React.Component<IProps, IState> {
               {value === 5 && (
                 <TabContainer>
                   <AlgorithmSubmissionForm benchmark={data} />
+                </TabContainer>
+              )}
+              {value === 6 && (
+                <TabContainer>
+                  <div>About Team or People</div>
                 </TabContainer>
               )}
               {/* <Dialog

@@ -3,7 +3,7 @@
   flex-direction: column;
   margin: 0 auto;
   padding: 10px;
-  width: 800px
+  width: 70%;
 }
 .inputContainer {
   display: flex;
@@ -11,7 +11,7 @@
   margin-bottom: 20px;
 }
 .inputContainer label {
-  flex: 1
+  flex: 1;
 }
 .inputContainer input {
   margin-left: 10px;
@@ -24,18 +24,16 @@
 .selectionContainer select {
   flex: 1;
   height: 30px;
-  font: 15px Lato, sans-serif
+  font: 15px Lato, sans-serif;
 }
 .selectionContainer {
   display: flex;
   flex: 2.5;
   justify-content: space-between;
   align-items: center;
-  
 }
-.selectionContainer span{
- margin-left: 10px;
-  
+.selectionContainer span {
+  margin-left: 10px;
 }
 .buttonText {
   text-transform: capitalize;
@@ -46,8 +44,13 @@
   align-items: center;
 }
 .checkboxContainer input {
-  flex: 1
+  flex: 1;
 }
 .checkboxContainer label {
-  flex: 8
+  flex: 8;
+}
+@media (max-width: 768px) {
+  .container {
+    width: 100%;
+  }
 }
