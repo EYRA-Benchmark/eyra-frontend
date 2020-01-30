@@ -11,7 +11,7 @@ import {
   UUID4,
   IJob,
   IDataset,
-  IImplementation,
+  IImplementation
 } from '../types';
 
 import { objectToQueryParams } from '../utils';
@@ -24,7 +24,7 @@ export class ComicApi {
     let token = null;
     if (typeof document !== 'undefined') {
       token =
-        document && document.location.href.split('?token=')[1] ||
+        (document && document.location.href.split('?token=')[1]) ||
         localStorage.getItem('comicToken') ||
         null;
     }
@@ -36,9 +36,8 @@ export class ComicApi {
       headers,
       ...(process.env.NODE_ENV === 'production'
         ? {}
-        // ignore HTTPS verification errors in DEV
-        : { httpsAgent: new https.Agent({ rejectUnauthorized: false }) }
-      ),
+        : // ignore HTTPS verification errors in DEV
+          { httpsAgent: new https.Agent({ rejectUnauthorized: false }) })
     });
     this.setToken(token);
   }
@@ -90,7 +89,7 @@ export class ComicApi {
       if (e.response && e.response.data && e.response.data.detail) {
         throw new Error(e.response.data.detail);
       }
-      throw (e);
+      throw e;
     }
   }
 
@@ -107,9 +106,8 @@ export class ComicApi {
       if (e.response && e.response.data && e.response.data.detail) {
         throw new Error(e.response.data.detail);
       }
-      throw (e);
+      throw e;
     }
-
   }
 
   async jobs(): Promise<IJob[]> {
@@ -122,9 +120,11 @@ export class ComicApi {
     return (await this.axios.get<IBenchmark[]>('benchmarks/')).data;
   }
   async filter_benchmarks(filters: {} = {}): Promise<IBenchmark[]> {
-    return (await this.axios.get<IBenchmark[]>(
-      `benchmarks/?${objectToQueryParams(filters)}`,
-    )).data;
+    return (
+      await this.axios.get<IBenchmark[]>(
+        `benchmarks/?${objectToQueryParams(filters)}`
+      )
+    ).data;
   }
 
   async benchmark(id: string): Promise<IBenchmark> {
@@ -143,29 +143,31 @@ export class ComicApi {
   }
 
   async submissions(filters: {} = {}): Promise<ISubmission[]> {
-    return (await this.axios.get<ISubmission[]>(
-      `submissions/?${objectToQueryParams(filters)}`,
-    )).data;
+    return (
+      await this.axios.get<ISubmission[]>(
+        `submissions/?${objectToQueryParams(filters)}`
+      )
+    ).data;
   }
   async algorithms(filters: {} = {}): Promise<IAlgorithm[]> {
-    return (await this.axios.get<IAlgorithm[]>(
-      `algorithms/?${objectToQueryParams(filters)}`,
-    )).data;
+    return (
+      await this.axios.get<IAlgorithm[]>(
+        `algorithms/?${objectToQueryParams(filters)}`
+      )
+    ).data;
   }
   async algorithm(id: string): Promise<IAlgorithm> {
     return (await this.axios.get<IAlgorithm>(`algorithms/${id}/`)).data;
   }
   async create_algorithm(details: any): Promise<IAlgorithm> {
-    return (await this.axios.patch<IAlgorithm>(`algorithms/${details.id}/`, details))
-      .data;
+    return (
+      await this.axios.patch<IAlgorithm>(`algorithms/${details.id}/`, details)
+    ).data;
   }
   async implementation(id: string): Promise<IImplementation> {
-    return (await this.axios.get<IImplementation>(`implementations/${id}/`)).data;
+    return (await this.axios.get<IImplementation>(`algorithms/${id}/`)).data;
   }
-  async benchmarkSubmission(
-    id: UUID4,
-    details: FormData,
-  ): Promise<IBenchmark> {
+  async benchmarkSubmission(id: UUID4, details: FormData): Promise<IBenchmark> {
     return (await this.axios.patch<IBenchmark>(`benchmarks/${id}/ `, details))
       .data;
   }
@@ -175,10 +177,9 @@ export class ComicApi {
       name: string;
       short_description: string;
       long_description: string;
-    },
+    }
   ): Promise<IDataset> {
-    return (await this.axios.patch<IDataset>(`dataset/${id}/`, details))
-      .data;
+    return (await this.axios.patch<IDataset>(`dataset/${id}/`, details)).data;
   }
 
   async algorithmSubmission(details: {
@@ -186,8 +187,7 @@ export class ComicApi {
     interface: UUID4;
     description?: string;
   }): Promise<IAlgorithm> {
-    return (await this.axios.post<IAlgorithm>('algorithms/', details))
-      .data;
+    return (await this.axios.post<IAlgorithm>('algorithms/', details)).data;
   }
 
   async implementationSubmission(details: {
@@ -196,7 +196,7 @@ export class ComicApi {
     algorithm: UUID4;
     description?: string;
   }): Promise<IImplementation> {
-    return (await this.axios.post<IImplementation>('implementations/', details))
+    return (await this.axios.post<IImplementation>('algorithms/', details))
       .data;
   }
 
@@ -205,8 +205,7 @@ export class ComicApi {
     implementation: UUID4;
     name?: string;
   }): Promise<ISubmission> {
-    return (await this.axios.post<ISubmission>('submissions/', details))
-      .data;
+    return (await this.axios.post<ISubmission>('submissions/', details)).data;
   }
 }
 

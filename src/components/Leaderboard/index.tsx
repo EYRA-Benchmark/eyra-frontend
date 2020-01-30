@@ -5,7 +5,7 @@ import { comicApi } from 'src/services/comicApi';
 import { Omit } from 'src/utils';
 
 // NestedSubmission is a Submission with a nested Algorithm
-export type INestedSubmission = Omit<ISubmission, 'implementation'> & {
+export type INestedSubmission = Omit<ISubmission, 'algorithm'> & {
   implementation: IImplementation;
 };
 
@@ -22,19 +22,19 @@ interface IState {
 class Leaderboard extends React.Component<IProps, IState> {
   state = {
     submissions: [],
-    isLoading: true,
+    isLoading: true
   };
   async componentWillMount() {
     let submissions;
     if (this.props.isPrivate) {
       submissions = await comicApi.submissions({
         benchmark: this.props.benchmarkID,
-        is_private: 1,
+        is_private: 1
       });
     } else {
       submissions = await comicApi.submissions({
         benchmark: this.props.benchmarkID,
-        is_private: 0,
+        is_private: 0
       });
     }
     // const evaluatedSubmissions = submissions.filter(
@@ -42,12 +42,12 @@ class Leaderboard extends React.Component<IProps, IState> {
     // );
     const nestedSubmissions: INestedSubmission[] = [];
     await Promise.all(
-      submissions.map(async (submission) => {
+      submissions.map(async (submission: ISubmission) => {
         nestedSubmissions.push({
           ...submission,
-          implementation: await comicApi.implementation(submission.implementation),
+          implementation: await comicApi.implementation(submission.algorithm)
         });
-      }),
+      })
     );
     this.setState({ submissions: nestedSubmissions, isLoading: false });
   }

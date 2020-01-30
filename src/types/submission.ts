@@ -1,8 +1,8 @@
 import { UUID4 } from './utils';
 
 export interface ISubmission {
-  implementation_job: UUID4;
-  implementation: UUID4;
+  algorithm_job: UUID4;
+  algorithm: UUID4;
   benchmark: string;
   created: string;
   creator: number;
