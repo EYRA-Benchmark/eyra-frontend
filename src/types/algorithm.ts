@@ -8,8 +8,13 @@ export interface IAlgorithm {
   description: string;
   name: string;
   creator: IUser['id'];
-  interface: UUID4;
-  container: UUID4;
+  admin_group: number;
+  tags: string[];
+  source_code_link: string;
+  paper_link: string;
+  permissions: string[];
+  // interface: UUID4;    removed when merged with implementation
+  // container: UUID4;    moved to submission as image
 }
 
 export interface IJob {

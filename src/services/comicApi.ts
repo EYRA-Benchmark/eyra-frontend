@@ -10,8 +10,7 @@ import {
   IResponse,
   UUID4,
   IJob,
-  IDataset,
-  IImplementation
+  IDataset
 } from '../types';
 
 import { objectToQueryParams } from '../utils';
@@ -164,9 +163,7 @@ export class ComicApi {
       await this.axios.patch<IAlgorithm>(`algorithms/${details.id}/`, details)
     ).data;
   }
-  async implementation(id: string): Promise<IImplementation> {
-    return (await this.axios.get<IImplementation>(`algorithms/${id}/`)).data;
-  }
+
   async benchmarkSubmission(id: UUID4, details: FormData): Promise<IBenchmark> {
     return (await this.axios.patch<IBenchmark>(`benchmarks/${id}/ `, details))
       .data;
@@ -184,25 +181,15 @@ export class ComicApi {
 
   async algorithmSubmission(details: {
     name: string;
-    interface: UUID4;
     description?: string;
   }): Promise<IAlgorithm> {
     return (await this.axios.post<IAlgorithm>('algorithms/', details)).data;
   }
 
-  async implementationSubmission(details: {
-    name: string;
-    image: string;
-    algorithm: UUID4;
-    description?: string;
-  }): Promise<IImplementation> {
-    return (await this.axios.post<IImplementation>('algorithms/', details))
-      .data;
-  }
-
   async submissionSubmission(details: {
     benchmark: UUID4;
-    implementation: UUID4;
+    algorithm: UUID4;
+    image: string;
     name?: string;
   }): Promise<ISubmission> {
     return (await this.axios.post<ISubmission>('submissions/', details)).data;
