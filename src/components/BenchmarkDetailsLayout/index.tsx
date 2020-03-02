@@ -72,6 +72,7 @@ class Details extends React.Component<IProps, IState> {
                 className={styles.tabsContainer}
                 scrollButtons="on"
               >
+                <Tab label="About" />
                 <Tab label="Description" />
                 <Tab label="Data" />
                 <Tab label="Truth" />
@@ -79,9 +80,13 @@ class Details extends React.Component<IProps, IState> {
                 <Tab label="Results" />
                 {/* <Tab label="Private Results" /> */}
                 <Tab label="Create submission" />
-                <Tab label="About" />
               </Tabs>
               {value === 0 && (
+                <TabContainer>
+                  <div>About Collaborators</div>
+                </TabContainer>
+              )}
+              {value === 1 && (
                 <TabContainer>
                   <Markdown
                     source={data.description}
@@ -89,7 +94,7 @@ class Details extends React.Component<IProps, IState> {
                   />
                 </TabContainer>
               )}
-              {value === 1 && (
+              {value === 2 && (
                 <TabContainer>
                   <Markdown
                     source={data.data_description}
@@ -101,7 +106,7 @@ class Details extends React.Component<IProps, IState> {
                   ) : null}
                 </TabContainer>
               )}
-              {value === 2 && (
+              {value === 3 && (
                 <TabContainer>
                   <Markdown
                     source={data.truth_description}
@@ -109,7 +114,7 @@ class Details extends React.Component<IProps, IState> {
                   />
                 </TabContainer>
               )}
-              {value === 3 && (
+              {value === 4 && (
                 <TabContainer>
                   <Markdown
                     source={data.metrics_description}
@@ -117,7 +122,7 @@ class Details extends React.Component<IProps, IState> {
                   />
                 </TabContainer>
               )}
-              {value === 4 && (
+              {value === 5 && (
                 <TabContainer>
                   <Leaderboard benchmarkID={data.id} isPrivate={false} />
                 </TabContainer>
@@ -127,16 +132,12 @@ class Details extends React.Component<IProps, IState> {
                   <Leaderboard benchmarkID={data.id} isPrivate={true} />
                 </TabContainer>
               )} */}
-              {value === 5 && (
+              {value === 6 && (
                 <TabContainer>
                   <AlgorithmSubmissionForm benchmark={data} />
                 </TabContainer>
               )}
-              {value === 6 && (
-                <TabContainer>
-                  <div>About Collaborators</div>
-                </TabContainer>
-              )}
+
               {/* <Dialog
                 open={this.state.dialogOpen}
                 onClose={this.toggleModal(false)}
