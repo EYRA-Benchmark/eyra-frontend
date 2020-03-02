@@ -1,5 +1,4 @@
 import * as React from 'react';
-import LeadeboardToolbar from '../LeaderboardToolbar/';
 import {
   Checkbox,
   Fab,
@@ -15,18 +14,18 @@ import {
 } from '@material-ui/core';
 import VisualizationIcon from '@material-ui/icons/BarChart';
 import { formatDateTime } from 'src/utils';
-import { UUID4 } from 'src/types';
+import { sortBy } from 'lodash';
+import { UUID4, IAlgorithm } from 'src/types';
 import { INestedSubmission } from '../index';
 
 import LeaderboardHead from '../LeaderboardHead/LeaderboardHead';
-
-import styles from './LeaderboardTableStyle';
+import LeadeboardToolbar from '../LeaderboardToolbar/';
 import JobLogDialog from 'src/components/JobLogDialog';
 import Observable from 'src/components/Observables';
 import CompareDialog from '../CompareDialog';
 import AlgorithmSubmissionDetails from '../../Forms/Algorithm/AlgorithmSubmissionDetails';
 import VisualizationDialog from '../../Dialog/';
-import { sortBy } from 'lodash';
+import styles from './LeaderboardTableStyle';
 type Order = 'asc' | 'desc';
 
 interface IState {
@@ -41,7 +40,7 @@ interface IState {
   rowsPerPage: number;
   page: number;
   open: boolean;
-  showSubmission: boolean;
+  algorithmDetails: IAlgorithm | null;
 }
 interface IProps extends WithStyles<typeof styles> {
   classes: any;
@@ -53,8 +52,9 @@ type IDataRow = {
   name: string;
   version: string;
   date: string;
-  algorithm_job: UUID4;
+  algorithm_job: UUID4; //implementation_job
   evaluation_job: UUID4;
+  algorithm: IAlgorithm;
 } & { [label: string]: string };
 
 class LeaderboardTable extends React.Component<IProps, IState> {
@@ -70,7 +70,7 @@ class LeaderboardTable extends React.Component<IProps, IState> {
     rowsPerPage: 5,
     page: 0,
     open: false,
-    showSubmission: false
+    algorithmDetails: null
   };
 
   handleRequestSort = (event: any, property: any) => {
@@ -96,7 +96,7 @@ class LeaderboardTable extends React.Component<IProps, IState> {
       page,
       observableJobId,
       observableUrl,
-      showSubmission
+      algorithmDetails
     } = this.state;
     const metrics = this.props.submissions[0].metrics;
     let metricFields: string[];
@@ -109,12 +109,13 @@ class LeaderboardTable extends React.Component<IProps, IState> {
         submission.visualization_url + '?id=' + submission.evaluation_job;
       return {
         id: submission.id,
-        name: submission.implementation.name,
-        version: submission.implementation.version,
+        name: submission.algorithm.name,
+        version: submission.version,
         implementationJob: submission.algorithm_job,
         visualization: url,
         evaluationJob: submission.evaluation_job,
         date: submission.created,
+        algorithm: submission.algorithm,
         ...metric
       };
     });
@@ -179,6 +180,7 @@ class LeaderboardTable extends React.Component<IProps, IState> {
         selected: newSelected
       });
     };
+    let isLoggedIn = localStorage.getItem('comicToken') ? true : false;
     return (
       <Paper className={classes.root}>
         {openJobLogID && (
@@ -187,6 +189,7 @@ class LeaderboardTable extends React.Component<IProps, IState> {
             onClose={() => this.setState({ openJobLogID: null })}
           />
         )}
+
         {observableJobId && (
           <VisualizationDialog
             print={false}
@@ -213,13 +216,14 @@ class LeaderboardTable extends React.Component<IProps, IState> {
             <CompareDialog items={itemsToCompare} />
           </VisualizationDialog>
         )}
-        {showSubmission && (
+        {algorithmDetails && (
           <VisualizationDialog
+            maxWidth={'md'}
             print={false}
-            onClose={() => this.setState({ showSubmission: false })}
+            onClose={() => this.setState({ algorithmDetails: null })}
             title={'Submission'}
           >
-            <AlgorithmSubmissionDetails />
+            <AlgorithmSubmissionDetails algorithm={algorithmDetails} />
           </VisualizationDialog>
         )}
         <div className={classes.tableWrapper}>
@@ -264,9 +268,13 @@ class LeaderboardTable extends React.Component<IProps, IState> {
                         />
                       </TableCell>
                       <TableCell component="td" scope="row">
-                        {/* <a onClick={() => this.setState({ showSubmission: true })}> */}
-                        {n.name}
-                        {/* </a> */}
+                        <a
+                          onClick={() =>
+                            this.setState({ algorithmDetails: n.algorithm })
+                          }
+                        >
+                          {n.name}
+                        </a>
                       </TableCell>
                       <TableCell component="td" scope="row" align="left">
                         {n.version ? n.version : '-'}
@@ -303,6 +311,7 @@ class LeaderboardTable extends React.Component<IProps, IState> {
                       </TableCell>
                       <TableCell align="left">
                         <Fab
+                          disabled={!isLoggedIn}
                           title="Log"
                           variant="round"
                           size="small"
@@ -311,12 +320,6 @@ class LeaderboardTable extends React.Component<IProps, IState> {
                             this.setState({ openJobLogID: n.implementationJob })
                           }
                         >
-                          {/* <Button
-                          variant="outlined"
-                          color="primary"
-                          type="button"
-                          onClick={() => this.setState({ openJobLogID: n.implementationJob })}
-                        > */}
                           <Icon color="primary">wrap_text</Icon>
                         </Fab>
                         {/* </Button> */}

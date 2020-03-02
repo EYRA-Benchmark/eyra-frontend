@@ -3,6 +3,12 @@
   flex-direction: column;
   margin: 0 auto;
 }
+.algorithmContainer {
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  width: 60%;
+}
 .imageContainer {
   display: flex;
   justify-content: center;

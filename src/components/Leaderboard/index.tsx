@@ -1,12 +1,11 @@
 import * as React from 'react';
 import LeaderboardTable from './LeaderboardTable/LeaderboardTable';
-import { ISubmission, IImplementation } from 'src/types';
+import { ISubmission, IAlgorithm } from 'src/types';
 import { comicApi } from 'src/services/comicApi';
-import { Omit } from 'src/utils';
 
 // NestedSubmission is a Submission with a nested Algorithm
 export type INestedSubmission = Omit<ISubmission, 'algorithm'> & {
-  implementation: IImplementation;
+  algorithm: IAlgorithm;
 };
 
 interface IProps {
@@ -45,7 +44,7 @@ class Leaderboard extends React.Component<IProps, IState> {
       submissions.map(async (submission: ISubmission) => {
         nestedSubmissions.push({
           ...submission,
-          implementation: await comicApi.implementation(submission.algorithm)
+          algorithm: await comicApi.algorithm(submission.algorithm)
         });
       })
     );

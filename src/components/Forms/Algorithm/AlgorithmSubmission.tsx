@@ -68,21 +68,16 @@ class AlgorithmSubmission extends React.Component<IProps & IUserProps, IState> {
       let algorithmID: UUID4 | null = null;
       if (this.state.createNewAlgorithm) {
         const algorithm = await comicApi.algorithmSubmission({
-          name: values.name,
-          interface: this.props.benchmark.interface
+          name: values.name
         });
         algorithmID = algorithm.id;
       } else {
         algorithmID = values.algorithm;
       }
-      const implementation = await comicApi.implementationSubmission({
-        name: values.name,
-        algorithm: algorithmID,
-        image: values.containerName
-      });
 
       await comicApi.submissionSubmission({
-        implementation: implementation.id,
+        algorithm: algorithmID,
+        image: values.containerName,
         benchmark: this.props.benchmark.id,
         name: `${values.name} on ${this.props.benchmark.name}`
       });
