@@ -21,19 +21,19 @@ interface IState {
 class Leaderboard extends React.Component<IProps, IState> {
   state = {
     submissions: [],
-    isLoading: true
+    isLoading: true,
   };
   async componentWillMount() {
     let submissions;
     if (this.props.isPrivate) {
       submissions = await comicApi.submissions({
         benchmark: this.props.benchmarkID,
-        is_private: 1
+        is_private: 1,
       });
     } else {
       submissions = await comicApi.submissions({
         benchmark: this.props.benchmarkID,
-        is_private: 0
+        is_private: 0,
       });
     }
     // const evaluatedSubmissions = submissions.filter(
@@ -44,9 +44,9 @@ class Leaderboard extends React.Component<IProps, IState> {
       submissions.map(async (submission: ISubmission) => {
         nestedSubmissions.push({
           ...submission,
-          algorithm: await comicApi.algorithm(submission.algorithm)
+          algorithm: await comicApi.algorithm(submission.algorithm),
         });
-      })
+      }),
     );
     this.setState({ submissions: nestedSubmissions, isLoading: false });
   }

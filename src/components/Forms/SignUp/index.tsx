@@ -39,91 +39,101 @@ const initialValues: IValues = {
 };
 
 const Signup = (props: IUserProps) => {
+  const [isSignedUp, setIsSignedUp] = React.useState(false);
   const handleSubmit = async (values: IValues, formik: FormikActions<IValues>) => {
     try {
-      await props.signup({
-        first_name: values.firstName,
-        last_name: values.lastName,
-        email: values.email,
-        password: values.password,
-      });
+      // await props.signup({
+      //   first_name: values.firstName,
+      //   last_name: values.lastName,
+      //   email: values.email,
+      //   password: values.password,
+      // });
       formik.setStatus({ success: true });
+      setIsSignedUp(true);
     } catch (e) {
-      formik.setStatus({ signupFail: e.message});
+      formik.setStatus({ signupFail: e.message });
     }
     formik.setSubmitting(false);
   };
-  return (
-    <Formik
-      initialValues={initialValues}
-      validationSchema={formSchema}
-      onSubmit={handleSubmit}
-    >
-      {({ isSubmitting, setFieldValue, errors, status, touched, isValid, values }) => (
-        <Form>
-          <div className={styles.container}>
-            <Field
-              name="firstName"
-              type="input"
-              placeholder="First Name"
-              autoFocus={true}
-              className={styles.input}
-            />
-            {errors.firstName && touched.lastName && (
-              <div className={styles.error}>{errors.firstName}</div>
-            )}
-            <Field
-              name="lastName"
-              type="input"
-              placeholder="Last Name"
-              className={styles.input}
-            />
-            {errors.lastName && touched.lastName && (
-              <div className={styles.error}>{errors.lastName}</div>
-            )}
-            <Field
-              name="organization"
-              type="input"
-              placeholder="Organization"
-              className={styles.input}
-            />
-            <Field
-              name="email"
-              type="email"
-              placeholder="Email"
-              className={styles.input}
-            />
-            {errors.email && touched.email && (
-              <div className={styles.error}>{errors.email}</div>
-            )}
-            <Field
-              name="password"
-              type="password"
-              placeholder="Password"
-              className={styles.input}
-            />
-            {errors.password && touched.password && (
-              <div className={styles.error}>{errors.password}</div>
-            )}
-            <Button
-              variant="outlined"
-              color="primary"
-              disabled={!isValid || isSubmitting || (status && status.success)}
-              type="submit"
-            >
-              Sign Up
-            </Button>
-            { status && status.success && (
-              <div>Thanks for signing up!</div>
-            )}
-            { status && status.signupFail && (
-              <div className={styles.error}>{status.signupFail}</div>
-            )}
-          </div>
-        </Form>
-      )}
-    </Formik>
-  );
+
+  const content = isSignedUp ?
+    (
+      <div className={styles.messageContainer}>
+        <span>Thanks for signing up! </span>
+        <span>Please check your inbox for activation link</span>
+      </div>
+    ) :
+    (
+      <Formik
+        initialValues={initialValues}
+        validationSchema={formSchema}
+        onSubmit={handleSubmit}
+      >
+        {({ isSubmitting, setFieldValue, errors, status, touched, isValid, values }) => (
+          <Form>
+            <div className={styles.container}>
+              <Field
+                name="firstName"
+                type="input"
+                placeholder="First Name"
+                autoFocus={true}
+                className={styles.input}
+              />
+              {errors.firstName && touched.lastName && (
+                <div className={styles.error}>{errors.firstName}</div>
+              )}
+              <Field
+                name="lastName"
+                type="input"
+                placeholder="Last Name"
+                className={styles.input}
+              />
+              {errors.lastName && touched.lastName && (
+                <div className={styles.error}>{errors.lastName}</div>
+              )}
+              <Field
+                name="organization"
+                type="input"
+                placeholder="Organization"
+                className={styles.input}
+              />
+              <Field
+                name="email"
+                type="email"
+                placeholder="Email"
+                className={styles.input}
+              />
+              {errors.email && touched.email && (
+                <div className={styles.error}>{errors.email}</div>
+              )}
+              <Field
+                name="password"
+                type="password"
+                placeholder="Password"
+                className={styles.input}
+              />
+              {errors.password && touched.password && (
+                <div className={styles.error}>{errors.password}</div>
+              )}
+              <Button
+                variant="outlined"
+                color="primary"
+                disabled={!isValid || isSubmitting || (status && status.success)}
+                type="submit"
+              >
+                Sign Up
+              </Button>
+
+              {status && status.signupFail && (
+                <div className={styles.error}>{status.signupFail}</div>
+              )}
+            </div>
+          </Form>
+        )}
+      </Formik>
+    );
+
+  return content;
 };
 
 export default withUser(Signup);

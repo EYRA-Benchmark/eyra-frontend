@@ -1,17 +1,18 @@
 import React from 'react';
 import Login from 'src/components/Forms/LoginForm';
 import SignUp from 'src/components/Forms/SignUp';
-
+import CloseIcon from '@material-ui/icons/CloseRounded';
 import { Paper, Tabs, Tab, Container } from '@material-ui/core';
 import styles from './Login.css';
 
 import Slide from '@material-ui/core/Slide';
-
-import Dialog from '@material-ui/core/Dialog';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
-
+import {
+  Dialog,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+  DialogActions,
+} from '@material-ui/core';
 interface ILoginDialogProps {
   open: boolean;
   onClose: () => any | undefined;
@@ -37,6 +38,7 @@ const tabs = [
 const LoginDialog = (props: ILoginDialogProps) => {
   const [activeTabIndex, setActiveTabIndex] = React.useState(0);
   const TabComponent = tabs[activeTabIndex].component;
+
   return (
     <Dialog
       open={props.open}
@@ -46,9 +48,21 @@ const LoginDialog = (props: ILoginDialogProps) => {
       aria-labelledby="alert-dialog-slide-title"
       aria-describedby="alert-dialog-slide-description"
     >
-      <DialogTitle id="alert-dialog-slide-title" classes={{ root: styles.title }}>
-        Welcome to EYRA!
-      </DialogTitle>
+      <div style={{ display: 'flex' }}>
+        <DialogTitle
+          id="alert-dialog-slide-title"
+          className={styles.title}
+        >
+          Welcome to EYRA!
+        </DialogTitle>
+        <DialogActions className={styles.hide} style={{ flex: 1 }}>
+          <CloseIcon
+            onClick={() => props.onClose()}
+            color="primary"
+            style={{ cursor: 'pointer' }}
+          />
+        </DialogActions>
+      </div>
       <DialogContent>
         <Paper className={styles.paper}>
           <Tabs

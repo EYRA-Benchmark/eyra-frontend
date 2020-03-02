@@ -7,7 +7,7 @@ interface IProps {
 }
 class AlgorithmSubmissionDetails extends React.Component<IProps> {
   state = {
-    isEdit: false
+    isEdit: false,
     // desc: this.props.algorithm.description,
   };
 

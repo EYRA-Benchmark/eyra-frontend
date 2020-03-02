@@ -6,7 +6,7 @@ import {
   Dialog,
   DialogTitle,
   DialogContent,
-  Slide
+  Slide,
 } from '@material-ui/core';
 import CloseIcon from '@material-ui/icons/CloseRounded';
 
@@ -47,7 +47,7 @@ const JobLogDialog = (props: IJobLogDialogProps) => {
           style={{
             flex: 5,
             textAlign: 'center',
-            color: 'var(--primary-color)'
+            color: 'var(--primary-color)',
           }}
         >
           Job Log

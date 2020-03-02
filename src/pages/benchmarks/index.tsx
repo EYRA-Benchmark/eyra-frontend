@@ -27,7 +27,10 @@ class Benchmarks extends React.Component<IUserProps & IProps, IState> {
     this.setState({ benchmarks: this.props.benchmarks });
   }
 
-  componentWillReceiveProps(nextProps: Readonly<IProps>, nextContext: any): void {
+  componentWillReceiveProps(
+    nextProps: Readonly<IProps>,
+    nextContext: any,
+  ): void {
     this.refresh();
   }
 
@@ -43,10 +46,12 @@ class Benchmarks extends React.Component<IUserProps & IProps, IState> {
         <Head>
           <title>Benchmarks | EYRA Benchmark Platform</title>
           <BreadCrumbs
-            crumbs={[{
-              id: 'benchmarks',
-              name: 'Benchmarks',
-            }]}
+            crumbs={[
+              {
+                id: 'benchmarks',
+                name: 'Benchmarks',
+              },
+            ]}
           />
         </Head>
         <Typography component="h1" variant="h5">

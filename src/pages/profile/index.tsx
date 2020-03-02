@@ -122,6 +122,10 @@ class Profile extends React.Component<IUserProps, IState> {
                   <AlgorithmsTable algorithms={algorithms} onEdit={this.onEdit} showMore={true} />
                   : <p>No Algorithms Found</p>}
                 </TabContainer>}
+              {activeIndex === 4 &&
+                <TabContainer>
+                  <div><p>Settings</p></div>
+                </TabContainer>}
             </Grid>
           </Grid>
         </Paper>

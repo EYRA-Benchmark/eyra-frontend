@@ -27,13 +27,13 @@ const initialValues: IValues = {
   algorithm: '',
   name: '',
   version: '',
-  containerName: ''
+  containerName: '',
 };
 
 class AlgorithmSubmission extends React.Component<IProps & IUserProps, IState> {
   state = {
     usersAlgorithms: [],
-    createNewAlgorithm: false
+    createNewAlgorithm: false,
   };
 
   async refresh() {
@@ -54,21 +54,21 @@ class AlgorithmSubmission extends React.Component<IProps & IUserProps, IState> {
 
   onCheckChanged = () => {
     this.setState({
-      createNewAlgorithm: !this.state.createNewAlgorithm
+      createNewAlgorithm: !this.state.createNewAlgorithm,
     });
-  };
+  }
   canSubmit = () => {
     return this.props.benchmark.permissions.indexOf('create_submission') > -1;
-  };
+  }
   onSubmit = async (
     values: IValues,
-    { setSubmitting }: FormikActions<IValues>
+    { setSubmitting }: FormikActions<IValues>,
   ) => {
     try {
       let algorithmID: UUID4 | null = null;
       if (this.state.createNewAlgorithm) {
         const algorithm = await comicApi.algorithmSubmission({
-          name: values.name
+          name: values.name,
         });
         algorithmID = algorithm.id;
       } else {
@@ -79,14 +79,14 @@ class AlgorithmSubmission extends React.Component<IProps & IUserProps, IState> {
         algorithm: algorithmID,
         image: values.containerName,
         benchmark: this.props.benchmark.id,
-        name: `${values.name} on ${this.props.benchmark.name}`
+        name: `${values.name} on ${this.props.benchmark.name}`,
       });
       alert('Submission succesful!');
     } catch (e) {
       alert('Error: ' + JSON.stringify(e));
     }
     setSubmitting(false);
-  };
+  }
 
   render() {
     const { usersAlgorithms, createNewAlgorithm } = this.state;
@@ -130,22 +130,22 @@ class AlgorithmSubmission extends React.Component<IProps & IUserProps, IState> {
                       </div>
                     </div>
                   ) : (
-                    <div className={styles.selectionContainer}>
-                      <div className={styles.checkboxContainer}>
-                        <input
-                          name={'newAlgorithm'}
-                          id={'newAlgorithm'}
-                          type="checkbox"
-                          value={'newAlgorithm'}
-                          checked={createNewAlgorithm}
-                          onChange={this.onCheckChanged}
-                        />
-                        <label htmlFor={'newAlgorithm'}>
-                          Create New Algorithm
+                      <div className={styles.selectionContainer}>
+                        <div className={styles.checkboxContainer}>
+                          <input
+                            name={'newAlgorithm'}
+                            id={'newAlgorithm'}
+                            type="checkbox"
+                            value={'newAlgorithm'}
+                            checked={createNewAlgorithm}
+                            onChange={this.onCheckChanged}
+                          />
+                          <label htmlFor={'newAlgorithm'}>
+                            Create New Algorithm
                         </label>
+                        </div>
                       </div>
-                    </div>
-                  )}
+                    )}
                 </div>
                 <div className={styles.inputContainer}>
                   <label htmlFor="name">Name</label>

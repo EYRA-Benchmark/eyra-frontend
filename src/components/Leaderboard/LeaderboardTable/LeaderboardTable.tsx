@@ -10,7 +10,7 @@ import {
   TableRow,
   TablePagination,
   withStyles,
-  WithStyles
+  WithStyles,
 } from '@material-ui/core';
 import VisualizationIcon from '@material-ui/icons/BarChart';
 import { formatDateTime } from 'src/utils';
@@ -52,7 +52,7 @@ type IDataRow = {
   name: string;
   version: string;
   date: string;
-  algorithm_job: UUID4; //implementation_job
+  algorithm_job: UUID4; // implementation_job
   evaluation_job: UUID4;
   algorithm: IAlgorithm;
 } & { [label: string]: string };
@@ -70,7 +70,7 @@ class LeaderboardTable extends React.Component<IProps, IState> {
     rowsPerPage: 5,
     page: 0,
     open: false,
-    algorithmDetails: null
+    algorithmDetails: null,
   };
 
   handleRequestSort = (event: any, property: any) => {
@@ -82,7 +82,7 @@ class LeaderboardTable extends React.Component<IProps, IState> {
     }
 
     this.setState({ order: order as Order, orderBy });
-  };
+  }
   render() {
     const { classes } = this.props;
     const {
@@ -96,13 +96,13 @@ class LeaderboardTable extends React.Component<IProps, IState> {
       page,
       observableJobId,
       observableUrl,
-      algorithmDetails
+      algorithmDetails,
     } = this.state;
     const metrics = this.props.submissions[0].metrics;
     let metricFields: string[];
     metrics ? (metricFields = Object.keys(metrics)) : (metricFields = []);
 
-    const data: IDataRow[] = this.props.submissions.map(submission => {
+    const data: IDataRow[] = this.props.submissions.map((submission) => {
       const metric = submission.metrics;
       const url =
         submission.visualization_url &&
@@ -116,7 +116,7 @@ class LeaderboardTable extends React.Component<IProps, IState> {
         evaluationJob: submission.evaluation_job,
         date: submission.created,
         algorithm: submission.algorithm,
-        ...metric
+        ...metric,
       };
     });
 
@@ -127,13 +127,13 @@ class LeaderboardTable extends React.Component<IProps, IState> {
 
     const isSelected = (id: string) => selected.indexOf(id) !== -1;
     const handleSelectAllClick = (
-      event: React.ChangeEvent<HTMLInputElement>
+      event: React.ChangeEvent<HTMLInputElement>,
     ) => {
       if (event.target.checked) {
-        const newSelecteds = data.map(n => n.id);
+        const newSelecteds = data.map((n) => n.id);
         this.setState({
           selected: newSelecteds,
-          itemsToCompare: this.props.submissions
+          itemsToCompare: this.props.submissions,
         });
         return;
       }
@@ -144,7 +144,7 @@ class LeaderboardTable extends React.Component<IProps, IState> {
     };
 
     const handleChangeRowsPerPage = (
-      event: React.ChangeEvent<HTMLInputElement>
+      event: React.ChangeEvent<HTMLInputElement>,
     ) => {
       this.setState({ rowsPerPage: +event.target.value });
       this.setState({ page: 0 });
@@ -152,7 +152,7 @@ class LeaderboardTable extends React.Component<IProps, IState> {
     const handleClick = (
       event: React.ChangeEvent<unknown>,
       checked: boolean,
-      id: string
+      id: string,
     ) => {
       const selectedIndex = selected.indexOf(id);
       let newSelected: string[] = [];
@@ -166,10 +166,10 @@ class LeaderboardTable extends React.Component<IProps, IState> {
       } else if (selectedIndex > 0) {
         newSelected = newSelected.concat(
           selected.slice(0, selectedIndex),
-          selected.slice(selectedIndex + 1)
+          selected.slice(selectedIndex + 1),
         );
       }
-      this.props.submissions.filter(submission => {
+      this.props.submissions.filter((submission) => {
         const index = newSelected.indexOf(submission.id);
         if (index >= 0) {
           compareItems.push(submission);
@@ -177,10 +177,10 @@ class LeaderboardTable extends React.Component<IProps, IState> {
       });
       this.setState({
         itemsToCompare: compareItems,
-        selected: newSelected
+        selected: newSelected,
       });
     };
-    let isLoggedIn = localStorage.getItem('comicToken') ? true : false;
+    const isLoggedIn = localStorage.getItem('comicToken') ? true : false;
     return (
       <Paper className={classes.root}>
         {openJobLogID && (
@@ -286,25 +286,25 @@ class LeaderboardTable extends React.Component<IProps, IState> {
                       ))}
                       <TableCell align="left">
                         {n.evaluationJob !== 'null' &&
-                        n.visualization !== null ? (
-                          <Fab
-                            variant="extended"
-                            size="small"
-                            aria-label="add"
-                            color="secondary"
-                            onClick={() => {
-                              this.setState({
-                                observableUrl: n.visualization.toString(),
-                                observableJobId: n.evaluationJob
-                              });
-                            }}
-                          >
-                            <VisualizationIcon color="primary" />
-                            visualize
-                          </Fab>
-                        ) : (
-                          '-'
-                        )}
+                          n.visualization !== null ? (
+                            <Fab
+                              variant="extended"
+                              size="small"
+                              aria-label="add"
+                              color="secondary"
+                              onClick={() => {
+                                this.setState({
+                                  observableUrl: n.visualization.toString(),
+                                  observableJobId: n.evaluationJob,
+                                });
+                              }}
+                            >
+                              <VisualizationIcon color="primary" />
+                              visualize
+                            </Fab>
+                          ) : (
+                            '-'
+                          )}
                       </TableCell>
                       <TableCell align="left">
                         {formatDateTime(new Date(n.date))}
@@ -337,10 +337,10 @@ class LeaderboardTable extends React.Component<IProps, IState> {
           rowsPerPage={rowsPerPage}
           page={page}
           backIconButtonProps={{
-            'aria-label': 'previous page'
+            'aria-label': 'previous page',
           }}
           nextIconButtonProps={{
-            'aria-label': 'next page'
+            'aria-label': 'next page',
           }}
           onChangePage={handleChangePage}
           onChangeRowsPerPage={handleChangeRowsPerPage}

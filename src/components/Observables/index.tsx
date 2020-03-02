@@ -16,7 +16,7 @@ class Observable extends Component<IProps, IState> {
     let notebookUrl = this.props.observableUrl;
     notebookUrl = notebookUrl!.replace(
       'https://observablehq.com/',
-      'https://api.observablehq.com/'
+      'https://api.observablehq.com/',
     );
     notebookUrl = notebookUrl.split('?')[0] + '.js?v=3';
     return notebookUrl;

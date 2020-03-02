@@ -13,8 +13,9 @@ interface IProps {
   benchmark: IBenchmark;
 }
 
-const canEdit = (benchmark: IBenchmark) =>
-  benchmark.permissions.indexOf('change_benchmark') > -1;
+const canEdit = (benchmark: IBenchmark) => {
+  return benchmark.permissions.indexOf('change_benchmark') > -1;
+};
 
 export const BenchmarkCard = (props: IProps) => {
   const benchmark = props.benchmark;
@@ -41,23 +42,28 @@ export const BenchmarkHeader = ({ benchmark }: { benchmark: IBenchmark }) => (
     titleTypographyProps={{
       variant: 'subtitle2',
     }}
-    action={canEdit(benchmark) &&
-      <div>
-        <Link href="/benchmark/[id]" as={`/benchmark/${benchmark.id}`}>
-          <a className={styles.link}>
-            <IconButton title="Details">
-              <DetailsIcon />
-            </IconButton>
-          </a>
-        </Link>
-        <Link href="/benchmark/[id]/edit" as={`/benchmark/${benchmark.id}/edit`}>
-          <a className={styles.link}>
-            <IconButton title="Edit">
-              <EditIcon />
-            </IconButton>
-          </a>
-        </Link>
-      </div>
+    action={
+      canEdit(benchmark) && (
+        <div>
+          <Link href="/benchmark/[id]" as={`/benchmark/${benchmark.id}`}>
+            <a className={styles.link}>
+              <IconButton title="Details">
+                <DetailsIcon />
+              </IconButton>
+            </a>
+          </Link>
+          <Link
+            href="/benchmark/[id]/edit"
+            as={`/benchmark/${benchmark.id}/edit`}
+          >
+            <a className={styles.link}>
+              <IconButton title="Edit">
+                <EditIcon />
+              </IconButton>
+            </a>
+          </Link>
+        </div>
+      )
     }
   />
 );

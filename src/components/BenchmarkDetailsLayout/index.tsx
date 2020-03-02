@@ -36,15 +36,15 @@ interface IState {
 class Details extends React.Component<IProps, IState> {
   state = {
     value: 0,
-    dialogOpen: false
+    dialogOpen: false,
   };
   handleChange = (event: any, value: number) => {
     this.setState({ value });
-  };
+  }
   toggleModal = (enabled: boolean | undefined) => () => {
     const newState = enabled === undefined ? !this.state.dialogOpen : enabled;
     this.setState({ dialogOpen: newState });
-  };
+  }
   render() {
     const { value } = this.state;
     const { data } = this.props;

@@ -26,14 +26,14 @@ export const getSubmissionsWithJobs = async (filters = {}) => {
   const submissions = await comicApi.submissions(filters);
   const nestedSubmissions: INestedSubmission[] = [];
   await Promise.all(
-    submissions.map(async submission => {
+    submissions.map(async (submission) => {
       nestedSubmissions.push({
         ...submission,
         implementation_job: await comicApi.job(submission.algorithm_job),
         evaluation_job: await comicApi.job(submission.evaluation_job),
-        submission_benchmark: await comicApi.benchmark(submission.benchmark)
+        submission_benchmark: await comicApi.benchmark(submission.benchmark),
       });
-    })
+    }),
   );
   return nestedSubmissions;
 };

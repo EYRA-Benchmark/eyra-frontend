@@ -10,7 +10,7 @@ import {
   IResponse,
   UUID4,
   IJob,
-  IDataset
+  IDataset,
 } from '../types';
 
 import { objectToQueryParams } from '../utils';
@@ -36,7 +36,7 @@ export class ComicApi {
       ...(process.env.NODE_ENV === 'production'
         ? {}
         : // ignore HTTPS verification errors in DEV
-          { httpsAgent: new https.Agent({ rejectUnauthorized: false }) })
+        { httpsAgent: new https.Agent({ rejectUnauthorized: false }) }),
     });
     this.setToken(token);
   }
@@ -121,7 +121,7 @@ export class ComicApi {
   async filter_benchmarks(filters: {} = {}): Promise<IBenchmark[]> {
     return (
       await this.axios.get<IBenchmark[]>(
-        `benchmarks/?${objectToQueryParams(filters)}`
+        `benchmarks/?${objectToQueryParams(filters)}`,
       )
     ).data;
   }
@@ -144,14 +144,14 @@ export class ComicApi {
   async submissions(filters: {} = {}): Promise<ISubmission[]> {
     return (
       await this.axios.get<ISubmission[]>(
-        `submissions/?${objectToQueryParams(filters)}`
+        `submissions/?${objectToQueryParams(filters)}`,
       )
     ).data;
   }
   async algorithms(filters: {} = {}): Promise<IAlgorithm[]> {
     return (
       await this.axios.get<IAlgorithm[]>(
-        `algorithms/?${objectToQueryParams(filters)}`
+        `algorithms/?${objectToQueryParams(filters)}`,
       )
     ).data;
   }
@@ -174,7 +174,7 @@ export class ComicApi {
       name: string;
       short_description: string;
       long_description: string;
-    }
+    },
   ): Promise<IDataset> {
     return (await this.axios.patch<IDataset>(`dataset/${id}/`, details)).data;
   }

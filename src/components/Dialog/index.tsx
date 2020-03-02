@@ -5,7 +5,7 @@ import {
   DialogActions,
   Dialog,
   DialogTitle,
-  DialogContent
+  DialogContent,
 } from '@material-ui/core';
 
 import Slide from '@material-ui/core/Slide';
