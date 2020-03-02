@@ -2,14 +2,13 @@ import React from 'react';
 import JobLog from 'src/components/JobLog';
 
 import {
-  Paper,
   DialogActions,
-  Button,
   Dialog,
   DialogTitle,
   DialogContent,
-  Slide,
+  Slide
 } from '@material-ui/core';
+import CloseIcon from '@material-ui/icons/CloseRounded';
 
 import { UUID4 } from 'src/types';
 
@@ -42,19 +41,28 @@ const JobLogDialog = (props: IJobLogDialogProps) => {
       aria-labelledby="alert-dialog-slide-title"
       aria-describedby="alert-dialog-slide-description"
     >
-      <DialogTitle id="alert-dialog-slide-title">
-        Job log
-      </DialogTitle>
-      <DialogContent>
-        <Paper>
-          <JobLog jobID={props.jobID} />
-        </Paper>
+      <div style={{ display: 'flex' }}>
+        <DialogTitle
+          id="alert-dialog-slide-title"
+          style={{
+            flex: 5,
+            textAlign: 'center',
+            color: 'var(--primary-color)'
+          }}
+        >
+          Job Log
+        </DialogTitle>
+        <DialogActions style={{ flex: 1 }}>
+          <CloseIcon
+            onClick={handleClose}
+            color="primary"
+            style={{ cursor: 'pointer' }}
+          />
+        </DialogActions>
+      </div>
+      <DialogContent style={{ width: '100%', display: 'flex' }}>
+        <JobLog jobID={props.jobID} />
       </DialogContent>
-      <DialogActions>
-        <Button onClick={handleClose} color="primary">
-          Close
-        </Button>
-      </DialogActions>
     </Dialog>
   );
 };
