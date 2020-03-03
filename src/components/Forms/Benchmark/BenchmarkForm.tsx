@@ -26,6 +26,7 @@ interface IValues {
   data_description: string;
   truth_description: string;
   metrics_description: string;
+  aboutBenchmark: string;
 }
 
 const onSubmit = async (
@@ -39,12 +40,14 @@ const onSubmit = async (
   formdata.append('truth_description', values.truth_description);
   formdata.append('metrics_description', values.metrics_description);
   formdata.append('short_description', values.short_description);
+  formdata.append('about', values.aboutBenchmark);
   if (typeof (values.banner_image) === 'object') {
     formdata.append('banner_image', values.banner_image);
   }
   if (typeof (values.card_image) === 'object') {
     formdata.append('card_image', values.card_image);
   }
+
   try {
     await comicApi
       .benchmarkSubmission(values.id, formdata)
@@ -69,11 +72,12 @@ class BenchmarkForm extends React.Component<IProps> {
     metrics: this.props.benchmark.metrics_description,
     banner_image: this.props.benchmark.banner_image,
     card_image: this.props.benchmark.card_image,
+    about: this.props.benchmark.about,
   };
 
   render() {
-    const { desc, data, truth, metrics, banner_image, card_image } = this.state;
-
+    const { desc, data, truth, metrics, banner_image, card_image, about } = this.state;
+    console.log('about', about)
     const { id, name, short_description } = this.props.benchmark;
     const initialValues: IValues = {
       id,
@@ -86,7 +90,7 @@ class BenchmarkForm extends React.Component<IProps> {
       data_description: data,
       truth_description: truth,
       metrics_description: metrics,
-
+      aboutBenchmark: about
     };
 
     return (
@@ -138,6 +142,16 @@ class BenchmarkForm extends React.Component<IProps> {
                   <Thumb file={values.card_image} isBanner={false} />
                 </div>
               </div>
+              <DescriptionEditor
+                label={'About'}
+                defaultValue={about ? about : 'Add description about people, team, etc'}
+                onChange={(event: any) => {
+                  setFieldValue('aboutBenchmark', event.target.value);
+                  this.setState({
+                    about: event.target.value,
+                  });
+                }}
+              />
               <div className={styles.inputContainer}>
                 <label htmlFor="short_description">Short Description</label>
                 <Field

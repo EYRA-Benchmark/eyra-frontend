@@ -83,7 +83,10 @@ class Details extends React.Component<IProps, IState> {
               </Tabs>
               {value === 0 && (
                 <TabContainer>
-                  <div>About Collaborators</div>
+                  <Markdown
+                    source={data.about}
+                    className={styles.container}
+                  />
                 </TabContainer>
               )}
               {value === 1 && (
