@@ -49,6 +49,14 @@
 .checkboxContainer label {
   flex: 8;
 }
+.error {
+  display: flex;
+  flex: 1;
+  min-width: 50px;
+  font-size: 12px;
+  color: red;
+  align-items: center;
+}
 @media (max-width: 768px) {
   .container {
     width: 100%;

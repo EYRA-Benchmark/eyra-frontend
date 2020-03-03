@@ -182,6 +182,7 @@ export class ComicApi {
   async algorithmSubmission(details: {
     name: string;
     description?: string;
+    tags: []
   }): Promise<IAlgorithm> {
     return (await this.axios.post<IAlgorithm>('algorithms/', details)).data;
   }
@@ -191,6 +192,7 @@ export class ComicApi {
     algorithm: UUID4;
     image: string;
     name?: string;
+    version: string;
   }): Promise<ISubmission> {
     return (await this.axios.post<ISubmission>('submissions/', details)).data;
   }
