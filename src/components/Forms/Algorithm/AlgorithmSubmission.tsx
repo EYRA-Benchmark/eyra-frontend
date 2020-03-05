@@ -81,28 +81,6 @@ class AlgorithmSubmission extends React.Component<IProps & IUserProps, IState> {
             }
           </div>
         </div>
-        <div className={styles.inputContainer}>
-          <label htmlFor="version">Version</label>
-          <Field name="version" type="text" placeholder="(e.g. 3)" />
-          <div className={styles.error}>
-            {
-              errors.version && touched.version && errors.version
-            }
-          </div>
-        </div>
-        <div className={styles.inputContainer}>
-          <label htmlFor="containerName">Docker image name</label>
-          <Field
-            name="containerName"
-            type="text"
-            placeholder="(e.g. eyra/amber:3)"
-          />
-          <div className={styles.error}>
-            {
-              errors.containerName && touched.containerName && errors.containerName
-            }
-          </div>
-        </div>
       </>
     )
   }
@@ -202,6 +180,28 @@ class AlgorithmSubmission extends React.Component<IProps & IUserProps, IState> {
                 </div>
 
                 {createNewAlgorithm && this.getNewAlgorithmForm(errors, touched)}
+                <div className={styles.inputContainer}>
+                  <label htmlFor="version">Version</label>
+                  <Field name="version" type="text" placeholder="(e.g. 3)" />
+                  <div className={styles.error}>
+                    {
+                      errors.version && touched.version && errors.version
+                    }
+                  </div>
+                </div>
+                <div className={styles.inputContainer}>
+                  <label htmlFor="containerName">Docker image name</label>
+                  <Field
+                    name="containerName"
+                    type="text"
+                    placeholder="(e.g. eyra/amber:3)"
+                  />
+                  <div className={styles.error}>
+                    {
+                      errors.containerName && touched.containerName && errors.containerName
+                    }
+                  </div>
+                </div>
                 <div className={styles.inputContainer}>
                   <Button
                     variant="outlined"
