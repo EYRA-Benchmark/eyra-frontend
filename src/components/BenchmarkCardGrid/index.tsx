@@ -16,12 +16,9 @@ const sortByDate = (a: IBenchmark, b: IBenchmark) =>
 export class CardGrid extends React.Component<IProps, {}> {
   render() {
     const { size, benchmarks } = this.props;
-    // let filteredBenchmarks = benchmarks.splice(benchmarks.findIndex((e) => e.id === 'c5c803c9-d7b2-4d99-8c50-fb9dc267a0b0'), 1);  // remove Dynaslum
-    let filteredBenchmarks = benchmarks
+    const filteredBenchmarks = benchmarks
       .sort(sortByDate)
       .slice(0, size > 0 ? size : benchmarks.length);
-
-
     return (
       <Grid container={true} spacing={3}>
         {filteredBenchmarks.map((benchmark, index: number) => (

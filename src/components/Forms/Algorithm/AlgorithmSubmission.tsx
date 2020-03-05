@@ -29,7 +29,7 @@ const formSchema = yup.object().shape({
   version: yup
     .string()
     .required(' * Version is required'),
-  containerName: yup.string().required(' * Docker image is required')
+  containerName: yup.string().required(' * Docker image is required'),
 });
 const initialValues: IValues = {
   algorithm: '',
@@ -42,7 +42,7 @@ class AlgorithmSubmission extends React.Component<IProps & IUserProps, IState> {
   state = {
     usersAlgorithms: [],
     createNewAlgorithm: true,
-    isValidated: false
+    isValidated: false,
   };
 
   async refresh() {
@@ -59,10 +59,9 @@ class AlgorithmSubmission extends React.Component<IProps & IUserProps, IState> {
     this.setState({
       createNewAlgorithm: !this.state.createNewAlgorithm,
     });
-    setFieldValue('algorithm', '')
+    setFieldValue('algorithm', '');
   }
   canSubmit = () => {
-    debugger;
     return this.props.benchmark.permissions.indexOf('create_submission') > -1;
   }
   getNewAlgorithmForm = (errors: any, touched: any) => {
@@ -82,7 +81,7 @@ class AlgorithmSubmission extends React.Component<IProps & IUserProps, IState> {
           </div>
         </div>
       </>
-    )
+    );
   }
   onSubmit = async (
     values: IValues,
@@ -105,7 +104,7 @@ class AlgorithmSubmission extends React.Component<IProps & IUserProps, IState> {
         image: values.containerName,
         benchmark: this.props.benchmark.id,
         name: `${values.name} on ${this.props.benchmark.name}`,
-        version: values.version
+        version: values.version,
       });
       alert('Submission succesful!');
     } catch (e) {
@@ -137,10 +136,10 @@ class AlgorithmSubmission extends React.Component<IProps & IUserProps, IState> {
                           name="name"
                           disabled={createNewAlgorithm}
                           onChange={(event: any) => {
-                            setFieldValue('algorithm', event.target.value)
+                            setFieldValue('algorithm', event.target.value);
                             this.setState({
                               createNewAlgorithm: false,
-                            })
+                            });
                           }}
                         >
                           <option value="" label="Select an algorithm" />

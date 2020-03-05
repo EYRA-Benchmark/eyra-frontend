@@ -77,7 +77,6 @@ class BenchmarkForm extends React.Component<IProps> {
 
   render() {
     const { desc, data, truth, metrics, banner_image, card_image, about } = this.state;
-    console.log('about', about)
     const { id, name, short_description } = this.props.benchmark;
     const initialValues: IValues = {
       id,
@@ -90,7 +89,7 @@ class BenchmarkForm extends React.Component<IProps> {
       data_description: data,
       truth_description: truth,
       metrics_description: metrics,
-      aboutBenchmark: about
+      aboutBenchmark: about,
     };
 
     return (
