@@ -57,7 +57,7 @@ const onSubmit = async (
         }
       });
   } catch (e) {
-    console.log(e);
+    alert(e.response.data.error);
   }
   setSubmitting(false);
 };
