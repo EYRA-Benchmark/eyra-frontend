@@ -277,7 +277,7 @@ class LeaderboardTable extends React.Component<IProps, IState> {
                         </a>
                       </TableCell>
                       <TableCell component="td" scope="row" align="left">
-                        {n.version ? n.version : '-'}
+                        {n.version ? 'v' + n.version : '-'}
                       </TableCell>
                       {metricFields.map((fieldName, j: number) => (
                         <TableCell key={j} align="left">
