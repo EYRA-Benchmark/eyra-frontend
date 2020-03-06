@@ -31,7 +31,7 @@ class AlgorithmSubmission extends React.Component<IProps & IUserProps, IState> {
   state = {
     usersAlgorithms: [],
     createNewAlgorithm: true,
-    version: '0'
+    version: '0',
   };
   async refresh() {
     const { user } = this.props;
@@ -50,18 +50,18 @@ class AlgorithmSubmission extends React.Component<IProps & IUserProps, IState> {
       containerName: '',
     };
     if (!values.name && !values.algorithm) {
-      errors.name = "Algorithm name is required"
+      errors.name = 'Algorithm name is required';
     }
     if (!this.state.createNewAlgorithm && !values.algorithm) {
-      errors.name = "Please select an algorithm"
+      errors.name = 'Please select an algorithm';
     }
     if (!values.containerName) {
-      errors.containerName = "container name is required"
+      errors.containerName = 'container name is required';
     }
     if (!errors.name && !errors.version && !errors.containerName) {
-      errors = {}
+      errors = {};
     }
-    return errors
+    return errors;
   }
   onCheckChanged = (setFieldValue: any) => {
     this.setState({
@@ -97,7 +97,6 @@ class AlgorithmSubmission extends React.Component<IProps & IUserProps, IState> {
   ) => {
     try {
       let algorithmID: UUID4 | null = null;
-      console.log(algorithmID + '\n' + values)
       let algorithmName = '';
       if (this.state.createNewAlgorithm) {
         const algorithm = await comicApi.algorithmSubmission({
@@ -105,11 +104,11 @@ class AlgorithmSubmission extends React.Component<IProps & IUserProps, IState> {
           tags: [],
         });
         algorithmID = algorithm.id;
-        algorithmName = values.name
+        algorithmName = values.name;
       } else {
-        values.name = ''
-        algorithmID = values.algorithm.split("/")[0];
-        algorithmName = values.algorithm.split("/")[1];
+        values.name = '';
+        algorithmID = values.algorithm.split('/')[0];
+        algorithmName = values.algorithm.split('/')[1];
       }
       await comicApi.submissionSubmission({
         algorithm: algorithmID,
@@ -120,8 +119,8 @@ class AlgorithmSubmission extends React.Component<IProps & IUserProps, IState> {
       });
       resetForm();
       this.setState({
-        version: ''
-      })
+        version: '',
+      });
       alert('Submission succesful!');
     } catch (e) {
       alert('Error: ' + JSON.stringify(e.response.data.error));
@@ -130,13 +129,12 @@ class AlgorithmSubmission extends React.Component<IProps & IUserProps, IState> {
   }
   async getTheSubmissionVersion(algorithmId: string) {
     const submissions = await comicApi.submissions({ algorithm: algorithmId });
-    console.log(submissions)
-    let version_number = submissions[0].version && (parseInt(submissions[0].version) + 1)
-    if (!version_number) version_number = 0;
-    const versionOfLastSubmission = version_number.toString();
+    let versionNumber = submissions[0].version && (parseInt(submissions[0].version, 10) + 1);
+    if (!versionNumber) { versionNumber = 0; }
+    const versionOfLastSubmission = versionNumber.toString();
     this.setState({
-      version: versionOfLastSubmission
-    })
+      version: versionOfLastSubmission,
+    });
   }
   render() {
     const { usersAlgorithms, createNewAlgorithm, version } = this.state;
@@ -161,7 +159,7 @@ class AlgorithmSubmission extends React.Component<IProps & IUserProps, IState> {
                           name="algorithm"
                           disabled={createNewAlgorithm}
                           onChange={(event: any) => {
-                            this.getTheSubmissionVersion(event.target.value.split("/")[0])
+                            this.getTheSubmissionVersion(event.target.value.split('/')[0]);
                             setFieldValue('algorithm', event.target.value);
                             this.setState({
                               createNewAlgorithm: false,
@@ -173,7 +171,7 @@ class AlgorithmSubmission extends React.Component<IProps & IUserProps, IState> {
                             usersAlgorithms.map((algorithm: IAlgorithm) => (
                               <option
                                 key={algorithm.id + Math.random()}
-                                value={algorithm.id + "/" + algorithm.name}
+                                value={algorithm.id + '/' + algorithm.name}
                                 label={algorithm.name}
                               />
                             ))
@@ -185,17 +183,20 @@ class AlgorithmSubmission extends React.Component<IProps & IUserProps, IState> {
                       : null
                     }
                     <div className={styles.checkboxContainer}>
-                      <Field type="checkbox"
+                      <Field
+                        type="checkbox"
                         name="isNewAlgorithm"
                         checked={createNewAlgorithm}
-                        onChange={() => this.onCheckChanged(setFieldValue)} />
+                        onChange={() => this.onCheckChanged(setFieldValue)}
+                      />
                       {/* <input
                         name="isNewAlgorithm"
                         type="checkbox"
                         value={'createNewAlgorithm'}
                         checked={createNewAlgorithm}
                         onChange={() => this.onCheckChanged(setFieldValue)}
-                      /> */}
+                        />
+                      */}
                       <label htmlFor={'newAlgorithm'}>
                         Create New Algorithm
                       </label>
@@ -210,9 +211,7 @@ class AlgorithmSubmission extends React.Component<IProps & IUserProps, IState> {
                 <div className={styles.inputContainer}>
                   <label htmlFor="version">Version</label>
                   <Field name="version" type="text" value={'v' + version} disabled={true} />
-                  <div className={styles.error}>
-
-                  </div>
+                  <div className={styles.error} />
                 </div>
                 <div className={styles.inputContainer}>
                   <label htmlFor="containerName">Docker image name</label>
