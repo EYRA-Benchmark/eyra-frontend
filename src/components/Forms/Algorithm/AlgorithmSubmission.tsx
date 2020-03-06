@@ -114,7 +114,7 @@ class AlgorithmSubmission extends React.Component<IProps & IUserProps, IState> {
         algorithm: algorithmID,
         image: values.containerName,
         benchmark: this.props.benchmark.id,
-        name: `${algorithmName}  ${this.state.version}`,
+        name: `${algorithmName} v${this.state.version}`,
         version: this.state.version,
       });
       resetForm();
