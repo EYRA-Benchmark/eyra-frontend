@@ -1,5 +1,5 @@
 import React from 'react';
-import * as yup from 'yup';
+// import * as yup from 'yup';
 import { Button } from '@material-ui/core';
 import { Field, Form, Formik } from 'formik';
 import { FormikActions } from 'formik';
@@ -11,30 +11,19 @@ import { IUserProps, withUser } from 'src/context/User';
 interface IProps {
   benchmark: IBenchmark;
 }
-interface IValues {
-  algorithm: string;
-  name: string;
-  version: string;
-  containerName: string;
-}
-
 interface IState {
   usersAlgorithms: IAlgorithm[];
   createNewAlgorithm: boolean;
+  version: string;
 }
-const formSchema = yup.object().shape({
-  name: yup
-    .string()
-    .required(' * Algorithm name is required.'),
-  version: yup
-    .string()
-    .required(' * Version is required'),
-  containerName: yup.string().required(' * Docker image is required'),
-});
+interface IValues {
+  algorithm: string;
+  name: string;
+  containerName: string;
+}
 const initialValues: IValues = {
   algorithm: '',
   name: '',
-  version: '',
   containerName: '',
 };
 
@@ -42,9 +31,8 @@ class AlgorithmSubmission extends React.Component<IProps & IUserProps, IState> {
   state = {
     usersAlgorithms: [],
     createNewAlgorithm: true,
-    isValidated: false,
+    version: '0'
   };
-
   async refresh() {
     const { user } = this.props;
     if (user != null) {
@@ -54,6 +42,26 @@ class AlgorithmSubmission extends React.Component<IProps & IUserProps, IState> {
   }
   componentDidMount() {
     this.refresh();
+  }
+  validate = (values: any) => {
+    let errors: any;
+    errors = {
+      name: '',
+      containerName: '',
+    };
+    if (!values.name && !values.algorithm) {
+      errors.name = "Algorithm name is required"
+    }
+    if (!this.state.createNewAlgorithm && !values.algorithm) {
+      errors.name = "Please select an algorithm"
+    }
+    if (!values.containerName) {
+      errors.containerName = "container name is required"
+    }
+    if (!errors.name && !errors.version && !errors.containerName) {
+      errors = {}
+    }
+    return errors
   }
   onCheckChanged = (setFieldValue: any) => {
     this.setState({
@@ -72,7 +80,7 @@ class AlgorithmSubmission extends React.Component<IProps & IUserProps, IState> {
           <Field
             name="name"
             type="text"
-            placeholder="(e.g. Amber v3)"
+            placeholder="Algorithm Name"
           />
           <div className={styles.error}>
             {
@@ -85,45 +93,62 @@ class AlgorithmSubmission extends React.Component<IProps & IUserProps, IState> {
   }
   onSubmit = async (
     values: IValues,
-    { setSubmitting }: FormikActions<IValues>,
+    { setSubmitting, resetForm }: FormikActions<IValues>,
   ) => {
     try {
       let algorithmID: UUID4 | null = null;
+      console.log(algorithmID + '\n' + values)
+      let algorithmName = '';
       if (this.state.createNewAlgorithm) {
         const algorithm = await comicApi.algorithmSubmission({
           name: values.name,
           tags: [],
         });
         algorithmID = algorithm.id;
+        algorithmName = values.name
       } else {
-        algorithmID = values.algorithm;
+        values.name = ''
+        algorithmID = values.algorithm.split("/")[0];
+        algorithmName = values.algorithm.split("/")[1];
       }
-
       await comicApi.submissionSubmission({
         algorithm: algorithmID,
         image: values.containerName,
         benchmark: this.props.benchmark.id,
-        name: `${values.name} on ${this.props.benchmark.name}`,
-        version: values.version,
+        name: `${algorithmName}  ${this.state.version}`,
+        version: this.state.version,
       });
+      resetForm();
+      this.setState({
+        version: ''
+      })
       alert('Submission succesful!');
     } catch (e) {
       alert('Error: ' + JSON.stringify(e.response.data.error));
     }
     setSubmitting(false);
   }
-
+  async getTheSubmissionVersion(algorithmId: string) {
+    const submissions = await comicApi.submissions({ algorithm: algorithmId });
+    console.log(submissions)
+    let version_number = submissions[0].version && (parseInt(submissions[0].version) + 1)
+    if (!version_number) version_number = 0;
+    const versionOfLastSubmission = version_number.toString();
+    this.setState({
+      version: versionOfLastSubmission
+    })
+  }
   render() {
-    const { usersAlgorithms, createNewAlgorithm } = this.state;
+    const { usersAlgorithms, createNewAlgorithm, version } = this.state;
 
     if (this.canSubmit()) {
       return (
         <Formik
           initialValues={initialValues}
-          validationSchema={formSchema}
+          validate={this.validate}
           onSubmit={this.onSubmit}
         >
-          {({ isSubmitting, errors, touched, setFieldValue, handleSubmit }) => (
+          {({ errors, touched, setFieldValue, handleSubmit }) => (
             <Form>
               <div className={styles.container}>
                 <div className={styles.inputContainer}>
@@ -133,9 +158,10 @@ class AlgorithmSubmission extends React.Component<IProps & IUserProps, IState> {
                       <>
                         <Field
                           component="select"
-                          name="name"
+                          name="algorithm"
                           disabled={createNewAlgorithm}
                           onChange={(event: any) => {
+                            this.getTheSubmissionVersion(event.target.value.split("/")[0])
                             setFieldValue('algorithm', event.target.value);
                             this.setState({
                               createNewAlgorithm: false,
@@ -147,7 +173,7 @@ class AlgorithmSubmission extends React.Component<IProps & IUserProps, IState> {
                             usersAlgorithms.map((algorithm: IAlgorithm) => (
                               <option
                                 key={algorithm.id + Math.random()}
-                                value={algorithm.id}
+                                value={algorithm.id + "/" + algorithm.name}
                                 label={algorithm.name}
                               />
                             ))
@@ -158,19 +184,21 @@ class AlgorithmSubmission extends React.Component<IProps & IUserProps, IState> {
                     )
                       : null
                     }
-
                     <div className={styles.checkboxContainer}>
-                      <input
-                        name={'newAlgorithm'}
-                        id={'newAlgorithm'}
+                      <Field type="checkbox"
+                        name="isNewAlgorithm"
+                        checked={createNewAlgorithm}
+                        onChange={() => this.onCheckChanged(setFieldValue)} />
+                      {/* <input
+                        name="isNewAlgorithm"
                         type="checkbox"
-                        value={'newAlgorithm'}
+                        value={'createNewAlgorithm'}
                         checked={createNewAlgorithm}
                         onChange={() => this.onCheckChanged(setFieldValue)}
-                      />
+                      /> */}
                       <label htmlFor={'newAlgorithm'}>
                         Create New Algorithm
-                        </label>
+                      </label>
                     </div>
                   </div>
                   <div className={styles.error}>
@@ -181,11 +209,9 @@ class AlgorithmSubmission extends React.Component<IProps & IUserProps, IState> {
                 {createNewAlgorithm && this.getNewAlgorithmForm(errors, touched)}
                 <div className={styles.inputContainer}>
                   <label htmlFor="version">Version</label>
-                  <Field name="version" type="text" placeholder="(e.g. 3)" />
+                  <Field name="version" type="text" value={'v' + version} disabled={true} />
                   <div className={styles.error}>
-                    {
-                      errors.version && touched.version && errors.version
-                    }
+
                   </div>
                 </div>
                 <div className={styles.inputContainer}>
@@ -193,7 +219,7 @@ class AlgorithmSubmission extends React.Component<IProps & IUserProps, IState> {
                   <Field
                     name="containerName"
                     type="text"
-                    placeholder="(e.g. eyra/amber:3)"
+                    placeholder="(e.g. eyra/algorithm-name:version-number)"
                   />
                   <div className={styles.error}>
                     {
@@ -205,7 +231,6 @@ class AlgorithmSubmission extends React.Component<IProps & IUserProps, IState> {
                   <Button
                     variant="outlined"
                     color="primary"
-                    disabled={isSubmitting}
                     type="submit"
                   >
                     Submit
