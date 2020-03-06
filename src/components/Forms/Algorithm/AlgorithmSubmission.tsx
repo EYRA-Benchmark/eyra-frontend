@@ -36,7 +36,7 @@ class AlgorithmSubmission extends React.Component<IProps & IUserProps, IState> {
   async refresh() {
     const { user } = this.props;
     if (user != null) {
-      const usersAlgorithms = await comicApi.algorithms({ has_admin: user.id });
+      const usersAlgorithms = await comicApi.algorithms({ has_admin: user.id, benchmark: this.props.benchmark.id });
       this.setState({ usersAlgorithms });
     }
   }
