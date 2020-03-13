@@ -13,11 +13,12 @@ import {
 import { INestedSubmission } from 'src/pages/submissions';
 import { UUID4 } from 'src/types';
 import CheckIcon from '@material-ui/icons/CheckCircle';
-import JobLogDialog from 'src/components/JobLogDialog';
 import FailedIcon from '@material-ui/icons/Close';
 import PendingIcon from '@material-ui/icons/HourglassEmpty';
 import SubmissionHeader from './SubmissionHeader';
 import { sortBy } from 'lodash';
+import VisualizationDialog from '../Dialog';
+import JobLog from '../JobLog';
 
 interface IProps {
   submissions: INestedSubmission[];
@@ -57,6 +58,7 @@ interface IState {
   rowsPerPage: number;
   page: number;
   openJobLogID: UUID4 | null;
+  submissionName: string;
 }
 
 class SubmissionsTable extends React.Component<IProps, IState> {
@@ -66,6 +68,7 @@ class SubmissionsTable extends React.Component<IProps, IState> {
     rowsPerPage: 3,
     page: 0,
     openJobLogID: '',
+    submissionName: '',
   };
   handleRequestSort = (event: any, property: any) => {
     const orderBy = property;
@@ -79,7 +82,7 @@ class SubmissionsTable extends React.Component<IProps, IState> {
   }
 
   render() {
-    const { order, orderBy, openJobLogID, rowsPerPage, page } = this.state;
+    const { order, orderBy, openJobLogID, rowsPerPage, page, submissionName } = this.state;
     const { showMore } = this.props;
     const data: IDataRow[] = this.props.submissions.map((submission) => {
       return {
@@ -108,12 +111,35 @@ class SubmissionsTable extends React.Component<IProps, IState> {
       this.setState({ rowsPerPage: +event.target.value });
       this.setState({ page: 0 });
     };
+    const renderStatusIcon = (status: string) => {
+      let icon;
+      switch (status) {
+        case 'Success':
+          icon = <Icon><CheckIcon style={{ color: '#4caf50' }} /></Icon>
+          break;
+        case 'Failure':
+          icon = <Icon><FailedIcon style={{ color: '#ed2939' }} /></Icon>
+          break;
+        case 'Pending':
+        case 'Started':
+          icon = <Icon><PendingIcon /></Icon>
+          break;
+        default: status;
+      }
+      return icon;
+    }
     return (
       <Paper>
+        {
+          openJobLogID &&
+          <VisualizationDialog
+            print={false}
+            title={submissionName}
+            onClose={() => this.setState({ openJobLogID: null, submissionName: '' })}>
+            <JobLog jobID={openJobLogID}></JobLog>
+          </VisualizationDialog>
+        }
 
-        {openJobLogID && (
-          <JobLogDialog jobID={openJobLogID} onClose={() => this.setState({ openJobLogID: null })} />
-        )}
         <div style={{ overflowX: 'scroll' }}>
           <Table aria-labelledby="Submission Table" >
             <SubmissionHeader
@@ -134,31 +160,13 @@ class SubmissionsTable extends React.Component<IProps, IState> {
                     {n.name}
                   </TableCell>
                   <TableCell component="td" scope="row">
-
-                    {
-                      (
-                        n.implementation_status === 'Success' &&
-                        <Icon><CheckIcon style={{ color: '#4caf50' }} /></Icon>
-                      )
-                      ||
-                      (
-                        n.implementation_status === 'Failure' &&
-                        <Icon><FailedIcon style={{ color: '#ed2939' }} /></Icon>
-                      )
-                      ||
-                      (
-                        n.implementation_status === 'Pending' || n.implementation_status === 'Started'
-                        && <Icon><PendingIcon /></Icon>
-                      )
-                    }
+                    {renderStatusIcon(n.implementation_status)}
                   </TableCell>
                   <TableCell component="td" scope="row">
                     {n.runtime_implementation}
                   </TableCell>
                   <TableCell component="td" scope="row">
-                    {n.evaluation_status === 'Success' ?
-                      <Icon><CheckIcon style={{ color: '#4caf50' }} /></Icon>
-                      : <Icon><FailedIcon style={{ color: '#ed2939' }} /></Icon>}
+                    {renderStatusIcon(n.evaluation_status)}
                   </TableCell>
                   <TableCell component="td" scope="row">
                     {n.runtime_evaluation}
@@ -170,20 +178,14 @@ class SubmissionsTable extends React.Component<IProps, IState> {
                       variant="round"
                       size="small"
                       color="secondary"
-                      onClick={() => this.setState({ openJobLogID: n.action })}
+                      onClick={() => this.setState({ openJobLogID: n.action, submissionName: n.name })}
                     >
-
                       <Icon color="primary">wrap_text</Icon>
                     </Fab>
 
                   </TableCell>
                 </TableRow>
               ))}
-              {/* {emptyRows > 0 && (
-              <TableRow style={{ height: 49 * emptyRows }}>
-                <TableCell colSpan={6} />
-              </TableRow>
-            )} */}
             </TableBody>
           </Table>
         </div>
@@ -208,5 +210,4 @@ class SubmissionsTable extends React.Component<IProps, IState> {
   }
 }
 
-// const wrapper = withStyles(styles);
 export default SubmissionsTable;

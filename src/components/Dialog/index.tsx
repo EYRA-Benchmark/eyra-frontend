@@ -11,7 +11,7 @@ import {
 import Slide from '@material-ui/core/Slide';
 import styles from './styles.css';
 interface IProps {
-  title: string;
+  title?: string;
   print: boolean;
   children: ReactNode;
   maxWidth?: any;
