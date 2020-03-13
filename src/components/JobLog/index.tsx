@@ -1,7 +1,7 @@
 import React from 'react';
 import { comicApi } from 'src/services/comicApi';
 
-import Spinner from 'src/components/Spinner/index';
+// import Spinner from 'src/components/Spinner/index';
 
 import { UUID4 } from 'src/types';
 
@@ -22,9 +22,9 @@ class JobLog extends React.Component<IProps, IState> {
   interval: any;
 
   update = async () => {
-    this.setState({ loading: true });
+    // this.setState({ loading: true }); // causes flicker on state update
     const job = await comicApi.job(this.props.jobID);
-    this.setState( { loading: false, log: job.log });
+    this.setState({ log: job.log });
   }
 
   componentDidMount() {
@@ -42,7 +42,7 @@ class JobLog extends React.Component<IProps, IState> {
     return (
       <pre>
         {this.state.log}
-        {this.state.loading && <Spinner />}
+        {/* {this.state.loading && <Spinner />} */}
       </pre>
     );
   }

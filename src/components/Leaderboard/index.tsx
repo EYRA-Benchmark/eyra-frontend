@@ -1,13 +1,15 @@
 import * as React from 'react';
 import LeaderboardTable from './LeaderboardTable/LeaderboardTable';
-import { ISubmission, IAlgorithm } from 'src/types';
+import { ISubmission, IAlgorithm, IJob } from 'src/types';
 import { comicApi } from 'src/services/comicApi';
 
 // NestedSubmission is a Submission with a nested Algorithm
-export type INestedSubmission = Omit<ISubmission, 'algorithm'> & {
-  algorithm: IAlgorithm;
+export interface INestedSubmission extends ISubmission {
+  evaluationJob: IJob;
 };
-
+export interface INestedSubmissionWithAlgorithm extends INestedSubmission {
+  algorithm_data: IAlgorithm;
+}
 interface IProps {
   benchmarkID: string;
   isPrivate: boolean;
@@ -36,21 +38,30 @@ class Leaderboard extends React.Component<IProps, IState> {
         is_private: 0,
       });
     }
-    // const evaluatedSubmissions = submissions.filter(
-    //   (submission) => submission.metrics_json !== null,
-    // );
-    const nestedSubmissions: INestedSubmission[] = [];
+
+    let nestedSubmissions: INestedSubmission[] = [];
+    const nestedSubmissionsWithAlgorithms: INestedSubmissionWithAlgorithm[] = [];
     await Promise.all(
       submissions.map(async (submission: ISubmission) => {
         nestedSubmissions.push({
           ...submission,
-          algorithm: await comicApi.algorithm(submission.algorithm),
+          evaluationJob: await comicApi.job(submission.evaluation_job),
         });
       }),
     );
-    this.setState({ submissions: nestedSubmissions, isLoading: false });
+    // get the submissions with evaluation success status only
+    nestedSubmissions = nestedSubmissions.filter(submission => submission.evaluationJob.status === 4)
+    // Fetch algorithm data for submissions
+    await Promise.all(
+      nestedSubmissions.map(async (submission: INestedSubmission) => {
+        nestedSubmissionsWithAlgorithms.push({
+          ...submission,
+          algorithm_data: await comicApi.algorithm(submission.algorithm),
+        })
+      })
+    )
+    this.setState({ submissions: nestedSubmissionsWithAlgorithms, isLoading: false });
   }
-
   render() {
     if (this.state.isLoading) {
       return <div>Loading...</div>;
@@ -59,6 +70,7 @@ class Leaderboard extends React.Component<IProps, IState> {
     if (this.state.submissions.length === 0) {
       return <div>No submissions found...</div>;
     }
+
     return <LeaderboardTable submissions={this.state.submissions} />;
   }
 }

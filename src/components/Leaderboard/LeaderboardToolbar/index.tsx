@@ -19,12 +19,12 @@ const LeaderboardToolbar = (props: ILeaderboardToolbarProps) => {
             <div className={classes.title}>
                 {numSelected > 0 ? (
                     <Typography variant="subtitle1">
-                        {numSelected} selected to compare
-            </Typography>
+                        {numSelected} algorithms selected to compare
+                    </Typography>
                 ) : (
                         <Typography variant="h6" id="tableTitle">
-                            Submissions
-            </Typography>
+                            {/* Submissions */}
+                        </Typography>
                     )}
             </div>
             <div className={classes.spacer} />
