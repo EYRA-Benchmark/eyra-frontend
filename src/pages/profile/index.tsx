@@ -70,8 +70,6 @@ class Profile extends React.Component<IUserProps, IState> {
       (benchmark: IBenchmark) =>
         benchmark.permissions.indexOf('change_benchmark') > -1,
     );
-    myBenchmarks.splice(
-      myBenchmarks.findIndex((e: IBenchmark) => e.id === 'c5c803c9-d7b2-4d99-8c50-fb9dc267a0b0'), 1);
     return (
       <Container>
         <Paper>
