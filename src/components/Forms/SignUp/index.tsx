@@ -42,12 +42,12 @@ const Signup = (props: IUserProps) => {
   const [isSignedUp, setIsSignedUp] = React.useState(false);
   const handleSubmit = async (values: IValues, formik: FormikActions<IValues>) => {
     try {
-      // await props.signup({
-      //   first_name: values.firstName,
-      //   last_name: values.lastName,
-      //   email: values.email,
-      //   password: values.password,
-      // });
+      await props.signup({
+        first_name: values.firstName,
+        last_name: values.lastName,
+        email: values.email,
+        password: values.password,
+      });
       formik.setStatus({ success: true });
       setIsSignedUp(true);
     } catch (e) {
@@ -60,7 +60,7 @@ const Signup = (props: IUserProps) => {
     (
       <div className={styles.messageContainer}>
         <span>Thanks for signing up! </span>
-        <span>Please check your inbox for activation link</span>
+        {/* <span>Please check your inbox for activation link</span> */}
       </div>
     ) :
     (
