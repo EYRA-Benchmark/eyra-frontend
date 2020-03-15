@@ -9,7 +9,6 @@ interface IProps {
 
 const DataFileCard = (props: IProps) => {
     const { dataFiles, type, desc, sampling } = props;
-
     const content = dataFiles ? (
         <div className={styles.container}>
             <h5>{type}</h5>

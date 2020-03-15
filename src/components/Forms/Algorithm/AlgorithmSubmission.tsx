@@ -126,8 +126,6 @@ class AlgorithmSubmission extends React.Component<IProps & IUserProps, IState> {
       });
       values.isSaved = true;
     } catch (e) {
-      debugger;
-      console.log(e.response.data);
       if (e.response.data.error) {
         alert('Error: ' + JSON.stringify(e.response.data.error));
       } else {

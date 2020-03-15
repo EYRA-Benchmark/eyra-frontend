@@ -32,8 +32,6 @@ const onSubmit = async (
                 }
             });
     } catch (e) {
-        debugger;
-        console.log(e.response.data);
         alert(e.response.data.error);
     }
     setSubmitting(false);

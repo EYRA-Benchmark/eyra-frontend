@@ -38,7 +38,7 @@ const DataDescription = (props: IProps) => {
                     <Grid item={true} key={3} xs={12} sm={6} md={6}>
                         <DataFileCard
                             dataFiles={data.participant_data_files}
-                            type={'Public Participant Data'}
+                            type={'Example Data'}
                             desc={data.participant_data_description}
                             sampling={data.participant_data_sampling_method}
                         />
@@ -46,23 +46,23 @@ const DataDescription = (props: IProps) => {
                 ),
             );
         }
-        if (data.public_test_data_description !== '' || data.public_test_data_sampling_method !== '') {
-            if (data.public_test_data_file && publicLbData.push(data.public_test_data_file),
-                data.public_ground_truth_data_file && publicLbData.push(data.public_ground_truth_data_file)) {
-                content.push(
-                    (
-                        <Grid item={true} key={1} xs={12} sm={6} md={6}>
-                            <DataFileCard
-                                dataFiles={[]}
-                                type={'Public Leaderboard Data'}
-                                desc={data.public_test_data_description}
-                                sampling={data.public_test_data_sampling_method}
-                            />
-                        </Grid>
-                    ),
-                );
-            }
+        // if (data.public_test_data_description !== '' || data.public_test_data_sampling_method !== '') {
+        if (data.public_test_data_file && publicLbData.push(data.public_test_data_file),
+            data.public_ground_truth_data_file && publicLbData.push(data.public_ground_truth_data_file)) {
+            content.push(
+                (
+                    <Grid item={true} key={1} xs={12} sm={6} md={6}>
+                        <DataFileCard
+                            dataFiles={publicLbData}
+                            type={'Benchmark Data'} // Benchmark Data
+                            desc={data.public_test_data_description}
+                            sampling={data.public_test_data_sampling_method}
+                        />
+                    </Grid>
+                ),
+            );
         }
+        //}
         if (data.private_test_data_description !== '' || data.private_test_data_sampling_method !== '') {
             if (data.private_test_data_file && privateLbData.push(data.private_test_data_file),
                 data.private_ground_truth_data_file && privateLbData.push(data.private_ground_truth_data_file)) {
@@ -71,7 +71,7 @@ const DataDescription = (props: IProps) => {
                         <Grid item={true} key={2} xs={12} sm={6} md={6}>
                             <DataFileCard
                                 dataFiles={[]}
-                                type={'Private Leaderboard Data'}
+                                type={'Private Benchmark Data'} // Private Benchmark Data
                                 desc={data.private_test_data_description}
                                 sampling={data.private_test_data_sampling_method}
                             />
