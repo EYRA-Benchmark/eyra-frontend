@@ -2,11 +2,15 @@
 import React, { Component } from 'react';
 import SuggestionList from './SuggestionList/';
 import styles from './styles.css';
-import { FieldProps } from 'formik';
+// import { FieldProps } from 'formik';
 const ENTER_KEY = 13;
 const COMMA_KEY = 188;
 type Keyboard_Event = React.KeyboardEvent<HTMLInputElement>;
 type Change_Event = React.ChangeEvent<HTMLInputElement>;
+interface IProps {
+    tags: string[];
+    setField: any;
+}
 interface IState {
     tags: string[];
     value: string;
@@ -14,9 +18,10 @@ interface IState {
     showSuggestion: boolean;
 }
 
-export default class InputTags extends Component<FieldProps, IState> {
+export default class InputTags extends Component<IProps, IState> {
+
     state = {
-        tags: ['tag1'],
+        tags: this.props.tags,
         value: '',
         suggestions: ['Algorithms', 'data', 'scans', 'Iris', 'FRB'],
         filteredSuggestions: [],
@@ -57,7 +62,7 @@ export default class InputTags extends Component<FieldProps, IState> {
             value: '',
             tags,
         });
-        this.props.form.setFieldValue('tags', tags);
+        this.props.setField('tags', tags);
     }
     deletePrevTag = (event: React.MouseEvent<HTMLElement>) => {
         const { tags } = this.state;

@@ -129,7 +129,7 @@ class SubmissionsTable extends React.Component<IProps, IState> {
       return icon;
     }
     return (
-      <Paper>
+      <Paper id='submissions'>
         {
           openJobLogID &&
           <VisualizationDialog

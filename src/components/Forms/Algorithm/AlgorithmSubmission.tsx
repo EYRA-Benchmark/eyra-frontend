@@ -20,11 +20,13 @@ interface IValues {
   algorithm: string;
   name: string;
   containerName: string;
+  isSaved: boolean;
 }
 const initialValues: IValues = {
   algorithm: '',
   name: '',
   containerName: '',
+  isSaved: false,
 };
 
 class AlgorithmSubmission extends React.Component<IProps & IUserProps, IState> {
@@ -66,6 +68,7 @@ class AlgorithmSubmission extends React.Component<IProps & IUserProps, IState> {
   onCheckChanged = (setFieldValue: any) => {
     this.setState({
       createNewAlgorithm: !this.state.createNewAlgorithm,
+      version: '0'
     });
     setFieldValue('algorithm', '');
   }
@@ -119,11 +122,17 @@ class AlgorithmSubmission extends React.Component<IProps & IUserProps, IState> {
       });
       resetForm();
       this.setState({
-        version: '',
+        version: '0',
       });
-      alert('Submission succesful!');
+      values.isSaved = true;
     } catch (e) {
-      alert('Error: ' + JSON.stringify(e.response.data.error));
+      debugger;
+      console.log(e.response.data);
+      if (e.response.data.error) {
+        alert('Error: ' + JSON.stringify(e.response.data.error));
+      } else {
+        alert('Error: ' + JSON.stringify(e.response.data));
+      }
     }
     setSubmitting(false);
   }
@@ -146,95 +155,95 @@ class AlgorithmSubmission extends React.Component<IProps & IUserProps, IState> {
           validate={this.validate}
           onSubmit={this.onSubmit}
         >
-          {({ errors, touched, setFieldValue, handleSubmit }) => (
+          {({ errors, touched, setFieldValue, handleSubmit, values }) => (
             <Form>
               <div className={styles.container}>
-                <div className={styles.inputContainer}>
-                  <label htmlFor="algorithm">Algorithm</label>
-                  <div className={styles.selectionContainer}>
-                    {usersAlgorithms.length > 0 ? (
-                      <>
-                        <Field
-                          component="select"
-                          name="algorithm"
-                          disabled={createNewAlgorithm}
-                          onChange={(event: any) => {
-                            this.getTheSubmissionVersion(event.target.value.split('/')[0]);
-                            setFieldValue('algorithm', event.target.value);
-                            this.setState({
-                              createNewAlgorithm: false,
-                            });
-                          }}
-                        >
-                          <option value="" label="Select an algorithm" />
-                          {
-                            usersAlgorithms.map((algorithm: IAlgorithm) => (
-                              <option
-                                key={algorithm.id + Math.random()}
-                                value={algorithm.id + '/' + algorithm.name}
-                                label={algorithm.name}
-                              />
-                            ))
-                          }
-                        </Field>
-                        <span>or</span>
-                      </>
-                    )
-                      : null
-                    }
-                    <div className={styles.checkboxContainer}>
-                      <Field
-                        type="checkbox"
-                        name="isNewAlgorithm"
-                        checked={createNewAlgorithm}
-                        onChange={() => this.onCheckChanged(setFieldValue)}
-                      />
-                      {/* <input
-                        name="isNewAlgorithm"
-                        type="checkbox"
-                        value={'createNewAlgorithm'}
-                        checked={createNewAlgorithm}
-                        onChange={() => this.onCheckChanged(setFieldValue)}
-                        />
-                      */}
-                      <label htmlFor={'newAlgorithm'}>
-                        Create New Algorithm
+                {!values.isSaved ?
+                  <>
+                    <div className={styles.inputContainer}>
+                      <label htmlFor="algorithm">Algorithm</label>
+                      <div className={styles.selectionContainer}>
+                        {usersAlgorithms.length > 0 ? (
+                          <>
+                            <Field
+                              component="select"
+                              name="algorithm"
+                              disabled={createNewAlgorithm}
+                              onChange={(event: any) => {
+                                this.getTheSubmissionVersion(event.target.value.split('/')[0]);
+                                setFieldValue('algorithm', event.target.value);
+                                this.setState({
+                                  createNewAlgorithm: false,
+                                });
+                              }}
+                            >
+                              <option value="" label="Select an algorithm" />
+                              {
+                                usersAlgorithms.map((algorithm: IAlgorithm) => (
+                                  <option
+                                    key={algorithm.id + Math.random()}
+                                    value={algorithm.id + '/' + algorithm.name}
+                                    label={algorithm.name}
+                                  />
+                                ))
+                              }
+                            </Field>
+                            <span>or</span>
+                          </>
+                        )
+                          : null
+                        }
+                        <div className={styles.checkboxContainer}>
+                          <Field
+                            type="checkbox"
+                            name="isNewAlgorithm"
+                            checked={createNewAlgorithm}
+                            onChange={() => this.onCheckChanged(setFieldValue)}
+                          />
+                          <label htmlFor={'newAlgorithm'}>
+                            Create New Algorithm
                       </label>
+                        </div>
+                      </div>
+                      <div className={styles.error}>
+                        {!createNewAlgorithm && errors.name && touched.name && errors.name}
+                      </div>
                     </div>
-                  </div>
-                  <div className={styles.error}>
-                    {!createNewAlgorithm && errors.name && touched.name && errors.name}
-                  </div>
-                </div>
 
-                {createNewAlgorithm && this.getNewAlgorithmForm(errors, touched)}
-                <div className={styles.inputContainer}>
-                  <label htmlFor="version">Version</label>
-                  <Field name="version" type="text" value={'v' + version} disabled={true} />
-                  <div className={styles.error} />
-                </div>
-                <div className={styles.inputContainer}>
-                  <label htmlFor="containerName">Docker image name</label>
-                  <Field
-                    name="containerName"
-                    type="text"
-                    placeholder="(e.g. eyra/algorithm-name:version-number)"
-                  />
-                  <div className={styles.error}>
-                    {
-                      errors.containerName && touched.containerName && errors.containerName
-                    }
-                  </div>
-                </div>
-                <div className={styles.inputContainer}>
-                  <Button
-                    variant="outlined"
-                    color="primary"
-                    type="submit"
-                  >
-                    Submit
+                    {createNewAlgorithm && this.getNewAlgorithmForm(errors, touched)}
+                    <div className={styles.inputContainer}>
+                      <label htmlFor="version">Version</label>
+                      <Field name="version" type="text" value={'v' + version} />
+                      <div className={styles.error} />
+                    </div>
+                    <div className={styles.inputContainer}>
+                      <label htmlFor="containerName">Docker image name</label>
+                      <Field
+                        name="containerName"
+                        type="text"
+                        placeholder="(e.g. eyra/algorithm-name:version-number)"
+                      />
+                      <div className={styles.error}>
+                        {
+                          errors.containerName && touched.containerName && errors.containerName
+                        }
+                      </div>
+                    </div>
+                    <div className={styles.inputContainer}>
+                      <Button
+                        variant="outlined"
+                        color="primary"
+                        type="submit"
+                      >
+                        Submit
                   </Button>
-                </div>
+                    </div>
+                  </> :
+                  <>
+                    <p>Submission Successfull!</p>
+                    <p><a href="/profile/submissions">Get the status of this submission</a></p>
+                  </>
+                }
               </div>
             </Form>
           )
