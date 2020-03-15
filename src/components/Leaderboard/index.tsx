@@ -6,7 +6,7 @@ import { comicApi } from 'src/services/comicApi';
 // NestedSubmission is a Submission with a nested Algorithm
 export interface INestedSubmission extends ISubmission {
   evaluationJob: IJob;
-};
+}
 export interface INestedSubmissionWithAlgorithm extends INestedSubmission {
   algorithm_data: IAlgorithm;
 }
@@ -50,16 +50,16 @@ class Leaderboard extends React.Component<IProps, IState> {
       }),
     );
     // get the submissions with evaluation success status only
-    nestedSubmissions = nestedSubmissions.filter(submission => submission.evaluationJob.status === 4)
+    nestedSubmissions = nestedSubmissions.filter((submission) => submission.evaluationJob.status === 4);
     // Fetch algorithm data for submissions
     await Promise.all(
       nestedSubmissions.map(async (submission: INestedSubmission) => {
         nestedSubmissionsWithAlgorithms.push({
           ...submission,
           algorithm_data: await comicApi.algorithm(submission.algorithm),
-        })
-      })
-    )
+        });
+      }),
+    );
     this.setState({ submissions: nestedSubmissionsWithAlgorithms, isLoading: false });
   }
   render() {

@@ -68,7 +68,7 @@ class AlgorithmSubmission extends React.Component<IProps & IUserProps, IState> {
   onCheckChanged = (setFieldValue: any) => {
     this.setState({
       createNewAlgorithm: !this.state.createNewAlgorithm,
-      version: '0'
+      version: '0',
     });
     setFieldValue('algorithm', '');
   }
@@ -234,7 +234,7 @@ class AlgorithmSubmission extends React.Component<IProps & IUserProps, IState> {
                         type="submit"
                       >
                         Submit
-                  </Button>
+                      </Button>
                     </div>
                   </> :
                   <>

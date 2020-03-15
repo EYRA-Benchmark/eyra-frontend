@@ -64,7 +64,7 @@ class LeaderboardTable extends React.Component<IProps, IState> {
     page: 0,
     open: false,
     visualizationContent: null,
-    visualizationTitle: ''
+    visualizationTitle: '',
   };
 
   handleRequestSort = (event: any, property: any) => {
@@ -87,7 +87,7 @@ class LeaderboardTable extends React.Component<IProps, IState> {
       rowsPerPage,
       page,
       visualizationContent,
-      visualizationTitle
+      visualizationTitle,
     } = this.state;
     const metrics = this.props.submissions[0].metrics;
     let metricFields: string[];
@@ -180,12 +180,13 @@ class LeaderboardTable extends React.Component<IProps, IState> {
             onClose={() => {
               if (visualizationTitle === 'Compare Visualizations') {
                 this.setState({
-                  selected: []
-                })
+                  selected: [],
+                });
               }
-              this.setState({ visualizationContent: null })
+              this.setState({ visualizationContent: null });
             }
-            }>
+            }
+          >
             {visualizationContent}
           </VisualizationDialog>)
         }
@@ -195,7 +196,7 @@ class LeaderboardTable extends React.Component<IProps, IState> {
             compareItems={() => {
               this.setState({
                 visualizationTitle: 'Compare Visualizations',
-                visualizationContent: <CompareDialog items={itemsToCompare} />
+                visualizationContent: <CompareDialog items={itemsToCompare} />,
               });
             }}
           />
@@ -238,7 +239,7 @@ class LeaderboardTable extends React.Component<IProps, IState> {
                           onClick={() =>
                             this.setState({
                               visualizationTitle: n.algorithm.name,
-                              visualizationContent: <AlgorithmSubmissionDetails algorithm={n.algorithm} />
+                              visualizationContent: <AlgorithmSubmissionDetails algorithm={n.algorithm} />,
                             })
                           }
                         >
@@ -270,7 +271,7 @@ class LeaderboardTable extends React.Component<IProps, IState> {
                                       observableUrl={n.visualization.toString()}
                                       isNotebook={true}
                                     />
-                                  )
+                                  ),
                                 });
                               }}
                             >
@@ -295,8 +296,8 @@ class LeaderboardTable extends React.Component<IProps, IState> {
                             this.setState({
                               visualizationTitle: 'Job Log',
                               visualizationContent: (
-                                <JobLog jobID={n.implementationJob}></JobLog>
-                              )
+                                <JobLog jobID={n.implementationJob} />
+                              ),
                             });
                           }
                           }

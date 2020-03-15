@@ -119,7 +119,7 @@ class EditAlgorithm extends React.Component<IProps> {
                                             onClick={submitForm}
                                         >
                                             Save
-                                    </Button>
+                                        </Button>
                                     </div>
                                 </>
                                 : <p>Algorithm Data Saved Successfully</p>
@@ -128,9 +128,7 @@ class EditAlgorithm extends React.Component<IProps> {
                     </Form>
                 )}
             </Formik>
-        )
-
-
+        );
     }
 }
 

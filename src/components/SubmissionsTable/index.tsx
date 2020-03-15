@@ -115,28 +115,29 @@ class SubmissionsTable extends React.Component<IProps, IState> {
       let icon;
       switch (status) {
         case 'Success':
-          icon = <Icon><CheckIcon style={{ color: '#4caf50' }} /></Icon>
+          icon = <Icon><CheckIcon style={{ color: '#4caf50' }} /></Icon>;
           break;
         case 'Failure':
-          icon = <Icon><FailedIcon style={{ color: '#ed2939' }} /></Icon>
+          icon = <Icon><FailedIcon style={{ color: '#ed2939' }} /></Icon>;
           break;
         case 'Pending':
         case 'Started':
-          icon = <Icon><PendingIcon /></Icon>
+          icon = <Icon><PendingIcon /></Icon>;
           break;
-        default: status;
+        default: icon = status;
       }
       return icon;
-    }
+    };
     return (
-      <Paper id='submissions'>
+      <Paper id="submissions">
         {
           openJobLogID &&
           <VisualizationDialog
             print={false}
             title={submissionName}
-            onClose={() => this.setState({ openJobLogID: null, submissionName: '' })}>
-            <JobLog jobID={openJobLogID}></JobLog>
+            onClose={() => this.setState({ openJobLogID: null, submissionName: '' })}
+          >
+            <JobLog jobID={openJobLogID} />
           </VisualizationDialog>
         }
 

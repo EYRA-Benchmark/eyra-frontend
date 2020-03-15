@@ -62,7 +62,7 @@ const DataDescription = (props: IProps) => {
                 ),
             );
         }
-        //}
+        // }
         if (data.private_test_data_description !== '' || data.private_test_data_sampling_method !== '') {
             if (data.private_test_data_file && privateLbData.push(data.private_test_data_file),
                 data.private_ground_truth_data_file && privateLbData.push(data.private_ground_truth_data_file)) {
