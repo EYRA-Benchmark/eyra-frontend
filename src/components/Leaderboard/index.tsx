@@ -43,10 +43,12 @@ class Leaderboard extends React.Component<IProps, IState> {
     const nestedSubmissionsWithAlgorithms: INestedSubmissionWithAlgorithm[] = [];
     await Promise.all(
       submissions.map(async (submission: ISubmission) => {
-        nestedSubmissions.push({
-          ...submission,
-          evaluationJob: await comicApi.job(submission.evaluation_job),
-        });
+        if (submission.evaluation_job) {
+          nestedSubmissions.push({
+            ...submission,
+            evaluationJob: await comicApi.job(submission.evaluation_job),
+          });
+        }
       }),
     );
     // get the submissions with evaluation success status only
@@ -54,10 +56,12 @@ class Leaderboard extends React.Component<IProps, IState> {
     // Fetch algorithm data for submissions
     await Promise.all(
       nestedSubmissions.map(async (submission: INestedSubmission) => {
-        nestedSubmissionsWithAlgorithms.push({
-          ...submission,
-          algorithm_data: await comicApi.algorithm(submission.algorithm),
-        });
+        if (submission.algorithm) {
+          nestedSubmissionsWithAlgorithms.push({
+            ...submission,
+            algorithm_data: await comicApi.algorithm(submission.algorithm),
+          });
+        }
       }),
     );
     this.setState({ submissions: nestedSubmissionsWithAlgorithms, isLoading: false });
