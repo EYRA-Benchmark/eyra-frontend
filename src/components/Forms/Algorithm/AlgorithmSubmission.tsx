@@ -15,25 +15,20 @@ interface IState {
   usersAlgorithms: IAlgorithm[];
   createNewAlgorithm: boolean;
   version: string;
+  isSaved: boolean;
 }
 interface IValues {
   algorithm: string;
   name: string;
   containerName: string;
-  isSaved: boolean;
 }
-const initialValues: IValues = {
-  algorithm: '',
-  name: '',
-  containerName: '',
-  isSaved: false,
-};
 
 class AlgorithmSubmission extends React.Component<IProps & IUserProps, IState> {
   state = {
     usersAlgorithms: [],
     createNewAlgorithm: true,
     version: '0',
+    isSaved: false,
   };
   async refresh() {
     const { user } = this.props;
@@ -113,18 +108,21 @@ class AlgorithmSubmission extends React.Component<IProps & IUserProps, IState> {
         algorithmID = values.algorithm.split('/')[0];
         algorithmName = values.algorithm.split('/')[1];
       }
-      await comicApi.submissionSubmission({
+      const submission = await comicApi.submissionSubmission({
         algorithm: algorithmID,
         image: values.containerName,
         benchmark: this.props.benchmark.id,
         name: `${algorithmName} v${this.state.version}`,
         version: this.state.version,
       });
+      if (submission) {
+        this.setState({ isSaved: true });
+      }
       resetForm();
       this.setState({
         version: '0',
       });
-      values.isSaved = true;
+
     } catch (e) {
       if (e.response.data.error) {
         alert('Error: ' + JSON.stringify(e.response.data.error));
@@ -144,7 +142,12 @@ class AlgorithmSubmission extends React.Component<IProps & IUserProps, IState> {
     });
   }
   render() {
-    const { usersAlgorithms, createNewAlgorithm, version } = this.state;
+    const { usersAlgorithms, createNewAlgorithm, version, isSaved } = this.state;
+    const initialValues: IValues = {
+      algorithm: '',
+      name: '',
+      containerName: '',
+    };
 
     if (this.canSubmit()) {
       return (
@@ -156,7 +159,7 @@ class AlgorithmSubmission extends React.Component<IProps & IUserProps, IState> {
           {({ errors, touched, setFieldValue, handleSubmit, values }) => (
             <Form>
               <div className={styles.container}>
-                {!values.isSaved ?
+                {!isSaved ?
                   <>
                     <div className={styles.inputContainer}>
                       <label htmlFor="algorithm">Algorithm</label>
@@ -236,10 +239,11 @@ class AlgorithmSubmission extends React.Component<IProps & IUserProps, IState> {
                         Submit
                       </Button>
                     </div>
-                  </> :
+                  </>
+                  :
                   <>
                     <p>Submission Successfull!</p>
-                    <p><a href="/profile/submissions">Get the status of this submission</a></p>
+                    <p><a href="/profile#submissions">Get the status of this submission</a></p>
                   </>
                 }
               </div>
