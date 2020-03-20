@@ -147,6 +147,7 @@ class AlgorithmSubmission extends React.Component<IProps & IUserProps, IState> {
   }
   render() {
     const { usersAlgorithms, createNewAlgorithm, version, isSaved, showHelp } = this.state;
+    const { benchmark } = this.props;
     const initialValues: IValues = {
       algorithm: '',
       name: '',
@@ -167,9 +168,10 @@ class AlgorithmSubmission extends React.Component<IProps & IUserProps, IState> {
                   <VisualizationDialog
                     title="How to create submission?"
                     print={false}
+                    maxWidth={'sm'}
                     onClose={() => this.setState({ showHelp: false })}
                   >
-                    <p>Demo</p>
+                    <p>{benchmark.submission_instruction}</p>
                   </VisualizationDialog>}
                 <div className={styles.right}>
                   <Fab
