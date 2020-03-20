@@ -26,7 +26,8 @@ interface IValues {
   data_description: string;
   truth_description: string;
   metrics_description: string;
-  aboutBenchmark: string;
+  about_benchmark: string;
+  submission_instruction: string;
 }
 
 const onSubmit = async (
@@ -40,14 +41,15 @@ const onSubmit = async (
   formdata.append('truth_description', values.truth_description);
   formdata.append('metrics_description', values.metrics_description);
   formdata.append('short_description', values.short_description);
-  formdata.append('about', values.aboutBenchmark);
+  formdata.append('about', values.about_benchmark);
+  formdata.append('submission_instruction', values.submission_instruction);
   if (typeof (values.banner_image) === 'object') {
     formdata.append('banner_image', values.banner_image);
   }
   if (typeof (values.card_image) === 'object') {
     formdata.append('card_image', values.card_image);
   }
-
+  console.log(formdata)
   try {
     await comicApi
       .benchmarkSubmission(values.id, formdata)
@@ -73,10 +75,11 @@ class BenchmarkForm extends React.Component<IProps> {
     banner_image: this.props.benchmark.banner_image,
     card_image: this.props.benchmark.card_image,
     about: this.props.benchmark.about,
+    submission_instruction: this.props.benchmark.submission_instruction,
   };
 
   render() {
-    const { desc, data, truth, metrics, banner_image, card_image, about } = this.state;
+    const { desc, data, truth, metrics, banner_image, card_image, about, submission_instruction } = this.state;
     const { id, name, short_description } = this.props.benchmark;
     const initialValues: IValues = {
       id,
@@ -89,7 +92,8 @@ class BenchmarkForm extends React.Component<IProps> {
       data_description: data,
       truth_description: truth,
       metrics_description: metrics,
-      aboutBenchmark: about,
+      about_benchmark: about,
+      submission_instruction,
     };
 
     return (
@@ -145,7 +149,7 @@ class BenchmarkForm extends React.Component<IProps> {
                 label={'About'}
                 defaultValue={about ? about : 'Add description about people, team, etc'}
                 onChange={(event: any) => {
-                  setFieldValue('aboutBenchmark', event.target.value);
+                  setFieldValue('about_benchmark', event.target.value);
                   this.setState({
                     about: event.target.value,
                   });
@@ -216,7 +220,16 @@ class BenchmarkForm extends React.Component<IProps> {
                   });
                 }}
               />
-
+              <DescriptionEditor
+                label={'Submission Instructions'}
+                defaultValue={submission_instruction ? submission_instruction : 'Add instructions about how to create submission'}
+                onChange={(event: any) => {
+                  setFieldValue('submission_instruction', event.target.value);
+                  this.setState({
+                    submission_instruction: event.target.value,
+                  });
+                }}
+              />
               <div className={styles.inputContainer}>
                 <Dialog
                   open={values.isSaved}

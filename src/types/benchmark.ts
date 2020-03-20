@@ -23,4 +23,5 @@ export interface IBenchmark {
   interface: UUID4;
   permissions: string[];
   about: string;
+  submission_instruction: string;
 }
