@@ -49,7 +49,6 @@ const onSubmit = async (
   if (typeof (values.card_image) === 'object') {
     formdata.append('card_image', values.card_image);
   }
-  console.log(formdata)
   try {
     await comicApi
       .benchmarkSubmission(values.id, formdata)

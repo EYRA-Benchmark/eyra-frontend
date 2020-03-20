@@ -1,12 +1,14 @@
 import React from 'react';
 // import * as yup from 'yup';
-import { Button } from '@material-ui/core';
+import { Button, Fab } from '@material-ui/core';
 import { Field, Form, Formik } from 'formik';
 import { FormikActions } from 'formik';
 import { comicApi } from 'src/services/comicApi';
 import styles from './AlgorithmSubmission.css';
 import { IAlgorithm, IBenchmark, UUID4 } from 'src/types';
 import { IUserProps, withUser } from 'src/context/User';
+import HelpIcon from '@material-ui/icons/HelpOutlineRounded';
+import VisualizationDialog from 'src/components/Dialog';
 
 interface IProps {
   benchmark: IBenchmark;
@@ -16,6 +18,7 @@ interface IState {
   createNewAlgorithm: boolean;
   version: string;
   isSaved: boolean;
+  showHelp: boolean;
 }
 interface IValues {
   algorithm: string;
@@ -29,6 +32,7 @@ class AlgorithmSubmission extends React.Component<IProps & IUserProps, IState> {
     createNewAlgorithm: true,
     version: '0',
     isSaved: false,
+    showHelp: false,
   };
   async refresh() {
     const { user } = this.props;
@@ -142,7 +146,7 @@ class AlgorithmSubmission extends React.Component<IProps & IUserProps, IState> {
     });
   }
   render() {
-    const { usersAlgorithms, createNewAlgorithm, version, isSaved } = this.state;
+    const { usersAlgorithms, createNewAlgorithm, version, isSaved, showHelp } = this.state;
     const initialValues: IValues = {
       algorithm: '',
       name: '',
@@ -159,6 +163,23 @@ class AlgorithmSubmission extends React.Component<IProps & IUserProps, IState> {
           {({ errors, touched, setFieldValue, handleSubmit, values }) => (
             <Form>
               <div className={styles.container}>
+                {showHelp &&
+                  <VisualizationDialog
+                    title="How to create submission?"
+                    print={false}
+                    onClose={() => this.setState({ showHelp: false })}
+                  >
+                    <p>Demo</p>
+                  </VisualizationDialog>}
+                <div className={styles.right}>
+                  <Fab
+                    size="small"
+                    color="secondary"
+                    onClick={() => this.setState({ showHelp: true })}
+                  >
+                    <HelpIcon color="primary" />
+                  </Fab>
+                </div>
                 {!isSaved ?
                   <>
                     <div className={styles.inputContainer}>
@@ -255,7 +276,10 @@ class AlgorithmSubmission extends React.Component<IProps & IUserProps, IState> {
     }
     return (
       <div>
-        <p>You don't have permissions to submit</p>
+        <p>
+          If you would like to submit an algorithm to this benchmark,
+          please contact the contact person mentioned in the about tab.
+        </p>
       </div >
     );
   }
