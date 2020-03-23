@@ -1,6 +1,5 @@
 import React from 'react';
-// import * as yup from 'yup';
-import { Button, Fab } from '@material-ui/core';
+import { Button } from '@material-ui/core';
 import { Field, Form, Formik } from 'formik';
 import { FormikActions } from 'formik';
 import { comicApi } from 'src/services/comicApi';
@@ -173,15 +172,7 @@ class AlgorithmSubmission extends React.Component<IProps & IUserProps, IState> {
                   >
                     <p>{benchmark.submission_instruction}</p>
                   </VisualizationDialog>}
-                <div className={styles.right}>
-                  <Fab
-                    size="small"
-                    color="secondary"
-                    onClick={() => this.setState({ showHelp: true })}
-                  >
-                    <HelpIcon color="primary" />
-                  </Fab>
-                </div>
+
                 {!isSaved ?
                   <>
                     <div className={styles.inputContainer}>
@@ -228,6 +219,12 @@ class AlgorithmSubmission extends React.Component<IProps & IUserProps, IState> {
                             Create New Algorithm
                       </label>
                         </div>
+                      </div>
+                      <div className={styles.right} title="submission support">
+                        <HelpIcon
+                          color="primary"
+                          onClick={() => this.setState({ showHelp: true })}
+                        />
                       </div>
                       <div className={styles.error}>
                         {!createNewAlgorithm && errors.name && touched.name && errors.name}

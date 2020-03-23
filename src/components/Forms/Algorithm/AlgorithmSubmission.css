@@ -8,6 +8,9 @@
 .right {
   display: flex;
   justify-content: flex-end;
+  margin-top: -10px;
+  margin-left: -20px;
+  cursor: pointer;
 }
 
 .inputContainer {
