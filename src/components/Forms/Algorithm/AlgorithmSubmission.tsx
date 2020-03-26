@@ -279,8 +279,8 @@ class AlgorithmSubmission extends React.Component<IProps & IUserProps, IState> {
     return (
       <div>
         <p>
-          If you would like to submit an algorithm to this benchmark,
-          please contact the contact person mentioned in the about tab.
+          If you would like to create a submission for this benchmark,
+          please login or sign up, by pressing "Login" at the top right.
         </p>
       </div >
     );
