@@ -71,7 +71,7 @@
     "tslint-config-prettier": "^1.18.0",
     "tslint-react": "4.0.0",
     "typescript": "3.6.3",
-    "typescript-plugin-css-modules": "^1.2.0"
+    "typescript-plugin-css-modules": "^2.4.0"
   },
   "jest": {
     "collectCoverageFrom": [
