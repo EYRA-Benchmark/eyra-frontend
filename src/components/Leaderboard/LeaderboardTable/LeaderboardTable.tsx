@@ -258,7 +258,6 @@ class LeaderboardTable extends React.Component<IProps, IState> {
                         {n.evaluationJob !== 'null' &&
                           n.visualization !== null ? (
                             <Fab
-                              variant="extended"
                               size="small"
                               aria-label="add"
                               color="secondary"
@@ -276,7 +275,7 @@ class LeaderboardTable extends React.Component<IProps, IState> {
                               }}
                             >
                               <VisualizationIcon color="primary" />
-                              visualize
+
                             </Fab>
                           ) : (
                             '-'

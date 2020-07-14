@@ -79,7 +79,7 @@ class Details extends React.Component<IProps, IState> {
                 <Tab label="Metrics" />
                 <Tab label="Results" />
                 {/* <Tab label="Private Results" /> */}
-                <Tab label="Create submission" />
+                {/* <Tab label="Create submission" /> */}
               </Tabs>
               {value === 0 && (
                 <TabContainer>
