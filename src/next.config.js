@@ -9,15 +9,21 @@ const withCSS = require("@zeit/next-css");
 // document = infiProxy();
 
 module.exports = withCSS({
+  distDir: "dist",
+  exportTrailingSlash: true,
   cssLoaderOptions: {
     localIdentName: "[name]__[local]--[hash:base64:5]",
   },
   cssModules: true,
 
   publicRuntimeConfig: {
-    backendURL: process.env.EYRA_BACKEND_URL || "https://api.staging.eyrabenchmark.net/api/v1/",
-    frontendURL: process.env.EYRA_FRONTEND_URL || "https://www.eyrabenchmark.net/",
-    prismicEndpoint: process.env.PRISMIC_URL || "https://eyra-test.prismic.io/api/v2",
+    backendURL:
+      process.env.EYRA_BACKEND_URL ||
+      "https://api.staging.eyrabenchmark.net/api/v1/",
+    frontendURL:
+      process.env.EYRA_FRONTEND_URL || "https://www.eyrabenchmark.net/",
+    prismicEndpoint:
+      process.env.PRISMIC_URL || "https://eyra-test.prismic.io/api/v2",
   },
   serverRuntimeConfig: {
     // Will only be available on the server side
