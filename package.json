@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "build": "next build src",
-    "export": "next export src",
+    "export": "build && next export src",
     "dev": "next src dev",
     "start": "next src dev",
     "start:production": "NODE_ENV=production yarn next start -p 80 src",
