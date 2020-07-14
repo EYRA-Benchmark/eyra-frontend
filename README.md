@@ -1,4 +1,3 @@
-[![Netlify Status](https://api.netlify.com/api/v1/badges/8439b3a2-a4d6-4df3-b64d-ce6b645f5c70/deploy-status)](https://app.netlify.com/sites/eyra/deploys)
 [![Build Status](https://travis-ci.org/EYRA-Benchmark/eyra-frontend.svg?branch=master)](https://travis-ci.org/EYRA-Benchmark/eyra-frontend)
 
 This is the frontend for the [Eyra Benchmark Platform](https://www.eyrabenchmark.net).
