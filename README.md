@@ -16,6 +16,7 @@ Then, start a development server using ``yarn start``. It should start running o
 Run `yarn build`.
 
 # Run production
+Now running on Netlify.
 First `yarn build`, then run `yarn start:production`.
 
 # Configuration
