@@ -5889,10 +5889,10 @@ postcss@^7.0.0, postcss@^7.0.14, postcss@^7.0.17, postcss@^7.0.18:
     source-map "^0.6.1"
     supports-color "^6.1.0"
 
-prismic-helpers@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.npmjs.org/prismic-helpers/-/prismic-helpers-1.0.0.tgz#8337420cf187f55fb7b7a8be755523c8696fc329"
-  integrity sha1-gzdCDPGH9V+3t6i+dVUjyGlvwyk=
+prismic-helpers@^1.0.3:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/prismic-helpers/-/prismic-helpers-1.0.3.tgz#cc1aa184f8791ed6b0a1775a9eb68a74a83f741e"
+  integrity sha512-eGCSflFwsWeXe7BdqWWGjjoaq1SPr61Y55xIUkgYumKFmfJsK9TVcSkRp0rdwW0hGnnDSRvjJwIo2kkDwG7KxA==
 
 prismic-javascript@^2.0.3:
   version "2.1.1"
@@ -5902,12 +5902,12 @@ prismic-javascript@^2.0.3:
     cross-fetch "^2.2.3"
     promise-polyfill "8.0.0"
 
-prismic-reactjs@^1.1.0:
-  version "1.1.0"
-  resolved "https://registry.npmjs.org/prismic-reactjs/-/prismic-reactjs-1.1.0.tgz#e3dbff1287434399d773597be5b80d724a98f23a"
-  integrity sha512-YaO7LumByUB/Evd8PR0mlLhBE0gB+YuEG6bZjHBWX8AvxIE5w1qpxBgB6W3DMLmA4AMB3jI46qNEbHZaevkHwQ==
+prismic-reactjs@^1.3.2:
+  version "1.3.2"
+  resolved "https://registry.yarnpkg.com/prismic-reactjs/-/prismic-reactjs-1.3.2.tgz#ec7ab535c11b4cc86cb724f52b1f9de23c0dcac9"
+  integrity sha512-xPZU4bXZ+XQql493XFm/9via7F2tScRlbjfpcRAjROq+RKPR0RAJN5jGGSHXudsT4HJ+WuApe+TKhGSj5Mn4bQ==
   dependencies:
-    prismic-helpers "^1.0.0"
+    prismic-helpers "^1.0.3"
     prismic-richtext "^1.0.3"
     prop-types "^15.7.2"
 
