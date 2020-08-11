@@ -3,7 +3,7 @@ import { IBenchmark } from 'src/types';
 import Markdown from '@nteract/markdown';
 import classNames from 'classnames';
 
-import AlgorithmSubmissionForm from 'src/components/Forms/Algorithm/AlgorithmSubmission';
+// import AlgorithmSubmissionForm from 'src/components/Forms/Algorithm/AlgorithmSubmission';
 import Leaderboard from 'src/components/Leaderboard';
 import DataDescription from 'src/components/DataDescription/';
 
