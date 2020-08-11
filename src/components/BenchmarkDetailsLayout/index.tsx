@@ -135,11 +135,11 @@ class Details extends React.Component<IProps, IState> {
                   <Leaderboard benchmarkID={data.id} isPrivate={true} />
                 </TabContainer>
               )} */}
-              {value === 6 && (
+              {/* {value === 6 && (
                 <TabContainer>
                   <AlgorithmSubmissionForm benchmark={data} />
                 </TabContainer>
-              )}
+              )} */}
 
               {/* <Dialog
                 open={this.state.dialogOpen}
