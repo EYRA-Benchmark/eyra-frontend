@@ -40,11 +40,11 @@ class Details extends React.Component<IProps, IState> {
   };
   handleChange = (event: any, value: number) => {
     this.setState({ value });
-  }
+  };
   toggleModal = (enabled: boolean | undefined) => () => {
     const newState = enabled === undefined ? !this.state.dialogOpen : enabled;
     this.setState({ dialogOpen: newState });
-  }
+  };
   render() {
     const { value } = this.state;
     const { data } = this.props;
@@ -79,14 +79,11 @@ class Details extends React.Component<IProps, IState> {
                 <Tab label="Metrics" />
                 <Tab label="Results" />
                 {/* <Tab label="Private Results" /> */}
-                {/* <Tab label="Create submission" /> */}
+                <Tab label="Create submission" />
               </Tabs>
               {value === 0 && (
                 <TabContainer>
-                  <Markdown
-                    source={data.about}
-                    className={styles.container}
-                  />
+                  <Markdown source={data.about} className={styles.container} />
                 </TabContainer>
               )}
               {value === 1 && (
@@ -135,11 +132,15 @@ class Details extends React.Component<IProps, IState> {
                   <Leaderboard benchmarkID={data.id} isPrivate={true} />
                 </TabContainer>
               )} */}
-              {/* {value === 6 && (
+              {value === 6 && (
                 <TabContainer>
-                  <AlgorithmSubmissionForm benchmark={data} />
+                  {/* <AlgorithmSubmissionForm benchmark={data} /> */}
+                  <p>
+                    If you would like to submit to this benchmark, please send a
+                    message to info@eyrabenchmark.net
+                  </p>
                 </TabContainer>
-              )} */}
+              )}
 
               {/* <Dialog
                 open={this.state.dialogOpen}
