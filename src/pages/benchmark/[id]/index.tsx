@@ -6,7 +6,7 @@ import { IBenchmark } from 'src/types/benchmark';
 
 import { Container } from '@material-ui/core';
 import Details from 'src/components/BenchmarkDetailsLayout';
-import BreadCrumbs from 'src/components/BreadCrumbs';
+// import BreadCrumbs from 'src/components/BreadCrumbs';
 
 interface IProps {
   benchmark: IBenchmark;
@@ -25,17 +25,18 @@ export default class BenchmarkDetails extends React.Component<IProps> {
       <Container>
         <Head>
           <title>{benchmark.name} | EYRA Benchmark Platform</title>
-          <BreadCrumbs
+          {/* <BreadCrumbs
             crumbs={[
               {
                 id: 'benchmarks',
                 name: 'Benchmarks',
-              }, {
+              },
+              {
                 id: `benchmarks/${benchmark.id}`,
                 name: benchmark.name,
               },
             ]}
-          />
+          /> */}
         </Head>
         <Details data={benchmark} />
       </Container>

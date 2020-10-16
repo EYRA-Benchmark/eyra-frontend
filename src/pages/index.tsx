@@ -12,7 +12,7 @@ import ChallengesGrid from 'src/components/BenchmarkCardGrid';
 import NewsGallery from 'src/components/NewsGallery';
 
 import styles from './Home.css';
-import BreadCrumbs from 'src/components/BreadCrumbs';
+// import BreadCrumbs from 'src/components/BreadCrumbs';
 import Head from 'next/head';
 
 interface IProps {
@@ -23,7 +23,11 @@ interface IProps {
 class Index extends React.Component<IProps> {
   static async getInitialProps(...args: any[]): Promise<IProps> {
     const prismicApi = await getPrismicClient();
-    const prismicResponse = await prismicApi.query(Prismic.Predicates.at('document.type', 'news'), {});
+    const prismicResponse = await prismicApi.query(
+      Prismic.Predicates.at('document.type', 'news'),
+      {}
+    );
+
     return {
       news: prismicResponse.results,
       benchmarks: await comicApi.benchmarks(),
@@ -38,17 +42,14 @@ class Index extends React.Component<IProps> {
   }
   public render() {
     const challengeContent = (
-      <ChallengesGrid
-        size={3}
-        benchmarks={this.props.benchmarks}
-      />
+      <ChallengesGrid size={3} benchmarks={this.props.benchmarks} />
     );
 
     return (
       <React.Fragment>
         <Head>
           <title>EYRA Benchmark Platform</title>
-          <BreadCrumbs crumbs={[]} />
+          {/* <BreadCrumbs crumbs={[]} /> */}
         </Head>
         <div className={styles.container}>
           <div className={styles.bannerBackground} id="demo">
@@ -68,7 +69,12 @@ class Index extends React.Component<IProps> {
         </div>
 
         <div className={styles.downBtn}>
-          <Fab color="primary" aria-label="Down" onClick={this.scrollToNext} title="Scroll Down">
+          <Fab
+            color="primary"
+            aria-label="Down"
+            onClick={this.scrollToNext}
+            title="Scroll Down"
+          >
             <DownIcon />
           </Fab>
         </div>
@@ -89,7 +95,6 @@ class Index extends React.Component<IProps> {
             </div>
           </div>
         </div>
-
       </React.Fragment>
     );
   }

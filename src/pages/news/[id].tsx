@@ -7,7 +7,7 @@ import styles from './NewsDetails.css';
 import { IPrismicResult, INews } from '../../types/prismic';
 import { getPrismicClient } from 'src/services/prismicApi';
 import { NextPageContext } from 'next';
-import BreadCrumbs from 'src/components/BreadCrumbs';
+// import BreadCrumbs from 'src/components/BreadCrumbs';
 import Head from 'next/head';
 
 interface IProps {
@@ -21,7 +21,10 @@ interface IProps {
 class NewsDetails extends React.Component<IProps> {
   static async getInitialProps(ctx: NextPageContext): Promise<IProps> {
     const prismicApi = await getPrismicClient();
-    const prismicResponse: IPrismicResult<INews> = await prismicApi.getByUID('news', ctx.query.id as string);
+    const prismicResponse: IPrismicResult<INews> = await prismicApi.getByUID(
+      'news',
+      ctx.query.id as string
+    );
     return {
       title: prismicResponse.data.title,
       desc: prismicResponse.data.description,
@@ -33,21 +36,23 @@ class NewsDetails extends React.Component<IProps> {
 
   render() {
     const { title, image, desc, date, id } = this.props;
+    console.log('props', this.props);
     return (
       <Container>
         <Head>
           <title>{title[0].text} | EYRA Benchmark Platform</title>
-          <BreadCrumbs
+          {/* <BreadCrumbs
             crumbs={[
               {
                 id: 'news',
                 name: 'News',
-              }, {
+              },
+              {
                 id: `news/${id}`,
                 name: title[0].text,
               },
             ]}
-          />
+          /> */}
         </Head>
         <Paper>
           <Grid container={true} spacing={3} className={styles.container}>
@@ -60,9 +65,7 @@ class NewsDetails extends React.Component<IProps> {
               </Grid>
               <Grid item={true} xs={9} sm={9} md={9}>
                 <div className={styles.headerContainer}>
-                  <div className={styles.title}>
-                    {RichText.render(title)}
-                  </div>
+                  <div className={styles.title}>{RichText.render(title)}</div>
                   <p>{date}</p>
                 </div>
               </Grid>

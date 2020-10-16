@@ -5,7 +5,7 @@ import { IBenchmark } from 'src/types';
 import Head from 'next/head';
 import { Typography, Container } from '@material-ui/core';
 import BenchmarkCardGrid from 'src/components/BenchmarkCardGrid';
-import BreadCrumbs from 'src/components/BreadCrumbs';
+// import BreadCrumbs from 'src/components/BreadCrumbs';
 import { withUser, IUserProps } from 'src/context/User';
 
 interface IProps {
@@ -29,7 +29,7 @@ class Benchmarks extends React.Component<IUserProps & IProps, IState> {
 
   componentWillReceiveProps(
     nextProps: Readonly<IProps>,
-    nextContext: any,
+    nextContext: any
   ): void {
     this.refresh();
   }
@@ -45,14 +45,14 @@ class Benchmarks extends React.Component<IUserProps & IProps, IState> {
       <Container>
         <Head>
           <title>Benchmarks | EYRA Benchmark Platform</title>
-          <BreadCrumbs
+          {/* <BreadCrumbs
             crumbs={[
               {
                 id: 'benchmarks',
                 name: 'Benchmarks',
               },
             ]}
-          />
+          /> */}
         </Head>
         <Typography component="h1" variant="h5">
           Benchmarks
