@@ -120,10 +120,22 @@ class LeaderboardTable extends React.Component<IProps, IState> {
       event: React.ChangeEvent<HTMLInputElement>
     ) => {
       if (event.target.checked) {
-        const newSelecteds = data.map((n) => n.id);
+        let newSelecteds = data.map((n) => {
+          if (n.evaluationJob !== 'null' && n.visualization !== null)
+            return n.id;
+        });
+        newSelecteds = newSelecteds.filter((el) => el !== undefined);
+        const compareItems = [];
+        this.props.submissions.filter((submission) => {
+          const index = newSelecteds.indexOf(submission.id);
+          if (index >= 0) {
+            compareItems.push(submission);
+          }
+        });
+        console.log('selected', newSelecteds);
         this.setState({
           selected: newSelecteds,
-          itemsToCompare: this.props.submissions,
+          itemsToCompare: compareItems,
         });
         return;
       }
