@@ -14,13 +14,12 @@ interface IProps {
   data: Array<IPrismicResult<INews>>;
 }
 
-export class Gallery extends React.Component<
-  IProps,
-  {}
-  > {
+export class Gallery extends React.Component<IProps, {}> {
   render() {
     const { data } = this.props;
-
+    const sortByDate = (a, b) =>
+      new Date(b.data.date).getTime() - new Date(a.data.date).getTime();
+    data.sort(sortByDate);
     return (
       <Grid container={true} spacing={3}>
         {data.map((card: IPrismicResult<INews>, index: number) => (
@@ -40,7 +39,10 @@ export class Gallery extends React.Component<
                     titleTypographyProps={{
                       variant: 'subtitle2',
                     }}
-                    subheaderTypographyProps={{ align: 'right', variant: 'caption' }}
+                    subheaderTypographyProps={{
+                      align: 'right',
+                      variant: 'caption',
+                    }}
                   />
                 </Card>
               </a>
