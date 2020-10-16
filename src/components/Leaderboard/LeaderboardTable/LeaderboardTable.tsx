@@ -76,7 +76,7 @@ class LeaderboardTable extends React.Component<IProps, IState> {
     }
 
     this.setState({ order: order as Order, orderBy });
-  }
+  };
   render() {
     const { classes } = this.props;
     const {
@@ -117,7 +117,7 @@ class LeaderboardTable extends React.Component<IProps, IState> {
 
     const isSelected = (id: string) => selected.indexOf(id) !== -1;
     const handleSelectAllClick = (
-      event: React.ChangeEvent<HTMLInputElement>,
+      event: React.ChangeEvent<HTMLInputElement>
     ) => {
       if (event.target.checked) {
         const newSelecteds = data.map((n) => n.id);
@@ -134,7 +134,7 @@ class LeaderboardTable extends React.Component<IProps, IState> {
     };
 
     const handleChangeRowsPerPage = (
-      event: React.ChangeEvent<HTMLInputElement>,
+      event: React.ChangeEvent<HTMLInputElement>
     ) => {
       this.setState({ rowsPerPage: +event.target.value });
       this.setState({ page: 0 });
@@ -142,7 +142,7 @@ class LeaderboardTable extends React.Component<IProps, IState> {
     const handleClick = (
       event: React.ChangeEvent<unknown>,
       checked: boolean,
-      id: string,
+      id: string
     ) => {
       const selectedIndex = selected.indexOf(id);
       let newSelected: string[] = [];
@@ -156,7 +156,7 @@ class LeaderboardTable extends React.Component<IProps, IState> {
       } else if (selectedIndex > 0) {
         newSelected = newSelected.concat(
           selected.slice(0, selectedIndex),
-          selected.slice(selectedIndex + 1),
+          selected.slice(selectedIndex + 1)
         );
       }
       this.props.submissions.filter((submission) => {
@@ -175,7 +175,9 @@ class LeaderboardTable extends React.Component<IProps, IState> {
       <Paper className={classes.root}>
         {visualizationContent && (
           <VisualizationDialog
-            print={visualizationTitle === 'Compare Visualizations' ? true : false}
+            print={
+              visualizationTitle === 'Compare Visualizations' ? true : false
+            }
             title={visualizationTitle}
             onClose={() => {
               if (visualizationTitle === 'Compare Visualizations') {
@@ -184,12 +186,11 @@ class LeaderboardTable extends React.Component<IProps, IState> {
                 });
               }
               this.setState({ visualizationContent: null });
-            }
-            }
+            }}
           >
             {visualizationContent}
-          </VisualizationDialog>)
-        }
+          </VisualizationDialog>
+        )}
         <div className={classes.tableWrapper}>
           <LeadeboardToolbar
             numSelected={selected.length}
@@ -225,21 +226,31 @@ class LeaderboardTable extends React.Component<IProps, IState> {
                       selected={isItemSelected}
                     >
                       <TableCell padding="checkbox">
-                        <Checkbox
-                          color="primary"
-                          checked={isItemSelected}
-                          inputProps={{ 'aria-labelledby': labelId }}
-                          onChange={(event, checked) =>
-                            handleClick(event, checked, n.id)
-                          }
-                        />
+                        {n.evaluationJob !== 'null' &&
+                        n.visualization !== null ? (
+                          <Checkbox
+                            color="primary"
+                            checked={isItemSelected}
+                            inputProps={{ 'aria-labelledby': labelId }}
+                            onChange={(event, checked) =>
+                              handleClick(event, checked, n.id)
+                            }
+                          />
+                        ) : (
+                          <Checkbox disabled />
+                        )}
                       </TableCell>
+
                       <TableCell component="td" scope="row">
                         <a
                           onClick={() =>
                             this.setState({
                               visualizationTitle: n.algorithm.name,
-                              visualizationContent: <AlgorithmSubmissionDetails algorithm={n.algorithm} />,
+                              visualizationContent: (
+                                <AlgorithmSubmissionDetails
+                                  algorithm={n.algorithm}
+                                />
+                              ),
                             })
                           }
                         >
@@ -256,30 +267,29 @@ class LeaderboardTable extends React.Component<IProps, IState> {
                       ))}
                       <TableCell align="left">
                         {n.evaluationJob !== 'null' &&
-                          n.visualization !== null ? (
-                            <Fab
-                              size="small"
-                              aria-label="add"
-                              color="secondary"
-                              onClick={() => {
-                                this.setState({
-                                  visualizationTitle: 'Visualization',
-                                  visualizationContent: (
-                                    <Observable
-                                      jobId={n.evaluationJob}
-                                      observableUrl={n.visualization.toString()}
-                                      isNotebook={true}
-                                    />
-                                  ),
-                                });
-                              }}
-                            >
-                              <VisualizationIcon color="primary" />
-
-                            </Fab>
-                          ) : (
-                            '-'
-                          )}
+                        n.visualization !== null ? (
+                          <Fab
+                            size="small"
+                            aria-label="add"
+                            color="secondary"
+                            onClick={() => {
+                              this.setState({
+                                visualizationTitle: 'Visualization',
+                                visualizationContent: (
+                                  <Observable
+                                    jobId={n.evaluationJob}
+                                    observableUrl={n.visualization.toString()}
+                                    isNotebook={true}
+                                  />
+                                ),
+                              });
+                            }}
+                          >
+                            <VisualizationIcon color="primary" />
+                          </Fab>
+                        ) : (
+                          '-'
+                        )}
                       </TableCell>
                       <TableCell align="left">
                         {formatDateTime(new Date(n.date))}
@@ -298,8 +308,7 @@ class LeaderboardTable extends React.Component<IProps, IState> {
                                 <JobLog jobID={n.implementationJob} />
                               ),
                             });
-                          }
-                          }
+                          }}
                         >
                           <Icon color="primary">wrap_text</Icon>
                         </Fab>
@@ -326,7 +335,7 @@ class LeaderboardTable extends React.Component<IProps, IState> {
           onChangePage={handleChangePage}
           onChangeRowsPerPage={handleChangeRowsPerPage}
         />
-      </Paper >
+      </Paper>
     );
   }
 }
