@@ -92,8 +92,10 @@ class LeaderboardTable extends React.Component<IProps, IState> {
     const metrics = this.props.submissions[0].metrics;
     let metricFields: string[];
     metrics ? (metricFields = Object.keys(metrics)) : (metricFields = []);
-
-    const data: IDataRow[] = this.props.submissions.map((submission) => {
+     // Remove submissions with no metrics
+    const filteredSubmissions = this.props.submissions.filter(submission => submission.metrics)
+   
+    let data: IDataRow[] = filteredSubmissions.map((submission) => {
       const metric = submission.metrics;
       const url =
         submission.visualization_url &&
@@ -114,7 +116,6 @@ class LeaderboardTable extends React.Component<IProps, IState> {
     if (order === 'desc') {
       sortedData = sortedData.reverse();
     }
-
     const isSelected = (id: string) => selected.indexOf(id) !== -1;
     const handleSelectAllClick = (
       event: React.ChangeEvent<HTMLInputElement>
@@ -123,7 +124,7 @@ class LeaderboardTable extends React.Component<IProps, IState> {
         const newSelecteds = data.map((n) => n.id);
         this.setState({
           selected: newSelecteds,
-          itemsToCompare: this.props.submissions,
+          itemsToCompare: filteredSubmissions,
         });
         return;
       }
@@ -159,7 +160,7 @@ class LeaderboardTable extends React.Component<IProps, IState> {
           selected.slice(selectedIndex + 1)
         );
       }
-      this.props.submissions.filter((submission) => {
+      filteredSubmissions.filter((submission) => {
         const index = newSelected.indexOf(submission.id);
         if (index >= 0) {
           compareItems.push(submission);
@@ -294,7 +295,8 @@ class LeaderboardTable extends React.Component<IProps, IState> {
                       <TableCell align="left">
                         {formatDateTime(new Date(n.date))}
                       </TableCell>
-                      <TableCell align="left">
+                      {/* Commented out job log */}
+                     {/*  <TableCell align="left">
                         <Fab
                           disabled={!isLoggedIn}
                           title="Log"
@@ -312,8 +314,7 @@ class LeaderboardTable extends React.Component<IProps, IState> {
                         >
                           <Icon color="primary">wrap_text</Icon>
                         </Fab>
-                        {/* </Button> */}
-                      </TableCell>
+                      </TableCell> */}
                     </TableRow>
                   );
                 })}
