@@ -47,7 +47,7 @@ class Leaderboard extends React.Component<IProps, {}> {
       })),
       { id: 'visualization', numeric: false, disablePadding: false, label: 'Visualization', sortable: false },
       { id: 'date', numeric: false, disablePadding: false, label: 'Date', sortable: true },
-      { id: 'log', numeric: false, disablePadding: false, label: 'Logs', sortable: false },
+      // { id: 'log', numeric: false, disablePadding: false, label: 'Logs', sortable: false },
     ];
 
     const { order, orderBy,
