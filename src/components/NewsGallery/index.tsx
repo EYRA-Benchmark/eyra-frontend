@@ -11,18 +11,22 @@ import Link from 'next/link';
 const RichText = require('prismic-reactjs').RichText;
 
 interface IProps {
+  size: number;
   data: Array<IPrismicResult<INews>>;
 }
-
-export class Gallery extends React.Component<IProps, {}> {
+const sortByDate = (a, b) =>
+new Date(b.data.date).getTime() - new Date(a.data.date).getTime();
+export class NewsGallery extends React.Component<IProps, {}> {
   render() {
-    const { data } = this.props;
-    const sortByDate = (a, b) =>
-      new Date(b.data.date).getTime() - new Date(a.data.date).getTime();
-    data.sort(sortByDate);
+    const { size,data } = this.props;
+   
+    const filteNews = data
+    .sort(sortByDate)
+      .slice(0, size > 0 ? size : data.length);
+    
     return (
       <Grid container={true} spacing={3}>
-        {data.map((card: IPrismicResult<INews>, index: number) => (
+        {filteNews.map((card: IPrismicResult<INews>, index: number) => (
           <Grid item={true} key={index} xs={12} sm={3} md={3}>
             <Link href="/news/[id]" as={`/news/${card.uid}`}>
               <a className={styles.link}>
@@ -53,4 +57,4 @@ export class Gallery extends React.Component<IProps, {}> {
     );
   }
 }
-export default Gallery;
+export default NewsGallery;

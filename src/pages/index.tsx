@@ -42,9 +42,11 @@ class Index extends React.Component<IProps> {
   }
   public render() {
     const challengeContent = (
-      <ChallengesGrid size={3} benchmarks={this.props.benchmarks} />
+      <ChallengesGrid size={4} benchmarks={this.props.benchmarks} />
     );
-
+    const newsContent = (
+      <NewsGallery size={4} data={this.props.news} />
+   )
     return (
       <React.Fragment>
         <Head>
@@ -89,9 +91,11 @@ class Index extends React.Component<IProps> {
               {challengeContent}
             </div>
             <div className={styles.section}>
-              <h3 className={classNames(styles.sectionHeader)}>News</h3>
-
-              <NewsGallery data={this.props.news} />
+            <div className={styles.titleContainer}>
+            <h3 className={classNames(styles.sectionHeader)}>News</h3>
+                <a href="/news">More News</a>
+              </div>
+             {newsContent}
             </div>
           </div>
         </div>
