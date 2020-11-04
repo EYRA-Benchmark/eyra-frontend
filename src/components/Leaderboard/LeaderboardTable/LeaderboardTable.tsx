@@ -2,7 +2,6 @@ import * as React from 'react';
 import {
   Checkbox,
   Fab,
-  Icon,
   Paper,
   Table,
   TableBody,
@@ -20,7 +19,6 @@ import { INestedSubmission, INestedSubmissionWithAlgorithm } from '../index';
 
 import LeaderboardHead from '../LeaderboardHead/LeaderboardHead';
 import LeadeboardToolbar from '../LeaderboardToolbar/';
-import JobLog from 'src/components/JobLog';
 import Observable from 'src/components/Observables';
 import CompareDialog from '../CompareDialog';
 import AlgorithmSubmissionDetails from '../../Forms/Algorithm/AlgorithmSubmissionDetails';
@@ -76,7 +74,7 @@ class LeaderboardTable extends React.Component<IProps, IState> {
     }
 
     this.setState({ order: order as Order, orderBy });
-  };
+  }
   render() {
     const { classes } = this.props;
     const {
@@ -93,9 +91,9 @@ class LeaderboardTable extends React.Component<IProps, IState> {
     let metricFields: string[];
     metrics ? (metricFields = Object.keys(metrics)) : (metricFields = []);
      // Remove submissions with no metrics
-    const filteredSubmissions = this.props.submissions.filter(submission => submission.metrics)
-   
-    let data: IDataRow[] = filteredSubmissions.map((submission) => {
+    const filteredSubmissions = this.props.submissions.filter((submission) => submission.metrics);
+
+    const data: IDataRow[] = filteredSubmissions.map((submission) => {
       const metric = submission.metrics;
       const url =
         submission.visualization_url &&
@@ -118,7 +116,7 @@ class LeaderboardTable extends React.Component<IProps, IState> {
     }
     const isSelected = (id: string) => selected.indexOf(id) !== -1;
     const handleSelectAllClick = (
-      event: React.ChangeEvent<HTMLInputElement>
+      event: React.ChangeEvent<HTMLInputElement>,
     ) => {
       if (event.target.checked) {
         const newSelecteds = data.map((n) => n.id);
@@ -135,7 +133,7 @@ class LeaderboardTable extends React.Component<IProps, IState> {
     };
 
     const handleChangeRowsPerPage = (
-      event: React.ChangeEvent<HTMLInputElement>
+      event: React.ChangeEvent<HTMLInputElement>,
     ) => {
       this.setState({ rowsPerPage: +event.target.value });
       this.setState({ page: 0 });
@@ -143,7 +141,7 @@ class LeaderboardTable extends React.Component<IProps, IState> {
     const handleClick = (
       event: React.ChangeEvent<unknown>,
       checked: boolean,
-      id: string
+      id: string,
     ) => {
       const selectedIndex = selected.indexOf(id);
       let newSelected: string[] = [];
@@ -157,7 +155,7 @@ class LeaderboardTable extends React.Component<IProps, IState> {
       } else if (selectedIndex > 0) {
         newSelected = newSelected.concat(
           selected.slice(0, selectedIndex),
-          selected.slice(selectedIndex + 1)
+          selected.slice(selectedIndex + 1),
         );
       }
       filteredSubmissions.filter((submission) => {
@@ -171,7 +169,7 @@ class LeaderboardTable extends React.Component<IProps, IState> {
         selected: newSelected,
       });
     };
-    const isLoggedIn = localStorage.getItem('comicToken') ? true : false;
+    // const isLoggedIn = localStorage.getItem('comicToken') ? true : false;
     return (
       <Paper className={classes.root}>
         {visualizationContent && (
@@ -238,7 +236,7 @@ class LeaderboardTable extends React.Component<IProps, IState> {
                             }
                           />
                         ) : (
-                          <Checkbox disabled />
+                          <Checkbox disabled={true} />
                         )}
                       </TableCell>
 

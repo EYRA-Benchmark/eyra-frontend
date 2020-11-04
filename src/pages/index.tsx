@@ -6,8 +6,6 @@ import classNames from 'classnames';
 import { getPrismicClient } from 'src/services/prismicApi';
 import { comicApi } from 'src/services/comicApi';
 import { IBenchmark } from 'src/types';
-import { INews, IPrismicResult } from 'src/types/prismic';
-
 import ChallengesGrid from 'src/components/BenchmarkCardGrid';
 import NewsGallery from 'src/components/NewsGallery';
 
@@ -16,7 +14,7 @@ import styles from './Home.css';
 import Head from 'next/head';
 
 interface IProps {
-  news: Array<IPrismicResult<INews>>;
+  news: any;
   benchmarks: IBenchmark[];
 }
 
@@ -25,11 +23,11 @@ class Index extends React.Component<IProps> {
     const prismicApi = await getPrismicClient();
     const prismicResponse = await prismicApi.query(
       Prismic.Predicates.at('document.type', 'news'),
-      {}
+      {},
     );
 
     return {
-      news: prismicResponse.results,
+      news: prismicResponse.results ,
       benchmarks: await comicApi.benchmarks(),
     };
   }
@@ -46,7 +44,7 @@ class Index extends React.Component<IProps> {
     );
     const newsContent = (
       <NewsGallery size={4} data={this.props.news} />
-   )
+   );
     return (
       <React.Fragment>
         <Head>

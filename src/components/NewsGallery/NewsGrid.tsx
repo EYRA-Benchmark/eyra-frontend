@@ -30,4 +30,4 @@ export class NewsGrid extends React.Component<IProps, {}> {
     );
   }
 }
-export default CardGrid;
+export default NewsGrid;

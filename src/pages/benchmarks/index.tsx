@@ -29,7 +29,7 @@ class Benchmarks extends React.Component<IUserProps & IProps, IState> {
 
   componentWillReceiveProps(
     nextProps: Readonly<IProps>,
-    nextContext: any
+    nextContext: any,
   ): void {
     this.refresh();
   }

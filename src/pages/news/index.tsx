@@ -1,16 +1,15 @@
 import * as React from 'react';
 import Prismic from 'prismic-javascript';
-import { INews, IPrismicResult } from 'src/types/prismic';
 import { getPrismicClient } from 'src/services/prismicApi';
 import Head from 'next/head';
 import { Typography, Container } from '@material-ui/core';
 import NewsGallary from 'src/components/NewsGallery';
 
 interface IState {
-    news: Array<IPrismicResult<INews>>;
+    news: any;
   }
 interface IProps {
-    news: Array<IPrismicResult<INews>>;
+    news: any;
   }
 
 class News extends React.Component<IProps, IState> {
@@ -18,30 +17,29 @@ class News extends React.Component<IProps, IState> {
         const prismicApi = await getPrismicClient();
         const prismicResponse = await prismicApi.query(
             Prismic.Predicates.at('document.type', 'news'),
-            {}
+            {},
         );
         this.setState({
           news: prismicResponse.results,
         });
       }
-    
+
       componentWillMount() {
         this.setState({news: this.props.news });
       }
-    
+
       componentWillReceiveProps(
         nextProps: Readonly<IProps>,
-        nextContext: any
+        nextContext: any,
       ): void {
         this.refresh();
       }
-    
 
     static async getInitialProps(...args: any[]): Promise<IProps> {
         const prismicApi = await getPrismicClient();
         const prismicResponse = await prismicApi.query(
             Prismic.Predicates.at('document.type', 'news'),
-            {}
+            {},
         );
         return {
             news: prismicResponse.results,
@@ -57,7 +55,7 @@ class News extends React.Component<IProps, IState> {
         <Typography component="h1" variant="h5">
           News
         </Typography>
-        <NewsGallary data={this.state.news}></NewsGallary>
+        <NewsGallary data={this.state.news} size={0}/>
       </Container>
     );
   }

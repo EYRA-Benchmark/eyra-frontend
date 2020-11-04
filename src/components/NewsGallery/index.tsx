@@ -14,16 +14,16 @@ interface IProps {
   size: number;
   data: Array<IPrismicResult<INews>>;
 }
-const sortByDate = (a, b) =>
+const sortByDate = (a: any, b: any) =>
 new Date(b.data.date).getTime() - new Date(a.data.date).getTime();
 export class NewsGallery extends React.Component<IProps, {}> {
   render() {
-    const { size,data } = this.props;
-   
+    const { size, data } = this.props;
+
     const filteNews = data
     .sort(sortByDate)
       .slice(0, size > 0 ? size : data.length);
-    
+
     return (
       <Grid container={true} spacing={3}>
         {filteNews.map((card: IPrismicResult<INews>, index: number) => (

@@ -4,7 +4,6 @@ const RichText = require('prismic-reactjs').RichText;
 
 import { formatDate } from '../../utils';
 import styles from './NewsDetails.css';
-import { IPrismicResult, INews } from '../../types/prismic';
 import { getPrismicClient } from 'src/services/prismicApi';
 import { NextPageContext } from 'next';
 // import BreadCrumbs from 'src/components/BreadCrumbs';
@@ -21,10 +20,10 @@ interface IProps {
 class NewsDetails extends React.Component<IProps> {
   static async getInitialProps(ctx: NextPageContext): Promise<IProps> {
     const prismicApi = await getPrismicClient();
-    const prismicResponse: IPrismicResult<INews> = await prismicApi.getByUID(
+    const prismicResponse= await prismicApi.getByUID(
       'news',
-      ctx.query.id as string
-    );
+      ctx.query.id as string,
+    ) ;
     return {
       title: prismicResponse.data.title,
       desc: prismicResponse.data.description,
@@ -35,8 +34,7 @@ class NewsDetails extends React.Component<IProps> {
   }
 
   render() {
-    const { title, image, desc, date, id } = this.props;
-    console.log('props', this.props);
+    const { title, image, desc, date} = this.props;
     return (
       <Container>
         <Head>
