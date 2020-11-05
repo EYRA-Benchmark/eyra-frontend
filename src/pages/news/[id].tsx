@@ -20,7 +20,7 @@ interface IProps {
 class NewsDetails extends React.Component<IProps> {
   static async getInitialProps(ctx: NextPageContext): Promise<IProps> {
     const prismicApi = await getPrismicClient();
-    const prismicResponse= await prismicApi.getByUID(
+    const prismicResponse = await prismicApi.getByUID(
       'news',
       ctx.query.id as string,
     ) ;

@@ -29,7 +29,7 @@ type Order = 'asc' | 'desc';
 interface IState {
   order: Order;
   orderBy: string;
-  selected: string[];
+  selected: any ;
   itemsToCompare: INestedSubmission[];
   rowsPerPage: number;
   page: number;
@@ -114,14 +114,16 @@ class LeaderboardTable extends React.Component<IProps, IState> {
     if (order === 'desc') {
       sortedData = sortedData.reverse();
     }
-    const isSelected = (id: string) => selected.indexOf(id) !== -1;
+    const isSelected = (id: string) => selected!.indexOf(id) !== -1;
     const handleSelectAllClick = (
       event: React.ChangeEvent<HTMLInputElement>,
     ) => {
       if (event.target.checked) {
         let newSelecteds = data.map((n) => {
-          if (n.evaluationJob !== 'null' && n.visualization !== null)
+          if (n.evaluationJob !== 'null' && n.visualization !== null) {
             return n.id;
+          }
+          return;
         });
         newSelecteds = newSelecteds.filter((el) => el !== undefined);
         const compareItems = [];
@@ -131,7 +133,6 @@ class LeaderboardTable extends React.Component<IProps, IState> {
             compareItems.push(submission);
           }
         });
-        console.log('selected', newSelecteds);
         this.setState({
           selected: newSelecteds,
           itemsToCompare: filteredSubmissions,
