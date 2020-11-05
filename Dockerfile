@@ -1,4 +1,4 @@
-FROM node:carbon-alpine as builder
+FROM node:12-alpine as builder
 
 RUN apk --no-cache add ca-certificates
 #RUN npm install -g yarn
