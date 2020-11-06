@@ -19,9 +19,9 @@ jobs:
   include:
     - stage: "Warm up cache"
       script: true
-    - stage: "Static analysis"
-      name: "Typecheck"
-      script: yarn typecheck
+    # - stage: "Static analysis"
+    #   name: "Typecheck"
+    #   script: yarn typecheck
     - name: "Lint"
       script: yarn lint
     - stage: "Tests"
