@@ -33,8 +33,8 @@ jobs:
       script: yarn test --coverage
       after_script:
        - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
-    - script: yarn cypress-install && yarn cypress-test
-      name: "Cypress tests"
+    # - script: yarn cypress-install && yarn cypress-test
+    #   name: "Cypress tests"
     - stage: "Docker build & push"
       install: skip
       script:
